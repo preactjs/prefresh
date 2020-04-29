@@ -24,8 +24,6 @@ if (module.hot) {
 }
 `;
 
-const EntryTest = /__PREACT__/;
-
 function createRefreshTemplate(source, renderContext) {
   const lines = source.split('\n');
 
@@ -43,4 +41,3 @@ function createRefreshTemplate(source, renderContext) {
 }
 
 exports.createRefreshTemplate = createRefreshTemplate;
-module.exports = createRefreshTemplate;

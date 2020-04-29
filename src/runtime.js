@@ -3,19 +3,17 @@ import { options, Component } from 'preact';
 // all vnodes referencing a given constructor
 const vnodesForComponent = new WeakMap();
 
-function replaceComponent(oldComponent, newComponent) {
-  const vnodes = vnodesForComponent.get(oldComponent);
+function replaceComponent(oldType, newType) {
+  const vnodes = vnodesForComponent.get(oldType);
   if (!vnodes) return;
 
   // migrate the list to our new constructor reference
-  vnodesForComponent.delete(oldComponent);
-  vnodesForComponent.set(newComponent, vnodes);
+  vnodesForComponent.delete(oldType);
+  vnodesForComponent.set(newType, vnodes);
 
-  console.log({ ...vnodes }, [...vnodes]);
-  
   vnodes.forEach(vnode => {
     // update the type in-place to reference the new component
-    vnode.type = newComponent;
+    vnode.type = newType;
     // enqueue a render
     const c = vnode.__c || vnode._component;
     if (c) Component.prototype.forceUpdate.call(c);
@@ -24,18 +22,37 @@ function replaceComponent(oldComponent, newComponent) {
 
 window.__PREACT__ = { replaceComponent }
 
-const old = options.vnode;
+const oldVnode = options.vnode;
 options.vnode = vnode => {
-  const type = vnode.type;
-  if (typeof type === 'function') {
-    let vnodes = vnodesForComponent.get(type);
+  if (typeof vnode.type === 'function') {
+    const vnodes = vnodesForComponent.get(vnode.type);
     if (!vnodes) {
-      vnodesForComponent.set(type, vnodes = new Set());
+      vnodesForComponent.set(vnode.type, [vnode]);
+    } else {
+      vnodes.push(vnode);
     }
-    vnodes.add(vnode);
   }
+  if (oldVnode) oldVnode(vnode);
 };
 
-// TODO: options .unmount remove from set
+const oldDiffed = options.__b;
+options.__b = (oldVNode, newVNode) => {
+  const type = newVNode.type;
+  if (typeof type === 'function' && vnodesForComponent.has(type)) {
+    const vnodes = vnodesForComponent.get(type);
+    const index = vnodes.indexOf(oldVNode);
+    if (index !== -1) {
+      vnodes.splice(index, 1);
+    }
+  }
+  if (oldDiffed) oldDiffed(oldVNode, newVNode);
+}
 
-// TODO: do we need to transition them from oldVNode --> newVNode with options.diff?
+const oldUnmount = options.unmount;
+options.unmount = (vnode) => {
+  const type = vnode.type;
+  if (typeof type === 'function' && vnodesForComponent.has(type)) {
+    vnodesForComponent.delete(type)
+  }
+  if (oldUnmount) oldUnmount(oldVNode, newVNode);
+}
