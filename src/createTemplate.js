@@ -1,15 +1,5 @@
 const { Template } = require('webpack');
 
-function createHotErrorHandler(moduleId) {
-  /**
-   * An error handler to allow self-recovering behaviours.
-   * @returns {void}
-   */
-  return function hotErrorHandler() {
-    require.cache[moduleId].hot.accept(hotErrorHandler);
-  };
-}
-
 const afterModule = `
 if (module.hot) {
   const m = module.hot.data && module.hot.data.module && module.hot.data.module;
@@ -32,7 +22,7 @@ if (module.hot) {
   });
 
   module.hot.accept(function errorRecovery() {
-    require.cache[moduleId].hot.accept(errorRecovery);
+    require.cache[module.id].hot.accept(errorRecovery);
   });
 }
 `;
