@@ -1,5 +1,15 @@
 const { Template } = require('webpack');
 
+function createHotErrorHandler(moduleId) {
+  /**
+   * An error handler to allow self-recovering behaviours.
+   * @returns {void}
+   */
+  return function hotErrorHandler() {
+    require.cache[moduleId].hot.accept(hotErrorHandler);
+  };
+}
+
 const afterModule = `
 if (module.hot) {
   const m = module.hot.data && module.hot.data.module && module.hot.data.module;
@@ -12,15 +22,18 @@ if (module.hot) {
         }
       }
     }
+  } else {
+    window.location.reload();
   }
 
   module.hot.dispose(function(data) {
+    // TODO: unrecoverable error should do window.location.reload()
     data.module = module;
   });
 
-  module.hot.accept(err => {
-    console.log(err);
-  })
+  module.hot.accept(function errorRecovery() {
+    require.cache[moduleId].hot.accept(errorRecovery);
+  });
 }
 `;
 
