@@ -10,5 +10,8 @@
   "bugs": {
     "url": "https://github.com/JoviDeCroock/preact-refresh/issues"
   },
-  "homepage": "https://github.com/JoviDeCroock/preact-refresh#readme"
+  "homepage": "https://github.com/JoviDeCroock/preact-refresh#readme",
+  "devDependencies": {
+    "webpack": "^4.43.0"
+  }
 }

@@ -1,5 +1,5 @@
-exports.injectEntry = originalEntry => {
-  const entryInjects = [require.resolve('./preact-refresh.js'),];
+const injectEntry = originalEntry => {
+  const entryInjects = [require.resolve('./runtime.js'),];
 
   if (typeof originalEntry === 'string') {
     return [...entryInjects, originalEntry];
@@ -21,3 +21,4 @@ exports.injectEntry = originalEntry => {
 };
 
 exports.countStatefulHooks = (hooks) => hooks.reduce((acc, hook) => Array.isArray(hook.__) ? acc + 1 :  acc, 0)
+exports.injectEntry = injectEntry;

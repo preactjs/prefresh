@@ -8,21 +8,22 @@ if (module.hot) {
       const fn = module.exports[i];
       if (typeof fn === 'function') {
         if (i in m.exports) {
+          console.log('replacing', fn)
           __PREACT__.replaceComponent(m.exports[i], fn);
         }
       }
     }
   } else {
-    window.location.reload();
+    // TODO: determine what condition we need here.
+    // window.location.reload();
   }
 
   module.hot.dispose(function(data) {
-    // TODO: unrecoverable error should do window.location.reload()
     data.module = module;
   });
 
   module.hot.accept(function errorRecovery() {
-    require.cache[module.id].hot.accept(errorRecovery);
+    // require.cache[module.id].hot.accept(errorRecovery);
   });
 }
 `;
