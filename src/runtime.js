@@ -20,11 +20,6 @@ function replaceComponent(oldType, newType) {
       c.constructor = vnode.type;
       if (c.__H) {
         // Reset hooks state
-        // TODO:
-        //  allow resubbing context: https://github.com/preactjs/preact/pull/2501
-        //  find reliable way of diffing depedency arrays
-        //  find reliable way to assert inserted state hooks
-        // more info at the bottom of this file.
         c.__H = {
           __: [], // _list
           __h: [] // _pendingEffects
@@ -79,19 +74,3 @@ options.unmount = (vnode) => {
   }
   if (oldUnmount) oldUnmount(vnode);
 }
-
-// IDEA
-// if (hooks && hooks.__) {
-//   const count = countStatefulHooks(hooks.__);
-//   Component.prototype.forceUpdate.call(c);
-//   const newCount = countStatefulHooks(hooks.__);
-//   if (count !== newCount) {
-//     // We'll have to reset hookState and call forceUpdate again.
-//     // There's another case where we add a dependency to a hook but
-//     // I'm not sure if we need to cover this.
-//   }
-// } else {
-//   // TODO: this is a class-component potentially and we should check
-//   // if any of the lifecycle methods have been altered.
-//   Component.prototype.forceUpdate.call(c);
-// }
