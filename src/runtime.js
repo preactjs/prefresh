@@ -15,12 +15,22 @@ function replaceComponent(oldType, newType) {
     // update the type in-place to reference the new component
     vnode.type = newType;
     // enqueue a render
-    const component = vnode.__c;
-    if (component) {
-      // component.__H = {
-      //   __: [], // _list
-      //   __h: [] // _pendingEffects
-      // };
+    const c = vnode.__c || vnode._component;
+    if (c) {
+      c.constructor = vnode.type;
+      if (c.__H) {
+        // Reset hooks state
+        // TODO:
+        //  allow resubbing context: https://github.com/preactjs/preact/pull/2501
+        //  find reliable way of diffing depedency arrays
+        //  find reliable way to assert inserted state hooks
+        // more info at the bottom of this file.
+        c.__H = {
+          __: [], // _list
+          __h: [] // _pendingEffects
+        };
+      }
+
       Component.prototype.forceUpdate.call(c);
     }
   });
