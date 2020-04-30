@@ -5,6 +5,8 @@
 We are still fleshing out the details on how to go about this approach best for [Preact](https://github.com/preactjs/preact), we'd
 love to give you the best reloading experience possible.
 
+Note that now the refreshing component will dispose of its `hookState` to reload in case of added hook, ... this to ensure consistency.
+
 ## Setup
 
 ```

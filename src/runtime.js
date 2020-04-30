@@ -29,6 +29,8 @@ function replaceComponent(oldType, newType) {
           __: [], // _list
           __h: [] // _pendingEffects
         };
+      } else {
+        Object.setPrototypeOf(vnode.__c, Object.create(newType.prototype));
       }
 
       Component.prototype.forceUpdate.call(c);
