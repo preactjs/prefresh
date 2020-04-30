@@ -26,11 +26,14 @@ function replaceComponent(oldType, newType) {
         };
       }
 
-      if (newType.prototype) {
+      if (vnode.__c._constructor) {
         Object.setPrototypeOf(vnode.__c, Object.create(newType.prototype));
-        if (newType.prototype._constructor) {
-          newType.prototype._constructor.call(vnode.__c)
+        for (const key in vnode.__c) {
+          if (typeof vnode.__c[key] === 'function' && Object.prototype.hasOwnProperty.call(vnode.__c, key) && !key.includes('constructor')) {
+            vnode.__c[key] = newType.prototype[key];
+          }
         }
+        newType.prototype._constructor.call(vnode.__c);
       }
 
       Component.prototype.forceUpdate.call(vnode.__c);
