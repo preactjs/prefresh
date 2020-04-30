@@ -1,4 +1,5 @@
 import { options, Component } from 'preact';
+import { countStatefulHooks } from './utils';
 
 // all vnodes referencing a given constructor
 const vnodesForComponent = new WeakMap();
@@ -16,7 +17,23 @@ function replaceComponent(oldType, newType) {
     vnode.type = newType;
     // enqueue a render
     const c = vnode.__c || vnode._component;
-    if (c) Component.prototype.forceUpdate.call(c);
+    if (c) {
+      const hooks = c.__H;
+      if (hooks && hooks.__) {
+        const count = countStatefulHooks(hooks.__);
+        Component.prototype.forceUpdate.call(c);
+        const newCount = countStatefulHooks(hooks.__);
+        if (count !== newCount) {
+          // We'll have to reset hookState and call forceUpdate again.
+          // There's another case where we add a dependency to a hook but
+          // I'm not sure if we need to cover this.
+        }
+      } else {
+        // TODO: this is a class-component potentially and we should check
+        // if any of the lifecycle methods have been altered.
+        Component.prototype.forceUpdate.call(c);
+      }
+    }
   });
 }
 

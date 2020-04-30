@@ -19,3 +19,5 @@ exports.injectEntry = originalEntry => {
     );
   }
 };
+
+exports.countStatefulHooks = (hooks) => hooks.reduce((acc, hook) => Array.isArray(hook.__) ? acc + 1 :  acc, 0)
