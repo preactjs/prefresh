@@ -4,21 +4,23 @@ const plugin = ({ template, types: t }) => {
 
   return {
     visitor: {
-      ClassBody({ node }) {
+      ClassBody(path) {
         _constructor = t.classMethod("method", t.identifier("_constructor"), [], t.blockStatement([]));
-        node.body.push(_constructor);
+        path.node.body.push(_constructor);
       },
-      ClassMethod({ node }) {
-        if (node.kind === "constructor") {
+      ClassMethod(path) {
+        if (path.node.kind === "constructor") {
           inConstructor = true;
-          node.body.body.push(t.expressionStatement(t.callExpression(t.identifier("_constructor"), [])));
+          path.node.body.body.push(
+            t.expressionStatement(t.callExpression(t.memberExpression(t.thisExpression(), t.identifier("_constructor")), []))
+          );
         } else {
           inConstructor = false;
         }
       },
       ExpressionStatement(path) {
         const { node } = path;
-        if (inConstructor && node.expression.right && node.expression.right.callee && node.expression.right.callee.property.name === "bind") {
+        if (_constructor && inConstructor && node.expression.right && node.expression.right.callee && node.expression.right.callee.property.name === "bind") {
           _constructor.body.body.push(node);
           path.remove();
         }
@@ -27,4 +29,4 @@ const plugin = ({ template, types: t }) => {
   };
 };
 
-export default plugin;
+module.exports = plugin;
