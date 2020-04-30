@@ -6,6 +6,8 @@ const { injectEntry } = require('./utils');
 class ReloadPlugin {
 
   apply(compiler) {
+    if (process.env.NODE_ENV === 'production' || compiler.options.mode === 'production') return;
+
     compiler.options.entry = injectEntry(compiler.options.entry);
 
     compiler.hooks.compilation.tap(this.constructor.name, compilation => {
