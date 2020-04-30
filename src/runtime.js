@@ -1,10 +1,4 @@
 import { options, Component } from 'preact';
-import { countStatefulHooks } from './utils';
-
-const defaultHookState = {
-  __: [], // _list
-  __h: [] // _pendingEffects
-}
 
 // all vnodes referencing a given constructor
 const vnodesForComponent = new WeakMap();
@@ -23,10 +17,10 @@ function replaceComponent(oldType, newType) {
     // enqueue a render
     const component = vnode.__c;
     if (component) {
-       const hooks = component.__H;
-       if (component.__H) {
-         component.__H = defaultHookState
-       }
+      // component.__H = {
+      //   __: [], // _list
+      //   __h: [] // _pendingEffects
+      // };
       Component.prototype.forceUpdate.call(c);
     }
   });
@@ -36,7 +30,7 @@ window.__PREACT__ = { replaceComponent }
 
 const oldVnode = options.vnode;
 options.vnode = vnode => {
-  if (typeof (vnode || {}).type === 'function') {
+  if (typeof vnode.type === 'function') {
     const vnodes = vnodesForComponent.get(vnode.type);
     if (!vnodes) {
       vnodesForComponent.set(vnode.type, [vnode]);
@@ -44,6 +38,7 @@ options.vnode = vnode => {
       vnodes.push(vnode);
     }
   }
+
   if (oldVnode) oldVnode(vnode);
 };
 
@@ -64,9 +59,13 @@ const oldUnmount = options.unmount;
 options.unmount = (vnode) => {
   const type = (vnode || {}).type;
   if (typeof type === 'function' && vnodesForComponent.has(type)) {
-    vnodesForComponent.delete(type)
+    const vnodes = vnodesForComponent.get(type);
+    const index = vnodes.indexOf(vnode);
+    if (index !== -1) {
+      vnodes.splice(index, 1);
+    }
   }
-  if (oldUnmount) oldUnmount(oldVNode, newVNode);
+  if (oldUnmount) oldUnmount(vnode);
 }
 
 // IDEA
