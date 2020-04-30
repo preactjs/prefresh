@@ -1,5 +1,7 @@
 import { options, Component } from 'preact';
 
+const refreshBabelConstructor = '__refresh_constructor__';
+
 // all vnodes referencing a given constructor
 const vnodesForComponent = new WeakMap();
 
@@ -26,14 +28,18 @@ function replaceComponent(oldType, newType) {
         };
       }
 
-      if (vnode.__c._constructor) {
+      if (vnode.__c[refreshBabelConstructor]) {
         Object.setPrototypeOf(vnode.__c, Object.create(newType.prototype));
         for (const key in vnode.__c) {
-          if (typeof vnode.__c[key] === 'function' && Object.prototype.hasOwnProperty.call(vnode.__c, key) && !key.includes('constructor')) {
+          if (
+            typeof vnode.__c[key] === 'function' &&
+            Object.prototype.hasOwnProperty.call(vnode.__c, key) &&
+            !key.includes('constructor')
+          ) {
             vnode.__c[key] = newType.prototype[key];
           }
         }
-        newType.prototype._constructor.call(vnode.__c);
+        newType.prototype[refreshBabelConstructor].call(vnode.__c);
       }
 
       Component.prototype.forceUpdate.call(vnode.__c);
