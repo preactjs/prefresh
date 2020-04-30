@@ -1,16 +1,14 @@
 {
   "name": "preact-refresh",
   "version": "0.1.0",
-  "description": "",
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JoviDeCroock/preact-reload.git"
+    "url": "git+https://github.com/JoviDeCroock/preact-refresh.git"
   },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JoviDeCroock/preact-reload/issues"
+    "url": "https://github.com/JoviDeCroock/preact-refresh/issues"
   },
-  "homepage": "https://github.com/JoviDeCroock/preact-reload#readme"
+  "homepage": "https://github.com/JoviDeCroock/preact-refresh#readme"
 }
