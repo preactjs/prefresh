@@ -2,6 +2,9 @@
   "name": "preact-refresh",
   "version": "0.2.0",
   "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint src"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JoviDeCroock/preact-refresh.git"
@@ -10,8 +13,59 @@
   "bugs": {
     "url": "https://github.com/JoviDeCroock/preact-refresh/issues"
   },
+  "authors": [
+    "Jovi De Croock <decroockjovi@gmail.com>"
+  ],
   "homepage": "https://github.com/JoviDeCroock/preact-refresh#readme",
   "devDependencies": {
+    "eslint": "5.15.1",
+    "eslint-config-developit": "^1.1.1",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-react": "7.12.4",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.2",
+    "prettier": "^1.18.2",
     "webpack": "^4.43.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "developit",
+      "prettier"
+    ],
+    "settings": {
+      "react": {
+        "pragma": "createElement"
+      }
+    },
+    "rules": {
+      "prefer-rest-params": 0,
+      "prefer-spread": 0,
+      "no-cond-assign": 0,
+      "jest/valid-expect": 0,
+      "jest/no-disabled-tests": 0
+    }
+  },
+  "eslintIgnore": [
+    "test/fixtures",
+    "test/ts/",
+    "*.ts",
+    "dist"
+  ],
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "none",
+    "useTabs": true,
+    "tabWidth": 2
+  },
+  "lint-staged": {
+    "**/*.{js,ts}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
