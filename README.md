@@ -33,14 +33,6 @@ const config = {
 }
 ```
 
-Last but not least let's add it to our `babel` plugins like this:
-
-```
-{
-  plugins: ['preact-refresh/babel']
-}
-```
-
 ## Uncertainties
 
 - [x] component altering lifecycles
