@@ -39,5 +39,5 @@ const config = {
 
 - [x] component altering lifecycles
 - [x] error recovery
+- [x] adding dependencies to hooks
 - [ ] state-hooks ordering
-- [ ] adding dependencies to hooks
