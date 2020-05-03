@@ -2,17 +2,37 @@ const { Template } = require('webpack');
 const { NAMESPACE } = require('./constants');
 
 const afterModule = `
-if (module.hot) {
+const exports = module.exports || module.__proto__.exports;
+let shouldBind = false;
+
+if (Array.isArray(exports)) {
+  // TODO: method to find out if this is a component
+} else if (!moduleExports || typeof moduleExports !== 'object') {
+  shouldBind = false;
+} else {
+  for (const key in moduleExports) {
+    const exportValue = moduleExports[key];
+    // TODO: method to find out if this is a component
+  }
+}
+
+if (module.hot && shouldBind) {
   const m = module.hot.data && module.hot.data.module && module.hot.data.module;
   if (m) {
     for (let i in module.exports) {
       const fn = module.exports[i];
-      if (typeof fn === 'function') {
-        if (i in m.exports) {
-          window.${NAMESPACE}.replaceComponent(m.exports[i], fn);
+      try {
+        if (typeof fn === 'function') {
+          if (i in m.exports) {
+            window.${NAMESPACE}.replaceComponent(m.exports[i], fn);
+          }
         }
+      } catch (e) {
+        window.location.reload();
       }
     }
+  } else {
+    window.location.reload();
   }
 
   module.hot.dispose(function(data) {

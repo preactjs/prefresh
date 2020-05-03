@@ -28,3 +28,7 @@ const injectEntry = originalEntry => {
 };
 
 exports.injectEntry = injectEntry;
+
+exports.getExports = function getModuleExports(module) {
+  return module.exports || module.__proto__.exports;
+}
