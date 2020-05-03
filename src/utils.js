@@ -1,5 +1,5 @@
 const injectEntry = originalEntry => {
-	const entryInjects = [require.resolve('./runtime.js')];
+	const entryInjects = [require.resolve('./runtime/index.js')];
 
 	if (typeof originalEntry === 'string') {
 		return [...entryInjects, originalEntry];

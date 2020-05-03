@@ -1,4 +1,5 @@
 const { Template } = require('webpack');
+const { NAMESPACE } = require('./constants');
 
 const afterModule = `
 if (module.hot) {
@@ -8,7 +9,7 @@ if (module.hot) {
       const fn = module.exports[i];
       if (typeof fn === 'function') {
         if (i in m.exports) {
-          __PREACT__.replaceComponent(m.exports[i], fn);
+          window.${NAMESPACE}.replaceComponent(m.exports[i], fn);
         }
       }
     }
