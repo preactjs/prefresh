@@ -55,7 +55,7 @@ function replaceComponent(oldType, newType) {
 				const oldOptionsHook = options.__h;
 				options.__h = (component, index, type) => {
 					const hooks = component.__H.__;
-					if (hooks[index].type !== type || !hooks[index].__hot_reload_id__) {
+					if (hooks[index].type !== type) {
 						hooks.splice(index, 0, { type });
 					} else if (hooks[index].__hot_reload_id__) {
 						visited.add(hooks[index].__hot_reload_id__);
