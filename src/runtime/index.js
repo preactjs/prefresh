@@ -1,3 +1,9 @@
+// Options for Preact.
+import './vnode';
+import './diffed';
+import './unmount';
+import './hook';
+
 import { options, Component } from 'preact';
 import {
 	VNODE_COMPONENT,
@@ -5,13 +11,9 @@ import {
 	HOOKS_LIST,
 	HOT_RELOAD_ID,
 	HOOK_OPTION,
-	NAMESPACE,
-	EFFECTS_LIST,
-	DIFFED_OPTION
+	NAMESPACE
 } from '../constants';
-
-// all vnodes referencing a given constructor
-const vnodesForComponent = new WeakMap();
+import { vnodesForComponent } from './vnodesForComponent';
 
 function replaceComponent(OldType, NewType) {
 	const vnodes = vnodesForComponent.get(OldType);
@@ -31,10 +33,12 @@ function replaceComponent(OldType, NewType) {
 			try {
 				if (vnode[VNODE_COMPONENT] instanceof OldType) {
 					const oldInst = vnode[VNODE_COMPONENT];
+
 					const newInst = new NewType(
 						vnode[VNODE_COMPONENT].props,
 						vnode[VNODE_COMPONENT].context
 					);
+
 					vnode[VNODE_COMPONENT] = newInst;
 					// copy old properties onto the new instance.
 					//   - Objects (including refs) in the new instance are updated with their old values
@@ -66,6 +70,7 @@ function replaceComponent(OldType, NewType) {
 				const visited = new WeakSet();
 				const hooks = vnode[VNODE_COMPONENT][COMPONENT_HOOKS];
 				const oldOptionsHook = options[HOOK_OPTION];
+
 				options[HOOK_OPTION] = (component, index, type) => {
 					const hooks = component[COMPONENT_HOOKS][HOOKS_LIST];
 					if (hooks[index].type !== type) {
@@ -99,73 +104,3 @@ function replaceComponent(OldType, NewType) {
 }
 
 window[NAMESPACE] = { replaceComponent };
-
-const oldVnode = options.vnode;
-options.vnode = vnode => {
-	if (typeof vnode.type === 'function') {
-		const vnodes = vnodesForComponent.get(vnode.type);
-		if (!vnodes) {
-			vnodesForComponent.set(vnode.type, [vnode]);
-		} else {
-			vnodes.push(vnode);
-		}
-	}
-
-	if (oldVnode) oldVnode(vnode);
-};
-
-const oldDiffed = options[DIFFED_OPTION];
-options[DIFFED_OPTION] = (oldVNode, newVNode) => {
-	const type = (newVNode || {}).type;
-	if (typeof type === 'function' && vnodesForComponent.has(type)) {
-		const vnodes = vnodesForComponent.get(type);
-		const index = vnodes.indexOf(oldVNode);
-		if (index !== -1) {
-			vnodes.splice(index, 1);
-		}
-	}
-
-	if (
-		typeof type === 'function' &&
-		newVNode[VNODE_COMPONENT] &&
-		newVNode[VNODE_COMPONENT][COMPONENT_HOOKS]
-	) {
-		const hooks = newVNode[VNODE_COMPONENT][COMPONENT_HOOKS];
-		(hooks.__ || []).forEach(listItem => {
-			if (!listItem[HOT_RELOAD_ID]) {
-				listItem[HOT_RELOAD_ID] = Symbol(HOT_RELOAD_ID);
-			}
-		});
-	}
-
-	if (oldDiffed) oldDiffed(oldVNode, newVNode);
-};
-
-const oldUnmount = options.unmount;
-options.unmount = vnode => {
-	const type = (vnode || {}).type;
-	if (typeof type === 'function' && vnodesForComponent.has(type)) {
-		const vnodes = vnodesForComponent.get(type);
-		const index = vnodes.indexOf(vnode);
-		if (index !== -1) {
-			vnodes.splice(index, 1);
-		}
-	}
-	if (oldUnmount) oldUnmount(vnode);
-};
-
-const oldHook = options[HOOK_OPTION];
-options[HOOK_OPTION] = (comp, index, type) => {
-	if (!comp[COMPONENT_HOOKS]) {
-		comp[COMPONENT_HOOKS] = {
-			[HOOKS_LIST]: [],
-			[EFFECTS_LIST]: []
-		};
-	}
-
-	if (!comp[COMPONENT_HOOKS][HOOKS_LIST][index]) {
-		comp[COMPONENT_HOOKS][HOOKS_LIST].push({ type });
-	}
-
-	if (oldHook) oldHook(comp, index, type);
-};
