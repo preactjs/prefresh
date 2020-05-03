@@ -25,32 +25,36 @@ function replaceComponent(oldType, newType) {
 				};
 			}
 
-			// if this was/is a class component:
-			if (vnode.__c instanceof oldType) {
-				const oldInst = vnode.__c;
-				const newInst = new newType(vnode.__c.props, vnode.__c.context);
-				vnode.__c = newInst;
-				// copy old properties onto the new instance.
-				//   - Objects (including refs) in the new instance are updated with their old values
-				//   - Missing or null properties are restored to their old values
-				//   - Updated Functions are not reverted
-				//   - Scalars are copied
-				for (let i in oldInst) {
-					const type = typeof oldInst[i];
-					if (!(i in newInst)) {
-						newInst[i] = oldInst[i];
-					} else if (type !== 'function' && typeof newInst[i] === type) {
-						if (
-							type === 'object' &&
-							newInst[i] != null &&
-							newInst[i].constructor === oldInst[i].constructor
-						) {
-							Object.assign(newInst[i], oldInst[i]);
-						} else {
+			try {
+				// if this was/is a class component:
+				if (vnode.__c instanceof oldType) {
+					const oldInst = vnode.__c;
+					const newInst = new newType(vnode.__c.props, vnode.__c.context);
+					vnode.__c = newInst;
+					// copy old properties onto the new instance.
+					//   - Objects (including refs) in the new instance are updated with their old values
+					//   - Missing or null properties are restored to their old values
+					//   - Updated Functions are not reverted
+					//   - Scalars are copied
+					for (let i in oldInst) {
+						const type = typeof oldInst[i];
+						if (!(i in newInst)) {
 							newInst[i] = oldInst[i];
+						} else if (type !== 'function' && typeof newInst[i] === type) {
+							if (
+								type === 'object' &&
+								newInst[i] != null &&
+								newInst[i].constructor === oldInst[i].constructor
+							) {
+								Object.assign(newInst[i], oldInst[i]);
+							} else {
+								newInst[i] = oldInst[i];
+							}
 						}
 					}
 				}
+			} catch (e) {
+				/* Functional component */
 			}
 
 			Component.prototype.forceUpdate.call(vnode.__c);
