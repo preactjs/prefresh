@@ -1,1 +1,9 @@
 exports.HMR_PLUGIN = 'HotModuleReplacementPlugin';
+exports.VNODE_COMPONENT = '__c';
+exports.COMPONENT_HOOKS = '__H';
+exports.HOOKS_LIST = '__';
+exports.EFFECTS_LIST = '__h';
+exports.HOT_RELOAD_ID = '__hot_reload_id__';
+exports.DIFFED_OPTION = '__b';
+exports.HOOK_OPTION = '__h';
+exports.NAMESPACE = '__PREFRESH__';
