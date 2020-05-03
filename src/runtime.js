@@ -3,25 +3,25 @@ import { options, Component } from 'preact';
 // all vnodes referencing a given constructor
 const vnodesForComponent = new WeakMap();
 
-function replaceComponent(oldType, newType) {
-	const vnodes = vnodesForComponent.get(oldType);
+function replaceComponent(OldType, NewType) {
+	const vnodes = vnodesForComponent.get(OldType);
 	if (!vnodes) return;
 
 	// migrate the list to our new constructor reference
-	vnodesForComponent.delete(oldType);
-	vnodesForComponent.set(newType, vnodes);
+	vnodesForComponent.delete(OldType);
+	vnodesForComponent.set(NewType, vnodes);
 
 	vnodes.forEach(vnode => {
 		// update the type in-place to reference the new component
-		vnode.type = newType;
+		vnode.type = NewType;
 
 		if (vnode.__c) {
 			vnode.__c.constructor = vnode.type;
 
 			try {
-				if (vnode.__c instanceof oldType) {
+				if (vnode.__c instanceof OldType) {
 					const oldInst = vnode.__c;
-					const newInst = new newType(vnode.__c.props, vnode.__c.context);
+					const newInst = new NewType(vnode.__c.props, vnode.__c.context);
 					vnode.__c = newInst;
 					// copy old properties onto the new instance.
 					//   - Objects (including refs) in the new instance are updated with their old values
@@ -65,6 +65,9 @@ function replaceComponent(oldType, newType) {
 				};
 
 				Component.prototype.forceUpdate.call(vnode.__c, () => {
+					// We have finished the update, all that's left to do is check whether
+					// or not we have unvisited hooks, if we do we can safely remove them since
+					// this code could've been removed.
 					vnode.__c.__H.__.forEach(({ __hot_reload_id__: hotReloadId }, i) => {
 						if (hotReloadId && !visited.has(hotReloadId)) {
 							hooks.__.splice(i, 1);
