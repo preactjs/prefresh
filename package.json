@@ -28,29 +28,14 @@
     "webpack": "^4.43.0"
   },
   "eslintConfig": {
-    "extends": [
-      "developit",
-      "prettier"
-    ],
-    "settings": {
-      "react": {
-        "pragma": "createElement"
-      }
-    },
+    "extends": ["developit", "prettier"],
     "rules": {
       "prefer-rest-params": 0,
       "prefer-spread": 0,
-      "no-cond-assign": 0,
-      "jest/valid-expect": 0,
-      "jest/no-disabled-tests": 0
+      "no-cond-assign": 0
     }
   },
-  "eslintIgnore": [
-    "test/fixtures",
-    "test/ts/",
-    "*.ts",
-    "dist"
-  ],
+  "eslintIgnore": ["dist", "node_modules"],
   "prettier": {
     "singleQuote": true,
     "trailingComma": "none",
