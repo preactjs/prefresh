@@ -24,8 +24,8 @@ import PreactRefreshPlugin from 'preact-refresh';
 
 const config = {
   plugins: [
-    new PreactRefreshPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new PreactRefreshPlugin(),
   ],
   devServer: {
     hot: true, // ensure dev-server.hot is on
