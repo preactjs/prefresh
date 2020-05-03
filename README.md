@@ -40,4 +40,7 @@ const config = {
 - [x] component altering lifecycles
 - [x] error recovery
 - [x] adding dependencies to hooks
-- [ ] state-hooks ordering
+- [x] state-hooks ordering
+- [ ] avoid triggering effects for added dependencies
+- [ ] transition better from Functional --> class and other way around
+- [ ] provide fallback if no hot modules/no preact modules (window.location.reload())

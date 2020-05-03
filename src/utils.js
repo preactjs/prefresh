@@ -18,6 +18,13 @@ const injectEntry = originalEntry => {
 			{}
 		);
 	}
+
+	if (typeof originalEntry === 'function') {
+		return (...args) =>
+			Promise.resolve(originalEntry(...args)).then(injectEntry);
+	}
+
+	throw new Error("Can't detect valid entry point.");
 };
 
 exports.injectEntry = injectEntry;

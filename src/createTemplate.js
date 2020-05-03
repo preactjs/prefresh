@@ -24,20 +24,36 @@ if (module.hot) {
 }
 `;
 
-function createRefreshTemplate(source, renderContext) {
-  const lines = source.split('\n');
+function createRefreshTemplate(source, chunk, hash, mainTemplate) {
+	let filename = mainTemplate.outputOptions.filename;
+	if (typeof filename === 'function') {
+		filename = filename({
+			chunk,
+			hash,
+			contentHashType: 'javascript',
+			hashWithLength: length =>
+				mainTemplate.renderCurrentHashCode(hash, length),
+			noChunkHash: mainTemplate.useChunkHash(chunk)
+		});
+	}
 
-  // Webpack generates this line whenever the mainTemplate is called
-  const moduleInitializationLineNumber = lines.findIndex((line) =>
-    line.startsWith('modules[moduleId].call')
-  );
+	if (!filename || !filename.includes('.js')) {
+		return source;
+	}
 
-  return Template.asString([
-    ...lines.slice(0, moduleInitializationLineNumber),
-    Template.indent(lines[moduleInitializationLineNumber]),
-    afterModule,
-    ...lines.slice(moduleInitializationLineNumber + 1, lines.length),
-  ]);
+	const lines = source.split('\n');
+
+	// Webpack generates this line whenever the mainTemplate is called
+	const moduleInitializationLineNumber = lines.findIndex(line =>
+		line.startsWith('modules[moduleId].call')
+	);
+
+	return Template.asString([
+		...lines.slice(0, moduleInitializationLineNumber),
+		Template.indent(lines[moduleInitializationLineNumber]),
+		afterModule,
+		...lines.slice(moduleInitializationLineNumber + 1, lines.length)
+	]);
 }
 
 exports.createRefreshTemplate = createRefreshTemplate;
