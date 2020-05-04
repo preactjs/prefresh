@@ -27,6 +27,10 @@
     "prettier": "^1.18.2",
     "webpack": "^4.43.0"
   },
+  "peerDependencies": {
+    "preact": "^10.4.0",
+    "webpack": "^4.0.0"
+  },
   "eslintConfig": {
     "extends": ["developit", "prettier"],
     "rules": {

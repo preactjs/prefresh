@@ -3,7 +3,7 @@ import { vnodesForComponent } from './vnodesForComponent';
 
 const oldVnode = options.vnode;
 options.vnode = vnode => {
-	if (typeof vnode.type === 'function') {
+	if (vnode && typeof vnode.type === 'function') {
 		const vnodes = vnodesForComponent.get(vnode.type);
 		if (!vnodes) {
 			vnodesForComponent.set(vnode.type, [vnode]);

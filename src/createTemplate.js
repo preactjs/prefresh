@@ -5,14 +5,18 @@ const afterModule = `
 const exports = module.exports || module.__proto__.exports;
 let shouldBind = false;
 
-if (Array.isArray(exports)) {
-  // TODO: method to find out if this is a component
-} else if (!moduleExports || typeof moduleExports !== 'object') {
+if (!exports || typeof exports != 'object') {
   shouldBind = false;
 } else {
-  for (const key in moduleExports) {
-    const exportValue = moduleExports[key];
-    // TODO: method to find out if this is a component
+  for (const key in exports) {
+    if (key === '__esmodule') continue;
+    const exportValue = exports[key];
+    if (typeof exportValue == 'function') {
+      const name = exportValue.name || exportValue.displayName;
+      if (name) {
+        shouldBind = shouldBind || (typeof name === 'string' && name[0] == name[0].toUpperCase());
+      }
+    }
   }
 }
 
@@ -31,8 +35,6 @@ if (module.hot && shouldBind) {
         window.location.reload();
       }
     }
-  } else {
-    window.location.reload();
   }
 
   module.hot.dispose(function(data) {
