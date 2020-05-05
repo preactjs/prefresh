@@ -28,11 +28,11 @@ if (module.hot && shouldBind) {
       try {
         if (typeof fn === 'function') {
           if (i in m.exports) {
-            window.${NAMESPACE}.replaceComponent(m.exports[i], fn);
+            self.${NAMESPACE}.replaceComponent(m.exports[i], fn);
           }
         }
       } catch (e) {
-        window.location.reload();
+        self.location.reload();
       }
     }
   }
