@@ -53,7 +53,7 @@ if (module.hot && shouldBind) {
             const prevSignature = self.${NAMESPACE}.getSignature(fn);
             const nextSignature = self.${NAMESPACE}.getSignature(m.exports[i]);
 
-            if (prevSignature.key !== nextSignature.key || nextSignature.forceReset) {
+            if ((prevSignature || {}).key !== (nextSignature || {}).key || (nextSignature || {}).forceReset) {
               window.location.reload();
             }
 
