@@ -24,8 +24,10 @@ This will go over all vnodes it knows for the `oldType` and rerender them accord
 
 - [x] component altering lifecycles
 - [x] error recovery
-- [x] adding dependencies to hooks
-- [x] state-hooks ordering
+- [x] class components
+- [x] functional components
+- [ ] state-hooks ordering
+- [ ] hook swapping
 - [ ] avoid triggering effects for added dependencies
 - [ ] transition better from Functional --> class and other way around
 - [ ] provide fallback if no hot modules/no preact modules (window.location.reload())
