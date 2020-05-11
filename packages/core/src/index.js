@@ -1,8 +1,8 @@
 // Options for Preact.
-import './vnode';
-import './diffed';
-import './unmount';
-import './hook';
+import './runtime/vnode';
+import './runtime/diffed';
+import './runtime/unmount';
+import './runtime/hook';
 
 import { options, Component } from 'preact';
 import {
@@ -12,8 +12,8 @@ import {
 	HOT_RELOAD_ID,
 	HOOK_OPTION,
 	NAMESPACE
-} from '../constants';
-import { vnodesForComponent } from './vnodesForComponent';
+} from './constants';
+import { vnodesForComponent } from './runtime/vnodesForComponent';
 
 function replaceComponent(OldType, NewType) {
 	const vnodes = vnodesForComponent.get(OldType);
@@ -103,4 +103,4 @@ function replaceComponent(OldType, NewType) {
 	});
 }
 
-window[NAMESPACE] = { replaceComponent };
+self[NAMESPACE] = { replaceComponent };
