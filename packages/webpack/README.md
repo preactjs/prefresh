@@ -29,3 +29,11 @@ const config = {
   ...moreWebpackConfig
 }
 ```
+
+### Using hooks
+
+If you're using `preact/hooks` you'll need something extra to ensure we can handle
+changes in hooks well.
+
+You'll need to add `react-refresh/babel` to your `babel-configuration` to make this
+work together.
