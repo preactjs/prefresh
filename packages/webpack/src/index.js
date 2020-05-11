@@ -1,6 +1,7 @@
 const { createRefreshTemplate } = require('./createTemplate');
 const { injectEntry } = require('./utils');
-const { HMR_PLUGIN } = require('./constants');
+
+const HMR_PLUGIN = 'HotModuleReplacementPlugin';
 
 class ReloadPlugin {
 	apply(compiler) {

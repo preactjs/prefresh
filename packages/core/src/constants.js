@@ -1,4 +1,3 @@
-exports.HMR_PLUGIN = 'HotModuleReplacementPlugin';
 exports.VNODE_COMPONENT = '__c';
 exports.COMPONENT_HOOKS = '__H';
 exports.HOOKS_LIST = '__';

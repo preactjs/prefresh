@@ -1,10 +1,10 @@
 const { Template } = require('webpack');
-const { NAMESPACE } = require('./constants');
+
+const NAMESPACE = '__PREFRESH__';
 
 const afterModule = `
 const exports = module.exports || module.__proto__.exports;
 let shouldBind = false;
-
 if (!exports || typeof exports != 'object') {
   shouldBind = false;
 } else {

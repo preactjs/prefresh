@@ -1,5 +1,5 @@
 {
-  "name": "preact-refresh",
+  "name": "prefresh",
   "version": "0.4.0",
   "main": "src/index.js",
   "scripts": {
@@ -17,6 +17,10 @@
     "Jovi De Croock <decroockjovi@gmail.com>"
   ],
   "homepage": "https://github.com/JoviDeCroock/preact-refresh#readme",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
     "eslint": "5.15.1",
     "eslint-config-developit": "^1.1.1",
@@ -24,12 +28,7 @@
     "eslint-plugin-react": "7.12.4",
     "husky": "^3.0.9",
     "lint-staged": "^9.4.2",
-    "prettier": "^1.18.2",
-    "webpack": "^4.43.0"
-  },
-  "peerDependencies": {
-    "preact": "^10.4.0",
-    "webpack": "^4.0.0"
+    "prettier": "^1.18.2"
   },
   "eslintConfig": {
     "extends": ["developit", "prettier"],
