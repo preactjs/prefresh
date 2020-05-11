@@ -1,0 +1,31 @@
+# Prefresh-webpack
+
+**Experimental package**
+
+[![npm version](https://badgen.net/npm/v/preact-refresh)](https://www.npmjs.com/package/@prefresh/webpack)
+
+## Setup
+
+```
+npm i -s @prefresh/webpack
+## OR
+yarn add @prefresh/webpack 
+```
+
+Then add it to your `webpack` config by doing
+
+```js
+import PreactRefreshPlugin from '@prefresh/webpack';
+
+const config = {
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new PreactRefreshPlugin(),
+  ],
+  devServer: {
+    hot: true, // ensure dev-server.hot is on
+    ...moreDevServerConfig
+  },
+  ...moreWebpackConfig
+}
+```

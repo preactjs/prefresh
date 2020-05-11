@@ -7,16 +7,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JoviDeCroock/preact-refresh.git"
+    "url": "git+https://github.com/JoviDeCroock/prefresh.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JoviDeCroock/preact-refresh/issues"
+    "url": "https://github.com/JoviDeCroock/prefresh/issues"
   },
   "authors": [
     "Jovi De Croock <decroockjovi@gmail.com>"
   ],
-  "homepage": "https://github.com/JoviDeCroock/preact-refresh#readme",
+  "homepage": "https://github.com/JoviDeCroock/prefresh#readme",
   "private": true,
   "workspaces": [
     "packages/*"
