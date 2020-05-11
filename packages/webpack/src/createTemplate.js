@@ -2,7 +2,28 @@ const { Template } = require('webpack');
 
 const NAMESPACE = '__PREFRESH__';
 
+const beforeModule = `
+const prevRefreshReg = window.$RefreshReg$;
+const prevRefreshSig = window.$RefreshSig$;
+
+window.$RefreshSig$ = () => {
+  return self.${NAMESPACE}.sign;
+};
+
+window.$RefreshReg$ = function (type, id) {
+  const typeId = moduleId + ' ' + id;
+  console.log('reg', typeId, type);
+};
+
+try {
+`;
+
 const afterModule = `
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
 const exports = module.exports || module.__proto__.exports;
 let shouldBind = false;
 if (!exports || typeof exports != 'object') {
@@ -28,10 +49,18 @@ if (module.hot && shouldBind) {
       try {
         if (typeof fn === 'function') {
           if (i in m.exports) {
+            const prevSignature = self.${NAMESPACE}.getSignature(fn);
+            const nextSignature = self.${NAMESPACE}.getSignature(m.exports[i]);
+
+            if (prevSignature.key !== nextSignature.key) {
+              window.location.reload();
+            }
+
             self.${NAMESPACE}.replaceComponent(m.exports[i], fn);
           }
         }
       } catch (e) {
+        console.log(e);
         self.location.reload();
       }
     }
@@ -73,6 +102,7 @@ function createRefreshTemplate(source, chunk, hash, mainTemplate) {
 
 	return Template.asString([
 		...lines.slice(0, moduleInitializationLineNumber),
+		beforeModule,
 		Template.indent(lines[moduleInitializationLineNumber]),
 		afterModule,
 		...lines.slice(moduleInitializationLineNumber + 1, lines.length)

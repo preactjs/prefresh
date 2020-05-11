@@ -15,6 +15,56 @@ import {
 } from './constants';
 import { vnodesForComponent } from './runtime/vnodesForComponent';
 
+const signaturesForType = new WeakMap();
+
+const computeKey = signature => {
+	let fullKey = signature.key;
+	let hooks;
+	try {
+		hooks = signature.getCustomHooks();
+	} catch (err) {
+		signature.forceReset = true;
+		signature.fullKey = fullKey;
+		return;
+	}
+
+	for (let i = 0; i < hooks.length; i++) {
+		const hook = hooks[i];
+		if (typeof hook !== 'function') {
+			signature.forceReset = true;
+			signature.fullKey = fullKey;
+			return;
+		}
+
+		const nestedHookSignature = signaturesForType.get(hook);
+		if (nestedHookSignature === undefined) continue;
+
+		const nestedHookKey = computeKey(nestedHookSignature);
+		if (nestedHookSignature.forceReset) {
+			signature.forceReset = true;
+		}
+		fullKey += '\n---\n' + nestedHookKey;
+	}
+
+	signature.fullKey = fullKey;
+};
+
+function sign(type, key, forceReset, getCustomHooks) {
+	if (type) {
+		const signature = signaturesForType.get(type);
+		if (!signature) {
+			signaturesForType.set(type, {
+				type,
+				key,
+				forceReset,
+				getCustomHooks: getCustomHooks || (() => [])
+			});
+		} else if (!signature.fullKey) {
+			computeKey(signature);
+		}
+	}
+}
+
 function replaceComponent(OldType, NewType) {
 	const vnodes = vnodesForComponent.get(OldType);
 	if (!vnodes) return;
@@ -103,4 +153,6 @@ function replaceComponent(OldType, NewType) {
 	});
 }
 
-self[NAMESPACE] = { replaceComponent };
+const getSignature = type => signaturesForType.get(type);
+
+self[NAMESPACE] = { replaceComponent, sign, getSignature };
