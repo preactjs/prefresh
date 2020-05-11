@@ -2,7 +2,6 @@
 import './runtime/vnode';
 import './runtime/diffed';
 import './runtime/unmount';
-import './runtime/hook';
 
 import { Component } from 'preact';
 import { VNODE_COMPONENT, NAMESPACE } from './constants';
