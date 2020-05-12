@@ -19,7 +19,7 @@ export default function prefreshPlugin() {
 
 					// Note: prefresh *must* be injected prior to any VNodes being created!
 					return `
-            import 'prefresh/packages/core';
+            import '@prefresh/core';
             import { hot } from 'vite/hmr';
             import * as __PSELF__ from ${spec};
             ${code}
