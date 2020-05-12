@@ -15,6 +15,11 @@ import { vnodesForComponent } from './runtime/vnodesForComponent';
 
 const signaturesForType = new WeakMap();
 
+/**
+ *
+ * This part has been vendored from "react-refresh"
+ * https://github.com/facebook/react/blob/master/packages/react-refresh/src/ReactFreshRuntime.js#L83
+ */
 const computeKey = signature => {
 	let fullKey = signature.key;
 	let hooks;
@@ -57,6 +62,7 @@ function sign(type, key, forceReset, getCustomHooks, status) {
 				forceReset,
 				getCustomHooks: getCustomHooks || (() => [])
 			});
+
 			return 'needsHooks';
 		} else if (status === 'needsHooks') {
 			computeKey(signature);
