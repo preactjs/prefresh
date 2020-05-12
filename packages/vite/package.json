@@ -4,7 +4,7 @@
 	"module": "src/index.js",
 	"main": "dist/src/index.js",
 	"scripts": {
-		"prepare": "cjyes src/index.js",
+		"prepublishOnly": "cjyes src/index.js",
 		"lint": "eslint src"
 	},
 	"repository": {
