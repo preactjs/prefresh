@@ -1202,6 +1202,14 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
+cjyes@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/cjyes/-/cjyes-0.1.0.tgz#97087c5aeb1bc5c0e0480e3683776a3fb09e9f5e"
+  integrity sha512-X+8iwqwiqY4DCYr3GO/uQt1ImiDgDA2K29AJo8pQRAVxh2g2A1QMqnQfg7Q53VityIt5Cm3BKqrtCG+aU98dlQ==
+  dependencies:
+    es-module-lexer "^0.3.18"
+    magic-string "^0.25.7"
+
 class-utils@^0.3.5:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/class-utils/-/class-utils-0.3.6.tgz#f93369ae8b9a7ce02fd41faad0ca83033190c463"
