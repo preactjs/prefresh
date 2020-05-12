@@ -4,7 +4,13 @@ import './runtime/diffed';
 import './runtime/unmount';
 
 import { Component } from 'preact';
-import { VNODE_COMPONENT, NAMESPACE } from './constants';
+import {
+	VNODE_COMPONENT,
+	NAMESPACE,
+	HOOKS_LIST,
+	EFFECTS_LIST,
+	COMPONENT_HOOKS
+} from './constants';
 import { vnodesForComponent } from './runtime/vnodesForComponent';
 
 const signaturesForType = new WeakMap();
@@ -58,7 +64,7 @@ function sign(type, key, forceReset, getCustomHooks, status) {
 	}
 }
 
-function replaceComponent(OldType, NewType) {
+function replaceComponent(OldType, NewType, resetHookState) {
 	const vnodes = vnodesForComponent.get(OldType);
 	if (!vnodes) return;
 
@@ -107,6 +113,13 @@ function replaceComponent(OldType, NewType) {
 				}
 			} catch (e) {
 				/* Functional component */
+			}
+
+			if (resetHookState) {
+				vnode[VNODE_COMPONENT][COMPONENT_HOOKS] = {
+					[HOOKS_LIST]: [],
+					[EFFECTS_LIST]: []
+				};
 			}
 
 			Component.prototype.forceUpdate.call(vnode[VNODE_COMPONENT]);
