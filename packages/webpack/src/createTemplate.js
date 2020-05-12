@@ -63,14 +63,18 @@ if (module.hot && shouldBind) {
               prevSignature.key !== nextSignature.key ||
               nextSignature.forceReset
             ) {
-              window.location.reload();
+              if (typeof i === 'string' && i.startsWith('use') && i[3] == i[3].toUpperCase()) {
+                window.location.reload();
+              } else {
+                self.${NAMESPACE}.replaceComponent(m.exports[i], fn, true);
+              }
+            } else {
+              self.${NAMESPACE}.replaceComponent(m.exports[i], fn, false);
             }
 
-            self.${NAMESPACE}.replaceComponent(m.exports[i], fn);
           }
         }
       } catch (e) {
-        console.log(e);
         self.location.reload();
       }
     }
