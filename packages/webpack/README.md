@@ -2,7 +2,7 @@
 
 **Experimental package**
 
-[![npm version](https://badgen.net/npm/v/preact-refresh)](https://www.npmjs.com/package/@prefresh/webpack)
+[![npm version](https://badgen.net/npm/v/@prefresh/webpack)](https://www.npmjs.com/package/@prefresh/webpack)
 
 ## Setup
 
