@@ -13,10 +13,8 @@ const prevRefreshSig = window.$RefreshSig$;
 window.$RefreshSig$ = () => {
   let status = 'begin';
   let savedType;
-  let hasHooks;
   return (type, key, forceReset, getCustomHooks) => {
     if (!savedType) savedType = type;
-    if (hasHooks === undefined) hasHooks = typeof getCustomHooks === 'function';
     status = self.${NAMESPACE}.sign(type || savedType, key, forceReset, getCustomHooks, status);
   };
 };
@@ -58,7 +56,7 @@ if (module.hot && shouldBind) {
       try {
         if (typeof fn === 'function') {
           if (i in m.exports) {
-            compareSignatures(fn, m.exports[i], i);
+            compareSignatures(m.exports[i], fn);
           }
         }
       } catch (e) {
