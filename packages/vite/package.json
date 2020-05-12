@@ -1,8 +1,8 @@
 {
 	"name": "@prefresh/vite",
-	"version": "0.5.0",
+	"version": "0.5.1",
 	"module": "src/index.js",
-	"main": "dist/index.js",
+	"main": "dist/src/index.js",
 	"scripts": {
 		"prepare": "cjyes src/index.js",
 		"lint": "eslint src"
