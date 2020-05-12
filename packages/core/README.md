@@ -30,4 +30,4 @@ This will go over all vnodes it knows for the `oldType` and rerender them accord
 - [x] avoid triggering effects for added dependencies
 - [x] transition better from Functional --> class and other way around
 - [x] provide fallback if no hot modules/no preact modules (window.location.reload())
-- [ ] custom hooks
+- [x] custom hooks
