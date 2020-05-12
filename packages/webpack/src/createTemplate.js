@@ -7,7 +7,14 @@ const prevRefreshReg = window.$RefreshReg$;
 const prevRefreshSig = window.$RefreshSig$;
 
 window.$RefreshSig$ = () => {
-  return self.${NAMESPACE}.sign;
+  let status = 'begin';
+  let savedType;
+  let hasHooks;
+  return (type, key, forceReset, getCustomHooks) => {
+    if (!savedType) savedType = type;
+    if (hasHooks === undefined) hasHooks = typeof getCustomHooks === 'function';
+    status = self.${NAMESPACE}.sign(type || savedType, key, forceReset, getCustomHooks, status);
+  };
 };
 
 window.$RefreshReg$ = () => {};
@@ -33,10 +40,9 @@ if (!exports || typeof exports != 'object') {
     if (typeof exportValue == 'function') {
       const name = exportValue.name || exportValue.displayName;
       if (name) {
-        shouldBind = shouldBind || (
-          typeof name === 'string' && (
-            name[0] == name[0].toUpperCase()
-          ));
+        const isComponent = typeof name === 'string' && name[0] == name[0].toUpperCase();
+        const isCustomHOook = typeof name === 'string' && name.startsWith('use') && name[3] == name[3].toUpperCase();
+        shouldBind = shouldBind || isComponent || isCustomHook;
       }
     }
   }
@@ -50,10 +56,13 @@ if (module.hot && shouldBind) {
       try {
         if (typeof fn === 'function') {
           if (i in m.exports) {
-            const prevSignature = self.${NAMESPACE}.getSignature(fn);
-            const nextSignature = self.${NAMESPACE}.getSignature(m.exports[i]);
+            const prevSignature = self.${NAMESPACE}.getSignature(fn) || {};
+            const nextSignature = self.${NAMESPACE}.getSignature(m.exports[i]) || {};
 
-            if ((prevSignature || {}).key !== (nextSignature || {}).key || (nextSignature || {}).forceReset) {
+            if (
+              prevSignature.key !== nextSignature.key ||
+              nextSignature.forceReset
+            ) {
               window.location.reload();
             }
 

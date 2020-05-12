@@ -41,18 +41,18 @@ const computeKey = signature => {
 	signature.key = signature.fullKey = fullKey;
 };
 
-function sign(type, key, forceReset, getCustomHooks) {
+function sign(type, key, forceReset, getCustomHooks, status) {
 	if (type) {
 		const signature = signaturesForType.get(type);
-		if (!signature) {
+		if (status === 'begin') {
 			signaturesForType.set(type, {
 				type,
 				key,
 				forceReset,
 				getCustomHooks: getCustomHooks || (() => [])
 			});
-			computeKey(signaturesForType.get(type));
-		} else {
+			return 'needsHooks';
+		} else if (status === 'needsHooks') {
 			computeKey(signature);
 		}
 	}
