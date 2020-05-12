@@ -1,6 +1,6 @@
 // Options for Preact.
 import './runtime/vnode';
-import './runtime/diffed';
+import './runtime/diff';
 import './runtime/unmount';
 
 import { Component } from 'preact';
@@ -64,31 +64,15 @@ function sign(type, key, forceReset, getCustomHooks, status) {
 	if (type) {
 		let signature = signaturesForType.get(type);
 		if (status === 'begin') {
-			signaturesForType.set(
+			signaturesForType.set(type, {
 				type,
-				(signature = {
-					type,
-					key,
-					forceReset,
-					getCustomHooks: getCustomHooks || (() => [])
-				})
-			);
-
-			signature.fullKey = computeKey(signature);
+				key,
+				forceReset,
+				getCustomHooks: getCustomHooks || (() => [])
+			});
 
 			return 'needsHooks';
 		} else if (status === 'needsHooks') {
-			if (!signature) {
-				signaturesForType.set(
-					type,
-					(signature = {
-						type,
-						key,
-						forceReset,
-						getCustomHooks: getCustomHooks || (() => [])
-					})
-				);
-			}
 			signature.fullKey = computeKey(signature);
 		}
 	}
@@ -167,6 +151,8 @@ function replaceHook(prev, next, resetHookState) {
 
 	types.forEach(type => {
 		const vnodes = vnodesForComponent.get(type);
+		if (!vnodes) return;
+
 		vnodes.forEach(vnode => {
 			if (resetHookState) {
 				vnode[VNODE_COMPONENT][COMPONENT_HOOKS] = {
@@ -180,8 +166,11 @@ function replaceHook(prev, next, resetHookState) {
 	});
 }
 
+function register(_type, _id) {}
+
 self[NAMESPACE] = {
 	getSignature: type => signaturesForType.get(type),
+	register,
 	replaceComponent,
 	replaceHook,
 	sign

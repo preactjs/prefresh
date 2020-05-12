@@ -19,7 +19,9 @@ window.$RefreshSig$ = () => {
   };
 };
 
-window.$RefreshReg$ = () => {};
+window.$RefreshReg$ = (type, id) => {
+  self.${NAMESPACE}.register(type, moduleId + ' ' + id);
+};
 
 try {
 `;
@@ -32,7 +34,6 @@ const afterModule = `
 
 const exports = module.exports || module.__proto__.exports;
 let shouldBind = false;
-let isCustomHook = false;
 if (!exports || typeof exports != 'object') {
   shouldBind = false;
 } else {
