@@ -46,7 +46,7 @@ const computeKey = signature => {
 		const nestedHookKey = computeKey(nestedHookSignature);
 		if (nestedHookSignature.forceReset) signature.forceReset = true;
 
-		fullKey += '\n---\n' + nestedHookKey;
+		if (nestedHookKey) fullKey += '\n---\n' + nestedHookKey;
 	}
 
 	signature.key = signature.fullKey = fullKey;

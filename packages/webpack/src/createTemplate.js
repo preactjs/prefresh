@@ -1,8 +1,12 @@
 const { Template } = require('webpack');
+const { isPreactCitizen, compareSignatures } = require('@prefresh/utils');
 
 const NAMESPACE = '__PREFRESH__';
 
 const beforeModule = `
+const isPreactCitizen = ${isPreactCitizen.toString()};
+const compareSignatures = ${compareSignatures.toString()};
+
 const prevRefreshReg = window.$RefreshReg$;
 const prevRefreshSig = window.$RefreshSig$;
 
@@ -40,9 +44,7 @@ if (!exports || typeof exports != 'object') {
     if (typeof exportValue == 'function') {
       const name = exportValue.name || exportValue.displayName;
       if (name) {
-        const isComponent = typeof name === 'string' && name[0] == name[0].toUpperCase();
-        const isCustomHOook = typeof name === 'string' && name.startsWith('use') && name[3] == name[3].toUpperCase();
-        shouldBind = shouldBind || isComponent || isCustomHook;
+        shouldBind = shouldBind || isPreactCitizen(name);
       }
     }
   }
@@ -56,22 +58,7 @@ if (module.hot && shouldBind) {
       try {
         if (typeof fn === 'function') {
           if (i in m.exports) {
-            const prevSignature = self.${NAMESPACE}.getSignature(fn) || {};
-            const nextSignature = self.${NAMESPACE}.getSignature(m.exports[i]) || {};
-
-            if (
-              prevSignature.key !== nextSignature.key ||
-              nextSignature.forceReset
-            ) {
-              if (typeof i === 'string' && i.startsWith('use') && i[3] == i[3].toUpperCase()) {
-                window.location.reload();
-              } else {
-                self.${NAMESPACE}.replaceComponent(m.exports[i], fn, true);
-              }
-            } else {
-              self.${NAMESPACE}.replaceComponent(m.exports[i], fn, false);
-            }
-
+            compareSignatures(fn, m.exports[i], i);
           }
         }
       } catch (e) {
