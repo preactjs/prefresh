@@ -5,7 +5,7 @@ export default function prefreshPlugin() {
             {
                 as: 'js',
                 test(path, query) {
-                    if (!/\.jsx$/.test(path)) return false;
+                    if (!/\.[tj]sx$/.test(path)) return false;
                     // @ts-ignore
                     this.path = path;
                     return true;
