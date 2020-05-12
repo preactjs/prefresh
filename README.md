@@ -3,4 +3,5 @@
 **Experimental package**
 
 - [core](https://github.com/JoviDeCroock/prefresh/tree/master/packages/core)
-- [webpack](https://github.com/JoviDeCroock/prefresh/tree/master/packages/webpack)
+- [utils](https://github.com/JoviDeCroock/prefresh/tree/master/packages/utils)
+- [vite](https://github.com/JoviDeCroock/prefresh/tree/master/packages/vite)
