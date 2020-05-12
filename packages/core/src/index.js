@@ -1,6 +1,6 @@
 // Options for Preact.
 import './runtime/vnode';
-import './runtime/diffed';
+import './runtime/diff';
 import './runtime/unmount';
 
 import { Component } from 'preact';
@@ -14,6 +14,7 @@ import {
 import { vnodesForComponent } from './runtime/vnodesForComponent';
 
 const signaturesForType = new WeakMap();
+const typesForHook = new WeakMap();
 
 /**
  *
@@ -28,16 +29,14 @@ const computeKey = signature => {
 		hooks = signature.getCustomHooks();
 	} catch (err) {
 		signature.forceReset = true;
-		signature.key = fullKey;
-		return;
+		return fullKey;
 	}
 
 	for (let i = 0; i < hooks.length; i++) {
 		const hook = hooks[i];
 		if (typeof hook !== 'function') {
 			signature.forceReset = true;
-			signature.key = fullKey;
-			return;
+			return fullKey;
 		}
 
 		const nestedHookSignature = signaturesForType.get(hook);
@@ -47,14 +46,23 @@ const computeKey = signature => {
 		if (nestedHookSignature.forceReset) signature.forceReset = true;
 
 		fullKey += '\n---\n' + nestedHookKey;
+
+		const types = typesForHook.get(hook);
+		if (types && types.length) {
+			if (types.indexOf(signature.type) === -1) {
+				typesForHook.set(hook, [...types, signature.type]);
+			}
+		} else {
+			typesForHook.set(hook, [signature.type]);
+		}
 	}
 
-	signature.key = signature.fullKey = fullKey;
+	return fullKey;
 };
 
 function sign(type, key, forceReset, getCustomHooks, status) {
 	if (type) {
-		const signature = signaturesForType.get(type);
+		let signature = signaturesForType.get(type);
 		if (status === 'begin') {
 			signaturesForType.set(type, {
 				type,
@@ -65,7 +73,7 @@ function sign(type, key, forceReset, getCustomHooks, status) {
 
 			return 'needsHooks';
 		} else if (status === 'needsHooks') {
-			computeKey(signature);
+			signature.fullKey = computeKey(signature);
 		}
 	}
 }
@@ -133,8 +141,37 @@ function replaceComponent(OldType, NewType, resetHookState) {
 	});
 }
 
+function replaceHook(prev, next, resetHookState) {
+	const types = typesForHook.get(prev);
+	if (!types) return;
+
+	// migrate the list to our new constructor reference
+	typesForHook.delete(prev);
+	typesForHook.set(next, types);
+
+	types.forEach(type => {
+		const vnodes = vnodesForComponent.get(type);
+		if (!vnodes) return;
+
+		vnodes.forEach(vnode => {
+			if (resetHookState) {
+				vnode[VNODE_COMPONENT][COMPONENT_HOOKS] = {
+					[HOOKS_LIST]: [],
+					[EFFECTS_LIST]: []
+				};
+			}
+
+			Component.prototype.forceUpdate.call(vnode[VNODE_COMPONENT]);
+		});
+	});
+}
+
+function register(_type, _id) {}
+
 self[NAMESPACE] = {
 	getSignature: type => signaturesForType.get(type),
+	register,
 	replaceComponent,
+	replaceHook,
 	sign
 };

@@ -1,23 +1,27 @@
 const { Template } = require('webpack');
+const { isPreactCitizen, compareSignatures } = require('@prefresh/utils');
 
 const NAMESPACE = '__PREFRESH__';
 
 const beforeModule = `
+const isPreactCitizen = ${isPreactCitizen.toString()};
+const compareSignatures = ${compareSignatures.toString()};
+
 const prevRefreshReg = window.$RefreshReg$;
 const prevRefreshSig = window.$RefreshSig$;
 
 window.$RefreshSig$ = () => {
   let status = 'begin';
   let savedType;
-  let hasHooks;
   return (type, key, forceReset, getCustomHooks) => {
     if (!savedType) savedType = type;
-    if (hasHooks === undefined) hasHooks = typeof getCustomHooks === 'function';
     status = self.${NAMESPACE}.sign(type || savedType, key, forceReset, getCustomHooks, status);
   };
 };
 
-window.$RefreshReg$ = () => {};
+window.$RefreshReg$ = (type, id) => {
+  self.${NAMESPACE}.register(type, moduleId + ' ' + id);
+};
 
 try {
 `;
@@ -30,7 +34,6 @@ const afterModule = `
 
 const exports = module.exports || module.__proto__.exports;
 let shouldBind = false;
-let isCustomHook = false;
 if (!exports || typeof exports != 'object') {
   shouldBind = false;
 } else {
@@ -40,9 +43,7 @@ if (!exports || typeof exports != 'object') {
     if (typeof exportValue == 'function') {
       const name = exportValue.name || exportValue.displayName;
       if (name) {
-        const isComponent = typeof name === 'string' && name[0] == name[0].toUpperCase();
-        const isCustomHOook = typeof name === 'string' && name.startsWith('use') && name[3] == name[3].toUpperCase();
-        shouldBind = shouldBind || isComponent || isCustomHook;
+        shouldBind = shouldBind || isPreactCitizen(name);
       }
     }
   }
@@ -56,22 +57,7 @@ if (module.hot && shouldBind) {
       try {
         if (typeof fn === 'function') {
           if (i in m.exports) {
-            const prevSignature = self.${NAMESPACE}.getSignature(fn) || {};
-            const nextSignature = self.${NAMESPACE}.getSignature(m.exports[i]) || {};
-
-            if (
-              prevSignature.key !== nextSignature.key ||
-              nextSignature.forceReset
-            ) {
-              if (typeof i === 'string' && i.startsWith('use') && i[3] == i[3].toUpperCase()) {
-                window.location.reload();
-              } else {
-                self.${NAMESPACE}.replaceComponent(m.exports[i], fn, true);
-              }
-            } else {
-              self.${NAMESPACE}.replaceComponent(m.exports[i], fn, false);
-            }
-
+            compareSignatures(m.exports[i], fn);
           }
         }
       } catch (e) {
