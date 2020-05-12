@@ -1,5 +1,11 @@
+const webpack = require('webpack');
 const { createRefreshTemplate } = require('./createTemplate');
 const { injectEntry } = require('./utils');
+
+const options = {
+	include: /\.([jt]sx?|flow)$/,
+	exclude: /node_modules/
+};
 
 const HMR_PLUGIN = 'HotModuleReplacementPlugin';
 
@@ -24,6 +30,27 @@ class ReloadPlugin {
 					'Webpack.HotModuleReplacementPlugin is missing from the webpack config.'
 				);
 			}
+		});
+
+		const matchObject = webpack.ModuleFilenameHelpers.matchObject.bind(
+			undefined,
+			options
+		);
+		compiler.hooks.normalModuleFactory.tap(this.constructor.name, nmf => {
+			nmf.hooks.afterResolve.tap(this.constructor.name, data => {
+				// Inject refresh loader to all JavaScript-like files
+				if (
+					matchObject(data.resource) &&
+					!data.resource.includes('@prefresh')
+				) {
+					data.loaders.unshift({
+						loader: require.resolve('./loader'),
+						options: undefined
+					});
+				}
+
+				return data;
+			});
 		});
 
 		compiler.hooks.compilation.tap(this.constructor.name, compilation => {

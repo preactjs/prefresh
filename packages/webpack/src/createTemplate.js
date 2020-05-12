@@ -20,7 +20,7 @@ window.$RefreshSig$ = () => {
 };
 
 window.$RefreshReg$ = (type, id) => {
-  self.${NAMESPACE}.register(type, moduleId + ' ' + id);
+  self.${NAMESPACE}.register(type, module.i + ' ' + id);
 };
 
 try {
