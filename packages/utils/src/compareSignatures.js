@@ -14,12 +14,13 @@ exports.compareSignatures = (prev, next, name) => {
 		nextSignature.forceReset
 	) {
 		if (isHook) {
-			self.__PREFRESH__.replaceHook(prev, next, true);
+			window.location.reload();
+			// self.__PREFRESH__.replaceHook(prev, next, true);
 		} else {
 			self.__PREFRESH__.replaceComponent(prev, next, true);
 		}
-	} else if (isHook) {
-		self.__PREFRESH__.replaceHook(prev, next, false);
+		//} else if (isHook) {
+		//	self.__PREFRESH__.replaceHook(prev, next, false);
 	} else {
 		self.__PREFRESH__.replaceComponent(prev, next, false);
 	}
