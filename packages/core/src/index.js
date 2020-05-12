@@ -2,18 +2,61 @@
 import './runtime/vnode';
 import './runtime/diffed';
 import './runtime/unmount';
-import './runtime/hook';
 
-import { options, Component } from 'preact';
-import {
-	VNODE_COMPONENT,
-	COMPONENT_HOOKS,
-	HOOKS_LIST,
-	HOT_RELOAD_ID,
-	HOOK_OPTION,
-	NAMESPACE
-} from './constants';
+import { Component } from 'preact';
+import { VNODE_COMPONENT, NAMESPACE } from './constants';
 import { vnodesForComponent } from './runtime/vnodesForComponent';
+
+const signaturesForType = new WeakMap();
+
+const computeKey = signature => {
+	let fullKey = signature.key;
+	let hooks;
+
+	try {
+		hooks = signature.getCustomHooks();
+	} catch (err) {
+		signature.forceReset = true;
+		signature.key = fullKey;
+		return;
+	}
+
+	for (let i = 0; i < hooks.length; i++) {
+		const hook = hooks[i];
+		if (typeof hook !== 'function') {
+			signature.forceReset = true;
+			signature.key = fullKey;
+			return;
+		}
+
+		const nestedHookSignature = signaturesForType.get(hook);
+		if (nestedHookSignature === undefined) continue;
+
+		const nestedHookKey = computeKey(nestedHookSignature);
+		if (nestedHookSignature.forceReset) signature.forceReset = true;
+
+		fullKey += '\n---\n' + nestedHookKey;
+	}
+
+	signature.key = signature.fullKey = fullKey;
+};
+
+function sign(type, key, forceReset, getCustomHooks, status) {
+	if (type) {
+		const signature = signaturesForType.get(type);
+		if (status === 'begin') {
+			signaturesForType.set(type, {
+				type,
+				key,
+				forceReset,
+				getCustomHooks: getCustomHooks || (() => [])
+			});
+			return 'needsHooks';
+		} else if (status === 'needsHooks') {
+			computeKey(signature);
+		}
+	}
+}
 
 function replaceComponent(OldType, NewType) {
 	const vnodes = vnodesForComponent.get(OldType);
@@ -66,41 +109,13 @@ function replaceComponent(OldType, NewType) {
 				/* Functional component */
 			}
 
-			if (vnode[VNODE_COMPONENT][COMPONENT_HOOKS]) {
-				const visited = new WeakSet();
-				const hooks = vnode[VNODE_COMPONENT][COMPONENT_HOOKS];
-				const oldOptionsHook = options[HOOK_OPTION];
-
-				options[HOOK_OPTION] = (component, index, type) => {
-					const hooks = component[COMPONENT_HOOKS][HOOKS_LIST];
-					if (hooks[index].type !== type) {
-						hooks.splice(index, 0, { type });
-					} else if (hooks[index][HOT_RELOAD_ID]) {
-						visited.add(hooks[index][HOT_RELOAD_ID]);
-					}
-
-					if (oldOptionsHook) oldOptionsHook(component, index, type);
-				};
-
-				Component.prototype.forceUpdate.call(vnode[VNODE_COMPONENT], () => {
-					// We have finished the update, all that's left to do is check whether
-					// or not we have unvisited hooks, if we do we can safely remove them since
-					// this code could've been removed.
-					vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(
-						(hook, i) => {
-							const hotReloadId = hook[HOT_RELOAD_ID];
-							if (hotReloadId && !visited.has(hotReloadId)) {
-								hooks.__.splice(i, 1);
-							}
-						}
-					);
-					options[HOOK_OPTION] = oldOptionsHook;
-				});
-			} else {
-				Component.prototype.forceUpdate.call(vnode[VNODE_COMPONENT]);
-			}
+			Component.prototype.forceUpdate.call(vnode[VNODE_COMPONENT]);
 		}
 	});
 }
 
-self[NAMESPACE] = { replaceComponent };
+self[NAMESPACE] = {
+	getSignature: type => signaturesForType.get(type),
+	replaceComponent,
+	sign
+};

@@ -26,8 +26,8 @@ This will go over all vnodes it knows for the `oldType` and rerender them accord
 - [x] error recovery
 - [x] class components
 - [x] functional components
-- [ ] state-hooks ordering
-- [ ] hook swapping
-- [ ] avoid triggering effects for added dependencies
-- [ ] transition better from Functional --> class and other way around
-- [ ] provide fallback if no hot modules/no preact modules (window.location.reload())
+- [x] hook swapping
+- [x] avoid triggering effects for added dependencies
+- [x] transition better from Functional --> class and other way around
+- [x] provide fallback if no hot modules/no preact modules (window.location.reload())
+- [x] custom hooks
