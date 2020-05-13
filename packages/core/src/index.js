@@ -14,7 +14,6 @@ import {
 import { vnodesForComponent } from './runtime/vnodesForComponent';
 
 const signaturesForType = new WeakMap();
-const typesForHook = new WeakMap();
 
 /**
  *
@@ -46,15 +45,6 @@ const computeKey = signature => {
 		if (nestedHookSignature.forceReset) signature.forceReset = true;
 
 		fullKey += '\n---\n' + nestedHookKey;
-
-		const types = typesForHook.get(hook);
-		if (types && types.length) {
-			if (types.indexOf(signature.type) === -1) {
-				typesForHook.set(hook, [...types, signature.type]);
-			}
-		} else {
-			typesForHook.set(hook, [signature.type]);
-		}
 	}
 
 	return fullKey;
@@ -141,37 +131,14 @@ function replaceComponent(OldType, NewType, resetHookState) {
 	});
 }
 
-function replaceHook(prev, next, resetHookState) {
-	const types = typesForHook.get(prev);
-	if (!types) return;
-
-	// migrate the list to our new constructor reference
-	typesForHook.delete(prev);
-	typesForHook.set(next, types);
-
-	types.forEach(type => {
-		const vnodes = vnodesForComponent.get(type);
-		if (!vnodes) return;
-
-		vnodes.forEach(vnode => {
-			if (resetHookState) {
-				vnode[VNODE_COMPONENT][COMPONENT_HOOKS] = {
-					[HOOKS_LIST]: [],
-					[EFFECTS_LIST]: []
-				};
-			}
-
-			Component.prototype.forceUpdate.call(vnode[VNODE_COMPONENT]);
-		});
-	});
+function register(type, id) {
+	// Unused atm
 }
-
-function register(_type, _id) {}
 
 self[NAMESPACE] = {
 	getSignature: type => signaturesForType.get(type),
 	register,
 	replaceComponent,
-	replaceHook,
-	sign
+	sign,
+	computeKey
 };
