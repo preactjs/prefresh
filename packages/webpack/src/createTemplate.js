@@ -1,12 +1,8 @@
 const { Template } = require('webpack');
-const { isPreactCitizen, compareSignatures } = require('@prefresh/utils');
 
 const NAMESPACE = '__PREFRESH__';
 
 const beforeModule = `
-const isPreactCitizen = ${isPreactCitizen.toString()};
-const compareSignatures = ${compareSignatures.toString()};
-
 const prevRefreshReg = window.$RefreshReg$;
 const prevRefreshSig = window.$RefreshSig$;
 
@@ -30,49 +26,6 @@ const afterModule = `
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
-}
-
-const exports = module.exports || module.__proto__.exports;
-let shouldBind = false;
-if (!exports || typeof exports != 'object') {
-  shouldBind = false;
-} else {
-  for (const key in exports) {
-    if (key === '__esmodule') continue;
-    const exportValue = exports[key];
-    if (typeof exportValue == 'function') {
-      const name = exportValue.name || exportValue.displayName;
-      if (name) {
-        shouldBind = shouldBind || isPreactCitizen(name);
-      }
-    }
-  }
-}
-
-if (module.hot && shouldBind) {
-  const m = module.hot.data && module.hot.data.module && module.hot.data.module;
-  if (m) {
-    for (let i in module.exports) {
-      const fn = module.exports[i];
-      try {
-        if (typeof fn === 'function') {
-          if (i in m.exports) {
-            compareSignatures(m.exports[i], fn);
-          }
-        }
-      } catch (e) {
-        self.location.reload();
-      }
-    }
-  }
-
-  module.hot.dispose(function(data) {
-    data.module = module;
-  });
-
-  module.hot.accept(function errorRecovery() {
-    require.cache[module.id].hot.accept(errorRecovery);
-  });
 }
 `;
 
