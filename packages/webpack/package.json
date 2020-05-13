@@ -1,6 +1,6 @@
 {
   "name": "@prefresh/webpack",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint src"
@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/JoviDeCroock/prefresh#readme",
   "dependencies": {
-    "@prefresh/core": "0.5.0",
+    "@prefresh/core": "0.6.0",
     "@prefresh/utils": "0.1.0"
   },
   "devDependencies": {
