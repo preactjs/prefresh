@@ -1,0 +1,28 @@
+{
+  "name": "@prefresh/nollup",
+  "version": "0.5.0",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoviDeCroock/prefresh.git",
+    "directory": "packages/nollup"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoviDeCroock/prefresh/issues"
+  },
+  "homepage": "https://github.com/JoviDeCroock/prefresh#readme",
+  "dependencies": {
+    "@prefresh/core": "0.6.1",
+    "@prefresh/utils": "0.1.1"
+  },
+  "devDependencies": {
+    "preact": "^10.4.1"
+  },
+  "peerDependencies": {
+    "preact": "^10.4.0"
+  }
+}
