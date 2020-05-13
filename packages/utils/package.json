@@ -4,7 +4,6 @@
 	"module": "src/index.es.js",
 	"main": "src/index.js",
   "scripts": {
-		"prepublishOnly": "cjyes src/index.js",
     "lint": "eslint src"
   },
   "repository": {
@@ -16,8 +15,5 @@
   "bugs": {
     "url": "https://github.com/JoviDeCroock/prefresh/issues"
   },
-  "homepage": "https://github.com/JoviDeCroock/prefresh#readme",
-  "devDependencies": {
-		"cjyes": "^0.1.0"
-	}
+  "homepage": "https://github.com/JoviDeCroock/prefresh#readme"
 }
