@@ -2,7 +2,12 @@ const webpack = require('webpack');
 const path = require('path');
 const { createRefreshTemplate } = require('./utils/createTemplate');
 const { injectEntry } = require('./utils/injectEntry');
-const { HMR_PLUGIN, NAME, options } = require('./utils/constants');
+const {
+	prefreshUtils,
+	HMR_PLUGIN,
+	NAME,
+	options
+} = require('./utils/constants');
 
 class ReloadPlugin {
 	apply(compiler) {
@@ -27,11 +32,10 @@ class ReloadPlugin {
 			}
 		});
 
-		// const providePlugin = new webpack.ProvidePlugin({
-		//   [prefreshUtils]: require.resolve('./utils/prefresh'),
-		// });
-
-		// providePlugin.apply(compiler);
+		const providePlugin = new webpack.ProvidePlugin({
+			[prefreshUtils]: require.resolve('./utils/prefresh')
+		});
+		providePlugin.apply(compiler);
 
 		const matcher = webpack.ModuleFilenameHelpers.matchObject.bind(
 			undefined,
@@ -43,6 +47,7 @@ class ReloadPlugin {
 				if (
 					matcher(data.resource) &&
 					!data.resource.includes('@prefresh') &&
+					!data.resource.includes('preact-reload') &&
 					!data.resource.includes(path.join(__dirname, './loader')) &&
 					!data.resource.includes(path.join(__dirname, './utils'))
 				) {
