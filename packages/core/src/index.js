@@ -14,10 +14,6 @@ import {
 import { vnodesForComponent } from './runtime/vnodesForComponent';
 
 const signaturesForType = new WeakMap();
-const typesForHook = new WeakMap();
-const allFamiliesByType = new WeakMap();
-const allFamiliesById = new Map();
-let pendingUpdates = [];
 
 /**
  *
@@ -49,15 +45,6 @@ const computeKey = signature => {
 		if (nestedHookSignature.forceReset) signature.forceReset = true;
 
 		fullKey += '\n---\n' + nestedHookKey;
-
-		const types = typesForHook.get(hook);
-		if (types && types.length) {
-			if (types.indexOf(signature.type) === -1) {
-				typesForHook.set(hook, [...types, signature.type]);
-			}
-		} else {
-			typesForHook.set(hook, [signature.type]);
-		}
 	}
 
 	return fullKey;
@@ -142,62 +129,16 @@ function replaceComponent(OldType, NewType, resetHookState) {
 			Component.prototype.forceUpdate.call(vnode[VNODE_COMPONENT]);
 		}
 	});
-	pendingUpdates = [];
-}
-
-function replaceHook(prev, next, resetHookState) {
-	const types = typesForHook.get(prev);
-	if (!types) return;
-
-	// migrate the list to our new constructor reference
-	typesForHook.delete(prev);
-	typesForHook.set(next, types);
-
-	types.forEach(type => {
-		const vnodes = vnodesForComponent.get(type);
-		if (!vnodes) return;
-
-		const newType = (pendingUpdates.find(
-			update => update[0].current === type
-		) || [null, type])[1];
-
-		vnodes.forEach(vnode => {
-			vnode.type = newType;
-			vnode[VNODE_COMPONENT].constructor = newType;
-			if (resetHookState) {
-				vnode[VNODE_COMPONENT][COMPONENT_HOOKS] = {
-					[HOOKS_LIST]: [],
-					[EFFECTS_LIST]: []
-				};
-			}
-
-			Component.prototype.forceUpdate.call(vnode[VNODE_COMPONENT]);
-		});
-	});
-
-	pendingUpdates = [];
 }
 
 function register(type, id) {
-	if (!type || typeof type !== 'function') return;
-
-	if (allFamiliesByType.has(type)) return;
-
-	let family = allFamiliesById.get(id);
-	if (!family) {
-		family = { current: type };
-		allFamiliesById.set(id, family);
-	} else {
-		pendingUpdates.push([family, type]);
-	}
-
-	allFamiliesByType.set(type, family);
+	// Unused atm
 }
 
 self[NAMESPACE] = {
 	getSignature: type => signaturesForType.get(type),
 	register,
 	replaceComponent,
-	replaceHook,
-	sign
+	sign,
+	computeKey
 };

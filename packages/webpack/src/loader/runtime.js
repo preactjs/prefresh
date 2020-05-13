@@ -1,20 +1,19 @@
 module.exports = function() {
-	const isPreactCitizen = name =>
-		typeof name === 'string' &&
-		name[0] &&
-		(name[0] == name[0].toUpperCase() ||
-			(name.startsWith('use') && name[3] == name[3].toUpperCase()));
+	// TODO: find a way to use @prefresh/utils here
+	const isComponent = name =>
+		typeof name === 'string' && name[0] && name[0] == name[0].toUpperCase();
 
+	// TODO: find a way to abstrat this out to an external helper file.
 	// eslint-disable-next-line
-	let moduleExports = module.exports || module.__proto__.exports;
+	const getExports = m => m.exports || m.__proto__.exports;
+
+	let moduleExports = getExports(module);
 	const moduleId = module.id;
 
 	let isCitizen = false;
 
-	if (
-		typeof moduleExports === 'function' &&
-		isPreactCitizen(moduleExports.name)
-	) {
+	// TODO: find a way to abstrat this out to an external helper file.
+	if (typeof moduleExports === 'function' && isComponent(moduleExports.name)) {
 		isCitizen = true;
 		window.__PREFRESH__.register(moduleExports, moduleId + ' %exports%');
 	}
@@ -30,10 +29,7 @@ module.exports = function() {
 			if (key === '__esModule') continue;
 
 			const exportValue = moduleExports[key];
-			if (
-				typeof exportValue === 'function' &&
-				isPreactCitizen(exportValue.name)
-			) {
+			if (typeof exportValue === 'function' && isComponent(exportValue.name)) {
 				isCitizen = isCitizen || true;
 				const typeID = moduleId + ' %exports% ' + key;
 				window.__PREFRESH__.register(exportValue, typeID);
@@ -42,49 +38,37 @@ module.exports = function() {
 	}
 
 	if (module.hot && isCitizen) {
-		// eslint-disable-next-line
-		moduleExports = module.exports || module.__proto__.exports;
+		moduleExports = getExports(module);
 		const m =
 			module.hot.data && module.hot.data.module && module.hot.data.module;
+
 		if (m) {
 			for (let i in moduleExports) {
 				const fn = moduleExports[i];
 				try {
 					if (typeof fn === 'function') {
-						// eslint-disable-next-line
-						const oldExports = m.exports || m.__proto__.exports;
+						const oldExports = getExports(m);
 						if (i in oldExports) {
 							const prev = oldExports[i];
 							const next = fn;
 
+							// TODO: find a way to use @prefresh/utils here
 							const prevSignature = self.__PREFRESH__.getSignature(prev) || {};
 							const nextSignature = self.__PREFRESH__.getSignature(next) || {};
 
-							let finalName = name || nextSignature.type.name;
-							const isHook =
-								typeof finalName === 'string' &&
-								finalName.startsWith('use') &&
-								finalName[3] == finalName[3].toUpperCase();
-
 							if (
 								prevSignature.key !== nextSignature.key ||
-								prevSignature.fullKey !== nextSignature.fullKey ||
+								self.__PREFRESH__.computeKey(prevSignature) !==
+									self.__PREFRESH__.computeKey(nextSignature) ||
 								nextSignature.forceReset
 							) {
-								if (isHook) {
-									self.__PREFRESH__.replaceHook(prev, next, true);
-								} else {
-									self.__PREFRESH__.replaceComponent(prev, next, true);
-								}
-							} else if (isHook) {
-								self.__PREFRESH__.replaceHook(prev, next, false);
+								self.__PREFRESH__.replaceComponent(prev, next, true);
 							} else {
 								self.__PREFRESH__.replaceComponent(prev, next, false);
 							}
 						}
 					}
 				} catch (e) {
-					console.log(e);
 					self.location.reload();
 				}
 			}

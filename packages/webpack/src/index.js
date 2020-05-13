@@ -1,13 +1,8 @@
 const webpack = require('webpack');
-const { createRefreshTemplate } = require('./createTemplate');
-const { injectEntry } = require('./utils');
-
-const options = {
-	include: /\.([jt]sx?|flow)$/,
-	exclude: /node_modules/
-};
-
-const HMR_PLUGIN = 'HotModuleReplacementPlugin';
+const path = require('path');
+const { createRefreshTemplate } = require('./utils/createTemplate');
+const { injectEntry } = require('./utils/injectEntry');
+const { HMR_PLUGIN, NAME, options } = require('./utils/constants');
 
 class ReloadPlugin {
 	apply(compiler) {
@@ -32,16 +27,24 @@ class ReloadPlugin {
 			}
 		});
 
-		const matchObject = webpack.ModuleFilenameHelpers.matchObject.bind(
+		// const providePlugin = new webpack.ProvidePlugin({
+		//   [prefreshUtils]: require.resolve('./utils/prefresh'),
+		// });
+
+		// providePlugin.apply(compiler);
+
+		const matcher = webpack.ModuleFilenameHelpers.matchObject.bind(
 			undefined,
 			options
 		);
-		compiler.hooks.normalModuleFactory.tap(this.constructor.name, nmf => {
-			nmf.hooks.afterResolve.tap(this.constructor.name, data => {
-				// Inject refresh loader to all JavaScript-like files
+
+		compiler.hooks.normalModuleFactory.tap(NAME, nmf => {
+			nmf.hooks.afterResolve.tap(NAME, data => {
 				if (
-					matchObject(data.resource) &&
-					!data.resource.includes('@prefresh')
+					matcher(data.resource) &&
+					!data.resource.includes('@prefresh') &&
+					!data.resource.includes(path.join(__dirname, './loader')) &&
+					!data.resource.includes(path.join(__dirname, './utils'))
 				) {
 					data.loaders.unshift({
 						loader: require.resolve('./loader'),
@@ -53,11 +56,9 @@ class ReloadPlugin {
 			});
 		});
 
-		compiler.hooks.compilation.tap(this.constructor.name, compilation => {
-			compilation.mainTemplate.hooks.require.tap(
-				this.constructor.name,
-				(source, chunk, hash) =>
-					createRefreshTemplate(source, chunk, hash, compilation.mainTemplate)
+		compiler.hooks.compilation.tap(NAME, compilation => {
+			compilation.mainTemplate.hooks.require.tap(NAME, (source, chunk, hash) =>
+				createRefreshTemplate(source, chunk, hash, compilation.mainTemplate)
 			);
 		});
 	}
