@@ -1,4 +1,4 @@
-exports.compareSignatures = (prev, next) => {
+export const compareSignatures = (prev, next) => {
 	const prevSignature = self.__PREFRESH__.getSignature(prev) || {};
 	const nextSignature = self.__PREFRESH__.getSignature(next) || {};
 

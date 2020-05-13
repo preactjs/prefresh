@@ -1,13 +1,2 @@
-const { compareSignatures } = require('./compareSignatures');
-const {
-	isPreactCitizen,
-	isComponent,
-	isCustomHook
-} = require('./isPreactCitizen');
-
-module.exports = {
-	compareSignatures,
-	isPreactCitizen,
-	isComponent,
-	isCustomHook
-};
+export { compareSignatures } from './compareSignatures';
+export { isPreactCitizen, isComponent, isCustomHook } from './isPreactCitizen';
