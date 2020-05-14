@@ -1,3 +1,7 @@
+## 0.6.1
+
+- Remove invalid `webpack` peerDependency
+
 ## 0.6.0
 
 - Added `computeKey` and `register` to the window payload
