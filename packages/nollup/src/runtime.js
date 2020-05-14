@@ -1,5 +1,6 @@
 import { isComponent, compareSignatures } from '@prefresh/utils';
 
+// eslint-disable-next-line
 const getExports = m => m.exports || m.__proto__.exports;
 
 const registerExports = m => {

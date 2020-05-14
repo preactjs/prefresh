@@ -35,3 +35,7 @@ changes in hooks well.
 
 You'll need to add `react-refresh/babel` to your `babel-configuration` to make this
 work together.
+
+## Credits
+
+- [PepsRyuu](https://github.com/PepsRyuu)
