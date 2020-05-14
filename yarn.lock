@@ -130,6 +130,11 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
+"@prefresh/core@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@prefresh/core/-/core-0.5.0.tgz#119da56977cba45d5d7d4eaf99d0394bb9296c9a"
+  integrity sha512-1omCRCn7Jmv28DdgydMOoOuQFDaccbHx9EItJRAFNAxwvfr01/qi2fhVZa60tSV8HKEdOvBWvdky/l2sLNUSDQ==
+
 "@rollup/plugin-json@^4.0.3":
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-json/-/plugin-json-4.0.3.tgz#747e2c2884c5a0fa00b66c9c0f3f1012cddca534"
