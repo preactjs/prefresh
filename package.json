@@ -31,14 +31,20 @@
     "prettier": "^1.18.2"
   },
   "eslintConfig": {
-    "extends": ["developit", "prettier"],
+    "extends": [
+      "developit",
+      "prettier"
+    ],
     "rules": {
       "prefer-rest-params": 0,
       "prefer-spread": 0,
       "no-cond-assign": 0
     }
   },
-  "eslintIgnore": ["dist", "node_modules"],
+  "eslintIgnore": [
+    "dist",
+    "node_modules"
+  ],
   "prettier": {
     "singleQuote": true,
     "trailingComma": "none",
