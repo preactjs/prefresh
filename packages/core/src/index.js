@@ -1,9 +1,9 @@
 // Options for Preact.
 import './runtime/vnode';
-import './runtime/diff';
 import './runtime/unmount';
 
 import { Component } from 'preact';
+
 import {
 	VNODE_COMPONENT,
 	NAMESPACE,
@@ -11,44 +11,9 @@ import {
 	EFFECTS_LIST,
 	COMPONENT_HOOKS
 } from './constants';
+import { computeKey } from './computeKey';
 import { vnodesForComponent } from './runtime/vnodesForComponent';
-
-const signaturesForType = new WeakMap();
-
-/**
- *
- * This part has been vendored from "react-refresh"
- * https://github.com/facebook/react/blob/master/packages/react-refresh/src/ReactFreshRuntime.js#L83
- */
-const computeKey = signature => {
-	let fullKey = signature.key;
-	let hooks;
-
-	try {
-		hooks = signature.getCustomHooks();
-	} catch (err) {
-		signature.forceReset = true;
-		return fullKey;
-	}
-
-	for (let i = 0; i < hooks.length; i++) {
-		const hook = hooks[i];
-		if (typeof hook !== 'function') {
-			signature.forceReset = true;
-			return fullKey;
-		}
-
-		const nestedHookSignature = signaturesForType.get(hook);
-		if (nestedHookSignature === undefined) continue;
-
-		const nestedHookKey = computeKey(nestedHookSignature);
-		if (nestedHookSignature.forceReset) signature.forceReset = true;
-
-		fullKey += '\n---\n' + nestedHookKey;
-	}
-
-	return fullKey;
-};
+import { signaturesForType } from './runtime/signaturesForType';
 
 function sign(type, key, forceReset, getCustomHooks, status) {
 	if (type) {
@@ -131,13 +96,11 @@ function replaceComponent(OldType, NewType, resetHookState) {
 	});
 }
 
-function register(type, id) {
-	// Unused atm
-}
-
 self[NAMESPACE] = {
 	getSignature: type => signaturesForType.get(type),
-	register,
+	register: (type, id) => {
+		// Unused atm
+	},
 	replaceComponent,
 	sign,
 	computeKey

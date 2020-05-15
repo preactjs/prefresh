@@ -1,3 +1,7 @@
+## 0.6.2
+
+- Some performance refactors
+
 ## 0.6.1
 
 - Remove invalid `webpack` peerDependency
