@@ -1,30 +1,36 @@
 /* globals __prefresh_utils__ */
 module.exports = function() {
-	const isCitizen = __prefresh_utils__.registerExports(module);
+	const isPrefreshComponent = __prefresh_utils__.registerExports(module);
 
-	if (module.hot && isCitizen) {
-		const moduleExports = __prefresh_utils__.getExports(module);
-		const m =
-			module.hot.data && module.hot.data.module && module.hot.data.module;
+	if (module.hot && isPrefreshComponent) {
+		const hotModuleExports = __prefresh_utils__.getExports(module);
+		const previousHotModuleExports =
+			module.hot.data && module.hot.data.moduleExports;
 
-		if (m) {
-			for (let i in moduleExports) {
-				const fn = moduleExports[i];
+		if (previousHotModuleExports) {
+			for (let i in hotModuleExports) {
 				try {
-					if (typeof fn === 'function') {
-						const oldExports = __prefresh_utils__.getExports(m);
-						if (i in oldExports) {
-							__prefresh_utils__.compareSignatures(oldExports[i], fn);
+					if (typeof hotModuleExports[i] === 'function') {
+						if (i in previousHotModuleExports) {
+							__prefresh_utils__.compareSignatures(
+								previousHotModuleExports[i],
+								hotModuleExports[i]
+							);
 						}
 					}
 				} catch (e) {
-					self.location.reload();
+					// Only available in newer webpack versions.
+					if (module.hot.invalidate) {
+						module.hot.invalidate();
+					} else {
+						self.location.reload();
+					}
 				}
 			}
 		}
 
 		module.hot.dispose(function(data) {
-			data.module = module;
+			data.moduleExports = __prefresh_utils__.getExports(module);
 		});
 
 		module.hot.accept(function errorRecovery() {
