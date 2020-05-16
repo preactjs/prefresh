@@ -1,0 +1,15 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@1.1.0/schema.json",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "linked": [
+    ["@prefresh/webpack", "@prefresh/core"],
+    ["@prefresh/nollup", "@prefresh/core"],
+    ["@prefresh/vite", "@prefresh/core"],
+    ["@prefresh/webpack", "@prefresh/utils"],
+    ["@prefresh/nollup", "@prefresh/utils"]
+  ],
+  "access": "restricted",
+  "baseBranch": "master",
+  "updateInternalDependencies": "patch"
+}
