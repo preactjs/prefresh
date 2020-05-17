@@ -4,9 +4,14 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 	return {
 		knownEntrypoints: ['@prefresh/core'],
 		async transform({ contents, urlPath, isDev }) {
-			if (!isDev || !urlPath.endsWith('.js')) return;
+			if (
+				!isDev ||
+				!urlPath.endsWith('.js') ||
+				urlPath.includes('web_modules') ||
+				urlPath.includes('node_modules')
+			)
+				return;
 
-			// TODO: only bind components with isComponent
 			return {
 				result: `
           import '@prefresh/core';
@@ -30,13 +35,13 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 
           ${contents}
 
-          conosle.log($CurrentModule$, import)
           if (import.meta.hot) {
             import.meta.hot.accept(({ module }) => {
               try {
                 for (let i in module) {
                   if (typeof module[i] === 'function') {
                     if (i in $CurrentModule$) {
+                      // We could add a check here on i.name if it's a component.
                       compareSignaturesForPrefreshment(
                         $CurrentModule$[i],
                         module[i]
