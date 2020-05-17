@@ -23,10 +23,10 @@
 	"devDependencies": {
 		"cjyes": "^0.1.0",
 		"preact": "^10.4.1",
-		"snowpack": "^2.0.0"
+		"snowpack": "^2.0.0-beta.24"
 	},
 	"peerDependencies": {
 		"preact": "^10.4.0",
-		"snowpack": "^2.0.0"
+		"snowpack": "^2.0.0-beta.24"
 	}
 }
