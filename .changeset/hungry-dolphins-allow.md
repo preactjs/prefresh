@@ -2,4 +2,4 @@
 '@prefresh/vite': patch
 ---
 
-Add fallback when module-replacement fails
+Add fallback when module-replacement fails.
