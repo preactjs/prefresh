@@ -19,10 +19,14 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 
           if (import.meta.hot) {
             import.meta.hot.accept(({module}) => {
-              for (let i in module) {
-                self.__PREFRESH__.replaceComponent($CurrentModule$[i], module[i]);
+              try {
+                for (let i in module) {
+                  self.__PREFRESH__.replaceComponent($CurrentModule$[i], module[i]);
+                }
+                $CurrentModule$ = module;
+              } catch(e) {
+                window.location.reload();
               }
-              $CurrentModule$ = module;
             });
           }`,
       };
