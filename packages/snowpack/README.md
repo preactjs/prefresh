@@ -16,6 +16,6 @@ Then add it to your `snowpack.config.json` config:
 
 ```json
 {
-  "plugins": ["@prefresh/snowpacks"]
+  "plugins": ["@prefresh/snowpack"]
 }
 ```

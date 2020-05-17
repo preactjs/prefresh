@@ -51,7 +51,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
                 }
                 $CurrentModule$ = module;
               } catch(e) {
-                window.location.reload();
+                module.hot.invalidate();
               }
             });
           }`
