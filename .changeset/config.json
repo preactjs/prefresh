@@ -1,9 +1,10 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@1.1.0/schema.json",
-  "changelog": "../scripts/changelog.js",
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "JoviDeCroock/prefresh" }
+  ],
   "commit": false,
-  "linked": [],
-  "access": "restricted",
-  "baseBranch": "master",
-  "updateInternalDependencies": "patch"
+  "access": "public",
+  "baseBranch": "master"
 }
