@@ -4,4 +4,4 @@
 
 ### Patch Changes
 
-- 2796d72: Add fallback when module-replacement fails
+- [#37](https://github.com/JoviDeCroock/prefresh/pull/37): Add fallback when module-replacement fails. (thanks @JoviDeCroock)
