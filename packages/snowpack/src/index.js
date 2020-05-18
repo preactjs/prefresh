@@ -33,8 +33,11 @@ module.exports = function preactRefreshPlugin(config, pluginOptions) {
               }
               $CurrentModule$ = module;
             } catch(e) {
-              console.log('error', e);
-              window.location.reload();
+              if (import.meta.hot.invalidate) {
+                import.meta.hot.invalidate();
+              } else {
+                window.location.reload();
+              }
             }
           });
         }
