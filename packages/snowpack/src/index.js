@@ -1,5 +1,12 @@
-const { compareSignatures, isComponent } = require('@prefresh/utils');
+const {
+	compareSignatures,
+	isComponent,
+	isCustomHook
+} = require('@prefresh/utils');
 
+// TODO: this currently wraps on a by-file basis but this assumption could be
+// wrong where someone exports multiple customHooks from a single file or mixes
+// both of these up.
 module.exports = function preactRefreshPlugin(config, pluginOptions) {
 	return {
 		knownEntrypoints: ['@prefresh/core'],
@@ -8,25 +15,6 @@ module.exports = function preactRefreshPlugin(config, pluginOptions) {
 
 			const parts = urlPath.split('/');
 			const lastPart = parts[parts.length - 1];
-
-			const prelude = `
-        import '@prefresh/core';
-        import * as $OriginalModule$ from ${JSON.stringify(urlPath)};
-        let $CurrentModule$ = $OriginalModule$;
-
-        const compareSignaturesForPrefreshment = ${compareSignatures.toString()};
-
-        window.$RefreshSig$ = () => {
-          let status = 'begin';
-          let savedType;
-          return (type, key, forceReset, getCustomHooks) => {
-            if (!savedType) savedType = type;
-            status = window.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, status);
-          };
-        };
-
-        window.$RefreshReg$ = (type, id) => {};
-      `;
 
 			const postLude = `
         if (import.meta.hot) {
@@ -54,10 +42,33 @@ module.exports = function preactRefreshPlugin(config, pluginOptions) {
 
 			return {
 				result: `
-          ${prelude}
+          import '@prefresh/core';
+          import * as $OriginalModule$ from ${JSON.stringify(urlPath)};
+          let $CurrentModule$ = $OriginalModule$;
+
+          const compareSignaturesForPrefreshment = ${compareSignatures.toString()};
+
+          window.$RefreshSig$ = () => {
+            let status = 'begin';
+            let savedType;
+            return (type, key, forceReset, getCustomHooks) => {
+              if (!savedType) savedType = type;
+              status = window.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, status);
+            };
+          };
+
+          window.$RefreshReg$ = (type, id) => {};
+
           ${contents}
-          ${isComponent(lastPart) ? postLude : ''}
+          ${
+						isComponent(lastPart)
+							? postLude
+							: isCustomHook(lastPart)
+							? 'import.meta.hot.accept();'
+							: ''
+					}
         `
+				// Currently the `import.meta.hot.accept()` does not result in a replacement in dependent modules.
 			};
 		}
 	};
