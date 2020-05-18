@@ -1,7 +1,7 @@
 const {
 	compareSignatures,
-	isComponent,
-	isCustomHook
+	isComponent
+	// isCustomHook
 } = require('@prefresh/utils');
 
 // TODO: this currently wraps on a by-file basis but this assumption could be
@@ -66,12 +66,12 @@ module.exports = function preactRefreshPlugin(config, pluginOptions) {
           ${
 						isComponent(lastPart)
 							? postLude
-							: isCustomHook(lastPart)
-							? 'import.meta.hot.accept();'
-							: ''
+							: // Currently the `import.meta.hot.accept()` does not result in a replacement in dependent modules.
+							  //: isCustomHook(lastPart)
+							  //? 'import.meta.hot.accept();'
+							  ''
 					}
         `
-				// Currently the `import.meta.hot.accept()` does not result in a replacement in dependent modules.
 			};
 		}
 	};
