@@ -1,6 +1,6 @@
 {
 	"name": "@prefresh/vite",
-	"version": "0.5.2",
+	"version": "0.6.0",
 	"module": "src/index.js",
 	"main": "dist/src/index.js",
 	"scripts": {
