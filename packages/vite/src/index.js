@@ -19,8 +19,6 @@ export default function prefreshPlugin() {
 					});
 
 					return `
-            import * as __PSELF__ from ${spec};
-
             const prevRefreshReg = window.$RefreshReg$ || (() => {});
             const prevRefreshSig = window.$RefreshSig$ || (() => {});
 
