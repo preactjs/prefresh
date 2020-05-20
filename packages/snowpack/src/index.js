@@ -7,6 +7,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 			if (!isDev || !urlPath.endsWith('.js')) return;
 
 			const parts = urlPath.split('/');
+			// TODO: improve this check, check on imports rather than filename.
 			const lastPart = parts[parts.length - 1];
 
 			const postLude = `
