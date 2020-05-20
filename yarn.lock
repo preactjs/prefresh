@@ -1752,10 +1752,10 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-cjyes@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/cjyes/-/cjyes-0.1.0.tgz#97087c5aeb1bc5c0e0480e3683776a3fb09e9f5e"
-  integrity sha512-X+8iwqwiqY4DCYr3GO/uQt1ImiDgDA2K29AJo8pQRAVxh2g2A1QMqnQfg7Q53VityIt5Cm3BKqrtCG+aU98dlQ==
+cjyes@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/cjyes/-/cjyes-0.3.0.tgz#5f17e5f3c58e8c18ccde939ec10546b80d907c96"
+  integrity sha512-CzVtDdOnA22ytUHsjcnbpCJHO94ofxq0wJ242xfFiSUbpdbdcQYQhPmMRYjYLoFo1sz3ivCTyCvMDeEc9A+IdQ==
   dependencies:
     es-module-lexer "^0.3.18"
     magic-string "^0.25.7"
