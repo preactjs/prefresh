@@ -1760,14 +1760,6 @@ cjyes@0.2.0:
     es-module-lexer "^0.3.18"
     magic-string "^0.25.7"
 
-cjyes@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/cjyes/-/cjyes-0.3.0.tgz#5f17e5f3c58e8c18ccde939ec10546b80d907c96"
-  integrity sha512-CzVtDdOnA22ytUHsjcnbpCJHO94ofxq0wJ242xfFiSUbpdbdcQYQhPmMRYjYLoFo1sz3ivCTyCvMDeEc9A+IdQ==
-  dependencies:
-    es-module-lexer "^0.3.18"
-    magic-string "^0.25.7"
-
 class-utils@^0.3.5:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/class-utils/-/class-utils-0.3.6.tgz#f93369ae8b9a7ce02fd41faad0ca83033190c463"
@@ -7444,10 +7436,10 @@ vendors@^1.0.0:
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.4.tgz#e2b800a53e7a29b93506c3cf41100d16c4c4ad8e"
   integrity sha512-/juG65kTL4Cy2su4P8HjtkTxk6VmJDiOPBufWniqQ6wknac6jNiXS9vU+hO3wgusiyqWlzTbVHi0dyJqRONg3w==
 
-vite@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-0.16.0.tgz#c27317b66c44685d4cd19c2dd81d7953ac5cad04"
-  integrity sha512-JBgdl2qwfcgGciBYo/duMqjuQEFaH/Fwx5rGeEMIz/DxsaHEjscK8xigYfzvZ+UVnoC+VtmnnTGW5RiP3SCkLg==
+vite@^0.16.1:
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-0.16.1.tgz#a38a2a42298397437f668a720c4e8269f77680de"
+  integrity sha512-P+rNf2YVT/pCetz346ygH7QuZExa98z3h03OEUCgOW3gWLGIspkuCFQccKYYv6r/PpWFpQpMJbUftCibNUNhnQ==
   dependencies:
     "@babel/parser" "^7.9.4"
     "@rollup/plugin-commonjs" "~11.0.0"

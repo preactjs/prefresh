@@ -26,10 +26,10 @@
 	"devDependencies": {
 		"cjyes": "0.2.0",
 		"preact": "^10.4.1",
-		"vite": "^0.16.0"
+		"vite": "^0.16.1"
 	},
 	"peerDependencies": {
 		"preact": "^10.4.0",
-		"vite": "*"
+		"vite": "^0.16.1"
 	}
 }
