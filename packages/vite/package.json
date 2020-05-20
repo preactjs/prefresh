@@ -18,7 +18,10 @@
 	},
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
-		"@prefresh/core": "0.5.0"
+		"@babel/core": "^7.9.6",
+		"@prefresh/core": "0.6.1",
+		"@prefresh/utils": "^0.1.1",
+		"react-refresh": "^0.8.2"
 	},
 	"devDependencies": {
 		"cjyes": "^0.1.0",
