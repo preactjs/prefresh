@@ -1,0 +1,18 @@
+{
+  "name": "vite",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "preact": "^10.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@prefresh/core": "^0.6.1",
+    "@prefresh/utils": "^0.1.1",
+    "react-refresh": "^0.8.2",
+    "vite": "^0.16.1"
+  }
+}
