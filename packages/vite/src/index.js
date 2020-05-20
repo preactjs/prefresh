@@ -3,7 +3,49 @@ export default function prefreshPlugin() {
 	return {
 		transforms: [
 			{
-				test: path => /\.(t|j)s(x)?$/.test(path),
+				test: path => /\.(t|j)s$/.test(path),
+				transform(code, _, isBuild, path) {
+					if (
+						isBuild ||
+						process.env.NODE_ENV === 'production' ||
+						path.includes('@modules')
+					)
+						return code;
+
+					const result = require('@babel/core').transformSync(code, {
+						plugins: [require('react-refresh/babel')],
+						ast: false,
+						sourceMaps: false
+					});
+
+					return `
+            import * as __PSELF__ from ${spec};
+
+            const prevRefreshReg = window.$RefreshReg$ || (() => {});
+            const prevRefreshSig = window.$RefreshSig$ || (() => {});
+
+            window.$RefreshReg$ = (type, id) => {}
+
+            window.$RefreshSig$ = () => {
+              let status = 'begin';
+              let savedType;
+              return (type, key, forceReset, getCustomHooks) => {
+                if (!savedType) savedType = type;
+                status = self.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, status);
+              };
+            };
+
+            ${result.code}
+
+            if (__DEV__) {
+              window.$RefreshReg$ = prevRefreshReg;
+              window.$RefreshSig$ = prevRefreshSig;
+            }
+          `;
+				}
+			},
+			{
+				test: path => /\.(t|j)sx$/.test(path),
 				transform(code, _, isBuild, path) {
 					if (
 						isBuild ||
@@ -51,17 +93,15 @@ export default function prefreshPlugin() {
             if (__DEV__) {
               window.$RefreshReg$ = prevRefreshReg;
               window.$RefreshSig$ = prevRefreshSig;
-              if (hasComponents) {
-                hot.accept((m) => {
-                  try {
-                    for (let i in m) {
-                      compareSignatures(module[i], m[i]);
-                    }
-                  } catch (e) {
-                    window.location.reload();
+              hot.accept((m) => {
+                try {
+                  for (let i in m) {
+                    compareSignatures(module[i], m[i]);
                   }
-                });
-              }
+                } catch (e) {
+                  window.location.reload();
+                }
+              });
             }
           `;
 				}
