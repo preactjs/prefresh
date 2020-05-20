@@ -1,3 +1,24 @@
+const preparation = `
+const prevRefreshReg = window.$RefreshReg$ || (() => {});
+const prevRefreshSig = window.$RefreshSig$ || (() => {});
+`;
+
+const signatureRegistration = `
+window.$RefreshSig$ = () => {
+  let status = 'begin';
+  let savedType;
+  return (type, key, forceReset, getCustomHooks) => {
+    if (!savedType) savedType = type;
+    status = self.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, status);
+  };
+};
+`;
+
+const cleanup = `
+window.$RefreshReg$ = prevRefreshReg;
+window.$RefreshSig$ = prevRefreshSig;
+`;
+
 /** @returns {import('vite').Plugin} */
 export default function prefreshPlugin() {
 	return {
@@ -19,25 +40,16 @@ export default function prefreshPlugin() {
 					});
 
 					return `
-            const prevRefreshReg = window.$RefreshReg$ || (() => {});
-            const prevRefreshSig = window.$RefreshSig$ || (() => {});
+            ${preparation}
 
             window.$RefreshReg$ = (type, id) => {}
 
-            window.$RefreshSig$ = () => {
-              let status = 'begin';
-              let savedType;
-              return (type, key, forceReset, getCustomHooks) => {
-                if (!savedType) savedType = type;
-                status = self.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, status);
-              };
-            };
+            ${signatureRegistration}
 
             ${result.code}
 
             if (__DEV__) {
-              window.$RefreshReg$ = prevRefreshReg;
-              window.$RefreshSig$ = prevRefreshSig;
+              ${cleanup}
             }
           `;
 				}
@@ -66,8 +78,7 @@ export default function prefreshPlugin() {
             import { hot } from 'vite/hmr';
             import * as __PSELF__ from ${spec};
 
-            const prevRefreshReg = window.$RefreshReg$ || (() => {});
-            const prevRefreshSig = window.$RefreshSig$ || (() => {});
+            ${preparation}
 
             const module = {};
             let hasComponents = false;
@@ -77,20 +88,12 @@ export default function prefreshPlugin() {
               if (isComponent(type.name)) hasComponents = true;
             }
 
-            window.$RefreshSig$ = () => {
-              let status = 'begin';
-              let savedType;
-              return (type, key, forceReset, getCustomHooks) => {
-                if (!savedType) savedType = type;
-                status = self.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, status);
-              };
-            };
+            ${signatureRegistration}
 
             ${result.code}
 
             if (__DEV__) {
-              window.$RefreshReg$ = prevRefreshReg;
-              window.$RefreshSig$ = prevRefreshSig;
+              ${cleanup}
               hot.accept((m) => {
                 try {
                   for (let i in m) {
