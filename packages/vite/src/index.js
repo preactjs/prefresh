@@ -1,39 +1,71 @@
+import { transformSync } from '@babel/core';
+
 /** @returns {import('vite').Plugin} */
 export default function prefreshPlugin() {
 	return {
 		transforms: [
 			{
-				as: 'js',
-				test(path, query) {
-					if (!/\.[tj]sx$/.test(path)) return false;
-					// @ts-ignore
-					this.path = path;
-					return true;
-				},
-				// todo: use isImport to ignore `/@modules` requests?
-				transform(code, isImport) {
-					// The module imports itself to get its current exports, avoiding the need for eval().
+				test: path => /\.(t|j)s(x)?$/.test(path),
+				transform(code, _, isBuild, path) {
+					if (
+						isBuild ||
+						process.env.NODE_ENV === 'production' ||
+						path.includes('@modules')
+					)
+						return code;
 
-					// @ts-ignore
-					const spec = JSON.stringify(this.path);
+					const result = transform(code);
+					const shouldBind = result.code.includes('$RefreshReg$(');
 
-          // Note: prefresh *must* be injected prior to any VNodes being created!
-          // TODO: check whether or not we can use @prefresh/utils.isComponent to not bind
-          // custom hooks.
 					return `
-            import '@prefresh/core';
-            import { hot } from 'vite/hmr';
-            import * as __PSELF__ from ${spec};
-            ${code}
+            ${
+							shouldBind
+								? `
+              import '@prefresh/core';
+              import { compareSignatures } from '@prefresh/utils';
+              import { hot } from 'vite/hmr';
+            `
+								: ''
+						}
+
+            const prevRefreshReg = window.$RefreshReg$ || (() => {});
+            const prevRefreshSig = window.$RefreshSig$ || (() => {});
+
+            const module = {};
+
+            window.$RefreshReg$ = (type, id) => {
+              module[type.name] = type;
+            }
+
+            window.$RefreshSig$ = () => {
+              let status = 'begin';
+              let savedType;
+              return (type, key, forceReset, getCustomHooks) => {
+                if (!savedType) savedType = type;
+                status = self.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, status);
+              };
+            };
+
+            ${result.code}
+
             if (__DEV__) {
-              let a = 0;
-              hot.accept(m => {
-                try {
-                  if (!a++) for (let i in m) self.__PREFRESH__.replaceComponent(__PSELF__[i], m[i]);
-                } catch (e) {
-                  window.location.reload();
-                }
-              });
+              window.$RefreshReg$ = prevRefreshReg;
+              window.$RefreshSig$ = prevRefreshSig;
+              ${
+								shouldBind
+									? `
+                hot.accept((m) => {
+                  try {
+                    for (let i in m) {
+                      compareSignatures(module[i], m[i]);
+                    }
+                  } catch (e) {
+                    window.location.reload();
+                  }
+                });
+              `
+									: ''
+							}
             }
           `;
 				}
@@ -41,3 +73,10 @@ export default function prefreshPlugin() {
 		]
 	};
 }
+
+const transform = code =>
+	transformSync(code, {
+		plugins: [require('react-refresh/babel')],
+		ast: false,
+		sourceMaps: false
+	});
