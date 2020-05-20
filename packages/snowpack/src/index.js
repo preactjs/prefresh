@@ -1,13 +1,6 @@
-const {
-	compareSignatures,
-	isComponent
-	// isCustomHook
-} = require('@prefresh/utils');
+import { compareSignatures, isComponent } from '@prefresh/utils';
 
-// TODO: this currently wraps on a by-file basis but this assumption could be
-// wrong where someone exports multiple customHooks from a single file or mixes
-// both of these up.
-module.exports = function preactRefreshPlugin(config, pluginOptions) {
+export default function preactRefreshPlugin(config, pluginOptions) {
 	return {
 		knownEntrypoints: ['@prefresh/core'],
 		async transform({ contents, urlPath, isDev }) {
@@ -63,16 +56,9 @@ module.exports = function preactRefreshPlugin(config, pluginOptions) {
           window.$RefreshReg$ = (type, id) => {};
 
           ${contents}
-          ${
-						isComponent(lastPart)
-							? postLude
-							: // Currently the `import.meta.hot.accept()` does not result in a replacement in dependent modules.
-							  //: isCustomHook(lastPart)
-							  //? 'import.meta.hot.accept();'
-							  ''
-					}
+          ${isComponent(lastPart) ? postLude : ''}
         `
 			};
 		}
 	};
-};
+}

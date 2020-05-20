@@ -24,7 +24,7 @@
 		"react-refresh": "^0.8.2"
 	},
 	"devDependencies": {
-		"cjyes": "^0.3.0",
+		"cjyes": "0.2.0",
 		"preact": "^10.4.1",
 		"vite": "^0.16.0"
 	},
