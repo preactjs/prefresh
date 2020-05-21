@@ -1,0 +1,26 @@
+{
+  "scripts": {
+    "prepare": "snowpack",
+    "start": "snowpack dev",
+    "build": "snowpack build",
+    "test": "jest",
+    "format": "prettier --write 'src/**/*.{js,jsx}'",
+    "lint": "prettier --check 'src/**/*.{js,jsx}'"
+  },
+  "webDependencies": {},
+  "dependencies": {
+    "@prefresh/core": "^0.6.1"
+  },
+  "devDependencies": {
+    "@prefresh/snowpack": "^0.1.0",
+    "@snowpack/app-scripts-preact": "^0.6.1",
+    "@snowpack/plugin-babel": "^0.6.2",
+    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/preact": "^1.0.2",
+    "jest": "^25.4.0",
+    "preact": "^10.4.1",
+    "prettier": "^2.0.0",
+    "react-refresh": "^0.8.2",
+    "snowpack": "next"
+  }
+}
