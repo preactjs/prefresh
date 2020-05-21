@@ -1,7 +1,8 @@
 {
 	"name": "@prefresh/snowpack",
 	"version": "0.1.0",
-	"main": "src/index.js",
+	"module": "src/index.js",
+	"main": "dist/src/index.js",
 	"scripts": {
 		"prepublishOnly": "cjyes src/index.js",
 		"lint": "eslint src"
