@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "camel-case": "https://cdn.pika.dev/pin/camel-case@v4.1.1-Alui70865ityrqCSCZaK/camel-case.js",
+    "date-fns": "https://cdn.pika.dev/pin/date-fns@v2.13.0-CNtDbLLYSsBdKHS9Td13/date-fns.js"
+  }
+}

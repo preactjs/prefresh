@@ -6,8 +6,9 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 		async transform({ contents, urlPath, isDev }) {
 			if (!isDev || !urlPath.endsWith('.js')) return;
 
+			const hasRegister = contents.includes('$RefreshReg$(');
+			const hasJsx = contents.includes('return h(');
 			const parts = urlPath.split('/');
-			// TODO: improve this check, check on imports rather than filename.
 			const lastPart = parts[parts.length - 1];
 
 			const postLude = `
@@ -45,6 +46,9 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 
           const compareSignaturesForPrefreshment = ${compareSignatures.toString()};
 
+          const prevRefreshReg = window.$RefreshReg$ || (() => {});
+          const prevRefreshSig = window.$RefreshSig$ || (() => {});
+
           window.$RefreshSig$ = () => {
             let status = 'begin';
             let savedType;
@@ -56,8 +60,14 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 
           window.$RefreshReg$ = (type, id) => {};
 
-          ${contents}
-          ${isComponent(lastPart) ? postLude : ''}
+          try {
+            ${contents}
+          } finally {
+            window.$RefreshSig$ = prevRefreshSig;
+            window.$RefreshReg$ = prevRefreshReg;
+          }
+
+          ${hasRegister || hasJsx || isComponent(lastPart) ? postLude : ''}
         `
 			};
 		}
