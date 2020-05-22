@@ -60,12 +60,10 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 
           window.$RefreshReg$ = (type, id) => {};
 
-          try {
-            ${contents}
-          } finally {
-            window.$RefreshSig$ = prevRefreshSig;
-            window.$RefreshReg$ = prevRefreshReg;
-          }
+          ${contents}
+
+          window.$RefreshSig$ = prevRefreshSig;
+          window.$RefreshReg$ = prevRefreshReg;
 
           ${hasRegister || hasJsx || isComponent(lastPart) ? postLude : ''}
         `
