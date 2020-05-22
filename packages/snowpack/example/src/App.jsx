@@ -1,24 +1,14 @@
 import { h } from 'preact';
-import logo from './logo.png';
+import { useCounter } from './useCounter';
 import './App.css';
 
 function App() {
+  const [count, increment, decrement] = useCounter()
   return (
-    <div className={'App'}>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.jsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://preactjs.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Preact
-        </a>
-      </header>
+    <div style={{ display: 'flex' }}>
+      <button onClick={decrement}>-</button>
+      <p>Count: {count}</p>
+      <button onClick={increment}>+10</button>
     </div>
   );
 }
