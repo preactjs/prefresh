@@ -1,6 +1,6 @@
 {
 	"name": "@prefresh/snowpack",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"module": "src/index.js",
 	"main": "dist/src/index.js",
 	"scripts": {
@@ -19,7 +19,7 @@
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
 		"@prefresh/core": "0.6.1",
-		"@prefresh/utils": "0.1.1"
+		"@prefresh/utils": "0.1.2"
 	},
 	"devDependencies": {
 		"cjyes": "0.3.1",

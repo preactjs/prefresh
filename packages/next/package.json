@@ -1,6 +1,6 @@
 {
 	"name": "@prefresh/next",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"main": "src/index.js",
 	"scripts": {
 		"lint": "eslint src"
@@ -16,7 +16,7 @@
 	},
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
-    "@prefresh/webpack": "^0.7.0"
+		"@prefresh/webpack": "^0.7.1"
 	},
 	"devDependencies": {
 		"next": "9.4.0",
