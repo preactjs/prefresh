@@ -8,7 +8,10 @@ const registerExports = m => {
 	const moduleId = module.id;
 	const moduleExports = getExports(m);
 
-	if (typeof moduleExports === 'function' && isComponent(moduleExports.name)) {
+	if (
+		typeof moduleExports === 'function' &&
+		isComponent(moduleExports.displayName || moduleExports.name)
+	) {
 		isCitizen = true;
 		window.__PREFRESH__.register(moduleExports, moduleId + ' %exports%');
 	}
@@ -24,7 +27,10 @@ const registerExports = m => {
 			if (key === '__esModule') continue;
 
 			const exportValue = moduleExports[key];
-			if (typeof exportValue === 'function' && isComponent(exportValue.name)) {
+			if (
+				typeof exportValue === 'function' &&
+				isComponent(exportValue.displayName || exportValue.name)
+			) {
 				isCitizen = isCitizen || true;
 				const typeID = moduleId + ' %exports% ' + key;
 				window.__PREFRESH__.register(exportValue, typeID);
