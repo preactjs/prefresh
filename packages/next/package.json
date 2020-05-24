@@ -1,0 +1,29 @@
+{
+	"name": "@prefresh/next",
+	"version": "0.0.0",
+	"main": "src/index.js",
+	"scripts": {
+		"lint": "eslint src"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/JoviDeCroock/prefresh.git",
+		"directory": "packages/next"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/JoviDeCroock/prefresh/issues"
+	},
+	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
+	"dependencies": {
+    "@prefresh/webpack": "^0.7.0"
+	},
+	"devDependencies": {
+		"next": "9.4.0",
+		"preact": "^10.4.1"
+	},
+	"peerDependencies": {
+		"next": "^9.4.0",
+		"preact": "^10.4.0"
+	}
+}
