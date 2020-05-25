@@ -19,3 +19,5 @@ const withPrefresh = require('@prefresh/next');
 module.exports = withPrefresh()
 }
 ```
+
+> There's a known issue when combined with `preact-devtools` that the hookState does not correctly reset.
