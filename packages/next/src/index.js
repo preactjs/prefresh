@@ -1,4 +1,4 @@
-const Prefresh = require('@prefresh/webpack');
+const Prefresh = require('./plugin');
 
 module.exports = (nextConfig = {}) => {
 	return Object.assign({}, nextConfig, {
