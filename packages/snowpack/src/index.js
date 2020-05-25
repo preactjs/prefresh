@@ -54,11 +54,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
                 }
                 $CurrentModule$ = module;
               } catch(e) {
-                if (import.meta.hot.invalidate) {
-                  import.meta.hot.invalidate();
-                } else {
-                  window.location.reload();
-                }
+                import.meta.hot.invalidate();
               }
             });
           }
