@@ -6,38 +6,6 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 		async transform({ contents, urlPath, isDev }) {
 			if (!isDev || !urlPath.endsWith('.js')) return;
 
-			const hasRegister = contents.includes('$RefreshReg$(');
-			const hasJsx = contents.includes('return h(');
-			const parts = urlPath.split('/');
-			const lastPart = parts[parts.length - 1];
-
-			const postLude = `
-        if (import.meta.hot) {
-          import.meta.hot.accept(({ module }) => {
-            try {
-              for (let i in module) {
-                if (typeof module[i] === 'function') {
-                  if (i in $CurrentModule$) {
-                    // We could add a check here on i.name if it's a component.
-                    compareSignaturesForPrefreshment(
-                      $CurrentModule$[i],
-                      module[i]
-                    );
-                  }
-                }
-              }
-              $CurrentModule$ = module;
-            } catch(e) {
-              if (import.meta.hot.invalidate) {
-                import.meta.hot.invalidate();
-              } else {
-                window.location.reload();
-              }
-            }
-          });
-        }
-      `;
-
 			return {
 				result: `
           import '@prefresh/core';
@@ -45,6 +13,9 @@ export default function preactRefreshPlugin(config, pluginOptions) {
           let $CurrentModule$ = $OriginalModule$;
 
           const compareSignaturesForPrefreshment = ${compareSignatures.toString()};
+          const shouldPrefreshBind = ${isComponent.toString()}
+
+          const __module_exports__ = []
 
           const prevRefreshReg = window.$RefreshReg$ || (() => {});
           const prevRefreshSig = window.$RefreshSig$ || (() => {});
@@ -58,14 +29,35 @@ export default function preactRefreshPlugin(config, pluginOptions) {
             };
           };
 
-          window.$RefreshReg$ = (type, id) => {};
+          window.$RefreshReg$ = (type, id) => {
+            __module_exports__.push(type.name);
+          };
 
           ${contents}
 
           window.$RefreshSig$ = prevRefreshSig;
           window.$RefreshReg$ = prevRefreshReg;
 
-          ${hasRegister || hasJsx || isComponent(lastPart) ? postLude : ''}
+          if (import.meta.hot && __module_exports__.some(shouldPrefreshBind)) {
+            import.meta.hot.accept(({ module }) => {
+              try {
+                for (let i in module) {
+                  if (typeof module[i] === 'function') {
+                    if (i in $CurrentModule$) {
+                      // We could add a check here on i.name if it's a component.
+                      compareSignaturesForPrefreshment(
+                        $CurrentModule$[i],
+                        module[i]
+                      );
+                    }
+                  }
+                }
+                $CurrentModule$ = module;
+              } catch(e) {
+                import.meta.hot.invalidate();
+              }
+            });
+          }
         `
 			};
 		}

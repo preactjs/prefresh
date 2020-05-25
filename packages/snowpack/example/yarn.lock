@@ -2052,6 +2052,11 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
+commondir@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
+  integrity sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=
+
 component-emitter@^1.2.1:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.3.0.tgz#16e4070fba8ae29b679f2215853ee181ab2eabc0"
@@ -2582,6 +2587,15 @@ fill-range@^7.0.1:
   integrity sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==
   dependencies:
     to-regex-range "^5.0.1"
+
+find-cache-dir@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/find-cache-dir/-/find-cache-dir-3.3.1.tgz#89b33fad4a4670daa94f855f7fbe31d6d84fe880"
+  integrity sha512-t2GDMt3oGC/v+BMwzmllWDuJF/xcDtE5j/fCGbqDD7OLuJkj0cfh1YSA5VKPvwMeLFLNDBkwOKZ2X85jGLVftQ==
+  dependencies:
+    commondir "^1.0.1"
+    make-dir "^3.0.2"
+    pkg-dir "^4.1.0"
 
 find-up@^2.1.0:
   version "2.1.0"
@@ -3766,7 +3780,7 @@ magic-string@^0.25.2, magic-string@^0.25.5:
   dependencies:
     sourcemap-codec "^1.4.4"
 
-make-dir@^3.0.0:
+make-dir@^3.0.0, make-dir@^3.0.2:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-3.1.0.tgz#415e967046b3a7f1d185277d84aa58203726a13f"
   integrity sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==
@@ -4108,6 +4122,14 @@ onetime@^5.1.0:
   dependencies:
     mimic-fn "^2.1.0"
 
+open@^7.0.4:
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/open/-/open-7.0.4.tgz#c28a9d315e5c98340bf979fdcb2e58664aa10d83"
+  integrity sha512-brSA+/yq+b08Hsr4c8fsEW2CRzk1BmfN3SAK/5VCHQ9bdoZJ4qa/+AfR0xHjlbbZUyPkUHs1b8x1RqdyZdkVqQ==
+  dependencies:
+    is-docker "^2.0.0"
+    is-wsl "^2.1.1"
+
 optionator@^0.8.1:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/optionator/-/optionator-0.8.3.tgz#84fa1d036fe9d3c7e21d99884b601167ec8fb495"
@@ -4293,7 +4315,7 @@ pirates@^4.0.1:
   dependencies:
     node-modules-regexp "^1.0.0"
 
-pkg-dir@^4.2.0:
+pkg-dir@^4.1.0, pkg-dir@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-4.2.0.tgz#f099133df7ede422e81d1d8448270eeb3e4261f3"
   integrity sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==
@@ -4895,10 +4917,10 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-snowpack@next:
-  version "2.0.0-rc.4"
-  resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-2.0.0-rc.4.tgz#a316b62b33fbd5ed4354a56cf683e87cb1179c0f"
-  integrity sha512-Jub/3g/A2MEOJV8647ZsWgeudPhcYmoItmn8wKuvuVoYHn+0GtW+voCQVlE1SG8ROJYKt4ZbXhyraUrZi+BX+A==
+snowpack@^2.0.0-rc.12:
+  version "2.0.0-rc.12"
+  resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-2.0.0-rc.12.tgz#227c218a5d09299872a55daa6908a02ba77cfcc2"
+  integrity sha512-YvMqkYQwCR/q+QWLK/jTMgfdtZlT7KiKJv6w4nkb9fWVD7QBTYlBnN40V70CXwm0QOgTLQbA1E2ltQk6/YUihg==
   dependencies:
     "@babel/plugin-syntax-import-meta" "^7.8.3"
     "@rollup/plugin-alias" "^3.0.1"
@@ -4919,12 +4941,14 @@ snowpack@next:
     esbuild "^0.3.0"
     etag "^1.8.1"
     execa "^4.0.0"
+    find-cache-dir "^3.3.1"
     glob "^7.1.4"
     got "^11.1.4"
     is-builtin-module "^3.0.0"
     jsonschema "^1.2.5"
     mime-types "^2.1.26"
     mkdirp "^1.0.3"
+    open "^7.0.4"
     ora "^4.0.4"
     p-queue "^6.2.1"
     resolve-from "^5.0.0"
@@ -4932,6 +4956,7 @@ snowpack@next:
     rollup "^2.3.0"
     tar "^6.0.1"
     validate-npm-package-name "^3.0.0"
+    ws "^7.3.0"
     yargs-parser "^18.1.3"
 
 source-map-resolve@^0.5.0, source-map-resolve@^0.5.2:
@@ -5542,7 +5567,7 @@ write-file-atomic@^3.0.0:
     signal-exit "^3.0.2"
     typedarray-to-buffer "^3.1.5"
 
-ws@^7.0.0:
+ws@^7.0.0, ws@^7.3.0:
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.3.0.tgz#4b2f7f219b3d3737bc1a2fbf145d825b94d38ffd"
   integrity sha512-iFtXzngZVXPGgpTlP1rBqsUK82p9tKqsWRPg5L56egiljujJT3vGAYnHANvFxBieXrTFavhzhxW52jnaWV+w2w==
