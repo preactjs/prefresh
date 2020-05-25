@@ -38,7 +38,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
           window.$RefreshSig$ = prevRefreshSig;
           window.$RefreshReg$ = prevRefreshReg;
 
-          if (__module_exports__.some(shouldPrefreshBind) && import.meta.hot) {
+          if (import.meta.hot && __module_exports__.some(shouldPrefreshBind)) {
             import.meta.hot.accept(({ module }) => {
               try {
                 for (let i in module) {
