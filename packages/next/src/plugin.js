@@ -2,12 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const { createRefreshTemplate } = require('./utils/createTemplate');
 const { injectEntry } = require('./utils/injectEntry');
-const {
-	prefreshUtils,
-	HMR_PLUGIN,
-	NAME,
-	options
-} = require('./utils/constants');
+const { prefreshUtils, NAME, options } = require('./utils/constants');
 
 class ReloadPlugin {
 	apply(compiler) {
@@ -18,19 +13,6 @@ class ReloadPlugin {
 			return;
 
 		compiler.options.entry = injectEntry(compiler.options.entry);
-
-		compiler.hooks.beforeRun.tap(this.constructor.name, compiler => {
-			if (
-				!compiler.options.plugins ||
-				!compiler.options.plugins.find(
-					plugin => plugin.constructor.name === HMR_PLUGIN
-				)
-			) {
-				throw new Error(
-					'Webpack.HotModuleReplacementPlugin is missing from the webpack config.'
-				);
-			}
-		});
 
 		const providePlugin = new webpack.ProvidePlugin({
 			[prefreshUtils]: require.resolve('./utils/prefresh')
@@ -62,10 +44,7 @@ class ReloadPlugin {
 		});
 
 		compiler.hooks.compilation.tap(NAME, compilation => {
-			const hookRequire: typeof compilation.mainTemplate.hooks.requireExtensions =
-				compilation.mainTemplate.hooks.require;
-
-			hookRequire.tap(NAME, (source, chunk, hash) =>
+			compilation.mainTemplate.hooks.require.tap(NAME, (source, chunk, hash) =>
 				createRefreshTemplate(source, chunk, hash, compilation.mainTemplate)
 			);
 		});
