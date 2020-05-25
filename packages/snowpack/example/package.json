@@ -21,6 +21,6 @@
     "preact": "^10.4.1",
     "prettier": "^2.0.0",
     "react-refresh": "^0.8.2",
-    "snowpack": "next"
+    "snowpack": "^2.0.0-rc.12"
   }
 }
