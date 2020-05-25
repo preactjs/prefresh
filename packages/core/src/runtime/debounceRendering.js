@@ -1,4 +1,4 @@
-import { options, Component } from 'preact';
+import { options } from 'preact';
 
 import { RERENDER_COUNT } from '../constants';
 
@@ -12,7 +12,7 @@ options.debounceRendering = process => {
 		try {
 			process();
 		} catch (e) {
-			Component.prototype[RERENDER_COUNT] = 0;
+			process[RERENDER_COUNT] = 0;
 			throw e;
 		}
 	});
