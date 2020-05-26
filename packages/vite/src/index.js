@@ -23,7 +23,6 @@ export default function prefreshPlugin() {
 								? `
               import '@prefresh/core';
               import { compareSignatures } from '@prefresh/utils';
-              import { hot } from 'vite/hmr';
             `
 								: ''
 						}
@@ -48,13 +47,13 @@ export default function prefreshPlugin() {
 
             ${result.code}
 
-            if (__DEV__) {
+            if (import.meta.hot) {
               window.$RefreshReg$ = prevRefreshReg;
               window.$RefreshSig$ = prevRefreshSig;
               ${
 								shouldBind
 									? `
-                hot.accept((m) => {
+                import.meta.hot.accept((m) => {
                   try {
                     for (let i in m) {
                       compareSignatures(module[i], m[i]);
