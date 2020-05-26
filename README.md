@@ -3,6 +3,7 @@
 **Experimental package**
 
 - [core](https://github.com/JoviDeCroock/prefresh/tree/master/packages/core)
+- [gatsby](https://www.gatsbyjs.org/packages/gatsby-plugin-preact/)
 - [next](https://github.com/JoviDeCroock/prefresh/tree/master/packages/next)
 - [nollup](https://github.com/JoviDeCroock/prefresh/tree/master/packages/nollup)
 - [snowpack](https://github.com/JoviDeCroock/prefresh/tree/master/packages/snowpack)
