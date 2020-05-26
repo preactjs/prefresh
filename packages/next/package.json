@@ -16,7 +16,8 @@
 	},
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
-		"@prefresh/webpack": "^0.7.1"
+    "@prefresh/core": "^0.6.2",
+    "@prefresh/utils": "^0.1.2"
 	},
 	"devDependencies": {
 		"next": "9.4.0",
