@@ -16,8 +16,8 @@
 	},
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
-		"@prefresh/core": "0.6.0",
-		"@prefresh/utils": "0.1.2"
+		"@prefresh/core": "^0.6.2",
+		"@prefresh/utils": "^0.1.2"
 	},
 	"devDependencies": {
 		"preact": "^10.4.1",
