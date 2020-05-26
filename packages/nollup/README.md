@@ -1,7 +1,5 @@
 # Prefresh-nollup
 
-**Experimental package**
-
 [![npm version](https://badgen.net/npm/v/@prefresh/nollup)](https://www.npmjs.com/package/@prefresh/nollup)
 
 ## Setup

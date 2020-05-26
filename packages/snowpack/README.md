@@ -1,6 +1,4 @@
-# `@prefresh/snowpack`
-
-**Experimental package**
+# Prefresh-snowpack
 
 [![npm version](https://badgen.net/npm/v/@prefresh/snowpack)](https://www.npmjs.com/package/@prefresh/snowpack)
 

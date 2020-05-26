@@ -1,7 +1,5 @@
 # Prefresh-webpack
 
-**Experimental package**
-
 [![npm version](https://badgen.net/npm/v/@prefresh/webpack)](https://www.npmjs.com/package/@prefresh/webpack)
 
 ## Setup

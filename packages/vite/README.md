@@ -1,6 +1,4 @@
-# `@prefresh/vite`
-
-**Experimental package**
+# Prefresh-vite
 
 [![npm version](https://badgen.net/npm/v/@prefresh/vite)](https://www.npmjs.com/package/@prefresh/vite)
 

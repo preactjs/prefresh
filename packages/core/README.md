@@ -1,7 +1,5 @@
 # Prefresh-core
 
-**Experimental package**
-
 [![npm version](https://badgen.net/npm/v/@prefresh/core)](https://www.npmjs.com/package/@prefresh/core)
 
 We are still fleshing out the details on how to go about this approach best for [Preact](https://github.com/preactjs/preact), we'd
@@ -19,15 +17,3 @@ expects two arguments. The first being the old `class/function` and the second t
 
 This will go over all vnodes it knows for the `oldType` and rerender them according to the
 `NewType`.
-
-## Uncertainties
-
-- [x] component altering lifecycles
-- [x] error recovery
-- [x] class components
-- [x] functional components
-- [x] hook swapping
-- [x] avoid triggering effects for added dependencies
-- [x] transition better from Functional --> class and other way around
-- [x] provide fallback if no hot modules/no preact modules (window.location.reload())
-- [x] custom hooks
