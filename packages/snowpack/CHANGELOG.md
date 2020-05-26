@@ -1,5 +1,14 @@
 # @prefresh/snowpack
 
+## 0.1.2
+
+### Patch Changes
+
+- [`201e9cd`](https://github.com/JoviDeCroock/prefresh/commit/201e9cd9b3c1566ecdd948f85942de5a4cfa8775) [#54](https://github.com/JoviDeCroock/prefresh/pull/54) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Move component check to the runtime now that acceptance can happen during runtime.
+
+- Updated dependencies [[`ee56105`](https://github.com/JoviDeCroock/prefresh/commit/ee5610575228663c08d40eed17a46064089d0075)]:
+  - @prefresh/core@0.6.2
+
 ## 0.1.1
 
 ### Patch Changes

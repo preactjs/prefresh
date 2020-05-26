@@ -1,24 +1,24 @@
 {
-  "name": "@prefresh/core",
-  "version": "0.6.1",
-  "main": "src/index.js",
-  "scripts": {
-    "lint": "eslint src"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JoviDeCroock/prefresh.git",
-    "directory": "packages/core"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/JoviDeCroock/prefresh/issues"
-  },
-  "homepage": "https://github.com/JoviDeCroock/prefresh#readme",
-  "devDependencies": {
-    "preact": "10.4.1"
-  },
-  "peerDependencies": {
-    "preact": "^10.0.0"
-  }
+	"name": "@prefresh/core",
+	"version": "0.6.2",
+	"main": "src/index.js",
+	"scripts": {
+		"lint": "eslint src"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/JoviDeCroock/prefresh.git",
+		"directory": "packages/core"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/JoviDeCroock/prefresh/issues"
+	},
+	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
+	"devDependencies": {
+		"preact": "10.4.1"
+	},
+	"peerDependencies": {
+		"preact": "^10.0.0"
+	}
 }

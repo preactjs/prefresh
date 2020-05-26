@@ -1,6 +1,6 @@
 {
 	"name": "@prefresh/nollup",
-	"version": "0.5.1",
+	"version": "0.5.2",
 	"main": "src/index.js",
 	"scripts": {
 		"lint": "eslint src"
@@ -16,7 +16,7 @@
 	},
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
-		"@prefresh/core": "0.6.1",
+		"@prefresh/core": "0.6.2",
 		"@prefresh/utils": "0.1.2"
 	},
 	"devDependencies": {
