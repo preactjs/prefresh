@@ -1,5 +1,16 @@
 # @prefresh/vite
 
+## 0.7.0
+
+### Minor Changes
+
+- [`c224080`](https://github.com/JoviDeCroock/prefresh/commit/c2240803a1631061085046da42c64fdcca78e3b8) [#62](https://github.com/JoviDeCroock/prefresh/pull/62) Thanks [@yyx990803](https://github.com/yyx990803)! - upgrade for vite 0.17 compatibility
+
+### Patch Changes
+
+- Updated dependencies [[`ee56105`](https://github.com/JoviDeCroock/prefresh/commit/ee5610575228663c08d40eed17a46064089d0075)]:
+  - @prefresh/core@0.6.2
+
 ## 0.6.1
 
 ### Patch Changes
