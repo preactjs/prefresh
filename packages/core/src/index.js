@@ -1,4 +1,6 @@
 // Options for Preact.
+import './runtime/catchError';
+import './runtime/debounceRendering';
 import './runtime/vnode';
 import './runtime/unmount';
 
