@@ -2,7 +2,15 @@
 	"name": "@prefresh/snowpack",
 	"version": "0.1.2",
 	"module": "src/index.js",
-	"main": "dist/src/index.js",
+  "main": "dist/src/index.js",
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "require": "./dist/src/index.js"
+    },
+    "./package.json": "./package.json",
+    "./": "./"
+  },
 	"scripts": {
 		"prepublishOnly": "cjyes src/index.js",
 		"lint": "eslint src"

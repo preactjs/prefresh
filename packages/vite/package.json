@@ -2,7 +2,15 @@
 	"name": "@prefresh/vite",
 	"version": "0.7.0",
 	"module": "src/index.js",
-	"main": "dist/src/index.js",
+  "main": "dist/src/index.js",
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "require": "./dist/src/index.js"
+    },
+    "./package.json": "./package.json",
+    "./": "./"
+  },
 	"scripts": {
 		"prepublishOnly": "cjyes src/index.js",
 		"lint": "eslint src"
