@@ -6,3 +6,5 @@ export const EFFECTS_LIST = '__h';
 export const RERENDER_COUNT = '__r';
 export const CATCH_ERROR_OPTION = '__e';
 export const COMPONENT_DIRTY = '__d';
+export const VNODE_DOM = '__e';
+export const VNODE_CHILDREN = '__k';

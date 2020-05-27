@@ -12,6 +12,7 @@ options.debounceRendering = process => {
 		try {
 			process();
 		} catch (e) {
+			console.log('has count', process[RERENDER_COUNT]);
 			process[RERENDER_COUNT] = 0;
 			throw e;
 		}
