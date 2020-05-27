@@ -13,5 +13,6 @@ options.unmount = vnode => {
 			}
 		}
 	}
+
 	if (oldUnmount) oldUnmount(vnode);
 };
