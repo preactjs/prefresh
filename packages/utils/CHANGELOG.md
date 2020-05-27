@@ -1,5 +1,11 @@
 ## 0.1.0
 
+## 0.2.0
+
+### Minor Changes
+
+- [`520acd7`](https://github.com/JoviDeCroock/prefresh/commit/520acd75ea2a1414ccf8a614049f7b159f448a90) [#69](https://github.com/JoviDeCroock/prefresh/pull/69) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Add export maps for Node 13/14
+
 ## 0.1.2
 
 ### Patch Changes
