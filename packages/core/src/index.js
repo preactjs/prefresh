@@ -11,7 +11,9 @@ import {
 	NAMESPACE,
 	HOOKS_LIST,
 	EFFECTS_LIST,
-	COMPONENT_HOOKS
+	COMPONENT_HOOKS,
+	VNODE_DOM,
+	VNODE_CHILDREN
 } from './constants';
 import { computeKey } from './computeKey';
 import { vnodesForComponent } from './runtime/vnodesForComponent';
@@ -84,6 +86,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
 				}
 			} catch (e) {
 				/* Functional component */
+				vnode[VNODE_COMPONENT].constructor = NewType;
 			}
 
 			if (resetHookState) {
@@ -91,6 +94,13 @@ function replaceComponent(OldType, NewType, resetHookState) {
 					[HOOKS_LIST]: [],
 					[EFFECTS_LIST]: []
 				};
+			}
+
+			if (
+				(vnode[VNODE_DOM] && !document.contains(vnode[VNODE_DOM])) ||
+				(!vnode[VNODE_DOM] && !vnode[VNODE_CHILDREN])
+			) {
+				location.reload();
 			}
 
 			Component.prototype.forceUpdate.call(vnode[VNODE_COMPONENT]);
