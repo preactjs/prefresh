@@ -7,9 +7,11 @@ module.exports = (nextConfig = {}) => {
 				const reactRefresh = config.plugins.find(
 					s => s.constructor.name === 'ReactFreshWebpackPlugin'
 				);
+
 				if (reactRefresh) {
 					config.plugins.splice(config.plugins.indexOf(reactRefresh), 1);
 				}
+
 				config.plugins.unshift(new Prefresh());
 			}
 

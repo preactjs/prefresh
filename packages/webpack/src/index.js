@@ -47,7 +47,6 @@ class ReloadPlugin {
 				if (
 					matcher(data.resource) &&
 					!data.resource.includes('@prefresh') &&
-					!data.resource.includes('preact-reload') &&
 					!data.resource.includes(path.join(__dirname, './loader')) &&
 					!data.resource.includes(path.join(__dirname, './utils'))
 				) {

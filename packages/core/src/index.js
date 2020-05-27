@@ -96,6 +96,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
 				};
 			}
 
+			// Cleanup when an async component has thrown.
 			if (
 				(vnode[VNODE_DOM] && !document.contains(vnode[VNODE_DOM])) ||
 				(!vnode[VNODE_DOM] && !vnode[VNODE_CHILDREN])
