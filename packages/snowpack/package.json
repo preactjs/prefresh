@@ -1,16 +1,16 @@
 {
 	"name": "@prefresh/snowpack",
-	"version": "0.1.2",
+	"version": "0.2.0",
 	"module": "src/index.js",
-  "main": "dist/src/index.js",
-  "exports": {
-    ".": {
-      "import": "./src/index.js",
-      "require": "./dist/src/index.js"
-    },
-    "./package.json": "./package.json",
-    "./": "./"
-  },
+	"main": "dist/src/index.js",
+	"exports": {
+		".": {
+			"import": "./src/index.js",
+			"require": "./dist/src/index.js"
+		},
+		"./package.json": "./package.json",
+		"./": "./"
+	},
 	"scripts": {
 		"prepublishOnly": "cjyes src/index.js",
 		"lint": "eslint src"
@@ -26,8 +26,8 @@
 	},
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
-		"@prefresh/core": "0.6.2",
-		"@prefresh/utils": "0.1.2"
+		"@prefresh/core": "0.7.0",
+		"@prefresh/utils": "0.2.0"
 	},
 	"devDependencies": {
 		"cjyes": "0.3.1",
