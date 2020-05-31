@@ -1,5 +1,12 @@
 # @prefresh/snowpack
 
+## 0.2.1
+
+### Patch Changes
+
+- Updated dependencies [[`501d8f6`](https://github.com/JoviDeCroock/prefresh/commit/501d8f6e62db87099846b80fc4d22185c2e3dad2)]:
+  - @prefresh/core@0.7.1
+
 ## 0.2.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
 	"name": "@prefresh/nollup",
-	"version": "0.6.0",
+	"version": "0.6.1",
 	"main": "src/index.js",
 	"exports": {
 		".": {
@@ -23,7 +23,7 @@
 	},
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
-		"@prefresh/core": "0.7.0",
+		"@prefresh/core": "0.7.1",
 		"@prefresh/utils": "0.2.0"
 	},
 	"devDependencies": {
