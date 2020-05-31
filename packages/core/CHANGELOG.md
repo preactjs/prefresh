@@ -1,10 +1,10 @@
-## 0.7.0
-
 ## 0.7.1
 
 ### Patch Changes
 
 - [`501d8f6`](https://github.com/JoviDeCroock/prefresh/commit/501d8f6e62db87099846b80fc4d22185c2e3dad2) [#72](https://github.com/JoviDeCroock/prefresh/pull/72) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Add "default" to the export map to support CJS modules requiring core
+
+## 0.7.0
 
 ### Minor Changes
 
