@@ -23,7 +23,7 @@
   ],
   "devDependencies": {
     "@changesets/changelog-github": "^0.2.6",
-    "@changesets/cli": "^2.7.1",
+    "@changesets/cli": "^2.8.0",
     "eslint": "5.15.1",
     "eslint-config-developit": "^1.1.1",
     "eslint-config-prettier": "^6.5.0",

@@ -949,10 +949,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@changesets/apply-release-plan@^3.0.1":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@changesets/apply-release-plan/-/apply-release-plan-3.0.2.tgz#e8f77518f065181717cc998d60b9dcaeb7387870"
-  integrity sha512-uw0qtgAVN55fw7Jg1t/KI9y7WMP4/IWfl7yYo4Q9Xl7kT87I4bntcFd0fhAj5+97iA9Hd3wNJczmNNWj7iLd7g==
+"@changesets/apply-release-plan@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@changesets/apply-release-plan/-/apply-release-plan-3.1.0.tgz#f0d8c4bd45cc65838be2c145186b137fae1d0842"
+  integrity sha512-W5bqJtfABXdUZLA0kZEjtUE3xqFPQvjrlGFxUw8uo1m/T3ZrGkAXtpXR3aGrTcSQhOLrQqC4qyGdB2hmUL0AjA==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@changesets/config" "^1.1.0"
@@ -979,6 +979,18 @@
     "@manypkg/get-packages" "^1.0.1"
     semver "^5.4.1"
 
+"@changesets/assemble-release-plan@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@changesets/assemble-release-plan/-/assemble-release-plan-2.1.0.tgz#35295e13a29a6836f44f08176f4700b80eb22e64"
+  integrity sha512-14my4mOCZoQhLmoBigf5heHufy7M1qKyP67gGsxt19xSUkWi6KISCRTq7FHErP4dIN1OwxEkPt0nUSJZHB023g==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    "@changesets/errors" "^0.1.4"
+    "@changesets/get-dependents-graph" "^1.1.3"
+    "@changesets/types" "^3.0.0"
+    "@manypkg/get-packages" "^1.0.1"
+    semver "^5.4.1"
+
 "@changesets/changelog-github@^0.2.6":
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/@changesets/changelog-github/-/changelog-github-0.2.6.tgz#06c2c4a5d45519cfcf67bb1596941a9083c01978"
@@ -988,14 +1000,14 @@
     "@changesets/types" "^3.0.0"
     dotenv "^8.1.0"
 
-"@changesets/cli@^2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@changesets/cli/-/cli-2.7.1.tgz#2fd1038e8d3f03c2000dcd720d59a8120ed2394c"
-  integrity sha512-OoN92lT1LdqJHmjwnjsth0NQz4E8s4k0GMMG7q6SdVqEUhSachxbBzHrKS9/OMykiWzqtagDvym6s1drCxAJtg==
+"@changesets/cli@^2.8.0":
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/@changesets/cli/-/cli-2.8.0.tgz#7cbaf05bdf262340ed3b65adb366c60b90f0e07b"
+  integrity sha512-dCm2wKGMymjpcnv1Y8xW9oVs1LbYHP4glFaDoyYzx2xRXAR2qR4J0+muC+OLkQcQBXqss9XG69kRWmJWrsqxgA==
   dependencies:
     "@babel/runtime" "^7.4.4"
-    "@changesets/apply-release-plan" "^3.0.1"
-    "@changesets/assemble-release-plan" "^2.0.4"
+    "@changesets/apply-release-plan" "^3.1.0"
+    "@changesets/assemble-release-plan" "^2.1.0"
     "@changesets/config" "^1.1.0"
     "@changesets/errors" "^0.1.4"
     "@changesets/get-release-plan" "^1.0.4"
@@ -1207,11 +1219,6 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
-
-"@prefresh/core@0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@prefresh/core/-/core-0.6.0.tgz#b7801ad3d16de9d21ed0824db6c85707f93cf93c"
-  integrity sha512-xhhBgQeMmyoSYEr8F27oypxRTWysIKPnc+Ed6U5OmEwPtLeKsccI3UCpSQyrcv5/HmPNPjAYHPqNC0uH57rIkw==
 
 "@rollup/plugin-alias@^3.0.1":
   version "3.1.0"
