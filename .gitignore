@@ -103,3 +103,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Package exports
+packages/vite/runtime
+packages/vite/utils

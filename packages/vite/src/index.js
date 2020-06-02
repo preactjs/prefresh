@@ -21,8 +21,8 @@ export default function prefreshPlugin() {
             ${
 							shouldBind
 								? `
-              import '@prefresh/vite/dist/src/runtime';
-              import { compareSignatures } from '@prefresh/vite/dist/src/utils';
+              import '@prefresh/vite/runtime';
+              import { compareSignatures } from '@prefresh/vite/utils';
             `
 								: ''
 						}
