@@ -1,7 +1,5 @@
 # Prefresh-next
 
-# Prefresh-next
-
 [![npm version](https://badgen.net/npm/v/@prefresh/next)](https://www.npmjs.com/package/@prefresh/next)
 
 ## Setup
