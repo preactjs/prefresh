@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 0.8.2
+
+### Patch Changes
+
+- [`518d403`](https://github.com/JoviDeCroock/prefresh/commit/518d4030a4b2c0e3d53636808633d9f049aa5695) [#76](https://github.com/JoviDeCroock/prefresh/pull/76) Thanks [@lukeed](https://github.com/lukeed)! - Allow @prefresh/vite to work within pnpm and yarn@2.x projects
+
 ## 0.8.1
 
 ### Patch Changes
