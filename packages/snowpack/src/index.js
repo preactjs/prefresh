@@ -2,14 +2,14 @@ import { isComponent, flush } from '@prefresh/utils';
 
 export default function preactRefreshPlugin(config, pluginOptions) {
 	return {
-		knownEntrypoints: ['@prefresh/core'],
+		knownEntrypoints: ['@prefresh/vite/runtime'],
 		async transform({ contents, urlPath, isDev }) {
 			if (!isDev || !urlPath.endsWith('.js') || config.devOptions.hmr === false)
 				return;
 
 			return {
 				result: `
-          import '@prefresh/core';
+          ${'import'} '@prefresh/vite/runtime';
 
           const shouldPrefreshBind = ${isComponent.toString()}
           const flushUpdates = ${flush.toString()}

@@ -5,14 +5,26 @@
 	"main": "dist/src/index.js",
 	"exports": {
 		".": {
-			"import": "./src/index.js",
-			"require": "./dist/src/index.js"
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js"
+		},
+		"./runtime": {
+			"import": "./runtime/index.mjs",
+			"require": "./runtime/index.js"
 		},
 		"./package.json": "./package.json",
 		"./": "./"
+  },
+  "modes": {
+		"default": "src/index.js",
+		"runtime": "src/runtime.js"
 	},
+	"files": [
+		"dist",
+		"runtime"
+	],
 	"scripts": {
-		"build": "cjyes src/index.js",
+		"build": "bundt",
 		"lint": "eslint src"
 	},
 	"repository": {
@@ -30,12 +42,12 @@
 		"@prefresh/utils": "^0.3.1"
 	},
 	"devDependencies": {
-		"cjyes": "0.3.1",
+		"bundt": "^1.0.1",
 		"preact": "^10.4.1",
-		"snowpack": "^2.0.0-rc.2"
+		"snowpack": "^2.0.0"
 	},
 	"peerDependencies": {
 		"preact": "^10.4.0",
-		"snowpack": "^2.0.0-rc.2"
+		"snowpack": "^2.0.0"
 	}
 }
