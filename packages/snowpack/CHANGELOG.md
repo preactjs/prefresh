@@ -1,5 +1,11 @@
 # @prefresh/snowpack
 
+## 0.3.0
+
+### Minor Changes
+
+- [`8e1b23b`](https://github.com/JoviDeCroock/prefresh/commit/8e1b23b7703fd0d1c7646cd05c6a2493499bb5a7) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Support opt-ing out of HMR
+
 ## 0.2.1
 
 ### Patch Changes
