@@ -4,7 +4,8 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 	return {
 		knownEntrypoints: ['@prefresh/core'],
 		async transform({ contents, urlPath, isDev }) {
-			if (!isDev || !urlPath.endsWith('.js')) return;
+			if (!isDev || !urlPath.endsWith('.js') || config.devOptions.hmr === false)
+				return;
 
 			return {
 				result: `
