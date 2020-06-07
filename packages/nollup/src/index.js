@@ -36,7 +36,7 @@ module.exports = function() {
 				};
 			}
 
-			if (id.includes('prefresh') || id.includes('node_modules')) {
+			if (id.includes('@prefresh') || id.includes('node_modules')) {
 				return;
 			}
 
