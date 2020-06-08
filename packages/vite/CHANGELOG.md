@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 0.8.3
+
+### Patch Changes
+
+- [`5b625bd`](https://github.com/JoviDeCroock/prefresh/commit/5b625bd1d5722dcbcf658cc4ddff9b0b55066556) [#90](https://github.com/JoviDeCroock/prefresh/pull/90) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix import transforming to require
+
 ## 0.8.2
 
 ### Patch Changes
