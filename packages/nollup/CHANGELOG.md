@@ -1,5 +1,11 @@
 # @prefresh/nollup
 
+## 0.6.2
+
+### Patch Changes
+
+- [`f4f2b91`](https://github.com/JoviDeCroock/prefresh/commit/f4f2b9111aaf05fd63397c0627386175430500bf) [#88](https://github.com/JoviDeCroock/prefresh/pull/88) Thanks [@PepsRyuu](https://github.com/PepsRyuu)! - Transform check from `prefresh` to `@prefresh`
+
 ## 0.6.1
 
 ### Patch Changes
