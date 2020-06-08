@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
-    "@prefresh/nollup": "^0.6.1",
+    "@prefresh/nollup": "^0.6.2",
     "@rollup/plugin-babel": "^5.0.3",
     "@rollup/plugin-node-resolve": "^8.0.1",
     "babel-preset-preact": "^2.0.0",
