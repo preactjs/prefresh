@@ -10,10 +10,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
-    "@prefresh/core": "^0.6.1",
-    "@prefresh/utils": "^0.1.1",
-    "@prefresh/vite": "0.6.0",
+    "@prefresh/vite": "0.8.3",
     "react-refresh": "^0.8.2",
-    "vite": "^0.16.1"
+    "vite": "^0.20.0"
   }
 }

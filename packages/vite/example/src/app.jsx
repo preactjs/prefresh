@@ -1,6 +1,10 @@
 import { Logo } from './logo'
 import { useCounter } from './useCounter'
 
+function Test() {
+  return <p>Test</p>
+}
+
 export function App(props) {
   const [count, increment] = useCounter(0);
   return (
@@ -8,6 +12,7 @@ export function App(props) {
       <Logo />
       <p>Count: {count}</p>
       <button onClick={increment}>Increment</button>
+      <Test />
     </div>
   )
 }
