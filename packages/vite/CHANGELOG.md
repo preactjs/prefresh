@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 0.9.0
+
+### Minor Changes
+
+- [`2cd872b`](https://github.com/JoviDeCroock/prefresh/commit/2cd872b1cb03808c3075fcc7240b779432a5f645) [#96](https://github.com/JoviDeCroock/prefresh/pull/96) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Support vite > 0.17 this version won't be compatible with 0.16 and under.
+
 ## 0.8.3
 
 ### Patch Changes
