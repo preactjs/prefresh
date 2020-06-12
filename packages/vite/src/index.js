@@ -54,7 +54,12 @@ export default function prefreshPlugin() {
               import.meta.hot.accept((m) => {
                 try {
                   for (let i in m) {
-                    compareSignatures(module[i], m[i]);
+                    if (i === 'default') {
+                      const keyword = m[i].name;
+                      compareSignatures(module[keyword], m[i]);
+                    } else {
+                      compareSignatures(module[i], m[i]);
+                    }
                   }
                 } catch (e) {
                   window.location.reload();
