@@ -15,56 +15,51 @@ export default function prefreshPlugin() {
 						return code;
 
 					const result = transform(code);
-					const shouldBind = result.code.includes('$RefreshReg$(');
+
+					if (!/\$RefreshReg\$\(/.test(result.code)) {
+						return code;
+					}
 
 					return `
-            ${
-							shouldBind
-								? `
-              ${'import'} '@prefresh/vite/runtime';
-              ${'import'} { compareSignatures } from '@prefresh/vite/utils';
-            `
-								: ''
-						}
+            ${'import'} '@prefresh/vite/runtime';
+            ${'import'} { compareSignatures } from '@prefresh/vite/utils';
 
-            const prevRefreshReg = window.$RefreshReg$ || (() => {});
-            const prevRefreshSig = window.$RefreshSig$ || (() => {});
-
+            let prevRefreshReg;
+            let prevRefreshSig;
             const module = {};
 
-            window.$RefreshReg$ = (type, id) => {
-              module[type.name] = type;
-            }
+            if (import.meta.hot) {
+              prevRefreshReg = window.$RefreshReg$ || (() => {});
+              prevRefreshSig = window.$RefreshSig$ || (() => {});
 
-            window.$RefreshSig$ = () => {
-              let status = 'begin';
-              let savedType;
-              return (type, key, forceReset, getCustomHooks) => {
-                if (!savedType) savedType = type;
-                status = self.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, status);
+              window.$RefreshReg$ = (type, id) => {
+                module[type.name] = type;
+              }
+
+              window.$RefreshSig$ = () => {
+                let status = 'begin';
+                let savedType;
+                return (type, key, forceReset, getCustomHooks) => {
+                  if (!savedType) savedType = type;
+                  status = self.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, status);
+                };
               };
-            };
+            }
 
             ${result.code}
 
             if (import.meta.hot) {
               window.$RefreshReg$ = prevRefreshReg;
               window.$RefreshSig$ = prevRefreshSig;
-              ${
-								shouldBind
-									? `
-                import.meta.hot.accept((m) => {
-                  try {
-                    for (let i in m) {
-                      compareSignatures(module[i], m[i]);
-                    }
-                  } catch (e) {
-                    window.location.reload();
+              import.meta.hot.accept((m) => {
+                try {
+                  for (let i in m) {
+                    compareSignatures(module[i], m[i]);
                   }
-                });
-              `
-									: ''
-							}
+                } catch (e) {
+                  window.location.reload();
+                }
+              });
             }
           `;
 				}
