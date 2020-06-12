@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 0.9.1
+
+### Patch Changes
+
+- [`778ad18`](https://github.com/JoviDeCroock/prefresh/commit/778ad18769976692e4195a92bcb81e9579086533) [#98](https://github.com/JoviDeCroock/prefresh/pull/98) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix issue where a default export would not correctly bring in the oldModule
+
 ## 0.9.0
 
 ### Minor Changes
