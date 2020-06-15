@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   release:
@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@master
+        uses: actions/checkout@main
         with:
           fetch-depth: 0
 
       - name: Setup Node.js 12.x
-        uses: actions/setup-node@master
+        uses: actions/setup-node@main
         with:
           node-version: 12.x
 
@@ -24,6 +24,6 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Create Release Pull Request
-        uses: changesets/action@master
+        uses: changesets/action@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
