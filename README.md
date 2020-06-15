@@ -1,14 +1,14 @@
 # Prefresh
 
-- [core](https://github.com/JoviDeCroock/prefresh/tree/master/packages/core)
+- [core](https://github.com/JoviDeCroock/prefresh/tree/main/packages/core)
 - [gatsby](https://www.gatsbyjs.org/packages/gatsby-plugin-preact/)
-- [next](https://github.com/JoviDeCroock/prefresh/tree/master/packages/next)
-- [nollup](https://github.com/JoviDeCroock/prefresh/tree/master/packages/nollup)
+- [next](https://github.com/JoviDeCroock/prefresh/tree/main/packages/next)
+- [nollup](https://github.com/JoviDeCroock/prefresh/tree/main/packages/nollup)
 - [preact-cli (--refresh)](https://github.com/preactjs/preact-cli#preact-watch)
-- [snowpack](https://github.com/JoviDeCroock/prefresh/tree/master/packages/snowpack)
-- [utils](https://github.com/JoviDeCroock/prefresh/tree/master/packages/utils)
-- [vite](https://github.com/JoviDeCroock/prefresh/tree/master/packages/vite)
-- [webpack](https://github.com/JoviDeCroock/prefresh/tree/master/packages/webpack)
+- [snowpack](https://github.com/JoviDeCroock/prefresh/tree/main/packages/snowpack)
+- [utils](https://github.com/JoviDeCroock/prefresh/tree/main/packages/utils)
+- [vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite)
+- [webpack](https://github.com/JoviDeCroock/prefresh/tree/main/packages/webpack)
 
 > Note that there is a known issue when combined with `preact-devtools` that the hookState does not correctly reset.
 
