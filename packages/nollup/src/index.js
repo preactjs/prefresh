@@ -4,10 +4,10 @@ module.exports = function() {
 	return {
 		nollupModuleWrap(code) {
 			return `
-                const prevRefreshReg = window.$RefreshReg$;
-                const prevRefreshSig = window.$RefreshSig$;
+                const prevRefreshReg = self.$RefreshReg$;
+                const prevRefreshSig = self.$RefreshSig$;
 
-                window.$RefreshSig$ = () => {
+                self.$RefreshSig$ = () => {
                     let status = 'begin';
                     let savedType;
                     return (type, key, forceReset, getCustomHooks) => {
@@ -16,15 +16,15 @@ module.exports = function() {
                     };
                 };
 
-                window.$RefreshReg$ = (type, id) => {
+                self.$RefreshReg$ = (type, id) => {
                     self.${NAMESPACE}.register(type, module.id + ' ' + id);
                 };
 
                 try {
                     ${code}
                 } finally {
-                    window.$RefreshReg$ = prevRefreshReg;
-                    window.$RefreshSig$ = prevRefreshSig;
+                    self.$RefreshReg$ = prevRefreshReg;
+                    self.$RefreshSig$ = prevRefreshSig;
                 }
             `;
 		},

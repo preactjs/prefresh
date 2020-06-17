@@ -3,10 +3,10 @@ const { Template } = require('webpack');
 const NAMESPACE = '__PREFRESH__';
 
 const beforeModule = `
-const prevRefreshReg = window.$RefreshReg$;
-const prevRefreshSig = window.$RefreshSig$;
+const prevRefreshReg = self.$RefreshReg$;
+const prevRefreshSig = self.$RefreshSig$;
 
-window.$RefreshSig$ = () => {
+self.$RefreshSig$ = () => {
   let status = 'begin';
   let savedType;
   return (type, key, forceReset, getCustomHooks) => {
@@ -15,7 +15,7 @@ window.$RefreshSig$ = () => {
   };
 };
 
-window.$RefreshReg$ = (type, id) => {
+self.$RefreshReg$ = (type, id) => {
   self.${NAMESPACE}.register(type, module.i + ' ' + id);
 };
 
@@ -24,8 +24,8 @@ try {
 
 const afterModule = `
 } finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
+  self.$RefreshReg$ = prevRefreshReg;
+  self.$RefreshSig$ = prevRefreshSig;
 }
 `;
 
