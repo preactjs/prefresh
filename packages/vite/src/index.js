@@ -29,14 +29,14 @@ export default function prefreshPlugin() {
             const module = {};
 
             if (import.meta.hot) {
-              prevRefreshReg = window.$RefreshReg$ || (() => {});
-              prevRefreshSig = window.$RefreshSig$ || (() => {});
+              prevRefreshReg = self.$RefreshReg$ || (() => {});
+              prevRefreshSig = self.$RefreshSig$ || (() => {});
 
-              window.$RefreshReg$ = (type, id) => {
+              self.$RefreshReg$ = (type, id) => {
                 module[type.name] = type;
               }
 
-              window.$RefreshSig$ = () => {
+              self.$RefreshSig$ = () => {
                 let status = 'begin';
                 let savedType;
                 return (type, key, forceReset, getCustomHooks) => {
@@ -49,8 +49,8 @@ export default function prefreshPlugin() {
             ${result.code}
 
             if (import.meta.hot) {
-              window.$RefreshReg$ = prevRefreshReg;
-              window.$RefreshSig$ = prevRefreshSig;
+              self.$RefreshReg$ = prevRefreshReg;
+              self.$RefreshSig$ = prevRefreshSig;
               import.meta.hot.accept((m) => {
                 try {
                   for (let i in m) {
@@ -62,7 +62,7 @@ export default function prefreshPlugin() {
                     }
                   }
                 } catch (e) {
-                  window.location.reload();
+                  self.location.reload();
                 }
               });
             }

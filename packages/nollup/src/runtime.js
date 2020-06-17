@@ -13,7 +13,7 @@ const registerExports = m => {
 		isComponent(moduleExports.displayName || moduleExports.name)
 	) {
 		isCitizen = true;
-		window.__PREFRESH__.register(moduleExports, moduleId + ' %exports%');
+		self.__PREFRESH__.register(moduleExports, moduleId + ' %exports%');
 	}
 
 	if (
@@ -33,7 +33,7 @@ const registerExports = m => {
 			) {
 				isCitizen = isCitizen || true;
 				const typeID = moduleId + ' %exports% ' + key;
-				window.__PREFRESH__.register(exportValue, typeID);
+				self.__PREFRESH__.register(exportValue, typeID);
 			}
 		}
 	}

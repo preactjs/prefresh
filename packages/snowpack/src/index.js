@@ -18,26 +18,26 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 
           const __module_exports__ = []
 
-          const prevRefreshReg = window.$RefreshReg$ || (() => {});
-          const prevRefreshSig = window.$RefreshSig$ || (() => {});
+          const prevRefreshReg = self.$RefreshReg$ || (() => {});
+          const prevRefreshSig = self.$RefreshSig$ || (() => {});
 
-          window.$RefreshSig$ = () => {
+          self.$RefreshSig$ = () => {
             let status = 'begin';
             let savedType;
             return (type, key, forceReset, getCustomHooks) => {
               if (!savedType) savedType = type;
-              status = window.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, status);
+              status = self.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, status);
             };
           };
 
-          window.$RefreshReg$ = (type, id) => {
+          self.$RefreshReg$ = (type, id) => {
             __module_exports__.push(type.name);
           };
 
           ${contents}
 
-          window.$RefreshSig$ = prevRefreshSig;
-          window.$RefreshReg$ = prevRefreshReg;
+          self.$RefreshSig$ = prevRefreshSig;
+          self.$RefreshReg$ = prevRefreshReg;
 
           if (import.meta.hot && __module_exports__.some(shouldPrefreshBind)) {
             import.meta.hot.accept(({ module }) => {
