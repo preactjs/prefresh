@@ -10,8 +10,6 @@
 - [vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite)
 - [webpack](https://github.com/JoviDeCroock/prefresh/tree/main/packages/webpack)
 
-> Note that there is a known issue when combined with `preact-devtools` that the hookState does not correctly reset.
-
 ## Best practices
 
 The general best practices are linear to other hot-reloaders and concepts.
