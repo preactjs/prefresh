@@ -13,6 +13,7 @@ module.exports = function() {
                     return (type, key, forceReset, getCustomHooks) => {
                         if (!savedType) savedType = type;
                         status = self.${NAMESPACE}.sign(type || savedType, key, forceReset, getCustomHooks, status);
+                        return type;
                     };
                 };
 
