@@ -1,5 +1,11 @@
 # @prefresh/snowpack
 
+## 0.3.2
+
+### Patch Changes
+
+- [`203bc1c`](https://github.com/JoviDeCroock/prefresh/commit/203bc1c916f8c2c0474677bb4dca2e5788a685c8) [#108](https://github.com/JoviDeCroock/prefresh/pull/108) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Add /dist files correctly to the publish
+
 ## 0.3.1
 
 ### Patch Changes
