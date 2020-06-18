@@ -30,7 +30,7 @@
 		"utils"
 	],
 	"scripts": {
-		"prepublishOnly": "bundt",
+		"build": "bundt",
 		"lint": "eslint src"
 	},
 	"repository": {
