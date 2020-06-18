@@ -1,5 +1,13 @@
 # @prefresh/next
 
+## 0.3.1
+
+### Patch Changes
+
+- [`1848d91`](https://github.com/JoviDeCroock/prefresh/commit/1848d9183aaae7cf1a3da9baeccd27935e7c563d) [#105](https://github.com/JoviDeCroock/prefresh/pull/105) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Change `window` to `self` so prefresh works outside of the browser
+
+* [`476c8b8`](https://github.com/JoviDeCroock/prefresh/commit/476c8b8ca75fba6e69e046510beb78dfe0e46544) [#107](https://github.com/JoviDeCroock/prefresh/pull/107) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Correctly return the function type from the refreshSigning
+
 ## 0.3.0
 
 ### Minor Changes
