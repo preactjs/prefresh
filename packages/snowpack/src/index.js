@@ -27,6 +27,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
             return (type, key, forceReset, getCustomHooks) => {
               if (!savedType) savedType = type;
               status = self.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, status);
+              return type;
             };
           };
 
