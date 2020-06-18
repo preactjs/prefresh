@@ -12,7 +12,7 @@
 		"./": "./"
 	},
 	"scripts": {
-		"prepublishOnly": "cjyes src/index.js",
+		"build": "cjyes src/index.js",
 		"lint": "eslint src"
 	},
 	"repository": {
