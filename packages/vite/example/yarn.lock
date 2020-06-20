@@ -900,6 +900,11 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
+dotenv-expand@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/dotenv-expand/-/dotenv-expand-5.1.0.tgz#3fbaf020bfd794884072ea26b1e9791d45a629f0"
+  integrity sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==
+
 dotenv@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
@@ -944,10 +949,10 @@ es-module-lexer@^0.3.18:
   resolved "https://registry.yarnpkg.com/es-module-lexer/-/es-module-lexer-0.3.20.tgz#13661aa6d793da74684b3353ad4327d5fa59d3d3"
   integrity sha512-kfB4R9F6FJ5Bgvxyk6W/u/a9cncXEGRyaD2UxyBhrF3+ty4qLzptgStLfe0J90o/qkSiiY0+yyzMcIIPvAOjIw==
 
-esbuild@^0.4.1:
-  version "0.4.14"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.4.14.tgz#19c3ec44fe3bb6c637dd5287d870a87d36352dcc"
-  integrity sha512-8lx+KpHMQM6t3JFutzCWLckcaVQyv5qvdCzWHQdXGGh16SXdv5nfo/+izWcF367PlMkCMfV7iWW7J5I8Skx7ZQ==
+esbuild@^0.5.3:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.5.4.tgz#0460ef999089dba534f2d214a0b84affae32669b"
+  integrity sha512-qUKfkCHZ6jNzM1mIFlc4axTujYF+eNwjVMbYvmS26to5DnavdIQiE2JB3MEs77pgK9nrUviwAJKN39r7t4DynA==
 
 escape-html@^1.0.3:
   version "1.0.3"
@@ -2261,10 +2266,10 @@ vary@^1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
 
-vite@^0.20.0:
-  version "0.20.8"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-0.20.8.tgz#dee70204b2c514cbae37e334cac56f2588791bba"
-  integrity sha512-ZqsDaEKp/rUBLAkOtz+avjFKbOhb38ewesvQmgePg/Y9RcJhmWUqF0cUovFqHNeVamDCdQNLI/kdQMjXg9o87g==
+vite@^1.0.0-beta.1:
+  version "1.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-1.0.0-beta.1.tgz#3b715b6d161e86188a1e0c47835969705bdd523d"
+  integrity sha512-CHUUyde0BvWc78PRIB53Ej2c3WMWv1ndegUKB9UK0eZUHkJ+J/VL72VaB8Sf1MRbU60mdI3T8lRBKauMKzVhqw==
   dependencies:
     "@babel/parser" "^7.9.4"
     "@rollup/plugin-commonjs" "^13.0.0"
@@ -2280,8 +2285,9 @@ vite@^0.20.0:
     clean-css "^4.2.3"
     debug "^4.1.1"
     dotenv "^8.2.0"
+    dotenv-expand "^5.1.0"
     es-module-lexer "^0.3.18"
-    esbuild "^0.4.1"
+    esbuild "^0.5.3"
     etag "^1.8.1"
     execa "^4.0.1"
     fs-extra "^9.0.0"

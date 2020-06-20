@@ -52,10 +52,10 @@
 	"devDependencies": {
 		"bundt": "^1.0.1",
 		"preact": "^10.4.1",
-		"vite": "^0.20.0"
+    "vite": "^1.0.0-beta.1"
 	},
 	"peerDependencies": {
 		"preact": "^10.4.0",
-		"vite": "^0.17.0"
+    "vite": ">=1.0.0-beta.1"
 	}
 }
