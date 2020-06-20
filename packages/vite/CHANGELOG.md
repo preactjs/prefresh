@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 0.10.0
+
+### Minor Changes
+
+- [`73d1d57`](https://github.com/JoviDeCroock/prefresh/commit/73d1d57440e75476584046a34fa8d4d188c9aca5) [#111](https://github.com/JoviDeCroock/prefresh/pull/111) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Support vite v1-beta
+
 ## 0.9.3
 
 ### Patch Changes
