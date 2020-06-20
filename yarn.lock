@@ -1304,10 +1304,10 @@
   dependencies:
     slash "^3.0.0"
 
-"@rollup/plugin-commonjs@^12.0.0":
-  version "12.0.0"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-12.0.0.tgz#e2f308ae6057499e0f413f878fff7c3a0fdc02a1"
-  integrity sha512-8+mDQt1QUmN+4Y9D3yCG8AJNewuTSLYPJVzKKUZ+lGeQrI+bV12Tc5HCyt2WdlnG6ihIL/DPbKRJlB40DX40mw==
+"@rollup/plugin-commonjs@^13.0.0":
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-13.0.0.tgz#8a1d684ba6848afe8b9e3d85649d4b2f6f7217ec"
+  integrity sha512-Anxc3qgkAi7peAyesTqGYidG5GRim9jtg8xhmykNaZkImtvjA7Wsqep08D2mYsqw1IF7rA3lYfciLgzUSgRoqw==
   dependencies:
     "@rollup/pluginutils" "^3.0.8"
     commondir "^1.0.1"
@@ -1371,6 +1371,15 @@
   version "3.0.10"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-3.0.10.tgz#a659b9025920378494cd8f8c59fbf9b3a50d5f12"
   integrity sha512-d44M7t+PjmMrASHbhgpSbVgtL6EFyX7J4mYxwQ/c5eoaE6N2VgCgEcWVzNnwycIloti+/MpwFr8qfw+nRw00sw==
+  dependencies:
+    "@types/estree" "0.0.39"
+    estree-walker "^1.0.1"
+    picomatch "^2.2.2"
+
+"@rollup/pluginutils@^3.0.9":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-3.1.0.tgz#706b4524ee6dc8b103b3c995533e5ad680c02b9b"
+  integrity sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==
   dependencies:
     "@types/estree" "0.0.39"
     estree-walker "^1.0.1"
@@ -3643,6 +3652,11 @@ dot-prop@^5.2.0:
   dependencies:
     is-obj "^2.0.0"
 
+dotenv-expand@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/dotenv-expand/-/dotenv-expand-5.1.0.tgz#3fbaf020bfd794884072ea26b1e9791d45a629f0"
+  integrity sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==
+
 dotenv@^8.1.0, dotenv@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
@@ -3820,10 +3834,10 @@ esbuild@^0.3.0:
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.3.9.tgz#a9ce2c4d4ef6bc01ac183b8d8635bb265d0a3fa2"
   integrity sha512-GbuJ/HyxOtVPNtcbgU7vcmPEZIfpeFnVgEGVvV2SrwU70ZZO0d7ZqRPm2gevD7FFxwNFpajdcEZZNJkEm7e4Pg==
 
-esbuild@^0.4.1:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.4.3.tgz#228e108f849128a2b2e64d524235fef58236912b"
-  integrity sha512-LKCkYlFZMDsUcUx1r5jmnTrtufBsgCvhtdAk0530RLO83PJo2ke2z/FybFCAzm2LGIpL+Sinhg4nUOA3BSpHjg==
+esbuild@^0.5.3:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.5.4.tgz#0460ef999089dba534f2d214a0b84affae32669b"
+  integrity sha512-qUKfkCHZ6jNzM1mIFlc4axTujYF+eNwjVMbYvmS26to5DnavdIQiE2JB3MEs77pgK9nrUviwAJKN39r7t4DynA==
 
 escape-html@^1.0.3:
   version "1.0.3"
@@ -4040,6 +4054,11 @@ estree-walker@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-1.0.1.tgz#31bc5d612c96b704106b477e6dd5d8aa138cb700"
   integrity sha512-1fMXF3YP4pZZVozF8j/ZLfvnR8NSIljt56UhbZ5PeeDmmGHpgpdwQt7ITlGvYaQukCvuBRMLEiKiYC+oeIg4cg==
+
+estree-walker@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-2.0.1.tgz#f8e030fb21cefa183b44b7ad516b747434e7a3e0"
+  integrity sha512-tF0hv+Yi2Ot1cwj9eYHtxC0jB9bmjacjQs6ZBTj82H8JwUywFuc+7E83NWfNMwHXZc11mjfFcVXPe9gEP4B8dg==
 
 esutils@^2.0.2:
   version "2.0.3"
@@ -7896,6 +7915,16 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
+rollup-plugin-dynamic-import-variables@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-dynamic-import-variables/-/rollup-plugin-dynamic-import-variables-1.0.2.tgz#13328bd7c78f6dd1672f8eddb200d1b78b555f36"
+  integrity sha512-bzYC/MwYsHgNGpWMI3G4qTjstJCtFqE25/k1Cq/sjfnzl7MQwwrrA4SAQEMiFgKbsw1H4tijVGY1tRk5Xa4h9g==
+  dependencies:
+    "@rollup/pluginutils" "^3.0.9"
+    estree-walker "^2.0.1"
+    globby "^11.0.0"
+    magic-string "^0.25.7"
+
 rollup-plugin-terser@^5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/rollup-plugin-terser/-/rollup-plugin-terser-5.3.0.tgz#9c0dd33d5771df9630cd027d6a2559187f65885e"
@@ -7907,10 +7936,10 @@ rollup-plugin-terser@^5.3.0:
     serialize-javascript "^2.1.2"
     terser "^4.6.2"
 
-rollup-plugin-vue@^6.0.0-beta.4:
-  version "6.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-vue/-/rollup-plugin-vue-6.0.0-beta.4.tgz#e6beff35c0bc23c06656058a3375bc54482bb739"
-  integrity sha512-c8LQyDtFx7+79xIysiBWeJcRHq0rKIVbTcNpV2Um9Qhr2orn82EL/SCY7y54rQ+C4fnrJCw9Svcttwm9CmkvOQ==
+rollup-plugin-vue@^6.0.0-beta.6:
+  version "6.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-vue/-/rollup-plugin-vue-6.0.0-beta.6.tgz#e77dc9cdec9e53778f086259a89fbff36f391ddf"
+  integrity sha512-APbkp9EDk0Vj5PpZNaa11yyNhr/Uy8OkrzpkajxUvONU+S7+qqOSVlaNTcsxiT198dOC6TM0iJK5ChDgEVecTA==
   dependencies:
     debug "^4.1.1"
     hash-sum "^2.0.0"
@@ -9170,13 +9199,13 @@ vendors@^1.0.0:
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.4.tgz#e2b800a53e7a29b93506c3cf41100d16c4c4ad8e"
   integrity sha512-/juG65kTL4Cy2su4P8HjtkTxk6VmJDiOPBufWniqQ6wknac6jNiXS9vU+hO3wgusiyqWlzTbVHi0dyJqRONg3w==
 
-vite@^0.20.0:
-  version "0.20.2"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-0.20.2.tgz#9ad6b4dfb5a08f886d54d3c7f7b3ee513808f75a"
-  integrity sha512-9SERU/4qYb2wxV/5IlzO/xSfDSLKsuhaLDmvwOFS2KkY6SlHrtULCfnMBZ6lhRStFix3NHLq0bijh90tZVElHA==
+vite@^1.0.0-beta.1:
+  version "1.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-1.0.0-beta.1.tgz#3b715b6d161e86188a1e0c47835969705bdd523d"
+  integrity sha512-CHUUyde0BvWc78PRIB53Ej2c3WMWv1ndegUKB9UK0eZUHkJ+J/VL72VaB8Sf1MRbU60mdI3T8lRBKauMKzVhqw==
   dependencies:
     "@babel/parser" "^7.9.4"
-    "@rollup/plugin-commonjs" "^12.0.0"
+    "@rollup/plugin-commonjs" "^13.0.0"
     "@rollup/plugin-json" "^4.0.3"
     "@rollup/plugin-node-resolve" "^8.0.0"
     "@types/koa" "^2.11.3"
@@ -9189,8 +9218,9 @@ vite@^0.20.0:
     clean-css "^4.2.3"
     debug "^4.1.1"
     dotenv "^8.2.0"
+    dotenv-expand "^5.1.0"
     es-module-lexer "^0.3.18"
-    esbuild "^0.4.1"
+    esbuild "^0.5.3"
     etag "^1.8.1"
     execa "^4.0.1"
     fs-extra "^9.0.0"
@@ -9204,6 +9234,7 @@ vite@^0.20.0:
     koa-static "^5.0.0"
     lru-cache "^5.1.1"
     magic-string "^0.25.7"
+    merge-source-map "^1.1.0"
     mime-types "^2.1.27"
     minimist "^1.2.5"
     open "^7.0.3"
@@ -9214,8 +9245,9 @@ vite@^0.20.0:
     postcss-modules "^2.0.0"
     resolve "^1.17.0"
     rollup "^2.11.2"
+    rollup-plugin-dynamic-import-variables "^1.0.1"
     rollup-plugin-terser "^5.3.0"
-    rollup-plugin-vue "^6.0.0-beta.4"
+    rollup-plugin-vue "^6.0.0-beta.6"
     selfsigned "^1.10.7"
     slash "^3.0.0"
     vue "^3.0.0-beta.14"

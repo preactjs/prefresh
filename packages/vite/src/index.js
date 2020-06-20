@@ -5,8 +5,8 @@ export default function prefreshPlugin() {
 	return {
 		transforms: [
 			{
-				test: path => /\.(t|j)s(x)?$/.test(path),
-				transform(code, _, isBuild, path) {
+				test: ({ path }) => /\.(t|j)s(x)?$/.test(path),
+				transform({ code, isBuild, path }) {
 					if (
 						isBuild ||
 						process.env.NODE_ENV === 'production' ||
@@ -14,13 +14,14 @@ export default function prefreshPlugin() {
 					)
 						return code;
 
-					const result = transform(code);
+					const result = transform(code, path);
 
 					if (!/\$RefreshReg\$\(/.test(result.code)) {
 						return code;
 					}
 
-					return `
+					return {
+						code: `
             ${'import'} '@prefresh/vite/runtime';
             ${'import'} { compareSignatures } from '@prefresh/vite/utils';
 
@@ -67,16 +68,19 @@ export default function prefreshPlugin() {
                 }
               });
             }
-          `;
+          `,
+						map: result.map
+					};
 				}
 			}
 		]
 	};
 }
 
-const transform = code =>
+const transform = (code, path) =>
 	transformSync(code, {
 		plugins: [require('react-refresh/babel')],
 		ast: false,
-		sourceMaps: false
+		sourceMaps: true,
+		sourceFileName: path
 	});
