@@ -1,6 +1,7 @@
 # Prefresh
 
 - [core](https://github.com/JoviDeCroock/prefresh/tree/main/packages/core)
+- [CRA with prefresh](https://github.com/jeremy-coleman/prefresh-cra)
 - [gatsby](https://www.gatsbyjs.org/packages/gatsby-plugin-preact/)
 - [next](https://github.com/JoviDeCroock/prefresh/tree/main/packages/next)
 - [nollup](https://github.com/JoviDeCroock/prefresh/tree/main/packages/nollup)
