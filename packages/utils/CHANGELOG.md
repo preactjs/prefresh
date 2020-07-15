@@ -1,5 +1,11 @@
 # @prefresh/utils
 
+## 0.2.1
+
+### Patch Changes
+
+- [`23bdb37`](https://github.com/JoviDeCroock/prefresh/commit/23bdb376c9d20d986f669599c19a98bf991f290e) [#115](https://github.com/JoviDeCroock/prefresh/pull/115) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Add .npmignore removing example
+
 ## 0.2.0
 
 ### Minor Changes
