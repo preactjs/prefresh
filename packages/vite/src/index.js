@@ -10,7 +10,8 @@ export default function prefreshPlugin() {
 					if (
 						isBuild ||
 						process.env.NODE_ENV === 'production' ||
-						path.includes('node_modules')
+						path.includes('node_modules') ||
+            path.includes('@modules')
 					)
 						return code;
 
