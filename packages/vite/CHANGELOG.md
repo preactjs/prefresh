@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 0.10.2
+
+### Patch Changes
+
+- [`42ac94f`](https://github.com/JoviDeCroock/prefresh/commit/42ac94f2020a906c908333810b2386feeb8e6f3f) [#117](https://github.com/JoviDeCroock/prefresh/pull/117) Thanks [@intrnl](https://github.com/intrnl)! - Skip transforming node_modules
+
 ## 0.10.1
 
 ### Patch Changes
