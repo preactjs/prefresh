@@ -2,65 +2,61 @@ import { compareSignatures, isComponent } from '@prefresh/utils';
 
 export default function preactRefreshPlugin(config, pluginOptions) {
 	return {
-		knownEntrypoints: ['@prefresh/core'],
-		async transform({ contents, urlPath, isDev }) {
-			if (!isDev || !urlPath.endsWith('.js') || config.devOptions.hmr === false)
-				return;
+		name: '@prefresh/snowpack',
+		input: ['.js'],
+		output: ['.js'],
+		async build({ contents, isDev }) {
+			if (!isDev || config.devOptions.hmr === false) return;
 
 			return {
 				result: `
           import '@prefresh/core';
-          import * as $OriginalModule$ from ${JSON.stringify(urlPath)};
-          let $CurrentModule$ = $OriginalModule$;
 
-          const compareSignaturesForPrefreshment = ${compareSignatures.toString()};
-          const shouldPrefreshBind = ${isComponent.toString()}
+          let prevRefreshReg;
+          let prevRefreshSig;
+          const module = {};
+          const compareSignatures = ${compareSignatures.toString()};
 
-          const __module_exports__ = []
+          if (import.meta.hot) {
+            prevRefreshReg = self.$RefreshReg$ || (() => {});
+            prevRefreshSig = self.$RefreshSig$ || (() => {});
 
-          const prevRefreshReg = self.$RefreshReg$ || (() => {});
-          const prevRefreshSig = self.$RefreshSig$ || (() => {});
-
-          self.$RefreshSig$ = () => {
-            let status = 'begin';
-            let savedType;
-            return (type, key, forceReset, getCustomHooks) => {
-              if (!savedType) savedType = type;
-              status = self.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, status);
-              return type;
+            self.$RefreshReg$ = (type, id) => {
+              module[type.name] = type;
             };
-          };
 
-          self.$RefreshReg$ = (type, id) => {
-            __module_exports__.push(type.name);
-          };
+            self.$RefreshSig$ = () => {
+              let status = 'begin';
+              let savedType;
+              return (type, key, forceReset, getCustomHooks) => {
+                if (!savedType) savedType = type;
+                status = self.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, status);
+                return type;
+              };
+            };
+          }
 
           ${contents}
 
-          self.$RefreshSig$ = prevRefreshSig;
-          self.$RefreshReg$ = prevRefreshReg;
-
-          if (import.meta.hot && __module_exports__.some(shouldPrefreshBind)) {
-            import.meta.hot.accept(({ module }) => {
+          if (import.meta.hot) {
+            self.$RefreshSig$ = prevRefreshSig;
+            self.$RefreshReg$ = prevRefreshReg;
+            import.meta.hot.accept((m) => {
               try {
-                for (let i in module) {
-                  if (typeof module[i] === 'function') {
-                    if (i in $CurrentModule$) {
-                      // We could add a check here on i.name if it's a component.
-                      compareSignaturesForPrefreshment(
-                        $CurrentModule$[i],
-                        module[i]
-                      );
-                    }
+                for (let i in m) {
+                  if (i === 'default') {
+                    const keyword = m[i].name;
+                    compareSignatures(module[keyword], m[i]);
+                  } else {
+                    compareSignatures(module[i], m[i]);
                   }
                 }
-                $CurrentModule$ = module;
               } catch(e) {
                 import.meta.hot.invalidate();
               }
             });
           }
-        `
+`
 			};
 		}
 	};

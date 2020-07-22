@@ -9,18 +9,18 @@
   },
   "webDependencies": {},
   "dependencies": {
-    "@prefresh/core": "^0.6.1"
+    "@prefresh/core": "^0.7.2"
   },
   "devDependencies": {
     "@prefresh/snowpack": "^0.1.0",
-    "@snowpack/app-scripts-preact": "^0.6.1",
-    "@snowpack/plugin-babel": "^0.6.2",
+    "@snowpack/app-scripts-preact": "^1.6.0-alpha.0",
+    "@snowpack/plugin-babel": "^1.4.0",
     "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/preact": "^1.0.2",
     "jest": "^25.4.0",
-    "preact": "^10.4.1",
+    "preact": "^10.4.6",
     "prettier": "^2.0.0",
     "react-refresh": "^0.8.2",
-    "snowpack": "^2.0.0-rc.12"
+    "snowpack": "^2.6.4"
   }
 }
