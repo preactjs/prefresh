@@ -11,7 +11,7 @@ export function App(props) {
     <div>
       <Logo />
       <p>Count: {count}</p>
-      <button onClick={increment}>Increment</button>
+      <button onClick={increment}>f</button>
       <Test />
     </div>
   )
