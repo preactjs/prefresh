@@ -112,7 +112,10 @@ function replaceComponent(OldType, NewType, resetHookState) {
 self[NAMESPACE] = {
 	getSignature: type => signaturesForType.get(type),
 	register: (type, id) => {
-		// Unused atm
+		signaturesForType.set(type, {
+			getCustomHooks: () => [],
+			type
+		});
 	},
 	replaceComponent,
 	sign,
