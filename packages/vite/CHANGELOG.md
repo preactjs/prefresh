@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 0.10.3
+
+### Patch Changes
+
+- Republish due to failed builds script.
+
 ## 0.10.2
 
 ### Patch Changes
