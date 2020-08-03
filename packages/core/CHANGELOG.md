@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 0.7.3
+
+### Patch Changes
+
+- [`f645aaa`](https://github.com/JoviDeCroock/prefresh/commit/f645aaa8da7ec8b1596ec537059a78a8fc630e00) [#128](https://github.com/JoviDeCroock/prefresh/pull/128) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Perform initial registration in core to avoid type without a signature
+
 ## 0.7.2
 
 ### Patch Changes
