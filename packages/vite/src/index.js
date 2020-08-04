@@ -36,6 +36,9 @@ export default function prefreshPlugin() {
 
               self.$RefreshReg$ = (type, id) => {
                 module[type.name] = type;
+                self.__PREFRESH__.register(type, ${JSON.stringify(
+									path
+								)} + " " + id);
               }
 
               self.$RefreshSig$ = () => {

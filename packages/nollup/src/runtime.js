@@ -50,21 +50,16 @@ export function __$RefreshCheck$__(module) {
 			module.hot.data && module.hot.data.module && module.hot.data.module;
 
 		if (m) {
-			for (let i in moduleExports) {
-				const fn = moduleExports[i];
-				try {
+			try {
+				for (let i in moduleExports) {
+					const fn = moduleExports[i];
 					if (typeof fn === 'function') {
 						const oldExports = getExports(m);
 						if (i in oldExports) {
 							compareSignatures(oldExports[i], fn);
 						}
 					}
-				} catch (e) {
-					self.location.reload();
 				}
-			}
-
-			try {
 				flush();
 			} catch (e) {
 				self.location.reload();

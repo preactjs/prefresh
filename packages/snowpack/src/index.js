@@ -34,6 +34,9 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 
           self.$RefreshReg$ = (type, id) => {
             __module_exports__.push(type.name);
+            self.__PREFRESH__.register(type, ${JSON.stringify(
+							urlPath
+						)} + " " + id);
           };
 
           ${contents}
