@@ -41,6 +41,11 @@ const makeConfig = () => {
 			path: path.resolve(__dirname, 'dist'),
 			publicPath: '/'
 		},
+		resolve: {
+			alias: {
+				preact: path.resolve(__dirname, 'node_modules', 'preact')
+			}
+		},
 		plugins,
 		module: {
 			rules: [
