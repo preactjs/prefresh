@@ -1,4 +1,4 @@
-import { compareSignatures, isComponent } from '@prefresh/utils';
+import { compareSignatures, isComponent, flush } from '@prefresh/utils';
 
 export default function preactRefreshPlugin(config, pluginOptions) {
 	return {
@@ -15,6 +15,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 
           const compareSignaturesForPrefreshment = ${compareSignatures.toString()};
           const shouldPrefreshBind = ${isComponent.toString()}
+          const flushUpdates = ${flush.toString()}
 
           const __module_exports__ = []
 
@@ -54,6 +55,8 @@ export default function preactRefreshPlugin(config, pluginOptions) {
                     }
                   }
                 }
+
+                flushUpdates();
                 $CurrentModule$ = module;
               } catch(e) {
                 import.meta.hot.invalidate();

@@ -27,6 +27,17 @@ module.exports = function() {
 					}
 				}
 			}
+
+			try {
+				__prefresh_utils__.flush();
+			} catch (e) {
+				// Only available in newer webpack versions.
+				if (module.hot.invalidate) {
+					module.hot.invalidate();
+				} else {
+					self.location.reload();
+				}
+			}
 		}
 
 		module.hot.dispose(function(data) {

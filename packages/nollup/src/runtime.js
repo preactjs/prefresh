@@ -1,4 +1,4 @@
-import { isComponent, compareSignatures } from '@prefresh/utils';
+import { isComponent, compareSignatures, flush } from '@prefresh/utils';
 
 // eslint-disable-next-line
 const getExports = m => m.exports || m.__proto__.exports;
@@ -62,6 +62,12 @@ export function __$RefreshCheck$__(module) {
 				} catch (e) {
 					self.location.reload();
 				}
+			}
+
+			try {
+				flush();
+			} catch (e) {
+				self.location.reload();
 			}
 		}
 
