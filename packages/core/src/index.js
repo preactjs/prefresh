@@ -135,6 +135,7 @@ self[NAMESPACE] = {
 				type
 			});
 		}
+
 	},
 	getPendingUpdates: () => pendingUpdates,
 	flush: () => {
