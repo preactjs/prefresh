@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 0.7.4
+
+### Patch Changes
+
+- [`ff43e20`](https://github.com/JoviDeCroock/prefresh/commit/ff43e2029f88fd2bc3103539b7d0a50bde42ce25) [#132](https://github.com/JoviDeCroock/prefresh/pull/132) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix mistake where the signature for custom hooks would always override itself
+
 ## 0.7.3
 
 ### Patch Changes
