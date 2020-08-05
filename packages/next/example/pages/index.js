@@ -5,7 +5,7 @@ const Home = () => {
 	return (
 		<main>
 			<p>{state}</p>
-			<button onClick={() => setState(state + 1)}>Increment</button>
+			<button onClick={() => setState(state + 2)}>Increment</button>
 		</main>
 	);
 };

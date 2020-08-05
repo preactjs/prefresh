@@ -74,7 +74,7 @@ class ReloadPlugin {
 				normalModuleFactory.hooks.afterResolve.tap(
 					this.constructor.name,
 					// Add react-refresh loader to process files that matches specified criteria
-					data => {
+					({ createData: data }) => {
 						if (
 							matcher(data.resource) &&
 							!data.resource.includes('@prefresh') &&

@@ -39,6 +39,7 @@ function sign(type, key, forceReset, getCustomHooks, status) {
 
 function replaceComponent(OldType, NewType, resetHookState) {
 	const vnodes = vnodesForComponent.get(OldType);
+	console.log('replacing', OldType, vnodes, vnodesForComponent);
 	if (!vnodes) return;
 
 	// migrate the list to our new constructor reference
