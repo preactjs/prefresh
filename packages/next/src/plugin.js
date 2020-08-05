@@ -106,7 +106,7 @@ class ReloadPlugin {
 		});
 		providePlugin.apply(compiler);
 
-		switch (webpack.version) {
+		switch (Number(webpack.version[0])) {
 			case 4: {
 				this.webpack4(compiler);
 				break;

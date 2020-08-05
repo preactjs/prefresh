@@ -5,9 +5,6 @@ const Template = require('webpack/lib/Template');
 const NAMESPACE = '__PREFRESH__';
 
 const beforeModule = `
-const prevRefreshReg = self.$RefreshReg$;
-const prevRefreshSig = self.$RefreshSig$;
-
 self.$RefreshSig$ = () => {
   let status = 'begin';
   let savedType;
@@ -17,12 +14,6 @@ self.$RefreshSig$ = () => {
     return type;
   };
 };
-
-self.$RefreshReg$ = (type, id) => {
-  self.${NAMESPACE}.register(type, module.i + ' ' + id);
-};
-
-try {
 `;
 
 class PrefreshRuntimeModule extends RuntimeModule {
@@ -42,7 +33,15 @@ class PrefreshRuntimeModule extends RuntimeModule {
 				`options.factory = ${runtimeTemplate.basicFunction(
 					'moduleObject, moduleExports, webpackRequire',
 					[
+						'const prevRefreshReg = self.$RefreshReg$;',
+						'const prevRefreshSig = self.$RefreshSig$;',
 						beforeModule,
+						`const reg = ${runtimeTemplate.basicFunction('currentModuleId', [
+							'self.$RefreshReg$ = (type, id) => {',
+							`self.${NAMESPACE}.register(type, currentModuleId + ' ' + id);`,
+							'};'
+						])}`,
+						'reg()',
 						'try {',
 						Template.indent(
 							'originalFactory.call(this, moduleObject, moduleExports, webpackRequire);'
