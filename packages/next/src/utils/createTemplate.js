@@ -30,7 +30,7 @@ const afterModule = `
 }
 `;
 
-function createRefreshTemplate(source, chunk, hash, mainTemplate) {
+function createRefreshTemplate(source) {
 	const lines = source.split('\n');
 	const moduleInitializationLineNumber = lines.findIndex(l =>
 		l.includes('modules[moduleId].call(')
