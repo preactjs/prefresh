@@ -1045,7 +1045,7 @@
   resolved "https://registry.yarnpkg.com/@prefresh/core/-/core-0.7.4.tgz#aa61b0049c5d7e78b29db553a465cd7df036aac3"
   integrity sha512-Qbdjg0xH7svik4ErxMLcJUblEoi1qKt/Je3qsHqLdZjtsU4/BWW6oOtz4COAZK5KirpFS56VjBYMLzi6/ueZqQ==
 
-"@prefresh/next@^0.3.0":
+"@prefresh/next@^0.3.2":
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/@prefresh/next/-/next-0.3.2.tgz#92c84865ec0ec285918955ea9e07a7662e780f02"
   integrity sha512-HpsMsqyjVHsn2/U1AWHneBN28rhmPQHTyYRaOzbZ3yz89s2WSpsEdZWkTZM5aVRqh1d2gy9eEhS0lVxjPzYPTg==

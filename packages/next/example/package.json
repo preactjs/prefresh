@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production next start"
   },
   "devDependencies": {
-    "@prefresh/next": "^0.3.0",
+    "@prefresh/next": "^0.3.2",
     "react-refresh": "^0.8.3"
   },
   "resolutions": {
