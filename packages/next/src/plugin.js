@@ -44,60 +44,52 @@ class ReloadPlugin {
 	}
 
 	webpack5(compiler) {
-		class PrefreshRuntimeModule extends webpack.RuntimeModule {
-			constructor() {
-				super(NAME, 5);
-			}
+		const ConstDependency = require('webpack/lib/dependencies/ConstDependency');
 
-			generate() {
-				// This is the part I don't understand anymore.... Yikes
-			}
-		}
+		const RuntimeGlobals = require('webpack/lib/RuntimeGlobals');
+		const PrefreshRuntimeMOdule = require('./utils/Runtime');
 
-		compiler.hooks.normalModuleFactory.tap(NAME, nmf => {
-			nmf.hooks.afterResolve.tap(NAME, data => {
-				if (
-					matcher(data.resource) &&
-					!data.resource.includes('@prefresh') &&
-					!data.resource.includes(path.join(__dirname, './loader')) &&
-					!data.resource.includes(path.join(__dirname, './utils'))
-				) {
-					data.loaders.unshift({
-						loader: require.resolve('./loader'),
-						options: undefined
-					});
+		compiler.hooks.compilation.tap(
+			NAME,
+			(compilation, { normalModuleFactory }) => {
+				if (compilation.compiler !== compiler) {
+					return;
 				}
-			});
-		});
 
-		compiler.hooks.compilation.tap(NAME, compilation => {
-			const hookVars = compilation.mainTemplate.hooks.localVars;
+				// Set template for ConstDependency which is used by parser hooks
+				compilation.dependencyTemplates.set(
+					ConstDependency,
+					new ConstDependency.Template()
+				);
 
-			hookVars.tap(NAME, source =>
-				webpack.Template.asString([
-					source,
-					'',
-					'if (typeof self !== "undefined") {',
-					webpack.Template.indent('self.$RefreshReg$ = function () {};'),
-					webpack.Template.indent('self.$RefreshSig$ = function () {'),
-					webpack.Template.indent(
-						webpack.Template.indent('return function (type) {')
-					),
-					webpack.Template.indent(
-						webpack.Template.indent(webpack.Template.indent('return type;'))
-					),
-					webpack.Template.indent(webpack.Template.indent('};')),
-					webpack.Template.indent('};'),
-					'}'
-				])
-			);
+				compilation.hooks.additionalTreeRuntimeRequirements.tap(
+					this.constructor.name,
+					// Setup react-refresh globals with a Webpack runtime module
+					(chunk, runtimeRequirements) => {
+						runtimeRequirements.add(RuntimeGlobals.interceptModuleExecution);
+						compilation.addRuntimeModule(chunk, new PrefreshRuntimeMOdule());
+					}
+				);
 
-			// @ts-ignore Exists in webpack 5
-			compilation.hooks.additionalTreeRuntimeRequirements.tap(NAME, chunk => {
-				// @ts-ignore Exists in webpack 5
-				compilation.addRuntimeModule(chunk, new PrefreshRuntimeModule());
-			});
-		});
+				normalModuleFactory.hooks.afterResolve.tap(
+					this.constructor.name,
+					// Add react-refresh loader to process files that matches specified criteria
+					data => {
+						if (
+							matcher(data.resource) &&
+							!data.resource.includes('@prefresh') &&
+							!data.resource.includes(path.join(__dirname, './loader')) &&
+							!data.resource.includes(path.join(__dirname, './utils'))
+						) {
+							data.loaders.unshift({
+								loader: require.resolve('./loader'),
+								options: undefined
+							});
+						}
+					}
+				);
+			}
+		);
 	}
 
 	apply(compiler) {
@@ -107,6 +99,13 @@ class ReloadPlugin {
 		)
 			return;
 
+		compiler.options.entry = injectEntry(compiler.options.entry);
+
+		const providePlugin = new webpack.ProvidePlugin({
+			[prefreshUtils]: require.resolve('./utils/prefresh')
+		});
+		providePlugin.apply(compiler);
+
 		switch (webpack.version) {
 			case 4: {
 				this.webpack4(compiler);
@@ -115,6 +114,9 @@ class ReloadPlugin {
 			case 5: {
 				this.webpack5(compiler);
 				break;
+			}
+			default: {
+				throw new Error('Unsupported webpack version.');
 			}
 		}
 	}
