@@ -4,5 +4,4 @@ exports.options = {
 	exclude: /node_modules/
 };
 
-exports.HMR_PLUGIN = 'HotModuleReplacementPlugin';
 exports.NAME = 'PrefreshWebpackPlugin';
