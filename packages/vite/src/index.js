@@ -11,7 +11,7 @@ export default function prefreshPlugin() {
 						isBuild ||
 						process.env.NODE_ENV === 'production' ||
 						path.includes('node_modules') ||
-            path.includes('@modules')
+						path.includes('@modules')
 					)
 						return code;
 
@@ -24,7 +24,7 @@ export default function prefreshPlugin() {
 					return {
 						code: `
             ${'import'} '@prefresh/vite/runtime';
-            ${'import'} { compareSignatures } from '@prefresh/vite/utils';
+            ${'import'} { compareSignatures, flushUpdates } from '@prefresh/vite/utils';
 
             let prevRefreshReg;
             let prevRefreshSig;
@@ -36,6 +36,9 @@ export default function prefreshPlugin() {
 
               self.$RefreshReg$ = (type, id) => {
                 module[type.name] = type;
+                self.__PREFRESH__.register(type, ${JSON.stringify(
+									path
+								)} + " " + id);
               }
 
               self.$RefreshSig$ = () => {
@@ -64,6 +67,8 @@ export default function prefreshPlugin() {
                       compareSignatures(module[i], m[i]);
                     }
                   }
+
+                  flushUpdates();
                 } catch (e) {
                   self.location.reload();
                 }

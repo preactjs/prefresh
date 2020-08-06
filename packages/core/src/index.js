@@ -19,6 +19,9 @@ import { computeKey } from './computeKey';
 import { vnodesForComponent } from './runtime/vnodesForComponent';
 import { signaturesForType } from './runtime/signaturesForType';
 
+let typesById = new Map();
+let pendingUpdates = [];
+
 function sign(type, key, forceReset, getCustomHooks, status) {
 	if (type) {
 		let signature = signaturesForType.get(type);
@@ -45,6 +48,8 @@ function replaceComponent(OldType, NewType, resetHookState) {
 	// migrate the list to our new constructor reference
 	vnodesForComponent.delete(OldType);
 	vnodesForComponent.set(NewType, vnodes);
+
+	pendingUpdates = pendingUpdates.filter(p => p[0] !== OldType);
 
 	vnodes.forEach(vnode => {
 		// update the type in-place to reference the new component
@@ -113,12 +118,28 @@ function replaceComponent(OldType, NewType, resetHookState) {
 self[NAMESPACE] = {
 	getSignature: type => signaturesForType.get(type),
 	register: (type, id) => {
+		if (!id.includes('%exports%')) {
+			if (typesById.has(id)) {
+				const existing = typesById.get(id);
+				if (existing !== type) {
+					pendingUpdates.push([existing, type]);
+					typesById.set(id, type);
+				}
+			} else {
+				typesById.set(id, type);
+			}
+		}
+
 		if (!signaturesForType.has(type)) {
 			signaturesForType.set(type, {
 				getCustomHooks: () => [],
 				type
 			});
 		}
+	},
+	getPendingUpdates: () => pendingUpdates,
+	flush: () => {
+		pendingUpdates = [];
 	},
 	replaceComponent,
 	sign,

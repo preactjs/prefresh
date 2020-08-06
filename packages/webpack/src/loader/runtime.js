@@ -8,8 +8,8 @@ module.exports = function() {
 			module.hot.data && module.hot.data.moduleExports;
 
 		if (previousHotModuleExports) {
-			for (let i in hotModuleExports) {
-				try {
+			try {
+				for (let i in hotModuleExports) {
 					if (typeof hotModuleExports[i] === 'function') {
 						if (i in previousHotModuleExports) {
 							__prefresh_utils__.compareSignatures(
@@ -18,13 +18,14 @@ module.exports = function() {
 							);
 						}
 					}
-				} catch (e) {
-					// Only available in newer webpack versions.
-					if (module.hot.invalidate) {
-						module.hot.invalidate();
-					} else {
-						self.location.reload();
-					}
+				}
+				__prefresh_utils__.flush();
+			} catch (e) {
+				// Only available in newer webpack versions.
+				if (module.hot.invalidate) {
+					module.hot.invalidate();
+				} else {
+					self.location.reload();
 				}
 			}
 		}
