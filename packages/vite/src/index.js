@@ -28,14 +28,12 @@ export default function prefreshPlugin() {
 
             let prevRefreshReg;
             let prevRefreshSig;
-            const module = {};
 
             if (import.meta.hot) {
               prevRefreshReg = self.$RefreshReg$ || (() => {});
               prevRefreshSig = self.$RefreshSig$ || (() => {});
 
               self.$RefreshReg$ = (type, id) => {
-                module[type.name] = type;
                 self.__PREFRESH__.register(type, ${JSON.stringify(
 									path
 								)} + " " + id);
@@ -59,15 +57,6 @@ export default function prefreshPlugin() {
               self.$RefreshSig$ = prevRefreshSig;
               import.meta.hot.accept((m) => {
                 try {
-                  for (let i in m) {
-                    if (i === 'default') {
-                      const keyword = m[i].name;
-                      compareSignatures(module[keyword], m[i]);
-                    } else {
-                      compareSignatures(module[i], m[i]);
-                    }
-                  }
-
                   flushUpdates();
                 } catch (e) {
                   self.location.reload();

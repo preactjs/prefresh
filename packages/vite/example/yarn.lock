@@ -217,24 +217,24 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@prefresh/core@^0.7.2":
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/@prefresh/core/-/core-0.7.2.tgz#982a530cd26b1c466786e92b2abfa03aa8c29f56"
-  integrity sha512-K01Yx3cWY+A4Cb61cJ93swmFS2ZaeCD2uRg8dvaUAw/6oZvtEPrqzueVRjjavkRdwhIuOwqHbCg4scSbo7jE/A==
+"@prefresh/core@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@prefresh/core/-/core-0.8.0.tgz#521db2b29f1d5df2b681f26ec5cfea2e094416b3"
+  integrity sha512-hw7ovlCdS+3LFCs9hczLnWpYR/tL3jCMOX74jjhSCp538meQv5+6mi9BehOjmvizu6pZ/FeXZ5GFvJT9lgixyw==
 
-"@prefresh/utils@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@prefresh/utils/-/utils-0.2.1.tgz#1446082c87f1ef61b0c407f1bd0e79726fb5ab45"
-  integrity sha512-Ju7WHncqUKsaFp7yAFoNSR2jdr0bjqr8AwV06LtpFmwliPe4IDGRcBGhofg+SY9yld3FUF1JWmEoUOfCyCGRhA==
+"@prefresh/utils@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@prefresh/utils/-/utils-0.3.0.tgz#f8795fad4d1b1ead690567b9665f58436bcc8de2"
+  integrity sha512-mxT63g0Ng29cdKGR8ORiEu9qXeKch7e9jGkjI7S8ydTXZEM083kCqPeLRe51HTO04uH5UPTyO7AO2P7oyRNyww==
 
-"@prefresh/vite@0.10.2":
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/@prefresh/vite/-/vite-0.10.2.tgz#fadece27537aed83296b7ce9e1b8f6e9be1fdd53"
-  integrity sha512-7cRu2C9eDJYZyMG8BfEgU6HkHHY+zePuzvuj/nxpJJxdnv65AaRpUBIcxSwnoe3C7/OLOXjEvDtIvLnuaq9d2Q==
+"@prefresh/vite@0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@prefresh/vite/-/vite-0.11.0.tgz#eb71bdcbb860b75163af2245b837639a63134474"
+  integrity sha512-NfTRHdHTjE7kkBTw072Y7pHIj/t6k5zftWxqQM/23QuLIVTZJT0lko4/6EPy+5AaYqCgNgf7tA2tRj3IBCcaNw==
   dependencies:
     "@babel/core" "^7.9.6"
-    "@prefresh/core" "^0.7.2"
-    "@prefresh/utils" "^0.2.1"
+    "@prefresh/core" "^0.8.0"
+    "@prefresh/utils" "^0.3.0"
     react-refresh "^0.8.2"
 
 "@rollup/plugin-commonjs@^14.0.0":
