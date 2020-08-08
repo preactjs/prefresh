@@ -14,7 +14,18 @@ export const compareSignatures = (prev, next) => {
 	}
 };
 
-export const flush = () => {
+const debounce = fn => {
+	let timeout;
+	return () => {
+		if (timeout) clearTimeout(timeout);
+		timeout = setTimeout(() => {
+			fn();
+			timeout = undefined;
+		}, 1000 / 60);
+	};
+};
+
+export const flush = debounce(() => {
 	const pending = [...self.__PREFRESH__.getPendingUpdates()];
 	self.__PREFRESH__.flush();
 
@@ -35,7 +46,7 @@ export const flush = () => {
 			}
 		});
 	}
-};
+});
 
 export const isPreactCitizen = name =>
 	typeof name === 'string' &&
