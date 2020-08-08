@@ -1,6 +1,6 @@
 {
 	"name": "@prefresh/vite",
-	"version": "0.10.3",
+	"version": "0.11.0",
 	"module": "dist/index.mjs",
 	"main": "dist/index.js",
 	"exports": {
@@ -45,8 +45,8 @@
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
 		"@babel/core": "^7.9.6",
-		"@prefresh/core": "^0.7.2",
-		"@prefresh/utils": "^0.2.1",
+		"@prefresh/core": "^0.8.0",
+		"@prefresh/utils": "^0.3.0",
 		"react-refresh": "^0.8.2"
 	},
 	"devDependencies": {
