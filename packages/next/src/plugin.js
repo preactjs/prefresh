@@ -11,13 +11,6 @@ const matcher = webpack.ModuleFilenameHelpers.matchObject.bind(
 
 class ReloadPlugin {
 	webpack4(compiler) {
-		compiler.options.entry = injectEntry(compiler.options.entry);
-
-		const providePlugin = new webpack.ProvidePlugin({
-			[prefreshUtils]: require.resolve('./utils/prefresh')
-		});
-		providePlugin.apply(compiler);
-
 		compiler.hooks.normalModuleFactory.tap(NAME, nmf => {
 			nmf.hooks.afterResolve.tap(NAME, data => {
 				if (
@@ -56,15 +49,13 @@ class ReloadPlugin {
 					return;
 				}
 
-				// Set template for ConstDependency which is used by parser hooks
 				compilation.dependencyTemplates.set(
 					ConstDependency,
 					new ConstDependency.Template()
 				);
 
 				compilation.hooks.additionalTreeRuntimeRequirements.tap(
-					this.constructor.name,
-					// Setup react-refresh globals with a Webpack runtime module
+					NAME,
 					(chunk, runtimeRequirements) => {
 						runtimeRequirements.add(RuntimeGlobals.interceptModuleExecution);
 						compilation.addRuntimeModule(chunk, new PrefreshRuntimeMOdule());
@@ -72,8 +63,7 @@ class ReloadPlugin {
 				);
 
 				normalModuleFactory.hooks.afterResolve.tap(
-					this.constructor.name,
-					// Add react-refresh loader to process files that matches specified criteria
+					NAME,
 					({ createData: data }) => {
 						if (
 							matcher(data.resource) &&
