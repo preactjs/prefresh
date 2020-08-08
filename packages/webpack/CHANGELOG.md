@@ -1,5 +1,19 @@
 # @prefresh/webpack
 
+## 0.9.0
+
+### Minor Changes
+
+- [`32b7a6e`](https://github.com/JoviDeCroock/prefresh/commit/32b7a6e86036efd7363ae599317f3d3770a0a1bb) [#131](https://github.com/JoviDeCroock/prefresh/pull/131) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Handle non-exported components correctly
+
+* [`f149103`](https://github.com/JoviDeCroock/prefresh/commit/f14910348f97d39a16d156879578b9e1b90c7e2a) [#139](https://github.com/JoviDeCroock/prefresh/pull/139) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Support webpack 5
+
+### Patch Changes
+
+- Updated dependencies [[`32b7a6e`](https://github.com/JoviDeCroock/prefresh/commit/32b7a6e86036efd7363ae599317f3d3770a0a1bb)]:
+  - @prefresh/core@0.8.0
+  - @prefresh/utils@0.3.0
+
 ## 0.8.2
 
 ### Patch Changes

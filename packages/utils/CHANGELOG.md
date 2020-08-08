@@ -1,5 +1,11 @@
 # @prefresh/utils
 
+## 0.3.0
+
+### Minor Changes
+
+- [`32b7a6e`](https://github.com/JoviDeCroock/prefresh/commit/32b7a6e86036efd7363ae599317f3d3770a0a1bb) [#131](https://github.com/JoviDeCroock/prefresh/pull/131) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Handle non-exported components correctly
+
 ## 0.2.1
 
 ### Patch Changes
