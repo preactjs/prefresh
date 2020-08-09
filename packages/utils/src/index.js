@@ -19,20 +19,8 @@ export const flush = () => {
 	self.__PREFRESH__.flush();
 
 	if (pending.length > 0) {
-		pending.forEach(([oldType, newType]) => {
-			const prevSignature = self.__PREFRESH__.getSignature(oldType) || {};
-			const nextSignature = self.__PREFRESH__.getSignature(newType) || {};
-
-			if (
-				prevSignature.key !== nextSignature.key ||
-				self.__PREFRESH__.computeKey(prevSignature) !==
-					self.__PREFRESH__.computeKey(nextSignature) ||
-				nextSignature.forceReset
-			) {
-				self.__PREFRESH__.replaceComponent(oldType, newType, true);
-			} else {
-				self.__PREFRESH__.replaceComponent(oldType, newType, false);
-			}
+		pending.forEach(([prev, next]) => {
+			compareSignatures(prev, next);
 		});
 	}
 };
