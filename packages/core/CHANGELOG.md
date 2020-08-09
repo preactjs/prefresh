@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 0.8.1
+
+### Patch Changes
+
+- [`9e34c74`](https://github.com/JoviDeCroock/prefresh/commit/9e34c7408a5307f270681f2c7029180908a5538a) [#143](https://github.com/JoviDeCroock/prefresh/pull/143) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Cleanup utils and core code
+
 ## 0.8.0
 
 ### Minor Changes

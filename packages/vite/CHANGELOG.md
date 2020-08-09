@@ -1,5 +1,17 @@
 # @prefresh/vite
 
+## 1.0.0
+
+### Major Changes
+
+- [`4020961`](https://github.com/JoviDeCroock/prefresh/commit/402096167ad77085d207f705703d7102d5d441a4) [#140](https://github.com/JoviDeCroock/prefresh/pull/140) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Remove the prefresh-check based on exported components and only rely on register passes.
+
+### Patch Changes
+
+- Updated dependencies [[`9e34c74`](https://github.com/JoviDeCroock/prefresh/commit/9e34c7408a5307f270681f2c7029180908a5538a)]:
+  - @prefresh/core@0.8.1
+  - @prefresh/utils@0.3.1
+
 ## 0.11.0
 
 ### Minor Changes
