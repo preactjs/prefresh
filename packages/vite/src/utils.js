@@ -1,3 +1,2 @@
-import { compareSignatures as compare, flush } from '@prefresh/utils';
-export const compareSignatures = compare;
+import { flush } from '@prefresh/utils';
 export const flushUpdates = flush;

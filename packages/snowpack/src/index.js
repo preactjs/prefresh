@@ -1,4 +1,4 @@
-import { compareSignatures, isComponent, flush } from '@prefresh/utils';
+import { isComponent, flush } from '@prefresh/utils';
 
 export default function preactRefreshPlugin(config, pluginOptions) {
 	return {
@@ -10,10 +10,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 			return {
 				result: `
           import '@prefresh/core';
-          import * as $OriginalModule$ from ${JSON.stringify(urlPath)};
-          let $CurrentModule$ = $OriginalModule$;
 
-          const compareSignaturesForPrefreshment = ${compareSignatures.toString()};
           const shouldPrefreshBind = ${isComponent.toString()}
           const flushUpdates = ${flush.toString()}
 
@@ -47,20 +44,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
           if (import.meta.hot && __module_exports__.some(shouldPrefreshBind)) {
             import.meta.hot.accept(({ module }) => {
               try {
-                for (let i in module) {
-                  if (typeof module[i] === 'function') {
-                    if (i in $CurrentModule$) {
-                      // We could add a check here on i.name if it's a component.
-                      compareSignaturesForPrefreshment(
-                        $CurrentModule$[i],
-                        module[i]
-                      );
-                    }
-                  }
-                }
-
                 flushUpdates();
-                $CurrentModule$ = module;
               } catch(e) {
                 import.meta.hot.invalidate();
               }
