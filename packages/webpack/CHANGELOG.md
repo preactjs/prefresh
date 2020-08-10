@@ -12,6 +12,12 @@
   - @prefresh/core@0.8.1
   - @prefresh/utils@0.3.1
 
+## 0.9.1
+
+### Patch changes
+
+- Fix incompatability with html-webpack plugin
+
 ## 0.9.0
 
 ### Minor Changes
