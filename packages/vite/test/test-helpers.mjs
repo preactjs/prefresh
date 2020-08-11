@@ -36,7 +36,7 @@ export async function setupTest(config, fixture, { open = true } = {}) {
 }
 
 export async function waitForVite(instance) {
-	await waitForMessage(instance.output, /running at/);
+  await waitForMessage(instance.output, /running at/);
 	return instance.output.join('\n').match(/https?:\/\/localhost:\d+/g)[0];
 }
 

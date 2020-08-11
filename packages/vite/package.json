@@ -52,6 +52,7 @@
 		"react-refresh": "^0.8.2"
 	},
 	"devDependencies": {
+    "@prefresh/vite": "file:./",
 		"bundt": "^1.0.1",
 		"expect": "^26.3.0",
 		"ncp": "^2.0.0",
