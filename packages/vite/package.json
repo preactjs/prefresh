@@ -31,7 +31,9 @@
 	],
 	"scripts": {
 		"build": "bundt",
-		"lint": "eslint src"
+		"lint": "eslint src",
+		"test:e2e": "node test/run-tests.mjs --no-pdf --no-screenshots --tests-glob '*.test.js'",
+		"test:e2e:debug": "node --inspect test/run-tests.mjs --no-pdf --no-screenshots --tests-glob '*.test.js'"
 	},
 	"repository": {
 		"type": "git",
@@ -51,8 +53,13 @@
 	},
 	"devDependencies": {
 		"bundt": "^1.0.1",
+		"expect": "^26.3.0",
+		"ncp": "^2.0.0",
+		"pentf": "^1.1.2",
 		"preact": "^10.4.1",
-		"vite": "^1.0.0-beta.1"
+		"puppeteer": "^5.2.1",
+		"tmp-promise": "^3.0.2",
+		"vite": "^1.0.0-rc.4"
 	},
 	"peerDependencies": {
 		"preact": "^10.4.0",
