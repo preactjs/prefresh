@@ -36,7 +36,7 @@ export async function setupTest(config, fixture, { open = true } = {}) {
 }
 
 export async function waitForVite(instance) {
-	await waitForMessage(instance.output, /^Listening/);
+	await waitForMessage(instance.output, /running at/);
 	return instance.output.join('\n').match(/https?:\/\/localhost:\d+/g)[0];
 }
 
@@ -48,7 +48,7 @@ export async function openVite(config, instance) {
 }
 
 export async function runVite(config, cwd, ...args) {
-	const bin = path.join(__dirname(import.meta.url), '..', 'node_modules', 'bin', 'vite');
+	const bin = path.join(__dirname(import.meta.url), '..', 'node_modules', '.bin', 'vite');
 	const child = childProcess.spawn('node', ['--experimental-modules', bin, ...args], {
 		cwd
 	});
