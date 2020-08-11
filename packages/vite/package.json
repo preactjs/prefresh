@@ -32,8 +32,8 @@
 	"scripts": {
 		"build": "bundt",
 		"lint": "eslint src",
-		"test:e2e": "node test/run-tests.mjs --no-pdf --no-screenshots --tests-glob '*.test.js'",
-		"test:e2e:debug": "node --inspect test/run-tests.mjs --no-pdf --no-screenshots --tests-glob '*.test.js'"
+		"test:e2e": "node test/run-tests.mjs --no-pdf --no-screenshots --tests-glob '*.test.mjs'",
+		"test:e2e:debug": "node --inspect test/run-tests.mjs --no-pdf --no-screenshots --tests-glob '*.test.mjs'"
 	},
 	"repository": {
 		"type": "git",
