@@ -2,14 +2,14 @@ import { isComponent, flush } from '@prefresh/utils';
 
 export default function preactRefreshPlugin(config, pluginOptions) {
 	return {
-		knownEntrypoints: ['@prefresh/vite/runtime'],
+		knownEntrypoints: ['@prefresh/snowpack/runtime'],
 		async transform({ contents, urlPath, isDev }) {
 			if (!isDev || !urlPath.endsWith('.js') || config.devOptions.hmr === false)
 				return;
 
 			return {
 				result: `
-          ${'import'} '@prefresh/vite/runtime';
+          ${'import'} '@prefresh/snowpack/runtime';
 
           const shouldPrefreshBind = ${isComponent.toString()}
           const flushUpdates = ${flush.toString()}
