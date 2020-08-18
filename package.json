@@ -1,7 +1,5 @@
 {
   "name": "prefresh",
-  "version": "0.4.0",
-  "main": "src/index.js",
   "scripts": {
     "build": "yarn workspace @prefresh/snowpack build && yarn workspace @prefresh/vite build && yarn workspace @prefresh/utils build",
     "lint": "eslint src"
