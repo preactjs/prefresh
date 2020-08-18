@@ -18,6 +18,7 @@ export async function applyDeps() {
   const utils = path.join(packages, 'utils');
   const vite = path.join(packages, 'vite');
   const reactRefresh = path.join(__dirname(import.meta.url), '..', '..', '..', 'node_modules', 'react-refresh');
+  const preact = path.join(__dirname(import.meta.url), '..', '..', '..', 'node_modules', 'preact');
   const nodeModules = path.join(tmp, 'node_modules');
 
   await ncp(core, nodeModules)
@@ -25,6 +26,7 @@ export async function applyDeps() {
   await ncp(vite, nodeModules)
   await ncp(core, nodeModules)
   await ncp(reactRefresh, nodeModules)
+  await ncp(preact, nodeModules)
 }
 
 export async function loadFixture(name, tmp) {
