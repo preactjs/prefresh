@@ -12,8 +12,23 @@ export const __dirname = url => path.dirname(fileURLToPath(url));
 
 const ncp = promisify(ncpCb);
 
+export async function applyDeps() {
+  const packages = path.join(__dirname(import.meta.url), '..', '..');
+  const core = path.join(packages, 'core');
+  const utils = path.join(packages, 'utils');
+  const vite = path.join(packages, 'vite');
+  const reactRefresh = path.join(__dirname(import.meta.url), '..', '..', '..', 'node_modules', 'react-refresh');
+  const nodeModules = path.join(tmp, 'node_modules');
+
+  await ncp(core, nodeModules)
+  await ncp(utils, nodeModules)
+  await ncp(vite, nodeModules)
+  await ncp(core, nodeModules)
+  await ncp(reactRefresh, nodeModules)
+}
+
 export async function loadFixture(name, tmp) {
-	const fixture = path.join(__dirname(import.meta.url), 'fixtures', name);
+  const fixture = path.posix.join(__dirname(import.meta.url), 'fixtures', name);
 	await ncp(fixture, tmp);
 }
 
@@ -24,6 +39,7 @@ export async function setupTest(config, fixture, { open = true } = {}) {
 	if (fixture) {
 		await loadFixture(fixture, cwd.path);
 	}
+  await applyDeps(cwd.path);
 
 	let instance;
 	let page;
