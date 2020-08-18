@@ -13,20 +13,13 @@
 
 ## Best practices
 
-The general best practices are linear to other hot-reloaders and concepts.
-Aim at making your components recognizable, so start them with a capital, if you're
-using custom-hooks start them with "use" and then a capital letter.
-If you're sharing hooks between components don't export them from the same place
-you're exporting components from. This could lead to stale occurences in other components.
+### Recognition
 
-Example:
+We need to be able to recognise your components, this means that components should
+start with a capital letter and hook should start with `use` followed by a capital letter.
+This allows the Babel plugin to effectively recognise these.
 
-/
- - Counter.js --> The Counter component
- - BigCounter.js --> The BigCounter component
- - sharedHooks.js --> useCounter
-
-Note that a component like this
+Do note that a component as seen below is not named.
 
 ```jsx
 export default () => {
@@ -34,8 +27,7 @@ export default () => {
 }
 ```
 
-won't be seen as a component because there is no way for prefresh to derive the name
-of this component. This can be solved by doing:
+Instead do:
 
 ```jsx
 const Refresh = () => {
@@ -47,3 +39,8 @@ export default Refresh;
 
 When you are working with HOC's be sure to lift up the `displayName` so we can
 recognise it as a component.
+
+### Context
+
+We don't have a mechanism in place to hot reload context, that's why our general advice is to move
+these to their own files.
