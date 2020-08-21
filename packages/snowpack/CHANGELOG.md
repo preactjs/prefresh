@@ -1,5 +1,11 @@
 # @prefresh/snowpack
 
+## 1.1.1
+
+### Patch Changes
+
+- [`2e0dfae`](https://github.com/JoviDeCroock/prefresh/commit/2e0dfae0b2061bec58415ba73a506636b84feb4f) [#153](https://github.com/JoviDeCroock/prefresh/pull/153) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix import paths
+
 ## 1.1.0
 
 ### Minor Changes
