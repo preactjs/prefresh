@@ -3,7 +3,7 @@
   "scripts": {
     "build": "yarn workspace @prefresh/snowpack build && yarn workspace @prefresh/vite build && yarn workspace @prefresh/utils build",
     "lint": "eslint src",
-    "test": "yarn workspace @prefrsh/vite test"
+    "test": "yarn workspace @prefresh/vite test"
   },
   "repository": {
     "type": "git",
