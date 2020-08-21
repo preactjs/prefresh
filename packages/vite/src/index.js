@@ -24,7 +24,7 @@ export default function prefreshPlugin() {
 					return {
 						code: `
             ${'import'} '@prefresh/vite/runtime';
-            ${'import'} { compareSignatures, flushUpdates } from '@prefresh/vite/utils';
+            ${'import'} { flushUpdates } from '@prefresh/vite/utils';
 
             let prevRefreshReg;
             let prevRefreshSig;
