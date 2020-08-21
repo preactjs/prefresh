@@ -1,5 +1,11 @@
 # @prefresh/snowpack
 
+## 1.1.0
+
+### Minor Changes
+
+- [`66bec0e`](https://github.com/JoviDeCroock/prefresh/commit/66bec0ebe8570a7e0be04b86cea4cbaf6f882377) [#80](https://github.com/JoviDeCroock/prefresh/pull/80) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Support strict package managers
+
 ## 1.0.0
 
 ### Major Changes

@@ -1,5 +1,11 @@
 # @prefresh/webpack
 
+## 1.0.1
+
+### Patch Changes
+
+- [`d97b03a`](https://github.com/JoviDeCroock/prefresh/commit/d97b03a3ce1f27079f705b9f7322efd48c26980a) [#150](https://github.com/JoviDeCroock/prefresh/pull/150) Thanks [@jayseeare](https://github.com/jayseeare)! - Fix warning about unmet peer dependency webpack.
+
 ## 1.0.0
 
 ### Major Changes
