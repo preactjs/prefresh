@@ -76,7 +76,7 @@ describe('vite', () => {
 	});
 
 	test('hmr', async () => {
-		const button = await page.$('button');
+		const button = await page.$('.button');
 		expect(await getText(button)).toMatch('Increment');
 
 		await updateFile('src/app.jsx', content =>
