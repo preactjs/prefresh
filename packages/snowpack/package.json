@@ -1,8 +1,8 @@
 {
 	"name": "@prefresh/snowpack",
 	"version": "1.1.0",
-	"module": "src/index.js",
-	"main": "dist/src/index.js",
+	"module": "dist/index.mjs",
+	"main": "dist/index.js",
 	"exports": {
 		".": {
 			"import": "./dist/index.mjs",
