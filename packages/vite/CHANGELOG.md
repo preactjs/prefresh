@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 1.0.1
+
+### Patch Changes
+
+- [`b0a28ec`](https://github.com/JoviDeCroock/prefresh/commit/b0a28ec762801716745463bb817e74f78a13a4b9) [#152](https://github.com/JoviDeCroock/prefresh/pull/152) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix crash by removing unused import
+
 ## 1.0.0
 
 ### Major Changes

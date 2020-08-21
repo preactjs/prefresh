@@ -1,6 +1,6 @@
 {
 	"name": "@prefresh/snowpack",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"module": "src/index.js",
 	"main": "dist/src/index.js",
 	"exports": {
@@ -14,8 +14,8 @@
 		},
 		"./package.json": "./package.json",
 		"./": "./"
-  },
-  "modes": {
+	},
+	"modes": {
 		"default": "src/index.js",
 		"runtime": "src/runtime.js"
 	},
