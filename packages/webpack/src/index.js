@@ -30,8 +30,8 @@ class ReloadPlugin {
 		});
 
 		compiler.hooks.compilation.tap(NAME, compilation => {
-			compilation.mainTemplate.hooks.require.tap(NAME, source =>
-				createRefreshTemplate(source)
+			compilation.mainTemplate.hooks.require.tap(NAME, (source, chunk, hash) =>
+				createRefreshTemplate(source, chunk, hash, compilation.mainTemplate)
 			);
 		});
 	}
