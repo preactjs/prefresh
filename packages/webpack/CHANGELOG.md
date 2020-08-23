@@ -1,5 +1,11 @@
 # @prefresh/webpack
 
+## 1.0.2
+
+### Patch Changes
+
+- [`61438f7`](https://github.com/JoviDeCroock/prefresh/commit/61438f7647957411fe57ea732101c6a018eac0eb) [#157](https://github.com/JoviDeCroock/prefresh/pull/157) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix variable passing
+
 ## 1.0.1
 
 ### Patch Changes
