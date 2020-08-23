@@ -31,7 +31,11 @@ const afterModule = `
 `;
 
 function createRefreshTemplate(source, chunk, hash, mainTemplate) {
-	let filename = mainTemplate.outputOptions.filename;
+	let filename;
+	if (mainTemplate) {
+		filename = mainTemplate.outputOptions.filename;
+	}
+
 	if (typeof filename === 'function') {
 		filename = filename({
 			chunk,
