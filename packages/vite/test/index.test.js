@@ -146,6 +146,24 @@ describe('vite', () => {
 		await button.evaluate(x => x.click());
 		expect(await getText(value)).toMatch('3');
 	});
+
+	test('resets hook state', async () => {
+		const value = await page.$('.value');
+		const button = await page.$('.button');
+		expect(await getText(button)).toMatch('Increment');
+		expect(await getText(value)).toMatch('0');
+
+		await button.evaluate(x => x.click());
+
+		expect(await getText(value)).toMatch('1');
+
+		await updateFile('src/app.jsx', content =>
+			content.replace('useCounter(0)', 'useCounter(10)')
+		);
+
+		await wait(1000);
+		expect(await getText(value)).toMatch('10');
+	});
 });
 
 const wait = time =>
