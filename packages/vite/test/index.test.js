@@ -49,11 +49,9 @@ describe('vite', () => {
 	let browserLogs = [];
 
 	beforeAll(async () => {
-		browser = await puppeteer.launch(
-			process.env.CI
-				? { args: ['--no-sandbox', '--disable-setuid-sandbox'] }
-				: {}
-		);
+		browser = await puppeteer.launch({
+			args: ['--no-sandbox', '--disable-setuid-sandbox']
+		});
 		page = await browser.newPage();
 
 		console.log('starting dev server...');
@@ -132,10 +130,7 @@ describe('vite', () => {
 		expect(await getText(value)).toMatch('Count: 3');
 
 		await updateFile('src/useCounter.js', content =>
-			content.replace(
-				'useState(initialValue || 0);',
-				'useState(initialValue || 10);'
-			)
+			content.replace('useState(0);', 'useState(10);')
 		);
 
 		await timeout(500);
