@@ -1,4 +1,4 @@
-import { isComponent, flush } from '@prefresh/utils';
+import { isComponent, flush, compareSignatures } from '@prefresh/utils';
 
 export default function preactRefreshPlugin(config, pluginOptions) {
 	return {
@@ -13,6 +13,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 
           const shouldPrefreshBind = ${isComponent.toString()}
           const flushUpdates = ${flush.toString()}
+          const compareSignatures = ${compareSignatures.toString()}
 
           const __module_exports__ = []
 
