@@ -16,13 +16,12 @@ export default function prefreshPlugin() {
 						return code;
 
 					const result = transform(code, path);
+					const hasReg = /\$RefreshReg\$\(/.test(result.code);
+					const hasSig = /\$RefreshSig\$\(/.test(result.code);
 
-					if (!/\$RefreshReg\$\(/.test(result.code)) {
-						return code;
-					}
+					if (!hasSig && !hasReg) return { code };
 
-					return {
-						code: `
+					const prelude = `
             ${'import'} '@prefresh/vite/runtime';
             ${'import'} { flushUpdates } from '@prefresh/vite/utils';
 
@@ -49,6 +48,21 @@ export default function prefreshPlugin() {
                 };
               };
             }
+            `;
+
+					if (hasSig && !hasReg) {
+						return {
+							code: `
+                ${prelude}
+                ${result.code}
+              `,
+							map: result.map
+						};
+					}
+
+					return {
+						code: `
+            ${prelude}
 
             ${result.code}
 
@@ -74,7 +88,7 @@ export default function prefreshPlugin() {
 
 const transform = (code, path) =>
 	transformSync(code, {
-		plugins: [require('react-refresh/babel')],
+		plugins: [[require('react-refresh/babel'), { skipEnvCheck: true }]],
 		ast: false,
 		sourceMaps: true,
 		sourceFileName: path
