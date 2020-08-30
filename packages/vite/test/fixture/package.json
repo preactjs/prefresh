@@ -2,8 +2,7 @@
   "name": "vite",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+    "dev": "NODE_ENV=development vite"
   },
   "dependencies": {
     "preact": "^10.4.1"
