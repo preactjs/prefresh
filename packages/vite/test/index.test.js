@@ -5,6 +5,10 @@ const puppeteer = require('puppeteer');
 
 const timeout = n => new Promise(r => setTimeout(r, n));
 
+const binPath = path.resolve(
+	__dirname,
+	'../../../node_modules/vite/bin/vite.js'
+);
 const fixtureDir = path.join(__dirname, '../test/fixture');
 const tempDir = path.join(__dirname, '../temp');
 let devServer;
@@ -41,6 +45,12 @@ async function expectByPolling(poll, expected) {
 	}
 }
 
+async function updateFile(file, replacer) {
+	const compPath = path.join(tempDir, file);
+	const content = await fs.readFile(compPath, 'utf-8');
+	await fs.writeFile(compPath, replacer(content));
+}
+
 beforeAll(async () => {
 	try {
 		await fs.remove(tempDir);
@@ -49,8 +59,8 @@ beforeAll(async () => {
 	await fs.copy(fixtureDir, tempDir, {
 		filter: file => !/dist|node_modules/.test(file)
 	});
+
 	await execa('yarn', { cwd: tempDir });
-	await execa('yarn', { cwd: path.join(tempDir, 'optimize-linked') });
 });
 
 afterAll(async () => {
@@ -66,6 +76,9 @@ afterAll(async () => {
 });
 
 describe('vite', () => {
+	let serverLogs = [];
+	let browserLogs = [];
+
 	beforeAll(async () => {
 		browser = await puppeteer.launch(
 			process.env.CI
@@ -73,10 +86,52 @@ describe('vite', () => {
 				: {}
 		);
 		page = await browser.newPage();
+
+		console.log('starting dev server...');
+
+		devServer = execa(binPath, {
+			cwd: tempDir
+		});
+
+		devServer.stderr.on('data', data => {
+			console.log('[SERVER LOG]: ', data.toString());
+			serverLogs.push(data.toString());
+		});
+
+		await new Promise(resolve => {
+			devServer.stdout.on('data', data => {
+				serverLogs.push(data.toString());
+				if (data.toString().match('running')) {
+					console.log('dev server running.');
+					resolve();
+				}
+			});
+		});
+
+		page = await browser.newPage();
+		page.on('console', msg => {
+			console.log('[BROWSER LOG]: ', msg);
+			browserLogs.push(msg.text());
+		});
+		await page.goto('http://localhost:3000');
+	});
+
+	afterAll(async () => {
+		try {
+			await fs.remove(tempDir);
+		} catch (e) {}
+		if (browser) await browser.close();
+		if (devServer) {
+			devServer.kill('SIGTERM', {
+				forceKillAfterTimeout: 2000
+			});
+		}
 	});
 
 	test('hmr', async () => {
 		const button = await page.$('.button');
+		let bodyHTML = await page.evaluate(() => document.body.innerHTML);
+		console.log('BODY', bodyHTML);
 		expect(await getText(button)).toMatch('Increment');
 
 		await updateFile('src/app.jsx', content =>
