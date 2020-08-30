@@ -154,9 +154,3 @@ const wait = time =>
 			res();
 		}, time);
 	});
-
-if (devServer) {
-	devServer.kill('SIGTERM', {
-		forceKillAfterTimeout: 2000
-	});
-}
