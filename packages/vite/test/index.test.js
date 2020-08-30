@@ -102,28 +102,21 @@ describe('vite', () => {
 		expect(await getText(button)).toMatch('Increment');
 
 		await updateFile('src/app.jsx', content =>
-			content.replace('Increment', 'Decrement')
+			content.replace('Increment', 'Increment (+)')
 		);
 
 		await timeout(2500);
-		expect(await getText(button)).toMatch('Decrement');
-
-		await updateFile('src/app.jsx', content =>
-			content.replace('Decrement', 'Increment')
-		);
-		await timeout(2500);
-		expect(await getText(button)).toMatch('Increment');
+		expect(await getText(button)).toMatch('Increment (+)');
 	});
 
 	test('custom hook', async () => {
 		const value = await page.$('.value');
 		const button = await page.$('.button');
-		expect(await getText(button)).toMatch('Increment');
-		expect(await getText(value)).toMatch('0');
+		expect(await getText(value)).toMatch('Count: 0');
 
 		await button.evaluate(x => x.click());
 
-		expect(await getText(value)).toMatch('1');
+		expect(await getText(value)).toMatch('Count: 1');
 
 		await updateFile('src/useCounter.js', content =>
 			content.replace('state + 1', 'state + 2')
@@ -131,24 +124,21 @@ describe('vite', () => {
 
 		await timeout(2500);
 		await button.evaluate(x => x.click());
-		expect(await getText(value)).toMatch('3');
+		expect(await getText(value)).toMatch('Count: 3');
 	});
 
 	test('resets hook state', async () => {
 		const value = await page.$('.value');
-		const button = await page.$('.button');
-		expect(await getText(button)).toMatch('Increment');
-		expect(await getText(value)).toMatch('0');
+		expect(await getText(value)).toMatch('Count: 3');
 
-		await button.evaluate(x => x.click());
-
-		expect(await getText(value)).toMatch('1');
-
-		await updateFile('src/app.jsx', content =>
-			content.replace('useCounter(0)', 'useCounter(10)')
+		await updateFile('src/useCounter.js', content =>
+			content.replace(
+				'useState(initialValue || 0);',
+				'useState(initialValue || 10);'
+			)
 		);
 
 		await timeout(2500);
-		expect(await getText(value)).toMatch('10');
+		expect(await getText(value)).toMatch('Count: 10');
 	});
 });
