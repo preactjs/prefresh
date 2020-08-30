@@ -1,7 +1,7 @@
 import { useCounter } from './useCounter'
 
 function Test() {
-  const [count, increment] = useCounter(0);
+  const [count, increment] = useCounter();
   return (
     <div>
       <p className="value">Count: {count}</p>
