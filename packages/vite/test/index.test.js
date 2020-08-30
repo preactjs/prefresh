@@ -105,7 +105,7 @@ describe('vite', () => {
 			content.replace('Increment', 'Increment (+)')
 		);
 
-		await timeout(2500);
+		await timeout(500);
 		expect(await getText(button)).toMatch('Increment (+)');
 	});
 
@@ -122,7 +122,7 @@ describe('vite', () => {
 			content.replace('state + 1', 'state + 2')
 		);
 
-		await timeout(2500);
+		await timeout(500);
 		await button.evaluate(x => x.click());
 		expect(await getText(value)).toMatch('Count: 3');
 	});
@@ -138,7 +138,7 @@ describe('vite', () => {
 			)
 		);
 
-		await timeout(2500);
+		await timeout(500);
 		expect(await getText(value)).toMatch('Count: 10');
 	});
 });
