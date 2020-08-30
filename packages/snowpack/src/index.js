@@ -5,7 +5,9 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 			if (!isDev || !urlPath.endsWith('.js') || config.devOptions.hmr === false)
 				return;
 
-			if (!/\$RefreshReg\$\(/.test(contents)) {
+      const hasRefeshReg = /\$RefreshReg\$\(/.test(contents)
+      const hasRefeshSig = /\$RefreshSig\$\(/.test(contents)
+			if (!hasRefeshReg && !hasRefeshSig) {
 				return { result: contents };
 			}
 
@@ -38,6 +40,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
           self.$RefreshSig$ = prevRefreshSig;
           self.$RefreshReg$ = prevRefreshReg;
 
+          ${hasRefeshReg && `
           if (import.meta.hot) {
             import.meta.hot.accept(({ module }) => {
               try {
@@ -47,6 +50,8 @@ export default function preactRefreshPlugin(config, pluginOptions) {
               }
             });
           }
+          `}
+
         `
 			};
 		}
