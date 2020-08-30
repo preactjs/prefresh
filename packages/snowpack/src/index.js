@@ -1,5 +1,3 @@
-import { isComponent, flush, compareSignatures } from '@prefresh/utils';
-
 export default function preactRefreshPlugin(config, pluginOptions) {
 	return {
 		knownEntrypoints: ['@prefresh/snowpack/runtime'],
@@ -7,15 +5,14 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 			if (!isDev || !urlPath.endsWith('.js') || config.devOptions.hmr === false)
 				return;
 
+			if (!/\$RefreshReg\$\(/.test(contents)) {
+				return { result: contents };
+			}
+
 			return {
 				result: `
           ${'import'} '@prefresh/snowpack/runtime';
-
-          const shouldPrefreshBind = ${isComponent.toString()}
-          const flushUpdates = ${flush.toString()}
-          const compareSignatures = ${compareSignatures.toString()}
-
-          const __module_exports__ = []
+          ${'import'} { flushUpdates } from '@prefresh/vite/utils';
 
           const prevRefreshReg = self.$RefreshReg$ || (() => {});
           const prevRefreshSig = self.$RefreshSig$ || (() => {});
@@ -31,7 +28,6 @@ export default function preactRefreshPlugin(config, pluginOptions) {
           };
 
           self.$RefreshReg$ = (type, id) => {
-            __module_exports__.push(type.name);
             self.__PREFRESH__.register(type, ${JSON.stringify(
 							urlPath
 						)} + " " + id);
@@ -42,7 +38,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
           self.$RefreshSig$ = prevRefreshSig;
           self.$RefreshReg$ = prevRefreshReg;
 
-          if (import.meta.hot && __module_exports__.some(shouldPrefreshBind)) {
+          if (import.meta.hot) {
             import.meta.hot.accept(({ module }) => {
               try {
                 flushUpdates();

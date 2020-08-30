@@ -11,17 +11,23 @@
 		"./runtime": {
 			"import": "./runtime/index.mjs",
 			"require": "./runtime/index.js"
+    },
+    "./utils": {
+			"import": "./utils/index.mjs",
+			"require": "./utils/index.js"
 		},
 		"./package.json": "./package.json",
 		"./": "./"
 	},
 	"modes": {
 		"default": "src/index.js",
-		"runtime": "src/runtime.js"
+		"runtime": "src/runtime.js",
+		"utils": "src/utils.js"
 	},
 	"files": [
 		"dist",
-		"runtime"
+    "runtime",
+    "utils"
 	],
 	"scripts": {
 		"build": "bundt",
