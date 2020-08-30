@@ -4,7 +4,7 @@ function Test() {
   const [count, increment] = useCounter(0);
   return (
     <div>
-      <p>Count: {count}</p>
+      <p className="value">Count: {count}</p>
       <button className="button" onClick={increment}>Increment</button>
     </div>
   )

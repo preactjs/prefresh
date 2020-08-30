@@ -110,7 +110,7 @@ describe('vite', () => {
 		}
 	});
 
-	test('hmr', async () => {
+	test('basic component', async () => {
 		const button = await page.$('.button');
 		expect(await getText(button)).toMatch('Increment');
 
@@ -120,6 +120,31 @@ describe('vite', () => {
 
 		await wait(1000);
 		expect(await getText(button)).toMatch('Decrement');
+
+		await updateFile('src/app.jsx', content =>
+			content.replace('Decrement', 'Increment')
+		);
+		await wait(1000);
+		expect(await getText(button)).toMatch('Increment');
+	});
+
+	test('custom hook', async () => {
+		const value = await page.$('.value');
+		const button = await page.$('.button');
+		expect(await getText(button)).toMatch('Increment');
+		expect(await getText(value)).toMatch('0');
+
+		await button.evaluate(x => x.click());
+
+		expect(await getText(value)).toMatch('1');
+
+		await updateFile('src/useCounter.js', content =>
+			content.replace('state + 1', 'state + 2')
+		);
+
+		await wait(1000);
+		await button.evaluate(x => x.click());
+		expect(await getText(value)).toMatch('3');
 	});
 });
 

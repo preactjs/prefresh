@@ -32,7 +32,7 @@
 	"scripts": {
 		"build": "bundt",
 		"lint": "eslint src",
-		"test": "jest --clearCache && jest --runInBand --forceExit"
+		"test": "jest --clearCache && jest --runInBand --forceExit --detectOpenHandles"
 	},
 	"repository": {
 		"type": "git",
