@@ -32,19 +32,6 @@ async function updateFile(file, replacer) {
 	await fs.writeFile(compPath, replacer(content));
 }
 
-// async function expectByPolling(poll, expected) {
-// 	const maxTries = 20;
-// 	for (let tries = 0; tries < maxTries; tries++) {
-// 		const actual = (await poll()) || '';
-// 		if (actual.indexOf(expected) > -1 || tries === maxTries - 1) {
-// 			expect(actual).toMatch(expected);
-// 			break;
-// 		} else {
-// 			await timeout(50);
-// 		}
-// 	}
-// }
-
 beforeAll(async () => {
 	try {
 		await fs.remove(tempDir);
@@ -118,13 +105,13 @@ describe('vite', () => {
 			content.replace('Increment', 'Decrement')
 		);
 
-		await wait(1000);
+		await timeout(2500);
 		expect(await getText(button)).toMatch('Decrement');
 
 		await updateFile('src/app.jsx', content =>
 			content.replace('Decrement', 'Increment')
 		);
-		await wait(1000);
+		await timeout(2500);
 		expect(await getText(button)).toMatch('Increment');
 	});
 
@@ -142,7 +129,7 @@ describe('vite', () => {
 			content.replace('state + 1', 'state + 2')
 		);
 
-		await wait(1000);
+		await timeout(2500);
 		await button.evaluate(x => x.click());
 		expect(await getText(value)).toMatch('3');
 	});
@@ -161,14 +148,7 @@ describe('vite', () => {
 			content.replace('useCounter(0)', 'useCounter(10)')
 		);
 
-		await wait(1000);
+		await timeout(2500);
 		expect(await getText(value)).toMatch('10');
 	});
 });
-
-const wait = time =>
-	new Promise(res => {
-		setTimeout(() => {
-			res();
-		}, time);
-	});
