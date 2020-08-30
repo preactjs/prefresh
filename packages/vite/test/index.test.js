@@ -57,18 +57,6 @@ beforeAll(async () => {
 	await execa('yarn', { cwd: tempDir });
 });
 
-afterAll(async () => {
-	try {
-		await fs.remove(tempDir);
-	} catch (e) {}
-	if (browser) await browser.close();
-	if (devServer) {
-		devServer.kill('SIGTERM', {
-			forceKillAfterTimeout: 2000
-		});
-	}
-});
-
 describe('vite', () => {
 	let serverLogs = [];
 	let browserLogs = [];
@@ -124,14 +112,26 @@ describe('vite', () => {
 
 	test('hmr', async () => {
 		const button = await page.$('.button');
-		let bodyHTML = await page.evaluate(() => document.body.innerHTML);
-		console.log('BODY', bodyHTML);
 		expect(await getText(button)).toMatch('Increment');
 
 		await updateFile('src/app.jsx', content =>
 			content.replace('Increment', 'Decrement')
 		);
 
-		await expectByPolling(() => getText(button), 'Decrement');
+		await wait(1000);
+		expect(await getText(button)).toMatch('Decrement');
 	});
 });
+
+const wait = time =>
+	new Promise(res => {
+		setTimeout(() => {
+			res();
+		}, time);
+	});
+
+if (devServer) {
+	devServer.kill('SIGTERM', {
+		forceKillAfterTimeout: 2000
+	});
+}
