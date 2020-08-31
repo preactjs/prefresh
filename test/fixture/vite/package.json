@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
-    "@prefresh/vite": "file:../packages/vite",
+    "@prefresh/vite": "file:../../../packages/vite",
     "react-refresh": "^0.8.2",
     "vite": "latest"
   }

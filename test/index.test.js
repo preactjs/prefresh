@@ -9,8 +9,19 @@ const timeout = n => new Promise(r => setTimeout(r, n));
 
 const integrations = ['vite'];
 
-const getBinPath = integration =>
-	path.resolve(__dirname, `../node_modules/vite/bin/${integration}.js`);
+const bin = {
+	snowpack: path.resolve(
+		__dirname,
+		`../node_modules/snowpack/dist-node/index.bin.js`
+	),
+	vite: path.resolve(__dirname, `../node_modules/vite/bin/vite.js`)
+};
+
+const binArgs = {
+	snowpack: ['dev'],
+	vite: []
+};
+
 const getFixtureDir = integration =>
 	path.join(__dirname, '../test/fixture', integration);
 const tempDir = path.join(__dirname, '../temp');
@@ -58,7 +69,7 @@ integrations.forEach(integration => {
 
 			console.log('starting dev server...');
 
-			devServer = execa(getBinPath(integration), {
+			devServer = execa(bin[integration], binArgs[integration], {
 				cwd: tempDir
 			});
 
