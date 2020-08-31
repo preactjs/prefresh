@@ -1,7 +1,0 @@
-{
-  "extends": "@snowpack/app-scripts-preact",
-  "plugins": [],
-  "devOptions": {
-    "open": "none"
-  }
-}

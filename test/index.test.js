@@ -8,11 +8,9 @@ const timeout = n => new Promise(r => setTimeout(r, n));
 const integrations = ['vite', 'snowpack'];
 
 const bin = {
-	snowpack: path.resolve(
-		__dirname,
-		`../node_modules/snowpack/dist-node/index.bin.js`
-	),
-	vite: path.resolve(__dirname, `../node_modules/vite/bin/vite.js`)
+	snowpack: dir =>
+		path.resolve(dir, `./node_modules/snowpack/dist-node/index.bin.js`),
+	vite: dir => path.resolve(dir, `./node_modules/vite/bin/vite.js`)
 };
 
 const binArgs = {
@@ -72,6 +70,12 @@ integrations.forEach(integration => {
 				filter: file => !/dist|node_modules/.test(file)
 			});
 
+			console.log(
+				'BIN',
+				bin[integration](getTempDir(integration)),
+				binArgs[integration]
+			);
+
 			await execa('yarn', { cwd: getTempDir(integration) });
 
 			browser = await puppeteer.launch({
@@ -81,9 +85,13 @@ integrations.forEach(integration => {
 
 			console.log('starting dev server...');
 
-			devServer = execa(bin[integration], binArgs[integration], {
-				cwd: getTempDir(integration)
-			});
+			devServer = execa(
+				bin[integration](getTempDir(integration)),
+				binArgs[integration],
+				{
+					cwd: getTempDir(integration)
+				}
+			);
 
 			devServer.stderr.on('data', data => {
 				console.log('[SERVER LOG]: ', data.toString());
