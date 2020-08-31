@@ -8,12 +8,8 @@
       }
     ]
   ],
-  "plugins": ["@babel/plugin-syntax-import-meta"],
-  "env": {
-    "development": {
-      "plugins": [
-        "react-refresh/babel"
-      ]
-    }
-  }
+  "plugins": [
+    "@babel/plugin-syntax-import-meta",
+    "react-refresh/babel"
+  ]
 }
