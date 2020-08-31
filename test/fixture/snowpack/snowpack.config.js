@@ -8,11 +8,7 @@ module.exports = {
 		public: '/',
 		src: '/_dist_'
 	},
-	plugins: [
-		'@snowpack/plugin-babel',
-		'@prefresh/snowpack',
-		'@snowpack/plugin-dotenv'
-	],
+	plugins: ['@snowpack/plugin-babel', '@prefresh/snowpack'],
 	devOptions: {
 		open: 'none'
 	}

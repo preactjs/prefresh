@@ -6,12 +6,6 @@
         "pragma": "h",
         "pragmaFrag": "Fragment"
       }
-    ],
-    [
-      "@babel/preset-typescript",
-      {
-        "jsxPragma": "h"
-      }
     ]
   ],
   "plugins": ["@babel/plugin-syntax-import-meta"],
