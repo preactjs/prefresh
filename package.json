@@ -3,7 +3,7 @@
   "scripts": {
     "build": "yarn workspace @prefresh/snowpack build && yarn workspace @prefresh/vite build && yarn workspace @prefresh/utils build",
     "lint": "eslint src",
-    "test": "yarn workspace @prefresh/vite test"
+    "test": "jest --clearCache && jest --runInBand --forceExit --detectOpenHandles"
   },
   "repository": {
     "type": "git",
@@ -28,9 +28,12 @@
     "eslint-config-developit": "^1.1.1",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-react": "7.12.4",
+    "fs-extra": "^9.0.1",
     "husky": "^3.0.9",
+    "jest": "^26.4.2",
     "lint-staged": "^9.4.2",
     "prettier": "^1.18.2",
+    "puppeteer": "^5.2.1",
     "yarn-deduplicate": "^2.0.0"
   },
   "eslintConfig": {
@@ -46,7 +49,8 @@
   },
   "eslintIgnore": [
     "dist",
-    "node_modules"
+    "node_modules",
+    "test"
   ],
   "prettier": {
     "singleQuote": true,
