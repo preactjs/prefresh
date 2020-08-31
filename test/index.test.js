@@ -59,6 +59,13 @@ integrations.forEach(integration => {
 		let serverLogs = [];
 		let browserLogs = [];
 
+		const browserConsoleListener = msg => {
+			console.log('[BROWSER LOG]: ', msg);
+			browserLogs.push(msg.text());
+		};
+
+		let serverConsoleListener;
+
 		jest.setTimeout(100000);
 
 		beforeAll(async () => {
@@ -85,22 +92,18 @@ integrations.forEach(integration => {
 				}
 			);
 
-			devServer.stderr.on('data', data => {
-				console.log('[SERVER LOG]: ', data.toString());
-				serverLogs.push(data.toString());
-			});
-
 			await new Promise(resolve => {
-				devServer.stdout.on('data', data => {
-					if (data.toString().match(goMessage[integration])) resolve();
-				});
+				devServer.stdout.on(
+					'data',
+					(serverConsoleListener = data => {
+						console.log('[SERVER LOG]: ', data.toString());
+						if (data.toString().match(goMessage[integration])) resolve();
+					})
+				);
 			});
 
 			page = await browser.newPage();
-			page.on('console', msg => {
-				console.log('[BROWSER LOG]: ', msg);
-				browserLogs.push(msg.text());
-			});
+			page.on('console', consoleListener);
 
 			await page.goto('http://localhost:' + defaultPort[integration]);
 		});
@@ -109,8 +112,11 @@ integrations.forEach(integration => {
 			try {
 				await fs.remove(getTempDir(integration));
 			} catch (e) {}
+			page.removeListener('console', logRequest);
+
 			if (browser) await browser.close();
 			if (devServer) {
+				devServer.stdout.removeEventListener(serverConsoleListener);
 				devServer.kill('SIGTERM', {
 					forceKillAfterTimeout: 2000
 				});
