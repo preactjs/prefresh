@@ -1,6 +1,6 @@
 {
 	"name": "@prefresh/snowpack",
-	"version": "1.1.2",
+	"version": "1.1.3",
 	"module": "dist/index.mjs",
 	"main": "dist/index.js",
 	"exports": {
@@ -11,8 +11,8 @@
 		"./runtime": {
 			"import": "./runtime/index.mjs",
 			"require": "./runtime/index.js"
-    },
-    "./utils": {
+		},
+		"./utils": {
 			"import": "./utils/index.mjs",
 			"require": "./utils/index.js"
 		},
@@ -26,8 +26,8 @@
 	},
 	"files": [
 		"dist",
-    "runtime",
-    "utils"
+		"runtime",
+		"utils"
 	],
 	"scripts": {
 		"build": "bundt",
