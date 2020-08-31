@@ -1,12 +1,15 @@
 export default function preactRefreshPlugin(config, pluginOptions) {
 	return {
-		knownEntrypoints: ['@prefresh/snowpack/runtime'],
+		knownEntrypoints: [
+			'@prefresh/snowpack/runtime',
+			'@prefresh/snowpack/utils'
+		],
 		async transform({ contents, urlPath, isDev }) {
 			if (!isDev || !urlPath.endsWith('.js') || config.devOptions.hmr === false)
 				return;
 
-      const hasRefeshReg = /\$RefreshReg\$\(/.test(contents)
-      const hasRefeshSig = /\$RefreshSig\$\(/.test(contents)
+			const hasRefeshReg = /\$RefreshReg\$\(/.test(contents);
+			const hasRefeshSig = /\$RefreshSig\$\(/.test(contents);
 			if (!hasRefeshReg && !hasRefeshSig) {
 				return { result: contents };
 			}
@@ -40,7 +43,8 @@ export default function preactRefreshPlugin(config, pluginOptions) {
           self.$RefreshSig$ = prevRefreshSig;
           self.$RefreshReg$ = prevRefreshReg;
 
-          ${hasRefeshReg && `
+          ${hasRefeshReg &&
+						`
           if (import.meta.hot) {
             import.meta.hot.accept(({ module }) => {
               try {
