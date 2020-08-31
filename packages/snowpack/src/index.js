@@ -1,21 +1,23 @@
-import { isComponent, flush, compareSignatures } from '@prefresh/utils';
-
 export default function preactRefreshPlugin(config, pluginOptions) {
 	return {
-		knownEntrypoints: ['@prefresh/snowpack/runtime'],
+		knownEntrypoints: [
+			'@prefresh/snowpack/runtime',
+			'@prefresh/snowpack/utils'
+		],
 		async transform({ contents, urlPath, isDev }) {
 			if (!isDev || !urlPath.endsWith('.js') || config.devOptions.hmr === false)
 				return;
 
+			const hasRefeshReg = /\$RefreshReg\$\(/.test(contents);
+			const hasRefeshSig = /\$RefreshSig\$\(/.test(contents);
+			if (!hasRefeshReg && !hasRefeshSig) {
+				return { result: contents };
+			}
+
 			return {
 				result: `
           ${'import'} '@prefresh/snowpack/runtime';
-
-          const shouldPrefreshBind = ${isComponent.toString()}
-          const flushUpdates = ${flush.toString()}
-          const compareSignatures = ${compareSignatures.toString()}
-
-          const __module_exports__ = []
+          ${'import'} { flushUpdates } from '@prefresh/snowpack/utils';
 
           const prevRefreshReg = self.$RefreshReg$ || (() => {});
           const prevRefreshSig = self.$RefreshSig$ || (() => {});
@@ -31,7 +33,6 @@ export default function preactRefreshPlugin(config, pluginOptions) {
           };
 
           self.$RefreshReg$ = (type, id) => {
-            __module_exports__.push(type.name);
             self.__PREFRESH__.register(type, ${JSON.stringify(
 							urlPath
 						)} + " " + id);
@@ -42,7 +43,9 @@ export default function preactRefreshPlugin(config, pluginOptions) {
           self.$RefreshSig$ = prevRefreshSig;
           self.$RefreshReg$ = prevRefreshReg;
 
-          if (import.meta.hot && __module_exports__.some(shouldPrefreshBind)) {
+          ${hasRefeshReg &&
+						`
+          if (import.meta.hot) {
             import.meta.hot.accept(({ module }) => {
               try {
                 flushUpdates();
@@ -51,6 +54,8 @@ export default function preactRefreshPlugin(config, pluginOptions) {
               }
             });
           }
+          `}
+
         `
 			};
 		}
