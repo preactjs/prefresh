@@ -3,95 +3,120 @@ const path = require('path');
 const execa = require('execa');
 const puppeteer = require('puppeteer');
 
-jest.setTimeout(100000);
-
 const timeout = n => new Promise(r => setTimeout(r, n));
 
-const integrations = ['vite'];
+const integrations = ['vite', 'snowpack'];
 
-const getBinPath = integration =>
-	path.resolve(__dirname, `../node_modules/vite/bin/${integration}.js`);
+const bin = {
+	snowpack: dir =>
+		path.resolve(dir, `./node_modules/snowpack/dist-node/index.bin.js`),
+	vite: dir => path.resolve(dir, `./node_modules/vite/bin/vite.js`)
+};
+
+const binArgs = {
+	snowpack: ['dev'],
+	vite: []
+};
+
+const goMessage = {
+	vite: 'running',
+	snowpack: 'Server started'
+};
+
+const defaultPort = {
+	vite: 3000,
+	snowpack: 8080
+};
+
 const getFixtureDir = integration =>
 	path.join(__dirname, '../test/fixture', integration);
-const tempDir = path.join(__dirname, '../temp');
-let devServer;
-let browser;
-let page;
 
-const getEl = async selectorOrEl => {
-	return typeof selectorOrEl === 'string'
-		? await page.$(selectorOrEl)
-		: selectorOrEl;
-};
-
-const getText = async selectorOrEl => {
-	const el = await getEl(selectorOrEl);
-	return el ? el.evaluate(el => el.textContent) : null;
-};
-
-async function updateFile(file, replacer) {
-	const compPath = path.join(tempDir, file);
-	const content = await fs.readFile(compPath, 'utf-8');
-	await fs.writeFile(compPath, replacer(content));
-}
+const getTempDir = integration => path.join(__dirname, '../temp', integration);
 
 integrations.forEach(integration => {
+	async function updateFile(file, replacer) {
+		const compPath = path.join(getTempDir(integration), file);
+		const content = await fs.readFile(compPath, 'utf-8');
+		await fs.writeFile(compPath, replacer(content));
+	}
+
 	describe(integration, () => {
+		let devServer;
+		let browser;
+		let page;
+
+		const getEl = async selectorOrEl => {
+			return typeof selectorOrEl === 'string'
+				? await page.$(selectorOrEl)
+				: selectorOrEl;
+		};
+
+		const getText = async selectorOrEl => {
+			const el = await getEl(selectorOrEl);
+			return el ? el.evaluate(el => el.textContent) : null;
+		};
+
 		let serverLogs = [];
 		let browserLogs = [];
 
+		const browserConsoleListener = msg => {
+			console.log('[BROWSER LOG]: ', msg);
+			browserLogs.push(msg.text());
+		};
+
+		let serverConsoleListener;
+
+		jest.setTimeout(100000);
+
 		beforeAll(async () => {
 			try {
-				await fs.remove(tempDir);
+				await fs.remove(getTempDir(integration));
 			} catch (e) {}
 
-			await fs.copy(getFixtureDir(integration), tempDir, {
+			await fs.copy(getFixtureDir(integration), getTempDir(integration), {
 				filter: file => !/dist|node_modules/.test(file)
 			});
 
-			await execa('yarn', { cwd: tempDir });
+			await execa('yarn', { cwd: getTempDir(integration) });
 
 			browser = await puppeteer.launch({
 				args: ['--no-sandbox', '--disable-setuid-sandbox']
 			});
 			page = await browser.newPage();
 
-			console.log('starting dev server...');
-
-			devServer = execa(getBinPath(integration), {
-				cwd: tempDir
-			});
-
-			devServer.stderr.on('data', data => {
-				console.log('[SERVER LOG]: ', data.toString());
-				serverLogs.push(data.toString());
-			});
+			devServer = execa(
+				bin[integration](getTempDir(integration)),
+				binArgs[integration],
+				{
+					cwd: getTempDir(integration)
+				}
+			);
 
 			await new Promise(resolve => {
-				devServer.stdout.on('data', data => {
-					serverLogs.push(data.toString());
-					if (data.toString().match('running')) {
-						console.log('dev server running.');
-						resolve();
-					}
-				});
+				devServer.stdout.on(
+					'data',
+					(serverConsoleListener = data => {
+						console.log('[SERVER LOG]: ', data.toString());
+						if (data.toString().match(goMessage[integration])) resolve();
+					})
+				);
 			});
 
 			page = await browser.newPage();
-			page.on('console', msg => {
-				console.log('[BROWSER LOG]: ', msg);
-				browserLogs.push(msg.text());
-			});
+			page.on('console', browserConsoleListener);
 
-			await page.goto('http://localhost:3000');
+			await page.goto('http://localhost:' + defaultPort[integration]);
 		});
 
 		afterAll(async () => {
 			try {
-				await fs.remove(tempDir);
+				await fs.remove(getTempDir(integration));
 			} catch (e) {}
+			page.removeListener('console', browserConsoleListener);
+
 			if (browser) await browser.close();
 			if (devServer) {
+				devServer.stdout.removeEventListener(serverConsoleListener);
 				devServer.kill('SIGTERM', {
 					forceKillAfterTimeout: 2000
 				});
@@ -130,7 +155,6 @@ integrations.forEach(integration => {
 
 		test('resets hook state', async () => {
 			const value = await page.$('.value');
-			expect(await getText(value)).toMatch('Count: 3');
 
 			await updateFile('src/useCounter.js', content =>
 				content.replace('useState(0);', 'useState(10);')

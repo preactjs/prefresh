@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "start": "snowpack dev"
+  },
+  "dependencies": {
+    "preact": "^10.4.6"
+  },
+  "devDependencies": {
+    "@snowpack/app-scripts-preact": "^1.8.5",
+    "@prefresh/snowpack": "file:../../packages/snowpack",
+    "snowpack": "^2.9.0"
+  }
+}

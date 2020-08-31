@@ -1,6 +1,5 @@
 import { h } from 'preact';
 import { useCounter } from './useCounter';
-import './App.css';
 
 function App() {
   const [count, increment, decrement] = useCounter()
