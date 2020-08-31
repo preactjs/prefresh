@@ -1,5 +1,10 @@
 import { signaturesForType } from './runtime/signaturesForType';
 
+/**
+ *
+ * This part has been vendored from "react-refresh"
+ * https://github.com/facebook/react/blob/master/packages/react-refresh/src/ReactFreshRuntime.js#L83
+ */
 export const computeKey = signature => {
 	let fullKey = signature.key;
 	let hooks;
