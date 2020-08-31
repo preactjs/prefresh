@@ -1,28 +1,28 @@
-export const timeout = n => new Promise(r => setTimeout(r, n));
+exports.timeout = n => new Promise(r => setTimeout(r, n));
 
-export const bin = {
+exports.bin = {
 	snowpack: dir =>
 		path.resolve(dir, `./node_modules/snowpack/dist-node/index.bin.js`),
 	vite: dir => path.resolve(dir, `./node_modules/vite/bin/vite.js`)
 };
 
-export const binArgs = {
+exports.binArgs = {
 	snowpack: ['dev'],
 	vite: []
 };
 
-export const goMessage = {
+exports.goMessage = {
 	vite: 'running',
 	snowpack: 'Server started'
 };
 
-export const defaultPort = {
+exports.defaultPort = {
 	vite: 3000,
 	snowpack: 8080
 };
 
-export const getFixtureDir = integration =>
+exports.getFixtureDir = integration =>
 	path.join(__dirname, '../test/fixture', integration);
 
-export const getTempDir = integration =>
+exports.getTempDir = integration =>
 	path.join(__dirname, '../temp', integration);
