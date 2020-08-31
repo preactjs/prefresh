@@ -2,36 +2,17 @@ const fs = require('fs-extra');
 const path = require('path');
 const execa = require('execa');
 const puppeteer = require('puppeteer');
-
-const timeout = n => new Promise(r => setTimeout(r, n));
+const {
+	timeout,
+	bin,
+	binArgs,
+	goMessage,
+	defaultPort,
+	getFixtureDir,
+	getTempDir
+} = require('./utils');
 
 const integrations = ['vite', 'snowpack'];
-
-const bin = {
-	snowpack: dir =>
-		path.resolve(dir, `./node_modules/snowpack/dist-node/index.bin.js`),
-	vite: dir => path.resolve(dir, `./node_modules/vite/bin/vite.js`)
-};
-
-const binArgs = {
-	snowpack: ['dev'],
-	vite: []
-};
-
-const goMessage = {
-	vite: 'running',
-	snowpack: 'Server started'
-};
-
-const defaultPort = {
-	vite: 3000,
-	snowpack: 8080
-};
-
-const getFixtureDir = integration =>
-	path.join(__dirname, '../test/fixture', integration);
-
-const getTempDir = integration => path.join(__dirname, '../temp', integration);
 
 integrations.forEach(integration => {
 	async function updateFile(file, replacer) {
