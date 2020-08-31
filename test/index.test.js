@@ -154,7 +154,6 @@ integrations.forEach(integration => {
 
 		test('resets hook state', async () => {
 			const value = await page.$('.value');
-			expect(await getText(value)).toMatch('Count: 3');
 
 			await updateFile('src/useCounter.js', content =>
 				content.replace('useState(0);', 'useState(10);')
