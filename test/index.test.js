@@ -117,6 +117,7 @@ integrations.forEach(integration => {
 			} catch (e) {}
 			if (browser) await browser.close();
 			if (devServer) {
+				devServer = undefined;
 				devServer.kill('SIGTERM', {
 					forceKillAfterTimeout: 2000
 				});
