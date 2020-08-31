@@ -10,6 +10,6 @@
   ],
   "plugins": [
     "@babel/plugin-syntax-import-meta",
-    "react-refresh/babel"
+    ["react-refresh/babel", { "skipEnvCheck": true }]
   ]
 }
