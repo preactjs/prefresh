@@ -77,8 +77,6 @@ integrations.forEach(integration => {
 			});
 			page = await browser.newPage();
 
-			console.log('starting dev server...');
-
 			devServer = execa(
 				bin[integration](getTempDir(integration)),
 				binArgs[integration],
@@ -94,10 +92,7 @@ integrations.forEach(integration => {
 
 			await new Promise(resolve => {
 				devServer.stdout.on('data', data => {
-					if (data.toString().match(goMessage[integration])) {
-						console.log('dev server running.');
-						resolve();
-					}
+					if (data.toString().match(goMessage[integration])) resolve();
 				});
 			});
 
