@@ -91,6 +91,7 @@ integrations.forEach(integration => {
 			await new Promise(resolve => {
 				devServer.stdout.on('data', data => {
 					console.log(
+						'check',
 						data.toString(),
 						data.toString().match(goMessage[integration])
 					);
