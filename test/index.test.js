@@ -70,12 +70,6 @@ integrations.forEach(integration => {
 				filter: file => !/dist|node_modules/.test(file)
 			});
 
-			console.log(
-				'BIN',
-				bin[integration](getTempDir(integration)),
-				binArgs[integration]
-			);
-
 			await execa('yarn', { cwd: getTempDir(integration) });
 
 			browser = await puppeteer.launch({
@@ -100,11 +94,6 @@ integrations.forEach(integration => {
 
 			await new Promise(resolve => {
 				devServer.stdout.on('data', data => {
-					console.log(
-						'check',
-						data.toString(),
-						data.toString().match(goMessage[integration])
-					);
 					if (data.toString().match(goMessage[integration])) {
 						console.log('dev server running.');
 						resolve();
