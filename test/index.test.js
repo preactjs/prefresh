@@ -32,21 +32,8 @@ const defaultPort = {
 
 const getFixtureDir = integration =>
 	path.join(__dirname, '../test/fixture', integration);
+
 const getTempDir = integration => path.join(__dirname, '../temp', integration);
-let devServer;
-let browser;
-let page;
-
-const getEl = async selectorOrEl => {
-	return typeof selectorOrEl === 'string'
-		? await page.$(selectorOrEl)
-		: selectorOrEl;
-};
-
-const getText = async selectorOrEl => {
-	const el = await getEl(selectorOrEl);
-	return el ? el.evaluate(el => el.textContent) : null;
-};
 
 integrations.forEach(integration => {
 	async function updateFile(file, replacer) {
@@ -56,6 +43,21 @@ integrations.forEach(integration => {
 	}
 
 	describe(integration, () => {
+		let devServer;
+		let browser;
+		let page;
+
+		const getEl = async selectorOrEl => {
+			return typeof selectorOrEl === 'string'
+				? await page.$(selectorOrEl)
+				: selectorOrEl;
+		};
+
+		const getText = async selectorOrEl => {
+			const el = await getEl(selectorOrEl);
+			return el ? el.evaluate(el => el.textContent) : null;
+		};
+
 		let serverLogs = [];
 		let browserLogs = [];
 
@@ -117,7 +119,6 @@ integrations.forEach(integration => {
 			} catch (e) {}
 			if (browser) await browser.close();
 			if (devServer) {
-				devServer = undefined;
 				devServer.kill('SIGTERM', {
 					forceKillAfterTimeout: 2000
 				});
