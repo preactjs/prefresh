@@ -1,3 +1,5 @@
+const path = require('path');
+
 exports.timeout = n => new Promise(r => setTimeout(r, n));
 
 exports.bin = {
