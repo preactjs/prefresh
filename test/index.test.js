@@ -22,6 +22,11 @@ const binArgs = {
 	vite: []
 };
 
+const defaultPort = {
+	vite: 3000,
+	snowpack: 8080
+};
+
 const getFixtureDir = integration =>
 	path.join(__dirname, '../test/fixture', integration);
 const tempDir = path.join(__dirname, '../temp');
@@ -94,7 +99,7 @@ integrations.forEach(integration => {
 				browserLogs.push(msg.text());
 			});
 
-			await page.goto('http://localhost:3000');
+			await page.goto('http://localhost:' + defaultPort[integration]);
 		});
 
 		afterAll(async () => {
