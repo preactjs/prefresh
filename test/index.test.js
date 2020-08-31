@@ -22,7 +22,7 @@ const binArgs = {
 
 const goMessage = {
 	vite: 'running',
-	snowpack: 'complete'
+	snowpack: 'Server started'
 };
 
 const defaultPort = {
