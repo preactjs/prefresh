@@ -14,7 +14,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 			return {
 				result: `
           ${'import'} '@prefresh/snowpack/runtime';
-          ${'import'} { flushUpdates } from '@prefresh/vite/utils';
+          ${'import'} { flushUpdates } from '@prefresh/snowpack/utils';
 
           const prevRefreshReg = self.$RefreshReg$ || (() => {});
           const prevRefreshSig = self.$RefreshSig$ || (() => {});
