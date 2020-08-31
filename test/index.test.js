@@ -103,7 +103,7 @@ integrations.forEach(integration => {
 			});
 
 			page = await browser.newPage();
-			page.on('console', consoleListener);
+			page.on('console', browserConsoleListener);
 
 			await page.goto('http://localhost:' + defaultPort[integration]);
 		});
@@ -112,7 +112,7 @@ integrations.forEach(integration => {
 			try {
 				await fs.remove(getTempDir(integration));
 			} catch (e) {}
-			page.removeListener('console', logRequest);
+			page.removeListener('console', browserConsoleListener);
 
 			if (browser) await browser.close();
 			if (devServer) {
