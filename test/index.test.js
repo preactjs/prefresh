@@ -22,6 +22,11 @@ const binArgs = {
 	vite: []
 };
 
+const goMessage = {
+	vite: 'running',
+	snowpack: 'complete'
+};
+
 const defaultPort = {
 	vite: 3000,
 	snowpack: 8080
@@ -86,7 +91,7 @@ integrations.forEach(integration => {
 			await new Promise(resolve => {
 				devServer.stdout.on('data', data => {
 					serverLogs.push(data.toString());
-					if (data.toString().match('running')) {
+					if (data.toString().match(goMessage[integration])) {
 						console.log('dev server running.');
 						resolve();
 					}
