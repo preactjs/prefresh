@@ -1,5 +1,11 @@
 # @prefresh/snowpack
 
+## 1.1.3
+
+### Patch Changes
+
+- [`c2d345b`](https://github.com/JoviDeCroock/prefresh/commit/c2d345b87139e5e3d5faf25c13ec3d6837a1375e) [#163](https://github.com/JoviDeCroock/prefresh/pull/163) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Improve stability of the utils imports in snowpack
+
 ## 1.1.2
 
 ### Patch Changes

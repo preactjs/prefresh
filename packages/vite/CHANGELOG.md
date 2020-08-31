@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 1.0.2
+
+### Patch Changes
+
+- [`2943da3`](https://github.com/JoviDeCroock/prefresh/commit/2943da358cdf6bad1a64a1a66419f355d9a2b381) [#155](https://github.com/JoviDeCroock/prefresh/pull/155) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix custom-hook signing
+
 ## 1.0.1
 
 ### Patch Changes
