@@ -7,7 +7,7 @@ jest.setTimeout(100000);
 
 const timeout = n => new Promise(r => setTimeout(r, n));
 
-const integrations = ['vite'];
+const integrations = ['vite', 'snowpack'];
 
 const bin = {
 	snowpack: path.resolve(
