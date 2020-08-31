@@ -3,8 +3,6 @@ const path = require('path');
 const execa = require('execa');
 const puppeteer = require('puppeteer');
 
-jest.setTimeout(100000);
-
 const timeout = n => new Promise(r => setTimeout(r, n));
 
 const integrations = ['vite', 'snowpack'];
@@ -34,7 +32,7 @@ const defaultPort = {
 
 const getFixtureDir = integration =>
 	path.join(__dirname, '../test/fixture', integration);
-const tempDir = path.join(__dirname, '../temp');
+const getTempDir = integration => path.join(__dirname, '../temp', integration);
 let devServer;
 let browser;
 let page;
@@ -50,27 +48,29 @@ const getText = async selectorOrEl => {
 	return el ? el.evaluate(el => el.textContent) : null;
 };
 
-async function updateFile(file, replacer) {
-	const compPath = path.join(tempDir, file);
-	const content = await fs.readFile(compPath, 'utf-8');
-	await fs.writeFile(compPath, replacer(content));
-}
-
 integrations.forEach(integration => {
+	async function updateFile(file, replacer) {
+		const compPath = path.join(getTempDir(integration), file);
+		const content = await fs.readFile(compPath, 'utf-8');
+		await fs.writeFile(compPath, replacer(content));
+	}
+
 	describe(integration, () => {
 		let serverLogs = [];
 		let browserLogs = [];
 
+		jest.setTimeout(100000);
+
 		beforeAll(async () => {
 			try {
-				await fs.remove(tempDir);
+				await fs.remove(getTempDir(integration));
 			} catch (e) {}
 
-			await fs.copy(getFixtureDir(integration), tempDir, {
+			await fs.copy(getFixtureDir(integration), getTempDir(integration), {
 				filter: file => !/dist|node_modules/.test(file)
 			});
 
-			await execa('yarn', { cwd: tempDir });
+			await execa('yarn', { cwd: getTempDir(integration) });
 
 			browser = await puppeteer.launch({
 				args: ['--no-sandbox', '--disable-setuid-sandbox']
@@ -80,7 +80,7 @@ integrations.forEach(integration => {
 			console.log('starting dev server...');
 
 			devServer = execa(bin[integration], binArgs[integration], {
-				cwd: tempDir
+				cwd: getTempDir(integration)
 			});
 
 			devServer.stderr.on('data', data => {
@@ -90,7 +90,10 @@ integrations.forEach(integration => {
 
 			await new Promise(resolve => {
 				devServer.stdout.on('data', data => {
-					serverLogs.push(data.toString());
+					console.log(
+						data.toString(),
+						data.toString().match(goMessage[integration])
+					);
 					if (data.toString().match(goMessage[integration])) {
 						console.log('dev server running.');
 						resolve();
@@ -109,7 +112,7 @@ integrations.forEach(integration => {
 
 		afterAll(async () => {
 			try {
-				await fs.remove(tempDir);
+				await fs.remove(getTempDir(integration));
 			} catch (e) {}
 			if (browser) await browser.close();
 			if (devServer) {
