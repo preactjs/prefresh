@@ -145,5 +145,45 @@ integrations.forEach(integration => {
 
 			await expectByPolling(() => getText(value), 'Count: 10');
 		});
+
+		if (integration === 'webpack') {
+			test('works for class-components', async () => {
+				const text = await page.$('.class-text');
+				await expectByPolling(() => getText(text), "I'm a class component");
+
+				await updateFile('src/greeting.jsx', content =>
+					content.replace(
+						"I'm a class component",
+						"I'm a reloaded class component"
+					)
+				);
+				await timeout(1000);
+
+				await expectByPolling(
+					() => getText(text),
+					"I'm a reloaded class component"
+				);
+			});
+
+			test('can change methods', async () => {
+				const text = await page.$('.greeting-text');
+				const button = await page.$('.greeting-button');
+				await expectByPolling(() => getText(text), 'hi');
+
+				await button.click();
+				await expectByPolling(() => getText(text), 'bye');
+
+				await updateFile('src/greeting.jsx', content =>
+					content.replace(
+						"this.setState({ greeting: 'bye' });",
+						"this.setState({ greeting: 'hello' });"
+					)
+				);
+				await timeout(1000);
+
+				await button.click();
+				await expectByPolling(() => getText(text), 'hello');
+			});
+		}
 	});
 });

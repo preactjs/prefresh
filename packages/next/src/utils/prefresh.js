@@ -1,4 +1,4 @@
-const { isComponent, flush } = require('@prefresh/utils');
+const { isComponent, flush, compareSignatures } = require('@prefresh/utils');
 
 // eslint-disable-next-line
 const getExports = m => m.exports || m.__proto__.exports;
@@ -44,5 +44,6 @@ const registerExports = m => {
 module.exports = Object.freeze({
 	getExports,
 	registerExports,
+	compareSignatures,
 	flush
 });
