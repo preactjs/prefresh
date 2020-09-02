@@ -17,6 +17,30 @@ const {
 } = require('./constants');
 
 describe('Prefresh integrations', () => {
+	let devServer, browser, page;
+
+	const browserConsoleListener = msg => {
+		console.log('[BROWSER LOG]: ', msg);
+		browserLogs.push(msg.text());
+	};
+
+	let serverConsoleListener;
+
+	afterEach(async () => {
+		try {
+			await fs.remove(getTempDir(integration));
+		} catch (e) {}
+		page.removeListener('console', browserConsoleListener);
+
+		if (browser) await browser.close();
+		if (devServer) {
+			devServer.stdout.removeEventListener(serverConsoleListener);
+			devServer.kill('SIGTERM', {
+				forceKillAfterTimeout: 2000
+			});
+		}
+	});
+
 	integrations.forEach(integration => {
 		async function updateFile(file, replacer) {
 			const compPath = path.join(getTempDir(integration), file);
@@ -25,10 +49,6 @@ describe('Prefresh integrations', () => {
 		}
 
 		describe(integration, () => {
-			let devServer;
-			let browser;
-			let page;
-
 			const getEl = async selectorOrEl => {
 				return typeof selectorOrEl === 'string'
 					? await page.$(selectorOrEl)
@@ -42,13 +62,6 @@ describe('Prefresh integrations', () => {
 
 			let serverLogs = [];
 			let browserLogs = [];
-
-			const browserConsoleListener = msg => {
-				console.log('[BROWSER LOG]: ', msg);
-				browserLogs.push(msg.text());
-			};
-
-			let serverConsoleListener;
 
 			jest.setTimeout(100000);
 
@@ -98,21 +111,6 @@ describe('Prefresh integrations', () => {
 				page.on('console', browserConsoleListener);
 
 				await page.goto('http://localhost:' + defaultPort[integration]);
-			});
-
-			afterAll(async () => {
-				try {
-					await fs.remove(getTempDir(integration));
-				} catch (e) {}
-				page.removeListener('console', browserConsoleListener);
-
-				if (browser) await browser.close();
-				if (devServer) {
-					devServer.stdout.removeEventListener(serverConsoleListener);
-					devServer.kill('SIGTERM', {
-						forceKillAfterTimeout: 2000
-					});
-				}
 			});
 
 			test('basic component', async () => {
