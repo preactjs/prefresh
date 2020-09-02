@@ -20,25 +20,10 @@ describe('Prefresh integrations', () => {
 	let devServer, browser, page;
 
 	const browserConsoleListener = msg => {
-		console.log('[BROWSER LOG]: ', msg);
+		// console.log('[BROWSER LOG]: ', msg);
 	};
 
 	let serverConsoleListener;
-
-	afterEach(async () => {
-		try {
-			await fs.remove(getTempDir(integration));
-		} catch (e) {}
-		page.removeListener('console', browserConsoleListener);
-
-		if (browser) await browser.close();
-		if (devServer) {
-			// devServer.stdout.removeEventListener(serverConsoleListener);
-			devServer.kill('SIGTERM', {
-				forceKillAfterTimeout: 2000
-			});
-		}
-	});
 
 	integrations.forEach(integration => {
 		async function updateFile(file, replacer) {
@@ -60,6 +45,22 @@ describe('Prefresh integrations', () => {
 			};
 
 			jest.setTimeout(100000);
+
+			afterAll(async () => {
+				console.log('AFTER');
+				try {
+					await fs.remove(getTempDir(integration));
+				} catch (e) {}
+				page.removeListener('console', browserConsoleListener);
+
+				if (browser) await browser.close();
+				if (devServer) {
+					// devServer.stdout.removeEventListener(serverConsoleListener);
+					devServer.kill('SIGTERM', {
+						forceKillAfterTimeout: 2000
+					});
+				}
+			});
 
 			beforeAll(async () => {
 				try {
@@ -89,7 +90,7 @@ describe('Prefresh integrations', () => {
 					devServer.stdout.on(
 						'data',
 						(serverConsoleListener = data => {
-							console.log('[SERVER LOG]: ', data.toString());
+							// console.log('[SERVER LOG]: ', data.toString());
 							if (data.toString().match(goMessage[integration])) resolve();
 						})
 					);
