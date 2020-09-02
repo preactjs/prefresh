@@ -50,7 +50,8 @@
   "eslintIgnore": [
     "dist",
     "node_modules",
-    "test"
+    "test",
+    "temp"
   ],
   "prettier": {
     "singleQuote": true,
