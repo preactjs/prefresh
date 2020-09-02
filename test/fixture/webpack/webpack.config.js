@@ -4,22 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PreactRefreshPlugin = require('@prefresh/webpack');
 
 const makeConfig = () => {
-	const { NODE_ENV } = process.env;
-	const isProduction = NODE_ENV === 'production';
-
-	// Build plugins
-	const plugins = [
-		new HtmlWebpackPlugin(),
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-		})
-	];
-
-	// Return configuration
 	return {
 		mode: 'development',
 		entry: './src/index.js',
-		stats: 'normal',
+		stats: 'minimal',
 		devServer: {
 			contentBase: path.join(__dirname, 'dist'),
 			host: 'localhost',
@@ -36,17 +24,19 @@ const makeConfig = () => {
 			path: path.resolve(__dirname, 'dist'),
 			publicPath: '/'
 		},
-		resolve: {
-			alias: {
-				preact: path.resolve(__dirname, 'node_modules', 'preact')
-			}
-		},
-		plugins,
+		plugins: [
+			new HtmlWebpackPlugin(),
+			new webpack.DefinePlugin({
+				'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+			}),
+			new PreactRefreshPlugin(),
+			new webpack.HotModuleReplacementPlugin()
+		],
 		module: {
 			rules: [
 				{
 					test: /\.js$|\.jsx$/,
-					include: [path.resolve(__dirname, 'src')],
+					exclude: /node_modules/,
 					loader: 'babel-loader'
 				}
 			]
