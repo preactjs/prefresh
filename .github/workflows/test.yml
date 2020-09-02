@@ -22,7 +22,7 @@ jobs:
       - name: Install Dependencies
         run: yarn --frozen-lockfile
       - name: Build packages
-        run: yarn --frozen-lockfile
+        run: yarn build
       - name: Run tests
         run: yarn test
         env:
