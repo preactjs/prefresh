@@ -54,7 +54,6 @@ describe('Prefresh integrations', () => {
 
 				if (browser) await browser.close();
 				if (devServer) {
-					// devServer.stdout.removeEventListener(serverConsoleListener);
 					devServer.kill('SIGTERM', {
 						forceKillAfterTimeout: 2000
 					});
