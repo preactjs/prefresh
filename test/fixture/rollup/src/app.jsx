@@ -1,3 +1,4 @@
+import { h } from 'preact';
 import { useCounter } from './useCounter'
 import { Greeting } from './greeting.jsx';
 
