@@ -2,17 +2,14 @@ const fs = require('fs-extra');
 const path = require('path');
 const execa = require('execa');
 const puppeteer = require('puppeteer');
+const { expectByPolling, getFixtureDir, getTempDir } = require('./utils');
 const {
-	timeout,
 	bin,
 	binArgs,
 	goMessage,
 	defaultPort,
-	getFixtureDir,
-	getTempDir
-} = require('./utils');
-
-const integrations = ['vite', 'snowpack'];
+	integrations
+} = require('./constants');
 
 integrations.forEach(integration => {
 	async function updateFile(file, replacer) {
@@ -106,32 +103,31 @@ integrations.forEach(integration => {
 
 		test('basic component', async () => {
 			const button = await page.$('.button');
-			expect(await getText(button)).toMatch('Increment');
+			await expectByPolling(() => getText(button), 'Increment');
 
 			await updateFile('src/app.jsx', content =>
 				content.replace('Increment', 'Increment (+)')
 			);
 
-			await timeout(500);
-			expect(await getText(button)).toMatch('Increment (+)');
+			await expectByPolling(() => getText(button), 'Increment (+)');
 		});
 
 		test('custom hook', async () => {
 			const value = await page.$('.value');
 			const button = await page.$('.button');
 			expect(await getText(value)).toMatch('Count: 0');
+			await expectByPolling(() => getText(value), 'Count: 0');
 
-			await button.evaluate(x => x.click());
+			await button.click();
 
-			expect(await getText(value)).toMatch('Count: 1');
+			await expectByPolling(() => getText(value), 'Count: 1');
 
 			await updateFile('src/useCounter.js', content =>
 				content.replace('state + 1', 'state + 2')
 			);
 
-			await timeout(500);
-			await button.evaluate(x => x.click());
-			expect(await getText(value)).toMatch('Count: 3');
+			await button.click();
+			await expectByPolling(() => getText(value), 'Count: 3');
 		});
 
 		test('resets hook state', async () => {
@@ -141,8 +137,7 @@ integrations.forEach(integration => {
 				content.replace('useState(0);', 'useState(10);')
 			);
 
-			await timeout(500);
-			expect(await getText(value)).toMatch('Count: 10');
+			await expectByPolling(() => getText(value), 'Count: 10');
 		});
 	});
 });
