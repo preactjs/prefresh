@@ -151,7 +151,7 @@ integrations.forEach(integration => {
 				const text = await page.$('.class-text');
 				await expectByPolling(() => getText(text), "I'm a class component");
 
-				await updateFile('src/class.jsx', content =>
+				await updateFile('src/greeting.jsx', content =>
 					content.replace(
 						"I'm a class component",
 						"I'm a reloaded class component"
@@ -173,7 +173,7 @@ integrations.forEach(integration => {
 				await button.click();
 				await expectByPolling(() => getText(text), 'bye');
 
-				await updateFile('src/class.jsx', content =>
+				await updateFile('src/greeting.jsx', content =>
 					content.replace(
 						"this.setState({ greeting: 'bye' });",
 						"this.setState({ greeting: 'hello' });"

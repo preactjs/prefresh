@@ -1,7 +1,8 @@
 import { h, Component } from 'preact'
 
-export class Class extends Component {
-  constructor() {
+export class Greeting extends Component {
+  constructor(props) {
+    super(props);
     this.state = { greeting: 'hi' };
     this.setGreeting = this.setGreeting.bind(this);
   }
