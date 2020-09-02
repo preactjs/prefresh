@@ -78,7 +78,7 @@ describe('Prefresh integrations', () => {
 				});
 				page = await browser.newPage();
 
-				devServer = execa(
+				devServer = execa.node(
 					bin[integration](getTempDir(integration)),
 					binArgs[integration],
 					{
