@@ -117,6 +117,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
 self[NAMESPACE] = {
 	getSignature: type => signaturesForType.get(type),
 	register: (type, id) => {
+		// TODO: utilize %exports% to register class components.
 		if (!id.includes('%exports%')) {
 			if (typesById.has(id)) {
 				const existing = typesById.get(id);
