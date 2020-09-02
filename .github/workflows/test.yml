@@ -19,8 +19,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '14.x'
-      - run: yarn
-      - run: yarn build
-      - run: yarn test
+      - name: Install Dependencies
+        run: yarn --frozen-lockfile
+      - name: Build packages
+        run: yarn build
+      - name: Run tests
+        run: yarn test
         env:
           CI: false

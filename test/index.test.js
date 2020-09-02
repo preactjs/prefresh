@@ -13,7 +13,8 @@ const {
 	binArgs,
 	goMessage,
 	defaultPort,
-	integrations
+	integrations,
+	supportsClassComponents
 } = require('./constants');
 
 describe('Prefresh integrations', () => {
@@ -149,7 +150,7 @@ describe('Prefresh integrations', () => {
 				await expectByPolling(() => getText(value), 'Count: 10');
 			});
 
-			if (['rollup', 'webpack'].includes(integration)) {
+			if (supportsClassComponents.includes(integration)) {
 				test('works for class-components', async () => {
 					const text = await page.$('.class-text');
 					await expectByPolling(() => getText(text), "I'm a class component");
