@@ -1,5 +1,5 @@
 import { useCounter } from './useCounter'
-import { Greeting } from './greeting';
+import { Greeting } from './greeting.jsx';
 
 function Test() {
   const [count, increment] = useCounter();

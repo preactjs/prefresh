@@ -146,7 +146,7 @@ integrations.forEach(integration => {
 			await expectByPolling(() => getText(value), 'Count: 10');
 		});
 
-		if (integration === 'webpack') {
+		if (['rollup', 'webpack'].includes(integration)) {
 			test('works for class-components', async () => {
 				const text = await page.$('.class-text');
 				await expectByPolling(() => getText(text), "I'm a class component");

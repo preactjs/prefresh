@@ -1,6 +1,6 @@
 const path = require('path');
 
-exports.integrations = ['vite', 'snowpack', 'webpack', 'rollup'];
+exports.integrations = ['rollup'];
 
 exports.bin = {
 	rollup: dir => path.resolve(dir, `./node_modules/nollup/lib/cli.js`),
