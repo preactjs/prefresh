@@ -26,11 +26,8 @@ const makeConfig = () => {
 		},
 		plugins: [
 			new HtmlWebpackPlugin(),
-			new webpack.DefinePlugin({
-				'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-			}),
-			new PreactRefreshPlugin(),
-			new webpack.HotModuleReplacementPlugin()
+			new webpack.HotModuleReplacementPlugin(),
+			new PreactRefreshPlugin()
 		],
 		module: {
 			rules: [
