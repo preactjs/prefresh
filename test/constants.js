@@ -17,7 +17,7 @@ exports.bin = {
 };
 
 exports.binArgs = {
-	next: ['dev -p 4001'],
+	next: ['dev', '-p', '3002'],
 	snowpack: ['dev'],
 	webpack: [],
 	vite: [],
