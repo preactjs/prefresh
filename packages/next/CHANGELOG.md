@@ -1,5 +1,11 @@
 # @prefresh/next
 
+## 1.1.0
+
+### Minor Changes
+
+- [`139db69`](https://github.com/JoviDeCroock/prefresh/commit/139db690d307f60ff5224c240158454762bd66f5) [#170](https://github.com/JoviDeCroock/prefresh/pull/170) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Add class-component support
+
 ## 1.0.0
 
 ### Major Changes
