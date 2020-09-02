@@ -120,7 +120,6 @@ integrations.forEach(integration => {
 		test('custom hook', async () => {
 			const value = await page.$('.value');
 			const button = await page.$('.button');
-			expect(await getText(value)).toMatch('Count: 0');
 			await expectByPolling(() => getText(value), 'Count: 0');
 
 			await button.click();
@@ -130,7 +129,6 @@ integrations.forEach(integration => {
 			await updateFile('src/useCounter.js', content =>
 				content.replace('state + 1', 'state + 2')
 			);
-
 			await timeout(1000);
 
 			await button.click();
