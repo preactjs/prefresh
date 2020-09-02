@@ -67,6 +67,11 @@ integrations.forEach(integration => {
 			});
 			page = await browser.newPage();
 
+			console.log(
+				'calling',
+				bin[integration](getTempDir(integration)),
+				binArgs[integration]
+			);
 			devServer = execa(
 				bin[integration](getTempDir(integration)),
 				binArgs[integration],
@@ -74,6 +79,7 @@ integrations.forEach(integration => {
 					cwd: getTempDir(integration)
 				}
 			);
+			console.log(devServer);
 
 			await new Promise((resolve, reject) => {
 				devServer.stdout.on(
