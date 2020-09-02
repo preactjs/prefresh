@@ -18,7 +18,9 @@ let config = {
 			hot: process.env.NODE_ENV === 'development',
 			file: 'styles.css'
 		}),
-		babel(),
+		babel({
+			babelHelpers: 'bundled'
+		}),
 		node_resolve(),
 		process.env.NODE_ENV === 'development' && prefresh()
 	]
