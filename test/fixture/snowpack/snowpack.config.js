@@ -10,6 +10,7 @@ module.exports = {
 	},
 	plugins: ['@snowpack/plugin-babel', '@prefresh/snowpack'],
 	devOptions: {
-		open: 'none'
+		open: 'none',
+		port: 3004
 	}
 };

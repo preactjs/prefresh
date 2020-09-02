@@ -222,23 +222,23 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@prefresh/core@0.8.0-alpha.0":
-  version "0.8.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@prefresh/core/-/core-0.8.0-alpha.0.tgz#4d5d0f243917eaa16a74bf91c61a667d39c32018"
-  integrity sha512-nBxMXo/Nvfif51QUQ4+YJpzSaihCjzq5BCUx5unn8H5qRZwNVpX5V62TKqcqRtATXlZMhi0qbbqp86VEr3lPBw==
+"@prefresh/core@^0.7.2":
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/@prefresh/core/-/core-0.7.4.tgz#aa61b0049c5d7e78b29db553a465cd7df036aac3"
+  integrity sha512-Qbdjg0xH7svik4ErxMLcJUblEoi1qKt/Je3qsHqLdZjtsU4/BWW6oOtz4COAZK5KirpFS56VjBYMLzi6/ueZqQ==
 
-"@prefresh/nollup@alpha":
-  version "0.7.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@prefresh/nollup/-/nollup-0.7.0-alpha.0.tgz#74c6b0d7ef3dcf674a49b28987e77a0996744fa1"
-  integrity sha512-yJ5SLasvoSK0HHR2J75D0xvr4q4G9YPteTGimrHX9WKNE9qAyKFtveuzNt9RVCRTbhqntxFLxaKa8nhXyJGp1Q==
+"@prefresh/nollup@^0.6.2":
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/@prefresh/nollup/-/nollup-0.6.4.tgz#6acbeebda68efafc932056e10202433300032833"
+  integrity sha512-BLohRikYmw+uH5zYR91cMQ3h++Wt0CfXWbZvGuvumsAuUWKH3lz9ZLKIh7ZOMpq+D6+vjIRUK02I/B9461SEug==
   dependencies:
-    "@prefresh/core" "0.8.0-alpha.0"
-    "@prefresh/utils" "^0.3.0-alpha.0"
+    "@prefresh/core" "^0.7.2"
+    "@prefresh/utils" "^0.2.1"
 
-"@prefresh/utils@^0.3.0-alpha.0":
-  version "0.3.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@prefresh/utils/-/utils-0.3.0-alpha.0.tgz#edc16205cd9f96b836fa645f3e2e2cc01700a53d"
-  integrity sha512-KS/dZGDqwHJ/Cr1oBptOLEgPRPC34rFFjWITNvGOrL7PwhzaXyzPlsz8dnKm3iCeX5G14Ri1i7Q+BhAb3RcQ+w==
+"@prefresh/utils@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@prefresh/utils/-/utils-0.2.1.tgz#1446082c87f1ef61b0c407f1bd0e79726fb5ab45"
+  integrity sha512-Ju7WHncqUKsaFp7yAFoNSR2jdr0bjqr8AwV06LtpFmwliPe4IDGRcBGhofg+SY9yld3FUF1JWmEoUOfCyCGRhA==
 
 "@rollup/plugin-babel@^5.0.3":
   version "5.1.0"

@@ -1,8 +1,9 @@
 const path = require('path');
 
-exports.integrations = ['vite', 'snowpack', 'webpack'];
+exports.integrations = ['vite', 'snowpack', 'rollup', 'webpack'];
 
 exports.bin = {
+	rollup: dir => path.resolve(dir, `./node_modules/nollup/lib/cli.js`),
 	snowpack: dir =>
 		path.resolve(dir, `./node_modules/snowpack/dist-node/index.bin.js`),
 	vite: dir => path.resolve(dir, `./node_modules/vite/bin/vite.js`),
@@ -16,17 +17,20 @@ exports.bin = {
 exports.binArgs = {
 	snowpack: ['dev'],
 	webpack: [],
-	vite: []
+	vite: [],
+	rollup: ['-c', '--hot', '--content-base', 'public', '--port', '3003']
 };
 
 exports.goMessage = {
 	vite: 'running',
 	snowpack: 'Server started',
-	webpack: 'successfully'
+	webpack: 'successfully',
+	rollup: 'Compiled'
 };
 
 exports.defaultPort = {
 	vite: 3000,
 	webpack: 3001,
-	snowpack: 8080
+	rollup: 3003,
+	snowpack: 3004
 };

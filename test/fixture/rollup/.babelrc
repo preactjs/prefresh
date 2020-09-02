@@ -1,0 +1,4 @@
+{
+  "presets": ["babel-preset-preact"],
+  "plugins": [["react-refresh/babel", { "skipEnvCheck": true }]]
+}
