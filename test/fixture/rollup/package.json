@@ -17,8 +17,6 @@
     "nollup": "^0.11.1",
     "react-refresh": "^0.8.3",
     "rollup": "^2.14.0",
-    "rollup-plugin-hot-css": "^0.3.0",
-    "rollup-plugin-static-files": "0.0.1",
     "rollup-plugin-terser": "^6.1.0",
     "shx": "^0.3.2"
   }

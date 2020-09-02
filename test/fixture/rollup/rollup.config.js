@@ -1,6 +1,5 @@
 import node_resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
-import static_files from 'rollup-plugin-static-files';
 import { terser } from 'rollup-plugin-terser';
 import prefresh from '@prefresh/nollup';
 
@@ -17,17 +16,8 @@ let config = {
 			babelHelpers: 'bundled'
 		}),
 		node_resolve(),
-		process.env.NODE_ENV === 'development' && prefresh()
+		prefresh()
 	]
 };
-
-if (process.env.NODE_ENV === 'production') {
-	config.plugins = config.plugins.concat([
-		static_files({
-			include: ['./public']
-		}),
-		terser()
-	]);
-}
 
 export default config;
