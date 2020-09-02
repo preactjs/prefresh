@@ -32,5 +32,5 @@ exports.defaultPort = {
 	vite: 3000,
 	webpack: 3001,
 	rollup: 3003,
-	snowpack: 8080
+	snowpack: 3004
 };
