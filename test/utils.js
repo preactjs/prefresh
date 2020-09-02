@@ -1,6 +1,6 @@
 const path = require('path');
 
-const timeout = n => new Promise(r => setTimeout(r, n));
+exports.timeout = n => new Promise(r => setTimeout(r, n));
 
 exports.getFixtureDir = integration =>
 	path.join(__dirname, '../test/fixture', integration);

@@ -22,7 +22,7 @@ exports.binArgs = {
 exports.goMessage = {
 	vite: 'running',
 	snowpack: 'Server started',
-	webpack: 'successfully'
+	webpack: 'running'
 };
 
 exports.defaultPort = {

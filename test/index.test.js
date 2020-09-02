@@ -2,7 +2,12 @@ const fs = require('fs-extra');
 const path = require('path');
 const execa = require('execa');
 const puppeteer = require('puppeteer');
-const { expectByPolling, getFixtureDir, getTempDir } = require('./utils');
+const {
+	expectByPolling,
+	getFixtureDir,
+	getTempDir,
+	timeout
+} = require('./utils');
 const {
 	bin,
 	binArgs,
@@ -126,6 +131,8 @@ integrations.forEach(integration => {
 				content.replace('state + 1', 'state + 2')
 			);
 
+			await timeout(1000);
+
 			await button.click();
 			await expectByPolling(() => getText(value), 'Count: 3');
 		});
@@ -136,6 +143,7 @@ integrations.forEach(integration => {
 			await updateFile('src/useCounter.js', content =>
 				content.replace('useState(0);', 'useState(10);')
 			);
+			await timeout(1000);
 
 			await expectByPolling(() => getText(value), 'Count: 10');
 		});
