@@ -19,7 +19,7 @@ exports.bin = {
 
 exports.binArgs = {
 	next: [
-		path.resolve(getTempDir('next'), `./node_modules/nollup/lib/cli.js`),
+		path.resolve(getTempDir('next'), `./node_modules/next/dist/node/next`),
 		'dev',
 		'-p',
 		'3002'
