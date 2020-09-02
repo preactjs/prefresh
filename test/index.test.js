@@ -21,7 +21,6 @@ describe('Prefresh integrations', () => {
 
 	const browserConsoleListener = msg => {
 		console.log('[BROWSER LOG]: ', msg);
-		browserLogs.push(msg.text());
 	};
 
 	let serverConsoleListener;
@@ -59,9 +58,6 @@ describe('Prefresh integrations', () => {
 				const el = await getEl(selectorOrEl);
 				return el ? el.evaluate(el => el.textContent) : null;
 			};
-
-			let serverLogs = [];
-			let browserLogs = [];
 
 			jest.setTimeout(100000);
 
