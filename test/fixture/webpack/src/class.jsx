@@ -15,7 +15,7 @@ export class Class extends Component {
       <div>
         <p className="class-text">I'm a class component</p>
         <p className="greeting-text">{this.state.greeting}</p>
-        <button className="greeting-button" onClick={this.setGreeting}>set</p>
+        <button className="greeting-button" onClick={this.setGreeting}>set</button>
       </div>
     )
   }
