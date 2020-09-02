@@ -1,11 +1,10 @@
 const path = require('path');
-const { getTempDir } = require('./utils');
 
 exports.integrations = ['vite', 'snowpack', 'rollup', 'next', 'webpack'];
 exports.supportsClassComponents = ['next', 'webpack', 'nollup'];
 
 exports.bin = {
-	next: () => 'node',
+	next: dir => path.resolve(dir, `./node_modules/next/dist/bin/next`),
 	rollup: dir => path.resolve(dir, `./node_modules/nollup/lib/cli.js`),
 	snowpack: dir =>
 		path.resolve(dir, `./node_modules/snowpack/dist-node/index.bin.js`),
@@ -18,12 +17,7 @@ exports.bin = {
 };
 
 exports.binArgs = {
-	next: [
-		path.resolve(getTempDir('next'), `./node_modules/next/dist/node/next`),
-		'dev',
-		'-p',
-		'3002'
-	],
+	next: ['dev', '-p', '3002'],
 	snowpack: ['dev'],
 	webpack: [],
 	vite: [],
