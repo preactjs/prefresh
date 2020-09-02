@@ -160,7 +160,7 @@ integrations.forEach(integration => {
 				await timeout(1000);
 
 				await expectByPolling(
-					() => getText(value),
+					() => getText(text),
 					"I'm a reloaded class component"
 				);
 			});
