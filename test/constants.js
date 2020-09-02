@@ -18,7 +18,7 @@ exports.binArgs = {
 	snowpack: ['dev'],
 	webpack: [],
 	vite: [],
-	rollup: ['-c --hot --content-base public --port 3003']
+	rollup: ['-c --hot --content-base public']
 };
 
 exports.goMessage = {
@@ -31,6 +31,6 @@ exports.goMessage = {
 exports.defaultPort = {
 	vite: 3000,
 	webpack: 3001,
-	rollup: 3003,
+	rollup: 8080,
 	snowpack: 3004
 };
