@@ -3,7 +3,6 @@ import babel from '@rollup/plugin-babel';
 import static_files from 'rollup-plugin-static-files';
 import { terser } from 'rollup-plugin-terser';
 import prefresh from '@prefresh/nollup';
-import hotcss from 'rollup-plugin-hot-css';
 
 let config = {
 	input: './src/index.jsx',
@@ -14,10 +13,6 @@ let config = {
 		assetFileNames: '[name].[hash][extname]'
 	},
 	plugins: [
-		hotcss({
-			hot: process.env.NODE_ENV === 'development',
-			file: 'styles.css'
-		}),
 		babel({
 			babelHelpers: 'bundled'
 		}),
