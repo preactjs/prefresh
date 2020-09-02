@@ -28,7 +28,8 @@
 	},
 	"devDependencies": {
 		"preact": "^10.4.1",
-		"webpack": "^4.43.0"
+		"webpack": "^4.43.0",
+		"webpack-dev-server": "^3.11.0"
 	},
 	"peerDependencies": {
 		"preact": "^10.4.0",
