@@ -1,6 +1,6 @@
 const path = require('path');
 
-exports.integrations = ['vite', 'snowpack', 'rollup', 'webpack'];
+exports.integrations = ['rollup'];
 
 exports.bin = {
 	rollup: dir => path.resolve(dir, `./node_modules/nollup/lib/cli.js`),
@@ -18,7 +18,7 @@ exports.binArgs = {
 	snowpack: ['dev'],
 	webpack: [],
 	vite: [],
-	rollup: ['-c --hot --content-base public']
+	rollup: ['-c', '--hot', '--content-base', 'public', '--port', '3003']
 };
 
 exports.goMessage = {
@@ -31,6 +31,6 @@ exports.goMessage = {
 exports.defaultPort = {
 	vite: 3000,
 	webpack: 3001,
-	rollup: 8080,
+	rollup: 3003,
 	snowpack: 3004
 };

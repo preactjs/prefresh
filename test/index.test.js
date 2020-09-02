@@ -20,7 +20,7 @@ describe('Prefresh integrations', () => {
 	let devServer, browser, page;
 
 	const browserConsoleListener = msg => {
-		// console.log('[BROWSER LOG]: ', msg);
+		console.log('[BROWSER LOG]: ', msg);
 	};
 
 	let serverConsoleListener;
@@ -47,7 +47,6 @@ describe('Prefresh integrations', () => {
 			jest.setTimeout(100000);
 
 			afterAll(async () => {
-				console.log('AFTER');
 				try {
 					await fs.remove(getTempDir(integration));
 				} catch (e) {}
@@ -63,6 +62,7 @@ describe('Prefresh integrations', () => {
 			});
 
 			beforeAll(async () => {
+				await timeout(2000);
 				try {
 					await fs.remove(getTempDir(integration));
 				} catch (e) {}
@@ -90,7 +90,7 @@ describe('Prefresh integrations', () => {
 					devServer.stdout.on(
 						'data',
 						(serverConsoleListener = data => {
-							// console.log('[SERVER LOG]: ', data.toString());
+							console.log('[SERVER LOG]: ', data.toString());
 							if (data.toString().match(goMessage[integration])) resolve();
 						})
 					);
@@ -116,6 +116,7 @@ describe('Prefresh integrations', () => {
 				await updateFile('src/app.jsx', content =>
 					content.replace('Increment', 'Increment (+)')
 				);
+				await timeout(1000);
 
 				await expectByPolling(() => getText(button), 'Increment (+)');
 			});
