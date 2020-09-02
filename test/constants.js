@@ -28,7 +28,7 @@ exports.goMessage = {
 	vite: 'running',
 	snowpack: 'Server started',
 	webpack: 'successfully',
-	rollup: 'Compiled'
+	rollup: 'Compiled',
 	next: 'successfully'
 };
 
