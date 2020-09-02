@@ -2,16 +2,11 @@
   "name": "nextjs-preact-demo",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next",
-    "build": "next build && next export -o build",
-    "start": "NODE_ENV=production next start"
+    "dev": "next"
   },
   "devDependencies": {
-    "@prefresh/next": "^1.0.0",
+    "@prefresh/next": "file:../../packages/next",
     "react-refresh": "^0.8.3"
-  },
-  "resolutions": {
-    "webpack": "^5.0.0-beta.22"
   },
   "dependencies": {
     "next": "^9.5.0",
