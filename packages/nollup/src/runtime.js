@@ -52,7 +52,7 @@ export function __$RefreshCheck$__(module) {
 		if (m) {
 			try {
 				for (let i in moduleExports) {
-					if (typeof fn === 'function') {
+					if (typeof moduleExports[i] === 'function') {
 						const oldExports = getExports(m);
 						if (i in oldExports) {
 							if (
