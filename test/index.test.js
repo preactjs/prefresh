@@ -75,12 +75,20 @@ integrations.forEach(integration => {
 				}
 			);
 
-			await new Promise(resolve => {
+			await new Promise((resolve, reject) => {
 				devServer.stdout.on(
 					'data',
 					(serverConsoleListener = data => {
 						console.log('[SERVER LOG]: ', data.toString());
 						if (data.toString().match(goMessage[integration])) resolve();
+					})
+				);
+
+				devServer.stderr.on(
+					'data',
+					(serverConsoleListener = data => {
+						console.log('[ERROR SERVER LOG]: ', data.toString());
+						reject(data.toString());
 					})
 				);
 			});
