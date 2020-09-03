@@ -1,15 +1,19 @@
 # Prefresh
 
-- [core](https://github.com/JoviDeCroock/prefresh/tree/main/packages/core)
+Fast-refresh for Preact!
+
+## Integrations
+
 - [CRA with prefresh](https://github.com/jeremy-coleman/prefresh-cra)
 - [gatsby](https://www.gatsbyjs.org/packages/gatsby-plugin-preact/)
 - [next](https://github.com/JoviDeCroock/prefresh/tree/main/packages/next)
 - [nollup](https://github.com/JoviDeCroock/prefresh/tree/main/packages/nollup)
 - [preact-cli (--refresh)](https://github.com/preactjs/preact-cli#preact-watch)
 - [snowpack](https://github.com/JoviDeCroock/prefresh/tree/main/packages/snowpack)
-- [utils](https://github.com/JoviDeCroock/prefresh/tree/main/packages/utils)
 - [vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite)
 - [webpack](https://github.com/JoviDeCroock/prefresh/tree/main/packages/webpack)
+
+[Writing your own integration](https://dev.to/jovidecroock/prefresh-fast-refresh-for-preact-26kg)
 
 ## Best practices
 
