@@ -121,6 +121,21 @@ describe('Prefresh integrations', () => {
 				await expectByPolling(() => getText(button), 'Increment (+)');
 			});
 
+			test('add export', async () => {
+				const button = await page.$('.button');
+				await expectByPolling(() => getText(button), 'Increment (+)');
+
+				await updateFile('src/app.jsx', content => {
+					let newContent = content;
+					newContent.replace('function Test', 'export function Test');
+					newContent.replace('Increment (+)', 'Increment');
+					return newContent;
+				});
+				await timeout(1000);
+
+				await expectByPolling(() => getText(button), 'Increment (+)');
+			});
+
 			test('custom hook', async () => {
 				const value = await page.$('.value');
 				const button = await page.$('.button');
