@@ -3,7 +3,9 @@
   "scripts": {
     "build": "yarn workspace @prefresh/snowpack build && yarn workspace @prefresh/vite build && yarn workspace @prefresh/utils build",
     "lint": "eslint src",
-    "test": "jest --clearCache && jest --runInBand --forceExit --detectOpenHandles"
+    "test": "jest --clearCache && jest --runInBand --forceExit --detectOpenHandles",
+    "changeset": "changeset",
+    "publish-packages": "yarn build && changeset publish"
   },
   "repository": {
     "type": "git",
