@@ -1,0 +1,5 @@
+---
+'@prefresh/snowpack': patch
+---
+
+Republish
