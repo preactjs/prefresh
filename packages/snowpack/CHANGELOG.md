@@ -1,5 +1,11 @@
 # @prefresh/snowpack
 
+## 1.1.4
+
+### Patch Changes
+
+- [`d9c7954`](https://github.com/JoviDeCroock/prefresh/commit/d9c7954db4bc4edde6571822f67899e73de4c018) [#175](https://github.com/JoviDeCroock/prefresh/pull/175) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Republish
+
 ## 1.1.3
 
 ### Patch Changes
