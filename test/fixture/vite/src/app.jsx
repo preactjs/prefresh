@@ -1,4 +1,6 @@
 import { useCounter } from './useCounter'
+import { StoreProvider } from './context';
+import { Products } from './products'
 
 function Test() {
   const [count, increment] = useCounter();
@@ -14,6 +16,9 @@ export function App(props) {
   return (
     <div>
       <Test />
+      <StoreProvider>
+        <Products />
+      </StoreProvider>
     </div>
   )
 }

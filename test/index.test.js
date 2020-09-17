@@ -14,7 +14,8 @@ const {
 	goMessage,
 	defaultPort,
 	integrations,
-	supportsClassComponents
+	supportsClassComponents,
+	supportsCustomBabelPlugin
 } = require('./constants');
 
 describe('Prefresh integrations', () => {
@@ -202,6 +203,35 @@ describe('Prefresh integrations', () => {
 
 					await button.click();
 					await expectByPolling(() => getText(text), 'hello');
+				});
+			}
+
+			if (supportsCustomBabelPlugin.includes(integration)) {
+				test('can hot reload context', async () => {
+					const appleDiv = await page.$('.apple-div');
+					await expectByPolling(() => getText(appleDiv), 'apple');
+
+					await appleDiv.click();
+					const storeItems = await page.$('.store-items');
+					await expectByPolling(
+						() => storeItems.firstChild.textContent,
+						'apple'
+					);
+
+					await updateFile('src/context.jsx', content =>
+						content.replace(
+							'if (!items.includes(id)) setItems([...items, id])',
+							'setItems([...items, id])'
+						)
+					);
+					await timeout(1000);
+
+					const peachDiv = await page.$('.peach-div');
+					await peachDiv.click();
+					await expectByPolling(
+						() => storeItems.secondChild.textContent,
+						'peach'
+					);
 				});
 			}
 		});
