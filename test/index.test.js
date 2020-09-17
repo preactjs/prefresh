@@ -14,8 +14,7 @@ const {
 	goMessage,
 	defaultPort,
 	integrations,
-	supportsClassComponents,
-	supportsCustomBabelPlugin
+	supportsClassComponents
 } = require('./constants');
 
 describe('Prefresh integrations', () => {
