@@ -7,7 +7,7 @@
   },
   "devDependencies": {
     "@snowpack/app-scripts-preact": "^1.8.5",
-    "@prefresh/babel-plugin-prefresh": "file:../../packages/babel",
+    "@prefresh/plugin-prefresh": "file:../../packages/babel",
     "@prefresh/snowpack": "file:../../packages/snowpack",
     "snowpack": "^2.9.0"
   }

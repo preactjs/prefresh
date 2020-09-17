@@ -3,7 +3,7 @@
     "dev": "next"
   },
   "devDependencies": {
-    "@prefresh/babel-plugin-prefresh": "file:../../packages/babel",
+    "@prefresh/plugin-prefresh": "file:../../packages/babel",
     "@prefresh/next": "file:../../packages/next",
     "react-refresh": "^0.8.3"
   },
