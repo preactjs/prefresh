@@ -1,0 +1,30 @@
+{
+	"name": "@prefresh/babel-plugin",
+	"version": "0.1.0",
+	"main": "dist/src/index.js",
+	"exports": {
+		".": {
+			"import": "./src/index.js",
+			"require": "./dist/src/index.js"
+		},
+		"./package.json": "./package.json",
+		"./": "./"
+	},
+	"scripts": {
+		"build": "cjyes src/index.js",
+		"lint": "eslint src"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/JoviDeCroock/prefresh.git",
+		"directory": "packages/babel"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/JoviDeCroock/prefresh/issues"
+	},
+	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
+	"devDependencies": {
+		"cjyes": "0.3.1"
+	}
+}

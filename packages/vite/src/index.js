@@ -88,7 +88,7 @@ export default function prefreshPlugin() {
 
 const transform = (code, path) =>
 	transformSync(code, {
-		plugins: [[require('react-refresh/babel'), { skipEnvCheck: true }]],
+		plugins: [[require('@prefresh/babel-plugin'), { skipEnvCheck: true }]],
 		ast: false,
 		sourceMaps: true,
 		sourceFileName: path

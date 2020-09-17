@@ -1,6 +1,8 @@
 import { h } from 'preact';
 import { useCounter } from './useCounter'
 import { Greeting } from './greeting.jsx';
+import { StoreProvider } from './context.jsx';
+import { Products } from './products.jsx';
 
 function Test() {
   const [count, increment] = useCounter();
@@ -17,6 +19,9 @@ export function App(props) {
     <div>
       <Test />
       <Greeting />
+      <StoreProvider>
+        <Products />
+      </StoreProvider>
     </div>
   )
 }

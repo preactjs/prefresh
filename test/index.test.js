@@ -204,6 +204,30 @@ describe('Prefresh integrations', () => {
 					await expectByPolling(() => getText(text), 'hello');
 				});
 			}
+
+			test('can hot reload context', async () => {
+				const appleDiv = await page.$('.apple-div');
+				await expectByPolling(() => getText(appleDiv), 'apple');
+
+				await appleDiv.click();
+				const storeItems = await page.$('.store-items');
+				let children = await storeItems.$$('li');
+				expect(await getText(children[0])).toMatch('apple');
+
+				await updateFile('src/context.jsx', content =>
+					content.replace(
+						'if (!items.includes(id)) setItems([...items, id])',
+						'setItems([...items, id])'
+					)
+				);
+				await timeout(1000);
+
+				const peachDiv = await page.$('.peach-div');
+				await peachDiv.click();
+				children = await storeItems.$$('li');
+				expect(await getText(children[0])).toMatch('apple');
+				expect(await getText(children[1])).toMatch('peach');
+			});
 		});
 	});
 });

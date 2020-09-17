@@ -33,7 +33,7 @@ const config = {
 If you're using `preact/hooks` you'll need something extra to ensure we can handle
 changes in hooks well.
 
-You'll need to add `react-refresh/babel` to your `babel-configuration` to make this
+You'll need to add `@prefresh/babel-plugin` to your `babel-configuration` to make this
 work together.
 
 ## Best practices

@@ -15,7 +15,7 @@ yarn add @prefresh/snowpack
 
 You'll have to add a few things, as seen in [this PR](https://github.com/pikapkg/create-snowpack-app/pull/54/files).
 
-Add `react-refresh/babel` to your `babel.config.json`:
+Add `@prefresh/babel-plugin` to your `babel.config.json`:
 
 ```json
 {
@@ -23,7 +23,7 @@ Add `react-refresh/babel` to your `babel.config.json`:
     "pragma": "h",
     "pragmaFrag": "Fragment"
   }], "@babel/preset-typescript"],
-  "plugins": ["@babel/plugin-syntax-import-meta", "react-refresh/babel"]
+  "plugins": ["@babel/plugin-syntax-import-meta", "@prefresh/babel-plugin"]
 }
 ```
 

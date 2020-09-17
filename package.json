@@ -1,7 +1,7 @@
 {
   "name": "prefresh",
   "scripts": {
-    "build": "yarn workspace @prefresh/snowpack build && yarn workspace @prefresh/vite build && yarn workspace @prefresh/utils build",
+    "build": "yarn workspace @prefresh/snowpack build && yarn workspace @prefresh/vite build && yarn workspace @prefresh/utils build && yarn workspace @prefresh/babel-plugin build",
     "lint": "eslint src",
     "test": "jest --clearCache && jest --runInBand --forceExit --detectOpenHandles",
     "changeset": "changeset",
