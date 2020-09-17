@@ -213,10 +213,7 @@ describe('Prefresh integrations', () => {
 
 					await appleDiv.click();
 					const storeItems = await page.$('.store-items');
-					await expectByPolling(
-						() => storeItems.firstChild.textContent,
-						'apple'
-					);
+					expect(storeItems.firstChild.textContent).toMatch('apple');
 
 					await updateFile('src/context.jsx', content =>
 						content.replace(
@@ -228,10 +225,7 @@ describe('Prefresh integrations', () => {
 
 					const peachDiv = await page.$('.peach-div');
 					await peachDiv.click();
-					await expectByPolling(
-						() => storeItems.secondChild.textContent,
-						'peach'
-					);
+					expect(storeItems.secondChild.textContent).toMatch('apple');
 				});
 			}
 		});
