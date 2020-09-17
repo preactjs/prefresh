@@ -1,4 +1,4 @@
 module.exports = {
 	presets: ['babel-preset-preact'],
-	plugins: [['@prefresh/plugin-babel', { skipEnvCheck: true }]]
+	plugins: [['@prefresh/babel-plugin', { skipEnvCheck: true }]]
 };

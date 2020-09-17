@@ -10,6 +10,6 @@ module.exports = {
 	],
 	plugins: [
 		'@babel/plugin-syntax-import-meta',
-		['@prefresh/plugin-babel', { skipEnvCheck: true }]
+		['@prefresh/babel-plugin', { skipEnvCheck: true }]
 	]
 };

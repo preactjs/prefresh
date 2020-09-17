@@ -22,7 +22,7 @@ module.exports = (nextConfig = {}) => {
 					defaultLoaders.babel.options.plugins || []
 				);
 				defaultLoaders.babel.options.plugins.push([
-					require.resolve('@prefresh/plugin-babel'),
+					require.resolve('@prefresh/babel-plugin'),
 					{ skipEnvCheck: true }
 				]);
 				defaultLoaders.babel.options.hasReactRefresh = false;
