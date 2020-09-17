@@ -428,9 +428,10 @@ export default function(babel, opts = {}) {
 				let counter = (contexts.get(id) || -1) + 1;
 				contexts.set(id, counter);
 				if (counter) id += counter;
+				id = '_' + state.get('filehash') + id;
 				path.skip();
 				path.replaceWith(
-					createContextTemplate({
+					TPL({
 						CREATECONTEXT: path.get('callee').node,
 						IDENT: t.identifier(id),
 						VALUE: t.clone(path.node.arguments[0])
@@ -756,6 +757,7 @@ export default function(babel, opts = {}) {
 			},
 			Program: {
 				enter(path, state) {
+					state.set('filehash', hash(path.hub.file.opts.filename || 'unnamed'));
 					state.set('contexts', new Map());
 					// This is a separate early visitor because we need to collect Hook calls
 					// and "const [foo, setFoo] = ..." signatures before the destructuring
