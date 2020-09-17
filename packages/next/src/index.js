@@ -21,9 +21,10 @@ module.exports = (nextConfig = {}) => {
 				defaultLoaders.babel.options.plugins = [].slice.call(
 					defaultLoaders.babel.options.plugins || []
 				);
-				defaultLoaders.babel.options.plugins.push(
-					require.resolve('@prefresh/plugin-babel')
-				);
+				defaultLoaders.babel.options.plugins.push([
+					require.resolve('@prefresh/plugin-babel'),
+					{ skipEnvCheck: true }
+				]);
 				defaultLoaders.babel.options.hasReactRefresh = false;
 
 				// This prevents the overrides above from affecting the server:
