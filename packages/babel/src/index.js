@@ -431,7 +431,7 @@ export default function(babel, opts = {}) {
 				id = '_' + state.get('filehash') + id;
 				path.skip();
 				path.replaceWith(
-					TPL({
+					createContextTemplate({
 						CREATECONTEXT: path.get('callee').node,
 						IDENT: t.identifier(id),
 						VALUE: t.clone(path.node.arguments[0])

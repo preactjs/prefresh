@@ -1,7 +1,10 @@
 module.exports = {
 	presets: ['@babel/preset-env'],
 	plugins: [
-		[require.resolve('@prefresh/babel'), { skipEnvCheck: true }],
+		[
+			require.resolve('@prefresh/babel-plugin-prefresh'),
+			{ skipEnvCheck: true }
+		],
 		[
 			'@babel/plugin-transform-react-jsx',
 			{
