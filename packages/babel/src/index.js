@@ -409,6 +409,10 @@ export default function(babel, opts = {}) {
 		{ placeholderPattern: /^[A-Z]+$/ }
 	);
 
+	const emptyTemplate = template(`
+    Object.assign(CREATECONTEXT.IDENT || (CREATECONTEXT.IDENT=CREATECONTEXT()));
+  `);
+
 	return {
 		visitor: {
 			CallExpression(path, state) {
@@ -430,13 +434,22 @@ export default function(babel, opts = {}) {
 				if (counter) id += counter;
 				id = '_' + state.get('filehash') + id;
 				path.skip();
-				path.replaceWith(
-					createContextTemplate({
-						CREATECONTEXT: path.get('callee').node,
-						IDENT: t.identifier(id),
-						VALUE: t.clone(path.node.arguments[0])
-					})
-				);
+				if (path.node.arguments[0]) {
+					path.replaceWith(
+						createContextTemplate({
+							CREATECONTEXT: path.get('callee').node,
+							IDENT: t.identifier(id),
+							VALUE: t.clone(path.node.arguments[0])
+						})
+					);
+				} else {
+					path.replaceWith(
+						emptyTemplate({
+							CREATECONTEXT: path.get('callee').node,
+							IDENT: t.identifier(id)
+						})
+					);
+				}
 			},
 			ExportDefaultDeclaration(path) {
 				const node = path.node;
