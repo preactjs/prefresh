@@ -400,23 +400,40 @@ export default function(babel, opts = {}) {
 		}
 	};
 
-	const createContextTemplate = template`
-    CREATE_CONTEXT.IDENT || (CREATE_CONTEXT.IDENT = INIT)
-  `;
+	const createContextTemplate = template(
+		`
+    Object.assign(CREATECONTEXT.IDENT || (CREATECONTEXT.IDENT=CREATECONTEXT(), {__:VALUE}));
+  `,
+		{ placeholderPattern: /^[A-Z]+$/ }
+	);
 
 	return {
 		visitor: {
 			CallExpression(path, state) {
-				if (path.get('callee').referencesImport('preact', 'createContext')) {
-					path.skip();
-					path.replaceWith(
-						createContextTemplate({
-							CREATE_CONTEXT: path.get('callee').node,
-							IDENT: t.identifier('_' + hash(path.getSource())),
-							INIT: path.node
-						})
-					);
+				if (!path.get('callee').referencesImport('preact', 'createContext'))
+					return;
+				let id = '';
+				if (t.isVariableDeclarator(path.parentPath)) {
+					id += '$' + path.parent.id.name;
+				} else if (t.isAssignmentExpression(path.parentPath)) {
+					if (t.isIdentifier(path.parent.left)) {
+						id += '_' + path.parent.left.name;
+					} else {
+						id += '_' + hash(path.parentPath.get('left').getSource());
+					}
 				}
+				const contexts = state.get('contexts');
+				let counter = (contexts.get(id) || -1) + 1;
+				contexts.set(id, counter);
+				if (counter) id += counter;
+				path.skip();
+				path.replaceWith(
+					createContextTemplate({
+						CREATECONTEXT: path.get('callee').node,
+						IDENT: t.identifier(id),
+						VALUE: t.clone(path.node.arguments[0])
+					})
+				);
 			},
 			ExportDefaultDeclaration(path) {
 				const node = path.node;
@@ -736,7 +753,8 @@ export default function(babel, opts = {}) {
 				);
 			},
 			Program: {
-				enter(path) {
+				enter(path, state) {
+					state.set('contexts', new Map());
 					// This is a separate early visitor because we need to collect Hook calls
 					// and "const [foo, setFoo] = ..." signatures before the destructuring
 					// transform mangles them. This extra traversal is not ideal for perf,
