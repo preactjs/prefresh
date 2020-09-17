@@ -46,6 +46,7 @@
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
 		"@babel/core": "^7.9.6",
+		"@prefresh/babel": "^0.1.0",
 		"@prefresh/core": "^0.8.1",
 		"@prefresh/utils": "^0.3.1",
 		"react-refresh": "^0.8.2"

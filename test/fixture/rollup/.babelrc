@@ -1,4 +1,4 @@
 {
   "presets": ["babel-preset-preact"],
-  "plugins": [["react-refresh/babel", { "skipEnvCheck": true }]]
+  "plugins": [["@prefresh/babel", { "skipEnvCheck": true }]]
 }
