@@ -217,6 +217,8 @@ export default function(babel, opts = {}) {
 
 	function isBuiltinHook(hookName) {
 		switch (hookName) {
+			case 'useErrorBoundary':
+			case 'React.useErrorBoundary':
 			case 'useState':
 			case 'React.useState':
 			case 'useReducer':
