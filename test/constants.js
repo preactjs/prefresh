@@ -2,7 +2,6 @@ const path = require('path');
 
 exports.integrations = ['vite', 'snowpack', 'rollup', 'next', 'webpack'];
 exports.supportsClassComponents = ['next', 'webpack', 'rollup'];
-exports.supportsCustomBabelPlugin = ['vite', 'snowpack', 'rollup', 'webpack'];
 
 exports.bin = {
 	next: dir => path.resolve(dir, `./node_modules/next/dist/bin/next`),
