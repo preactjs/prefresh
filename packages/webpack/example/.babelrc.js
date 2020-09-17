@@ -1,7 +1,7 @@
 module.exports = {
 	presets: ['@babel/preset-env'],
 	plugins: [
-		'react-refresh/babel',
+		'@prefresh/babel-plugin',
 		[
 			'@babel/plugin-transform-react-jsx',
 			{

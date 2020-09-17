@@ -5,7 +5,7 @@
     "lint": "eslint src",
     "test": "jest --clearCache && jest --runInBand --forceExit --detectOpenHandles",
     "changeset": "changeset",
-    "publish-packages": "yarn build && changeset publish"
+    "release": "yarn build && changeset publish"
   },
   "repository": {
     "type": "git",
