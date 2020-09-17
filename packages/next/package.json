@@ -23,6 +23,7 @@
 	},
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
+    "@prefresh/babel-plugin": "0.1.0",
 		"@prefresh/core": "^0.8.1",
 		"@prefresh/utils": "^0.3.1"
 	},

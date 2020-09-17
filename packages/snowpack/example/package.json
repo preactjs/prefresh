@@ -12,6 +12,7 @@
     "@prefresh/core": "^0.6.1"
   },
   "devDependencies": {
+    "@prefresh/babel-plugin": "0.1.0",
     "@prefresh/snowpack": "^1.1.0",
     "@snowpack/app-scripts-preact": "^0.6.1",
     "@snowpack/plugin-babel": "^0.6.2",
@@ -20,7 +21,6 @@
     "jest": "^25.4.0",
     "preact": "^10.4.1",
     "prettier": "^2.0.0",
-    "react-refresh": "^0.8.2",
     "snowpack": "^2.0.0"
   }
 }
