@@ -1,4 +1,4 @@
 module.exports = {
 	presets: ['next/babel'],
-	plugins: [require.resolve('@prefresh/plugin-prefresh')]
+	plugins: [require.resolve('@prefresh/plugin-babel')]
 };

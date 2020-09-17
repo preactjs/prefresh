@@ -7,7 +7,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
-    "@prefresh/plugin-prefresh": "file:../../packages/babel",
+    "@prefresh/plugin-babel": "file:../../packages/babel",
     "@prefresh/vite": "file:../../packages/vite",
     "react-refresh": "^0.8.2",
     "vite": "latest"

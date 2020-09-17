@@ -1,5 +1,5 @@
 {
-	"name": "@prefresh/plugin-prefresh",
+	"name": "@prefresh/plugin-babel",
 	"version": "0.1.0",
 	"main": "dist/src/index.js",
 	"exports": {
