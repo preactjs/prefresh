@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useContext } from 'preact/hooks';
-import { StoreContext } from './context';
+import { StoreContext } from './context.jsx';
 
 const products = ['apple', 'peach']
 
