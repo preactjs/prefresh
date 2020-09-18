@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 1.1.0
+
+### Minor Changes
+
+- [`515735b`](https://github.com/JoviDeCroock/prefresh/commit/515735bace3d59d240ade7c8f5d0aee2be35e801) [#179](https://github.com/JoviDeCroock/prefresh/pull/179) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - use @prefresh/babel-plugin instead of react-refresh/babel to support context HMR
+
 ## 1.0.2
 
 ### Patch Changes
