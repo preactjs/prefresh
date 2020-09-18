@@ -152,6 +152,13 @@ describe('Prefresh integrations', () => {
 
 				await button.click();
 				await expectByPolling(() => getText(value), 'Count: 3');
+
+				await updateFile('src/useCounter.js', content =>
+					content.replace('useState(0)', 'useState(10)')
+				);
+				await timeout(1000);
+
+				await expectByPolling(() => getText(value), 'Count: 10');
 			});
 
 			test('resets hook state', async () => {
