@@ -1,19 +1,19 @@
-# Prefresh-vite
+# Prefresh-wmr
 
-[![npm version](https://badgen.net/npm/v/@prefresh/vite)](https://www.npmjs.com/package/@prefresh/vite)
+[![npm version](https://badgen.net/npm/v/@prefresh/wmr)](https://www.npmjs.com/package/@prefresh/wmr)
 
 ## Setup
 
 ```
-npm i -s @prefresh/vite
+npm i -s @prefresh/wmr
 ## OR
-yarn add @prefresh/vite
+yarn add @prefresh/wmr
 ```
 
-Then add it to your `vite.config.js` config:
+Then add it to your `wmr.config.js` config:
 
 ```js
-import prefresh from '@prefresh/vite';
+import prefresh from '@prefresh/wmr';
 
 export default {
 	plugins: [prefresh()]
@@ -48,8 +48,3 @@ export default Refresh;
 
 When you are working with HOC's be sure to lift up the `displayName` so we can
 recognise it as a component.
-
-### Context
-
-We don't have a mechanism in place to hot reload context, that's why our general advice is to move
-these to their own files.

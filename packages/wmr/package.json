@@ -26,6 +26,7 @@
 	"dependencies": {
 		"@babel/core": "^7.9.6",
 		"@prefresh/core": "^0.8.1",
+    "@prefresh/plugin-babel": "^0.1.0",
 		"@prefresh/utils": "^0.3.1",
 		"magic-string": "^0.25.7",
 		"react-refresh": "^0.8.2"

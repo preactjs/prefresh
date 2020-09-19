@@ -70,7 +70,7 @@ export default function wmrPlugin() {
 
 const transform = (code, path) =>
 	transformSync(code, {
-		plugins: [require('react-refresh/babel')],
+		plugins: [require('@prefresh/babel-plugin')],
 		ast: false,
 		sourceMaps: true,
 		sourceFileName: path
