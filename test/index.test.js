@@ -141,7 +141,7 @@ describe('Prefresh integrations', () => {
 				await fs.writeFile(
 					compPath,
 					`import { h } from 'preact';
-export const Tester = () => <p className="test">Test</p>;`
+export const Tester = () => <p className="tester">Test</p>;`
 				);
 
 				await updateFile('src/app.jsx', content => {
@@ -169,20 +169,46 @@ export const Tester = () => <p className="test">Test</p>;`
             )
           }`
 					);
+
+					newContent.replace(
+						`export function App(props) {
+              return (
+                <div>
+                  <Test />
+                  <Greeting />
+                  <StoreProvider>
+                    <Products />
+                  </StoreProvider>
+                </div>
+              )
+            }`,
+						`export function App(props) {
+              return (
+                <div>
+                  <Tester />
+                  <Test />
+                  <Greeting />
+                  <StoreProvider>
+                    <Products />
+                  </StoreProvider>
+                </div>
+              )
+            }`
+					);
 					return newContent;
 				});
-				await timeout(1000);
+				await timeout(2000);
 
-				const testText = await page.$('.test');
+				const testText = await page.$('.tester');
 				await expectByPolling(() => getText(testText), 'Test');
 
 				await updateFile('src/test.jsx', c =>
 					c.replace(
-						'<p className="test">Test</p>',
-						'<p className="test">Test2</p>'
+						'<p className="tester">Test</p>',
+						'<p className="tester">Test2</p>'
 					)
 				);
-				await timeout(1000);
+				await timeout(2000);
 
 				await expectByPolling(() => getText(testText), 'Test2');
 			});
