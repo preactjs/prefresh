@@ -140,11 +140,8 @@ describe('Prefresh integrations', () => {
 				const compPath = path.join(getTempDir(integration), 'src/test.jsx');
 				await fs.writeFile(
 					compPath,
-					`
-          import { h } from 'preact';
-
-          export const Tester = () => <p className="test">Test</p>
-          `
+					`import { h } from 'preact';
+export const Tester = () => <p className="test">Test</p>;`
 				);
 
 				await updateFile('src/app.jsx', content => {
