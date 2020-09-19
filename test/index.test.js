@@ -146,55 +146,11 @@ export const Tester = () => <p className="tester">Test</p>;`
 
 				await updateFile('src/app.jsx', content => {
 					let newContent = 'import { Tester } from "./test.jsx";\n' + content;
-					newContent.replace(
-						`export function App(props) {
-            return (
-              <div>
-                <Test />
-                <StoreProvider>
-                  <Products />
-                </StoreProvider>
-              </div>
-            )
-          }`,
-						`export function App(props) {
-            return (
-              <div>
-                <Tester />
-                <Test />
-                <StoreProvider>
-                  <Products />
-                </StoreProvider>
-              </div>
-            )
-          }`
+					newContent = newContent.replace(
+						`<Test />`,
+						`<Test />\n      <Tester />\n`
 					);
-
-					newContent.replace(
-						`export function App(props) {
-              return (
-                <div>
-                  <Test />
-                  <Greeting />
-                  <StoreProvider>
-                    <Products />
-                  </StoreProvider>
-                </div>
-              )
-            }`,
-						`export function App(props) {
-              return (
-                <div>
-                  <Tester />
-                  <Test />
-                  <Greeting />
-                  <StoreProvider>
-                    <Products />
-                  </StoreProvider>
-                </div>
-              )
-            }`
-					);
+					console.log(newContent);
 					return newContent;
 				});
 				await timeout(2000);
