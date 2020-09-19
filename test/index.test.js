@@ -136,6 +136,38 @@ describe('Prefresh integrations', () => {
 				await expectByPolling(() => getText(button), 'Increment (+)');
 			});
 
+			test('add file and import it', async () => {
+				const compPath = path.join(getTempDir(integration), 'src/test.jsx');
+				await fs.writeFile(
+					compPath,
+					`
+          import { h } from 'preact';
+
+          export const Tester = () => <p className="test">Test</p>
+          `
+				);
+
+				await updateFile('src/app.jsx', content => {
+					let newContent = 'import { Tester } from "./test.jsx";\n' + content;
+					newContent.replace('<div>', '<div>\n<Tester/>\n');
+					return newContent;
+				});
+				await timeout(1000);
+
+				const testText = await page.$('.test');
+				await expectByPolling(() => getText(testText), 'Test');
+
+				await updateFile('src/test.jsx', c =>
+					c.replace(
+						'<p className="test">Test</p>',
+						'<p className="test">Test2</p>'
+					)
+				);
+				await timeout(1000);
+
+				await expectByPolling(() => getText(testText), 'Test2');
+			});
+
 			test('custom hook', async () => {
 				const value = await page.$('.value');
 				const button = await page.$('.button');
