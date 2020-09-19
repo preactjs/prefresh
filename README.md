@@ -44,7 +44,3 @@ export default Refresh;
 When you are working with HOC's be sure to lift up the `displayName` so we can
 recognise it as a component.
 
-### Context
-
-We don't have a mechanism in place to hot reload context, that's why our general advice is to move
-these to their own files.
