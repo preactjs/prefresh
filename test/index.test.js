@@ -149,7 +149,29 @@ describe('Prefresh integrations', () => {
 
 				await updateFile('src/app.jsx', content => {
 					let newContent = 'import { Tester } from "./test.jsx";\n' + content;
-					newContent.replace('<div>', '<div>\n<Tester/>\n');
+					newContent.replace(
+						`export function App(props) {
+            return (
+              <div>
+                <Test />
+                <StoreProvider>
+                  <Products />
+                </StoreProvider>
+              </div>
+            )
+          }`,
+						`export function App(props) {
+            return (
+              <div>
+                <Tester />
+                <Test />
+                <StoreProvider>
+                  <Products />
+                </StoreProvider>
+              </div>
+            )
+          }`
+					);
 					return newContent;
 				});
 				await timeout(1000);
