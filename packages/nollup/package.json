@@ -31,6 +31,7 @@
 		"preact": "^10.4.1"
 	},
 	"peerDependencies": {
+    "@prefresh/babel-plugin": "^0.2.0",
 		"preact": "^10.4.0"
 	}
 }
