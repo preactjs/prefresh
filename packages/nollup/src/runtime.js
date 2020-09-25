@@ -1,4 +1,4 @@
-import { isComponent, flush } from '@prefresh/utils';
+import { isComponent, flush, compareSignatures } from '@prefresh/utils';
 
 // eslint-disable-next-line
 const getExports = m => m.exports || m.__proto__.exports;
@@ -50,6 +50,20 @@ export function __$RefreshCheck$__(module) {
 
 		if (m) {
 			try {
+				const moduleExports = getExports(module);
+				for (let i in moduleExports) {
+					if (typeof moduleExports[i] === 'function') {
+						const oldExports = getExports(m);
+						if (i in oldExports) {
+							if (
+								'prototype' in moduleExports[i] &&
+								moduleExports[i].prototype.render
+							) {
+								compareSignatures(oldExports[i], moduleExports[i]);
+							}
+						}
+					}
+				}
 				flush();
 			} catch (e) {
 				self.location.reload();
