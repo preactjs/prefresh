@@ -1,7 +1,7 @@
 const path = require('path');
 
 exports.integrations = ['vite', 'snowpack', 'rollup', 'next', 'webpack'];
-exports.supportsClassComponents = ['next', 'webpack', 'rollup', 'vite'];
+exports.supportsClassComponents = ['next', 'webpack', 'rollup'];
 
 exports.bin = {
 	next: dir => path.resolve(dir, `./node_modules/next/dist/bin/next`),
