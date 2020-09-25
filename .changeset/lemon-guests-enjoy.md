@@ -1,5 +1,6 @@
 ---
 '@prefresh/next': patch
+'@prefresh/vite': patch
 '@prefresh/nollup': major
 '@prefresh/webpack': major
 '@prefresh/snowpack': major

@@ -48,8 +48,7 @@
 		"@babel/core": "^7.9.6",
 		"@prefresh/babel-plugin": "0.2.0",
 		"@prefresh/core": "^0.8.1",
-		"@prefresh/utils": "^0.3.1",
-		"react-refresh": "^0.8.2"
+		"@prefresh/utils": "^0.3.1"
 	},
 	"devDependencies": {
 		"bundt": "^1.0.1",
