@@ -45,12 +45,12 @@ export function __$RefreshCheck$__(module) {
 	const isCitizen = registerExports(module);
 
 	if (module.hot && isCitizen) {
-		const moduleExports = getExports(module);
 		const m =
 			module.hot.data && module.hot.data.module && module.hot.data.module;
 
 		if (m) {
 			try {
+				const moduleExports = getExports(module);
 				for (let i in moduleExports) {
 					if (typeof moduleExports[i] === 'function') {
 						const oldExports = getExports(m);

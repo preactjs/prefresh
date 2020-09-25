@@ -44,6 +44,6 @@ const registerExports = m => {
 module.exports = Object.freeze({
 	getExports,
 	registerExports,
-	compareSignatures,
-	flush
+	flush,
+	compareSignatures
 });

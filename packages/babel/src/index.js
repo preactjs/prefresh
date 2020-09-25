@@ -415,6 +415,53 @@ export default function(babel, opts = {}) {
 
 	return {
 		visitor: {
+			ClassDeclaration: {
+				enter(path) {
+					const node = path.node;
+					let programPath;
+					let insertAfterPath;
+					switch (path.parent.type) {
+						case 'Program':
+							insertAfterPath = path;
+							programPath = path.parentPath;
+							break;
+						case 'ExportNamedDeclaration':
+							insertAfterPath = path.parentPath;
+							programPath = insertAfterPath.parentPath;
+							break;
+						case 'ExportDefaultDeclaration':
+							insertAfterPath = path.parentPath;
+							programPath = insertAfterPath.parentPath;
+							break;
+						default:
+							return;
+					}
+					const id = node.id;
+					if (id === null) {
+						// We don't currently handle anonymous default exports.
+						return;
+					}
+					const inferredName = id.name;
+					if (!isComponentishName(inferredName)) {
+						return;
+					}
+
+					// Make sure we're not mutating the same tree twice.
+					// This can happen if another Babel plugin replaces parents.
+					if (seenForRegistration.has(node)) {
+						return;
+					}
+					seenForRegistration.add(node);
+					// Don't mutate the tree above this point.
+
+					const handle = createRegistration(programPath, inferredName);
+					insertAfterPath.insertAfter(
+						t.expressionStatement(
+							t.assignmentExpression('=', handle, path.node.id)
+						)
+					);
+				}
+			},
 			CallExpression(path, state) {
 				if (!path.get('callee').referencesImport('preact', 'createContext'))
 					return;
