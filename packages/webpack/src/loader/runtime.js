@@ -8,23 +8,6 @@ module.exports = function() {
 
 		if (previousHotModuleExports) {
 			try {
-				const hotModuleExports = __prefresh_utils__.getExports(module);
-				for (let i in hotModuleExports) {
-					if (typeof hotModuleExports[i] === 'function') {
-						if (i in previousHotModuleExports) {
-							if (
-								'prototype' in hotModuleExports[i] &&
-								hotModuleExports[i].prototype.render
-							) {
-								__prefresh_utils__.compareSignatures(
-									previousHotModuleExports[i],
-									hotModuleExports[i]
-								);
-							}
-						}
-					}
-				}
-
 				__prefresh_utils__.flush();
 			} catch (e) {
 				// Only available in newer webpack versions.
