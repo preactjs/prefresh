@@ -1,4 +1,4 @@
-export const compareSignatures = (prev, next) => {
+const compareSignatures = (prev, next) => {
 	const prevSignature = self.__PREFRESH__.getSignature(prev) || {};
 	const nextSignature = self.__PREFRESH__.getSignature(next) || {};
 
@@ -24,19 +24,6 @@ export const flush = () => {
 		});
 	}
 };
-
-export const isPreactCitizen = name =>
-	typeof name === 'string' &&
-	name[0](
-		(name[0] && name[0] == name[0].toUpperCase()) ||
-			(name.startsWith('use') && name[3] && name[3] == name[3].toUpperCase())
-	);
-
-export const isCustomHook = name =>
-	typeof name === 'string' &&
-	name.startsWith('use') &&
-	name[3] &&
-	name[3] == name[3].toUpperCase();
 
 export const isComponent = name =>
 	typeof name === 'string' && name[0] && name[0] == name[0].toUpperCase();
