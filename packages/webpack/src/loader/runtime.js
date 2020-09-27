@@ -1,6 +1,6 @@
 /* globals __prefresh_utils__ */
 module.exports = function() {
-	const isPrefreshComponent = __prefresh_utils__.registerExports(module);
+	const isPrefreshComponent = __prefresh_utils__.shouldBind(module);
 
 	if (module.hot && isPrefreshComponent) {
 		const previousHotModuleExports =

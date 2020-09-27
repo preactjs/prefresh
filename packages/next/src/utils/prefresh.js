@@ -3,9 +3,8 @@ const { isComponent, flush } = require('@prefresh/utils');
 // eslint-disable-next-line
 const getExports = m => m.exports || m.__proto__.exports;
 
-const registerExports = m => {
+const shouldBind = m => {
 	let isCitizen = false;
-	const moduleId = module.id;
 	const moduleExports = getExports(m);
 
 	if (
@@ -13,7 +12,6 @@ const registerExports = m => {
 		isComponent(moduleExports.displayName || moduleExports.name)
 	) {
 		isCitizen = true;
-		self.__PREFRESH__.register(moduleExports, moduleId + ' %exports%');
 	}
 
 	if (
@@ -32,8 +30,6 @@ const registerExports = m => {
 				isComponent(exportValue.displayName || exportValue.name)
 			) {
 				isCitizen = isCitizen || true;
-				const typeID = moduleId + ' %exports% ' + key;
-				self.__PREFRESH__.register(exportValue, typeID);
 			}
 		}
 	}
@@ -43,6 +39,6 @@ const registerExports = m => {
 
 module.exports = Object.freeze({
 	getExports,
-	registerExports,
+	shouldBind,
 	flush
 });
