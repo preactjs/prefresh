@@ -1,5 +1,11 @@
 # @prefresh/utils
 
+## 1.0.0
+
+### Major Changes
+
+- [`25c683c`](https://github.com/JoviDeCroock/prefresh/commit/25c683cf47484ee1612ff0fcd677f788b00d8860) [#191](https://github.com/JoviDeCroock/prefresh/pull/191) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Trim the utils down to only used methods
+
 ## 0.3.1
 
 ### Patch Changes

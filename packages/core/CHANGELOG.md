@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.0.0
+
+### Major Changes
+
+- [`b075a8e`](https://github.com/JoviDeCroock/prefresh/commit/b075a8ebb7c613b8ce41844d82532803fd61f710) [#190](https://github.com/JoviDeCroock/prefresh/pull/190) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Remove export registration
+
 ## 0.8.1
 
 ### Patch Changes

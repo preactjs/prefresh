@@ -1,5 +1,17 @@
 # @prefresh/next
 
+## 1.2.2
+
+### Patch Changes
+
+- [`b075a8e`](https://github.com/JoviDeCroock/prefresh/commit/b075a8ebb7c613b8ce41844d82532803fd61f710) [#190](https://github.com/JoviDeCroock/prefresh/pull/190) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Remove export registration
+
+* [`cbc79e2`](https://github.com/JoviDeCroock/prefresh/commit/cbc79e2c6e11e6965b3fc64f1f880119ce532393) [#188](https://github.com/JoviDeCroock/prefresh/pull/188) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Remove unused code and require @prefresh/babel-plugin
+
+* Updated dependencies [[`b075a8e`](https://github.com/JoviDeCroock/prefresh/commit/b075a8ebb7c613b8ce41844d82532803fd61f710), [`25c683c`](https://github.com/JoviDeCroock/prefresh/commit/25c683cf47484ee1612ff0fcd677f788b00d8860)]:
+  - @prefresh/core@1.0.0
+  - @prefresh/utils@1.0.0
+
 ## 1.2.1
 
 ### Patch Changes
