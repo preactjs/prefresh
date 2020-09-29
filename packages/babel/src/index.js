@@ -14,11 +14,10 @@ function hash(str) {
  */
 export default function(babel, opts = {}) {
 	if (typeof babel.env === 'function') {
-		// Only available in Babel 7.
 		const env = babel.env();
 		if (env !== 'development' && !opts.skipEnvCheck) {
 			throw new Error(
-				'React Refresh Babel transform should only be enabled in development environment. ' +
+				'Prefresh Babel transform should only be enabled in development environment. ' +
 					'Instead, the environment is: "' +
 					env +
 					'". If you want to override this check, pass {skipEnvCheck: true} as plugin options.'
@@ -411,7 +410,12 @@ export default function(babel, opts = {}) {
 
 	const emptyTemplate = template(`
     Object.assign(CREATECONTEXT.IDENT || (CREATECONTEXT.IDENT=CREATECONTEXT()));
-  `);
+	`);
+
+	const getFirstNonTsExpression = expression =>
+		expression.type === 'TSAsExpression'
+			? getFirstNonTsExpression(expression.expression)
+			: expression;
 
 	return {
 		visitor: {
@@ -486,7 +490,7 @@ export default function(babel, opts = {}) {
 						createContextTemplate({
 							CREATECONTEXT: path.get('callee').node,
 							IDENT: t.identifier(id),
-							VALUE: t.clone(path.node.arguments[0])
+							VALUE: t.clone(getFirstNonTsExpression(path.node.arguments[0]))
 						})
 					);
 				} else {

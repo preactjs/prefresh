@@ -6,9 +6,9 @@
     "preact": "^10.4.6"
   },
   "devDependencies": {
-    "@snowpack/app-scripts-preact": "^1.8.5",
+    "@snowpack/plugin-babel": "2.1.1",
     "@prefresh/babel-plugin": "file:../../packages/babel",
     "@prefresh/snowpack": "file:../../packages/snowpack",
-    "snowpack": "^2.9.0"
+    "snowpack": "2.10.1"
   }
 }
