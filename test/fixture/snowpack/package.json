@@ -9,6 +9,6 @@
     "@snowpack/app-scripts-preact": "^1.8.5",
     "@prefresh/babel-plugin": "file:../../packages/babel",
     "@prefresh/snowpack": "file:../../packages/snowpack",
-    "snowpack": "^2.9.0"
+    "snowpack": "^2.11.1"
   }
 }
