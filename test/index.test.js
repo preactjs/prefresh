@@ -151,7 +151,6 @@ describe('Prefresh integrations', () => {
 							`<Test />`,
 							`<Test />\n      <Tester />\n`
 						);
-						console.log(newContent);
 						return newContent;
 					});
 					await timeout(2000);
