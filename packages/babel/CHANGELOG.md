@@ -1,5 +1,11 @@
 # @prefresh/babel-plugin
 
+## 0.2.2
+
+### Patch Changes
+
+- [`39c60c5`](https://github.com/JoviDeCroock/prefresh/commit/39c60c5862adef106fed1ca59a968f40cdacdd10) [#195](https://github.com/JoviDeCroock/prefresh/pull/195) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix syntax issue preventing babel from correctly assigning defaultValues
+
 ## 0.2.1
 
 ### Patch Changes
