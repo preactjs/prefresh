@@ -1,5 +1,12 @@
 # @prefresh/vite
 
+## 1.1.3
+
+### Patch Changes
+
+- Updated dependencies [[`53e79a8`](https://github.com/JoviDeCroock/prefresh/commit/53e79a8bcdf5ef3a9387e46307cfd0ce1a2a3186)]:
+  - @prefresh/babel-plugin@0.2.1
+
 ## 1.1.2
 
 ### Patch Changes

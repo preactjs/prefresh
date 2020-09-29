@@ -1,6 +1,6 @@
 {
 	"name": "@prefresh/next",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"main": "src/index.js",
 	"exports": {
 		".": {
@@ -23,7 +23,7 @@
 	},
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
-		"@prefresh/babel-plugin": "0.2.0",
+		"@prefresh/babel-plugin": "0.2.1",
 		"@prefresh/core": "^1.0.0",
 		"@prefresh/utils": "^1.0.0"
 	},
