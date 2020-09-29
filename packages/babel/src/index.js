@@ -403,13 +403,13 @@ export default function(babel, opts = {}) {
 
 	const createContextTemplate = template(
 		`
-    Object.assign(CREATECONTEXT.IDENT || (CREATECONTEXT.IDENT=CREATECONTEXT(), {__:VALUE}));
+    Object.assign((CREATECONTEXT.IDENT || (CREATECONTEXT.IDENT=CREATECONTEXT(VALUE))), {__:VALUE});
   `,
 		{ placeholderPattern: /^[A-Z]+$/ }
 	);
 
 	const emptyTemplate = template(`
-    Object.assign(CREATECONTEXT.IDENT || (CREATECONTEXT.IDENT=CREATECONTEXT()));
+    (CREATECONTEXT.IDENT || (CREATECONTEXT.IDENT=CREATECONTEXT()));
 	`);
 
 	const getFirstNonTsExpression = expression =>
