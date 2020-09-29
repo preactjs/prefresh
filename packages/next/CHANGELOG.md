@@ -1,5 +1,12 @@
 # @prefresh/next
 
+## 1.2.4
+
+### Patch Changes
+
+- Updated dependencies [[`39c60c5`](https://github.com/JoviDeCroock/prefresh/commit/39c60c5862adef106fed1ca59a968f40cdacdd10)]:
+  - @prefresh/babel-plugin@0.2.2
+
 ## 1.2.3
 
 ### Patch Changes
