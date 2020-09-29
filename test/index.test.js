@@ -106,9 +106,7 @@ describe('Prefresh integrations', () => {
 				page = await browser.newPage();
 				page.on('console', browserConsoleListener);
 
-				await page.goto('http://localhost:' + defaultPort[integration], {
-					waitUntil: 'networkidle0'
-				});
+				await page.goto('http://localhost:' + defaultPort[integration]);
 			});
 
 			test('basic component', async () => {
