@@ -17,6 +17,8 @@ const {
 	supportsClassComponents
 } = require('./constants');
 
+const TIMEOUT = 1000;
+
 describe('Prefresh integrations', () => {
 	let devServer, browser, page;
 
@@ -116,7 +118,7 @@ describe('Prefresh integrations', () => {
 				await updateFile('src/app.jsx', content =>
 					content.replace('Increment', 'Increment (+)')
 				);
-				await timeout(1000);
+				await timeout(TIMEOUT);
 
 				await expectByPolling(() => getText(button), 'Increment (+)');
 			});
@@ -131,7 +133,7 @@ describe('Prefresh integrations', () => {
 					newContent.replace('Increment (+)', 'Increment');
 					return newContent;
 				});
-				await timeout(1000);
+				await timeout(TIMEOUT);
 
 				await expectByPolling(() => getText(button), 'Increment (+)');
 			});
@@ -182,7 +184,7 @@ describe('Prefresh integrations', () => {
 				await updateFile('src/useCounter.js', content =>
 					content.replace('state + 1', 'state + 2')
 				);
-				await timeout(1000);
+				await timeout(TIMEOUT);
 
 				await button.click();
 				await expectByPolling(() => getText(value), 'Count: 3');
@@ -190,7 +192,7 @@ describe('Prefresh integrations', () => {
 				await updateFile('src/useCounter.js', content =>
 					content.replace('useState(0)', 'useState(10)')
 				);
-				await timeout(1000);
+				await timeout(TIMEOUT);
 
 				await expectByPolling(() => getText(value), 'Count: 10');
 			});
@@ -201,7 +203,7 @@ describe('Prefresh integrations', () => {
 				await updateFile('src/useCounter.js', content =>
 					content.replace('useState(0);', 'useState(10);')
 				);
-				await timeout(1000);
+				await timeout(TIMEOUT);
 
 				await expectByPolling(() => getText(value), 'Count: 10');
 			});
@@ -217,7 +219,7 @@ describe('Prefresh integrations', () => {
 							"I'm a reloaded class component"
 						)
 					);
-					await timeout(1000);
+					await timeout(TIMEOUT);
 
 					await expectByPolling(
 						() => getText(text),
@@ -239,7 +241,7 @@ describe('Prefresh integrations', () => {
 							"this.setState({ greeting: 'hello' });"
 						)
 					);
-					await timeout(1000);
+					await timeout(TIMEOUT);
 
 					await button.click();
 					await expectByPolling(() => getText(text), 'hello');
@@ -261,7 +263,7 @@ describe('Prefresh integrations', () => {
 						'setItems([...items, id])'
 					)
 				);
-				await timeout(1000);
+				await timeout(TIMEOUT);
 
 				const peachDiv = await page.$('.peach-div');
 				await peachDiv.click();
