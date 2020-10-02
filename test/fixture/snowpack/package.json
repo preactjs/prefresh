@@ -6,8 +6,6 @@
     "preact": "^10.4.6"
   },
   "devDependencies": {
-    "@snowpack/plugin-babel": "2.1.1",
-    "@prefresh/babel-plugin": "file:../../packages/babel",
     "@prefresh/snowpack": "file:../../packages/snowpack",
     "snowpack": "2.10.1"
   }
