@@ -8,7 +8,7 @@ module.exports = {
 		public: '/',
 		src: '/_dist_'
 	},
-	plugins: ['@snowpack/plugin-babel', '@prefresh/snowpack'],
+	plugins: ['@prefresh/snowpack'],
 	devOptions: {
 		open: 'none',
 		port: 3004
