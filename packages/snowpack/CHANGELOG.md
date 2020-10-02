@@ -1,5 +1,11 @@
 # @prefresh/snowpack
 
+## 2.0.1
+
+### Patch Changes
+
+- [`60b4103`](https://github.com/JoviDeCroock/prefresh/commit/60b4103484ccb738bd03260a2be898e60f9626d7) [#199](https://github.com/JoviDeCroock/prefresh/pull/199) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Integrate babel-plugin
+
 ## 2.0.0
 
 ### Major Changes
