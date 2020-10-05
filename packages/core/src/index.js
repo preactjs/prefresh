@@ -22,6 +22,8 @@ import { signaturesForType } from './runtime/signaturesForType';
 let typesById = new Map();
 let pendingUpdates = [];
 
+const forbiddenEffectFields = ['__', '__H'];
+
 function sign(type, key, forceReset, getCustomHooks, status) {
 	if (type) {
 		let signature = signaturesForType.get(type);
@@ -95,6 +97,36 @@ function replaceComponent(OldType, NewType, resetHookState) {
 			}
 
 			if (resetHookState) {
+				if (
+					vnode[VNODE_COMPONENT][COMPONENT_HOOKS] &&
+					vnode[VNODE_COMPONENT][COMPONENT_HOOKS][EFFECTS_LIST]
+				) {
+					vnode[VNODE_COMPONENT][COMPONENT_HOOKS][EFFECTS_LIST].forEach(
+						effect => {
+							const possibleCleanupKeys = Object.keys(effect).filter(
+								key => !forbiddenEffectFields.includes(key)
+							);
+							possibleCleanupKeys.forEach(key => {
+								if (typeof effect[key] == 'function') effect[key]();
+							});
+						}
+					);
+				}
+
+				if (vnode[VNODE_COMPONENT].__h) {
+					vnode[VNODE_COMPONENT].__h.forEach(possibleEffect => {
+						if (typeof possibleEffect === 'object') {
+							const possibleCleanupKeys = Object.keys(possibleEffect).filter(
+								key => !forbiddenEffectFields.includes(key)
+							);
+							possibleCleanupKeys.forEach(key => {
+								if (typeof possibleEffect[key] == 'function')
+									possibleEffect[key]();
+							});
+						}
+					});
+				}
+
 				vnode[VNODE_COMPONENT][COMPONENT_HOOKS] = {
 					[HOOKS_LIST]: [],
 					[EFFECTS_LIST]: []
