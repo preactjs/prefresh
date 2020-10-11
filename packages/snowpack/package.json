@@ -45,6 +45,7 @@
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
 		"@babel/core": "^7.9.6",
+		"@babel/plugin-syntax-class-properties": "^7.10.0",
 		"@prefresh/babel-plugin": "0.2.2",
 		"@prefresh/core": "^1.0.0",
 		"@prefresh/utils": "^1.0.0"
