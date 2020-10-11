@@ -8,3 +8,6 @@ export const CATCH_ERROR_OPTION = '__e';
 export const COMPONENT_DIRTY = '__d';
 export const VNODE_DOM = '__e';
 export const VNODE_CHILDREN = '__k';
+export const HOOK_VALUE = '__';
+export const HOOK_ARGS = '__H';
+export const HOOK_CLEANUP = '__c';

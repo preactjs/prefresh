@@ -13,7 +13,10 @@ import {
 	EFFECTS_LIST,
 	COMPONENT_HOOKS,
 	VNODE_DOM,
-	VNODE_CHILDREN
+	VNODE_CHILDREN,
+	HOOK_ARGS,
+	HOOK_VALUE,
+	HOOK_CLEANUP
 } from './constants';
 import { computeKey } from './computeKey';
 import { vnodesForComponent } from './runtime/vnodesForComponent';
@@ -21,8 +24,6 @@ import { signaturesForType } from './runtime/signaturesForType';
 
 let typesById = new Map();
 let pendingUpdates = [];
-
-const forbiddenEffectFields = ['__', '__H'];
 
 function sign(type, key, forceReset, getCustomHooks, status) {
 	if (type) {
@@ -99,32 +100,32 @@ function replaceComponent(OldType, NewType, resetHookState) {
 			if (resetHookState) {
 				if (
 					vnode[VNODE_COMPONENT][COMPONENT_HOOKS] &&
-					vnode[VNODE_COMPONENT][COMPONENT_HOOKS][EFFECTS_LIST]
+					vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST] &&
+					vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].length
 				) {
-					vnode[VNODE_COMPONENT][COMPONENT_HOOKS][EFFECTS_LIST].forEach(
-						effect => {
-							const possibleCleanupKeys = Object.keys(effect).filter(
-								key => !forbiddenEffectFields.includes(key)
-							);
-							possibleCleanupKeys.forEach(key => {
-								if (typeof effect[key] == 'function') effect[key]();
-							});
+					vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(
+						possibleEffect => {
+							if (
+								possibleEffect[HOOK_CLEANUP] &&
+								typeof possibleEffect[HOOK_CLEANUP] === 'function'
+							) {
+								possibleEffect[HOOK_CLEANUP]();
+							} else if (
+								possibleEffect[HOOK_ARGS] &&
+								possibleEffect[HOOK_VALUE] &&
+								Object.keys(possibleEffect).length === 3
+							) {
+								const cleanupKey = Object.keys(possibleEffect).find(
+									key => key !== HOOK_ARGS && key !== HOOK_VALUE
+								);
+								if (
+									cleanupKey &&
+									typeof possibleEffect[cleanupKey] == 'function'
+								)
+									possibleEffect[cleanupKey]();
+							}
 						}
 					);
-				}
-
-				if (vnode[VNODE_COMPONENT].__h) {
-					vnode[VNODE_COMPONENT].__h.forEach(possibleEffect => {
-						if (typeof possibleEffect === 'object') {
-							const possibleCleanupKeys = Object.keys(possibleEffect).filter(
-								key => !forbiddenEffectFields.includes(key)
-							);
-							possibleCleanupKeys.forEach(key => {
-								if (typeof possibleEffect[key] == 'function')
-									possibleEffect[key]();
-							});
-						}
-					});
 				}
 
 				vnode[VNODE_COMPONENT][COMPONENT_HOOKS] = {
