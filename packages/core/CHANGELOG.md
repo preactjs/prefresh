@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.1.0
+
+### Minor Changes
+
+- [`ac7c5d1`](https://github.com/JoviDeCroock/prefresh/commit/ac7c5d150bcbb9cea40060549b31a2ed06fcc5dc) [#202](https://github.com/JoviDeCroock/prefresh/pull/202) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Cleanup effects when resetting hooks state
+
 ## 1.0.0
 
 ### Major Changes
