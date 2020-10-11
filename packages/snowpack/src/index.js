@@ -74,7 +74,10 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 
 const transform = (code, id) =>
 	transformSync(code, {
-		plugins: [[require('@prefresh/babel-plugin'), { skipEnvCheck: true }]],
+		plugins: [
+			[require('@prefresh/babel-plugin'), { skipEnvCheck: true }],
+			[require('@babel/plugin-syntax-class-properties')]
+		],
 		cwd: process.cwd(),
 		filename: id,
 		ast: false,
