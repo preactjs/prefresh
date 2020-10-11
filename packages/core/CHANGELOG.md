@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.1.1
+
+### Patch Changes
+
+- [`b8678d0`](https://github.com/JoviDeCroock/prefresh/commit/b8678d036cb02c7b3b9901b2057ba04a4f4c1041) [#206](https://github.com/JoviDeCroock/prefresh/pull/206) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Improve cleanup detection
+
 ## 1.1.0
 
 ### Minor Changes
