@@ -1,5 +1,16 @@
 # @prefresh/snowpack
 
+## 2.1.0
+
+### Minor Changes
+
+- [`8d7076a`](https://github.com/JoviDeCroock/prefresh/commit/8d7076ac4bb3415c4ae67a76a1f64ed0ae3f7ae1) [#203](https://github.com/JoviDeCroock/prefresh/pull/203) Thanks [@FredKSchott](https://github.com/FredKSchott)! - Add support for class properties syntax
+
+### Patch Changes
+
+- Updated dependencies [[`ac7c5d1`](https://github.com/JoviDeCroock/prefresh/commit/ac7c5d150bcbb9cea40060549b31a2ed06fcc5dc)]:
+  - @prefresh/core@1.1.0
+
 ## 2.0.1
 
 ### Patch Changes
