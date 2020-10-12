@@ -30,8 +30,30 @@ class ReloadPlugin {
 		});
 
 		compiler.hooks.compilation.tap(NAME, compilation => {
-			compilation.mainTemplate.hooks.require.tap(NAME, source =>
-				createRefreshTemplate(source)
+			compilation.mainTemplate.hooks.require.tap(
+				NAME,
+				(source, chunk, hash) => {
+					let filename = compilation.mainTemplate.outputOptions.filename;
+					if (typeof filename === 'function') {
+						filename = filename({
+							chunk,
+							hash,
+							contentHashType: 'javascript',
+							hashWithLength: length =>
+								compilation.mainTemplate.renderCurrentHashCode(hash, length),
+							noChunkHash: compilation.mainTemplate.useChunkHash(chunk)
+						});
+					}
+
+					if (
+						!compilation.mainTemplate.filename ||
+						!compilation.mainTemplate.filename.includes('.js')
+					) {
+						return source;
+					}
+
+					return createRefreshTemplate(source);
+				}
 			);
 		});
 	}
