@@ -12,7 +12,7 @@ const matcher = webpack.ModuleFilenameHelpers.matchObject.bind(
 class ReloadPlugin {
 	constructor(options) {
 		this.options = {
-			runsInNextJs: Boolean(options.runsInNextJs)
+			runsInNextJs: Boolean(options && options.runsInNextJs)
 		};
 	}
 
