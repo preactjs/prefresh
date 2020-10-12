@@ -30,7 +30,7 @@ const afterModule = `
 }
 `;
 
-function createRefreshTemplate(source, chunk, hash, mainTemplate) {
+function createRefreshTemplate(source, chunk, hash, mainTemplate, options) {
 	let filename = mainTemplate.outputOptions.filename;
 	if (typeof filename === 'function') {
 		filename = filename({
@@ -51,8 +51,14 @@ function createRefreshTemplate(source, chunk, hash, mainTemplate) {
 
 	// Webpack generates this line whenever the mainTemplate is called
 	const moduleInitializationLineNumber = lines.findIndex(line =>
-		line.startsWith('modules[moduleId].call')
+		options.runsInNextJs
+			? line.includes('modules[moduleId].call(')
+			: line.startsWith('modules[moduleId].call')
 	);
+
+	if (moduleInitializationLineNumber === -1) {
+		return source;
+	}
 
 	return Template.asString([
 		...lines.slice(0, moduleInitializationLineNumber),

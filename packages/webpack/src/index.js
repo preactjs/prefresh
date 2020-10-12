@@ -10,6 +10,12 @@ const matcher = webpack.ModuleFilenameHelpers.matchObject.bind(
 );
 
 class ReloadPlugin {
+	constructor(options) {
+		this.options = {
+			runsInNextJs: Boolean(options && options.runsInNextJs)
+		};
+	}
+
 	webpack4(compiler) {
 		compiler.hooks.normalModuleFactory.tap(NAME, nmf => {
 			nmf.hooks.afterResolve.tap(NAME, data => {
@@ -31,7 +37,13 @@ class ReloadPlugin {
 
 		compiler.hooks.compilation.tap(NAME, compilation => {
 			compilation.mainTemplate.hooks.require.tap(NAME, (source, chunk, hash) =>
-				createRefreshTemplate(source, chunk, hash, compilation.mainTemplate)
+				createRefreshTemplate(
+					source,
+					chunk,
+					hash,
+					compilation.mainTemplate,
+					this.options
+				)
 			);
 		});
 	}
@@ -40,7 +52,7 @@ class ReloadPlugin {
 		const ConstDependency = require('webpack/lib/dependencies/ConstDependency');
 
 		const RuntimeGlobals = require('webpack/lib/RuntimeGlobals');
-		const PrefreshRuntimeMOdule = require('./utils/Runtime');
+		const PrefreshRuntimeModule = require('./utils/Runtime');
 
 		compiler.hooks.compilation.tap(
 			NAME,
@@ -58,7 +70,7 @@ class ReloadPlugin {
 					NAME,
 					(chunk, runtimeRequirements) => {
 						runtimeRequirements.add(RuntimeGlobals.interceptModuleExecution);
-						compilation.addRuntimeModule(chunk, new PrefreshRuntimeMOdule());
+						compilation.addRuntimeModule(chunk, new PrefreshRuntimeModule());
 					}
 				);
 
@@ -111,5 +123,7 @@ class ReloadPlugin {
 		}
 	}
 }
+
+ReloadPlugin.supportsNextJs = true;
 
 module.exports = ReloadPlugin;

@@ -6,6 +6,9 @@
     "@prefresh/next": "file:../../packages/next",
     "@prefresh/babel-plugin": "file:../../packages/babel"
   },
+  "resolutions": {
+    "@prefresh/webpack": "file:../../packages/webpack"
+  },
   "dependencies": {
     "next": "^9.5.0",
     "preact": "^10.4.4",
