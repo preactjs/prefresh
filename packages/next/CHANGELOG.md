@@ -1,5 +1,16 @@
 # @prefresh/next
 
+## 1.3.0
+
+### Minor Changes
+
+- [`9a9bb68`](https://github.com/JoviDeCroock/prefresh/commit/9a9bb68f062b14a9f6c999c8a17a37a61af3a69f) [#209](https://github.com/JoviDeCroock/prefresh/pull/209) Thanks [@sventschui](https://github.com/sventschui)! - Use the @prefresh/webpack plugin in @prefresh/next to fix a bug with @zeit/next-css
+
+### Patch Changes
+
+- Updated dependencies [[`9a9bb68`](https://github.com/JoviDeCroock/prefresh/commit/9a9bb68f062b14a9f6c999c8a17a37a61af3a69f)]:
+  - @prefresh/webpack@2.1.0
+
 ## 1.2.4
 
 ### Patch Changes
