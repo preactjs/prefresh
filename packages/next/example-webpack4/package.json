@@ -7,22 +7,20 @@
     "start": "NODE_ENV=production next start"
   },
   "devDependencies": {
-    "@prefresh/next": "../"
+    "@prefresh/next": "^1.0.0",
+    "@prefresh/webpack": "^2.0.0"
   },
   "resolutions": {
-    "webpack": "^5.0.0-beta.22",
     "@prefresh/next": "../",
     "@prefresh/webpack": "../../webpack"
   },
   "dependencies": {
-    "@prefresh/webpack": "../../webpack",
     "next": "^9.5.4",
     "preact": "^10.4.4",
     "preact-render-to-string": "^5.1.4",
     "react": "github:preact-compat/react#1.0.0",
     "react-dom": "github:preact-compat/react-dom#1.0.0",
-    "react-ssr-prepass": "npm:preact-ssr-prepass@^1.0.1",
-    "webpack": "^5.0.0-beta.22"
+    "react-ssr-prepass": "npm:preact-ssr-prepass@^1.0.1"
   },
   "license": "UNLICENSE"
 }
