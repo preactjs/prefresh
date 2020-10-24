@@ -21,9 +21,6 @@ module.exports = (nextConfig = {}) => {
 
 				config.plugins.unshift(new Prefresh({ runsInNextJs: true }));
 
-				const copyLoader = { ...defaultLoaders.babel };
-				const copyLoaderOptions = { ...defaultLoaders.babel.options };
-
 				defaultLoaders.babel.options.plugins = [].slice.call(
 					defaultLoaders.babel.options.plugins || []
 				);
@@ -34,10 +31,6 @@ module.exports = (nextConfig = {}) => {
 				]);
 
 				defaultLoaders.babel.options.hasReactRefresh = false;
-
-				// This prevents the overrides above from affecting the server:
-				copyLoader.options = copyLoaderOptions;
-				defaultLoaders.babel = copyLoader;
 			}
 
 			if (typeof nextConfig.webpack === 'function') {
