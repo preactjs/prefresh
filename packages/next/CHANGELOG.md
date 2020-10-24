@@ -1,5 +1,11 @@
 # @prefresh/next
 
+## 1.3.1
+
+### Patch Changes
+
+- [`4c3d811`](https://github.com/JoviDeCroock/prefresh/commit/4c3d81134f4b724ff675379e037c8610bab8467d) [#211](https://github.com/JoviDeCroock/prefresh/pull/211) Thanks [@lfre](https://github.com/lfre)! - Fix assignment of defaultLoaders
+
 ## 1.3.0
 
 ### Minor Changes
