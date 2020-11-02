@@ -8,9 +8,9 @@ If you're using the [`preact-template`](https://github.com/pikapkg/create-snowpa
 out of the box, if you don't or are using the old version fo it you'll have to follow these instructions.
 
 ```
-npm i -s @prefresh/snowpack
+npm i --save-dev @prefresh/snowpack
 ## OR
-yarn add @prefresh/snowpack
+yarn add --dev @prefresh/snowpack
 ```
 
 You'll have to add a few things, as seen in [this PR](https://github.com/pikapkg/create-snowpack-app/pull/54/files).
