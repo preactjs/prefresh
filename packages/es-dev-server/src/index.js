@@ -1,19 +1,18 @@
-import { transformSync } from '@babel/core';
+import babel from '@babel/core';
+import plugin from '@prefresh/babel-plugin';
+
+const { transformSync } = babel;
 
 export default function preactRefreshPlugin(config, pluginOptions) {
 	return {
-		knownEntrypoints: [
-			'@prefresh/es-dev-server/runtime',
-			'@prefresh/es-dev-server/utils'
-		],
 		async transform(context) {
 			if (process.env.NODE_ENV === 'production' || !context.response.is('js'))
 				return;
 
-			const { code } = transform(context.body, id);
+			const { code } = transform(context.body);
 
-			hasRefeshReg = /\$RefreshReg\$\(/.test(code);
-			hasRefeshSig = /\$RefreshSig\$\(/.test(code);
+			const hasRefeshReg = /\$RefreshReg\$\(/.test(code);
+			const hasRefeshSig = /\$RefreshSig\$\(/.test(code);
 			if (!hasRefeshReg && !hasRefeshSig) {
 				return context;
 			}
@@ -38,7 +37,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 
           self.$RefreshReg$ = (type, id) => {
             self.__PREFRESH__.register(type, ${JSON.stringify(
-							urlPath
+							context.originalUrl
 						)} + " " + id);
           };
 
@@ -66,11 +65,10 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 	};
 }
 
-const transform = (code, id) =>
+const transform = code =>
 	transformSync(code, {
-		plugins: [[require('@prefresh/babel-plugin'), { skipEnvCheck: true }]],
+		plugins: [[plugin, { skipEnvCheck: true }]],
 		cwd: process.cwd(),
-		filename: id,
 		ast: false,
 		compact: false,
 		sourceMaps: false,

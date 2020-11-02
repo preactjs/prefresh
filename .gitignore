@@ -109,5 +109,7 @@ dist
 # Package exports
 packages/vite/runtime
 packages/vite/utils
+packages/es-dev-server/runtime
+packages/es-dev-server/utils
 packages/snowpack/runtime
 packages/snowpack/utils

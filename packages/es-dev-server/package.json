@@ -50,13 +50,15 @@
 		"@prefresh/utils": "^1.0.0"
 	},
 	"devDependencies": {
+    "@web/dev-server": "^0.0.18",
+    "@web/dev-server-hmr": "^0.0.2",
 		"bundt": "^1.0.1",
-		"preact": "^10.4.1",
-		"es-dev-server": "^1.57.0"
+		"preact": "^10.4.1"
 	},
 	"peerDependencies": {
+		"@web/dev-server": "^0.0.18",
+    "@web/dev-server-hmr": "^0.0.2",
 		"@prefresh/babel-plugin": "^0.2.0",
-		"preact": "^10.4.0",
-		"es-dev-server": "^1.57.0"
+		"preact": "^10.4.0"
 	}
 }
