@@ -2,7 +2,7 @@
 	"name": "@prefresh/babel-plugin",
 	"version": "0.2.2",
   "main": "dist/src/index.js",
-  "type": "module",
+  "module": "dist/src/index.js",
 	"exports": {
 		".": {
 			"import": "./src/index.js",
