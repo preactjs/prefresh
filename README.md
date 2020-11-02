@@ -4,6 +4,7 @@ Fast-refresh for Preact!
 
 ## Integrations
 
+- [@web/dev-server](https://github.com/JoviDeCroock/prefresh/tree/main/packages/es-dev-server)
 - [CRA with prefresh](https://github.com/jeremy-coleman/prefresh-cra)
 - [gatsby](https://www.gatsbyjs.org/packages/gatsby-plugin-preact/)
 - [next](https://github.com/JoviDeCroock/prefresh/tree/main/packages/next)
