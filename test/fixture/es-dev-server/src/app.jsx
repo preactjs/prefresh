@@ -1,3 +1,4 @@
+import { h } from 'preact';
 import { useCounter } from './useCounter'
 import { StoreProvider } from './context';
 import { Products } from './products'
