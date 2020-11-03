@@ -1,6 +1,6 @@
 const Prefresh = require('@prefresh/webpack');
 
-module.exports = (nextConfig = {}, includeNodeModules = false) => {
+module.exports = (nextConfig = {}) => {
 	return Object.assign({}, nextConfig, {
 		webpack(config, options) {
 			if (!Prefresh.supportsNextJs) {
@@ -20,7 +20,7 @@ module.exports = (nextConfig = {}, includeNodeModules = false) => {
 				}
 
 				config.plugins.unshift(
-					new Prefresh({ runsInNextJs: true, includeNodeModules })
+					new Prefresh({ runsInNextJs: true, includeNodeModules: true })
 				);
 
 				defaultLoaders.babel.options.plugins = [].slice.call(
