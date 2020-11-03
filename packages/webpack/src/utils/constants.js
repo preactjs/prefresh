@@ -1,7 +1,11 @@
 exports.prefreshUtils = '__prefresh_utils__';
-exports.options = {
+exports.NAME = 'PrefreshWebpackPlugin';
+
+exports.optionsWithoutNodeModules = {
 	include: /\.([jt]sx?)$/,
 	exclude: /node_modules/
 };
 
-exports.NAME = 'PrefreshWebpackPlugin';
+exports.optionsWithNodeModules = {
+	include: /\.([jt]sx?)$/
+};

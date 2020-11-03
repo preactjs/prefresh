@@ -2,15 +2,22 @@ const webpack = require('webpack');
 const path = require('path');
 const { createRefreshTemplate } = require('./utils/createTemplate');
 const { injectEntry } = require('./utils/injectEntry');
-const { prefreshUtils, NAME, options } = require('./utils/constants');
-
-const matcher = webpack.ModuleFilenameHelpers.matchObject.bind(
-	undefined,
-	options
-);
+const {
+	prefreshUtils,
+	NAME,
+	optionsWithoutNodeModules,
+	optionsWithNodeModules
+} = require('./utils/constants');
 
 class ReloadPlugin {
 	constructor(options) {
+		this.matcher = webpack.ModuleFilenameHelpers.matchObject.bind(
+			undefined,
+			options && options.includeNodeModules
+				? optionsWithNodeModules
+				: optionsWithoutNodeModules
+		);
+
 		this.options = {
 			runsInNextJs: Boolean(options && options.runsInNextJs)
 		};
@@ -20,7 +27,7 @@ class ReloadPlugin {
 		compiler.hooks.normalModuleFactory.tap(NAME, nmf => {
 			nmf.hooks.afterResolve.tap(NAME, data => {
 				if (
-					matcher(data.resource) &&
+					this.matcher(data.resource) &&
 					!data.resource.includes('@prefresh') &&
 					!data.resource.includes(path.join(__dirname, './loader')) &&
 					!data.resource.includes(path.join(__dirname, './utils'))
@@ -78,7 +85,7 @@ class ReloadPlugin {
 					NAME,
 					({ createData: data }) => {
 						if (
-							matcher(data.resource) &&
+							this.matcher(data.resource) &&
 							!data.resource.includes('@prefresh') &&
 							!data.resource.includes(path.join(__dirname, './loader')) &&
 							!data.resource.includes(path.join(__dirname, './utils'))
