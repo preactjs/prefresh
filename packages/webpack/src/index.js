@@ -5,17 +5,16 @@ const { injectEntry } = require('./utils/injectEntry');
 const {
 	prefreshUtils,
 	NAME,
-	optionsWithoutNodeModules,
-	optionsWithNodeModules
+	matcherOptions,
+	nextMatcherOptions,
+	injectRefreshFunctions
 } = require('./utils/constants');
 
 class ReloadPlugin {
 	constructor(options) {
 		this.matcher = webpack.ModuleFilenameHelpers.matchObject.bind(
 			undefined,
-			options && options.includeNodeModules
-				? optionsWithNodeModules
-				: optionsWithoutNodeModules
+			options && options.runsInNextJs ? matcherOptions : nextMatcherOptions
 		);
 
 		this.options = {
@@ -43,6 +42,7 @@ class ReloadPlugin {
 		});
 
 		compiler.hooks.compilation.tap(NAME, compilation => {
+			injectRefreshFunctions(compilation);
 			compilation.mainTemplate.hooks.require.tap(NAME, (source, chunk, hash) =>
 				createRefreshTemplate(
 					source,
@@ -67,6 +67,8 @@ class ReloadPlugin {
 				if (compilation.compiler !== compiler) {
 					return;
 				}
+
+				injectRefreshFunctions(compilation);
 
 				compilation.dependencyTemplates.set(
 					ConstDependency,

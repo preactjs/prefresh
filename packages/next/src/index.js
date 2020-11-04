@@ -19,9 +19,7 @@ module.exports = (nextConfig = {}) => {
 					config.plugins.splice(config.plugins.indexOf(reactRefresh), 1);
 				}
 
-				config.plugins.unshift(
-					new Prefresh({ runsInNextJs: true, includeNodeModules: true })
-				);
+				config.plugins.unshift(new Prefresh({ runsInNextJs: true }));
 
 				defaultLoaders.babel.options.plugins = [].slice.call(
 					defaultLoaders.babel.options.plugins || []
