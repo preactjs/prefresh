@@ -1,3 +1,5 @@
+const { Template } = require('webpack');
+
 exports.prefreshUtils = '__prefresh_utils__';
 exports.NAME = 'PrefreshWebpackPlugin';
 
