@@ -1,5 +1,16 @@
 # @prefresh/next
 
+## 1.4.0
+
+### Minor Changes
+
+- [`65dbda1`](https://github.com/JoviDeCroock/prefresh/commit/65dbda1744ebba2d5d7d935df88aee6966a870fa) [#216](https://github.com/JoviDeCroock/prefresh/pull/216) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Add possiblity to add the loader to node_modules
+
+### Patch Changes
+
+- Updated dependencies [[`65dbda1`](https://github.com/JoviDeCroock/prefresh/commit/65dbda1744ebba2d5d7d935df88aee6966a870fa)]:
+  - @prefresh/webpack@2.2.0
+
 ## 1.3.1
 
 ### Patch Changes
