@@ -3,6 +3,7 @@
 	"version": "1.1.4",
 	"module": "dist/index.mjs",
 	"main": "dist/index.js",
+	"types": "index.d.ts",
 	"exports": {
 		".": {
 			"import": "./dist/index.mjs",
@@ -27,7 +28,8 @@
 	"files": [
 		"dist",
 		"runtime",
-		"utils"
+		"utils",
+		"index.d.ts"
 	],
 	"scripts": {
 		"build": "bundt",
@@ -51,7 +53,7 @@
 		"@prefresh/utils": "^1.0.0"
 	},
 	"devDependencies": {
-		"bundt": "^1.0.1",
+		"bundt": "^1.1.1",
 		"preact": "^10.4.7",
 		"vite": "^1.0.0-rc.4"
 	},
