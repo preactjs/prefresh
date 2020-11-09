@@ -1,5 +1,5 @@
 {
-	"name": "@prefresh/es-dev-server",
+	"name": "@prefresh/web-dev-server",
 	"version": "0.1.0",
 	"module": "dist/index.mjs",
 	"main": "dist/index.js",
