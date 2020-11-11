@@ -1,6 +1,6 @@
 import { esbuildPlugin } from "@web/dev-server-esbuild";
 import { hmrPlugin } from '@web/dev-server-hmr';
-import prefresh from "@prefresh/es-dev-server";
+import prefresh from "@prefresh/web-dev-server";
 
 export default {
   nodeResolve: true,

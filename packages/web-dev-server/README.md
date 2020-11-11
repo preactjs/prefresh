@@ -1,20 +1,20 @@
-# Prefresh-es-dev-server
+# Prefresh-web-dev-server
 
-[![npm version](https://badgen.net/npm/v/@prefresh/es-dev-server)](https://www.npmjs.com/package/@prefresh/es-dev-server)
+[![npm version](https://badgen.net/npm/v/@prefresh/es-dev-server)](https://www.npmjs.com/package/@prefresh/web-dev-server)
 
 ## Setup
 
 ```
-npm i --save-dev @prefresh/es-dev-server
+npm i --save-dev @prefresh/web-dev-server
 ## OR
-yarn add --dev @prefresh/es-dev-server
+yarn add --dev @prefresh/web-dev-server
 ```
 
 web-dev-server.config.mjs
 
 ```js
 export default {
-  plugins: ["@prefresh/es-dev-server"]
+  plugins: ["@prefresh/web-dev-server"]
 }
 ```
 

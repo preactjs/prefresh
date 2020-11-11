@@ -10,6 +10,6 @@
     "@web/dev-server-esbuild": "^0.2.6",
     "@web/dev-server-hmr": "^0.0.2",
     "@prefresh/babel-plugin": "file:../../../packages/babel",
-    "@prefresh/es-dev-server": "file:../../../packages/es-dev-server"
+    "@prefresh/web-dev-server": "file:../../../packages/web-dev-server"
   }
 }

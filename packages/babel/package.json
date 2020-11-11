@@ -2,17 +2,17 @@
 	"name": "@prefresh/babel-plugin",
 	"version": "0.2.2",
   "main": "dist/src/index.js",
-  "module": "dist/src/index.js",
+  "module": "src/index.mjs",
 	"exports": {
 		".": {
-			"import": "./src/index.js",
+			"import": "./src/index.mjs",
 			"require": "./dist/src/index.js"
 		},
 		"./package.json": "./package.json",
 		"./": "./"
 	},
 	"scripts": {
-		"build": "cjyes src/index.js",
+		"build": "cjyes src/index.mjs",
 		"lint": "eslint src"
 	},
 	"repository": {
