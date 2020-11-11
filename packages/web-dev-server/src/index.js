@@ -6,7 +6,11 @@ const { transformSync } = babel;
 export default function preactRefreshPlugin(config, pluginOptions) {
 	return {
 		async transform(context) {
-			if (process.env.NODE_ENV === 'production' || !context.response.is('js'))
+			if (
+				process.env.NODE_ENV === 'production' ||
+				!context.response.is('js') ||
+				context.path.includes('node_modules')
+			)
 				return;
 
 			const { code } = transform(context.body);
