@@ -22,6 +22,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 			}
 
 			return {
+				...context,
 				body: `
           ${'import'} '@prefresh/web-dev-server/runtime';
           ${'import'} { flushUpdates } from '@prefresh/web-dev-server/utils';
