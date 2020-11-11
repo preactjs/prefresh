@@ -4,6 +4,7 @@ import prefresh from "@prefresh/web-dev-server";
 
 export default {
   nodeResolve: true,
+  port: 3005,
   plugins: [
     esbuildPlugin({ jsx: true, jsxFactory: "h", jsxFragment: "Fragment" }),
     hmrPlugin(),
