@@ -1,6 +1,6 @@
 # Prefresh-web-dev-server
 
-[![npm version](https://badgen.net/npm/v/@prefresh/es-dev-server)](https://www.npmjs.com/package/@prefresh/web-dev-server)
+[![npm version](https://badgen.net/npm/v/@prefresh/web-dev-server)](https://www.npmjs.com/package/@prefresh/web-dev-server)
 
 ## Setup
 

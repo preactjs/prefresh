@@ -23,8 +23,8 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 
 			return {
 				body: `
-          ${'import'} '@prefresh/es-dev-server/runtime';
-          ${'import'} { flushUpdates } from '@prefresh/es-dev-server/utils';
+          ${'import'} '@prefresh/web-dev-server/runtime';
+          ${'import'} { flushUpdates } from '@prefresh/web-dev-server/utils';
 
           const prevRefreshReg = self.$RefreshReg$ || (() => {});
           const prevRefreshSig = self.$RefreshSig$ || (() => {});
