@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 1.2.0
+
+### Minor Changes
+
+- [`bcc90a6`](https://github.com/JoviDeCroock/prefresh/commit/bcc90a6da0aa84ddf83255990efb56a2e87021e2) [#218](https://github.com/JoviDeCroock/prefresh/pull/218) Thanks [@DreierF](https://github.com/DreierF)! - feature: Added type declarations
+
 ## 1.1.4
 
 ### Patch Changes
