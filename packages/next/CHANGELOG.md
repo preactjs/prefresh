@@ -1,5 +1,11 @@
 # @prefresh/next
 
+## 1.4.1
+
+### Patch Changes
+
+- [`c6c149d`](https://github.com/JoviDeCroock/prefresh/commit/c6c149ddb052fc4368d03265616d32b951b59118) [#222](https://github.com/JoviDeCroock/prefresh/pull/222) Thanks [@BasixKOR](https://github.com/BasixKOR)! - Add webpack as peerDependencies
+
 ## 1.4.0
 
 ### Minor Changes
