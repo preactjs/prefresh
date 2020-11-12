@@ -54,7 +54,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
           ${hasRefeshReg &&
 						`
           if (import.meta.hot) {
-            import.meta.hot.accept(({ module }) => {
+            import.meta.hot.accept(() => {
               try {
                 flushUpdates();
               } catch(e) {

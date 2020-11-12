@@ -38,7 +38,7 @@ exports.binArgs = {
 	webpack: [],
 	vite: [],
 	nollup: ['-c', '--hot', '--content-base', 'public', '--port', '3003'],
-	'web-dev-server': ['--watch', '--port', '3005']
+	'web-dev-server': []
 };
 
 exports.goMessage = {

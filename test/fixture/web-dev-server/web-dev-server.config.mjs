@@ -7,7 +7,7 @@ export default {
   port: 3005,
   plugins: [
     esbuildPlugin({ jsx: true, jsxFactory: "h", jsxFragment: "Fragment" }),
+    prefresh(),
     hmrPlugin(),
-    prefresh()
   ],
 };
