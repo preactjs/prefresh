@@ -2,9 +2,11 @@
 	"name": "@prefresh/nollup",
 	"version": "2.0.0",
 	"main": "src/index.js",
+	"module": "src/wrapper.mjs",
 	"exports": {
 		".": {
-			"require": "./src/index.js"
+			"require": "./src/index.js",
+			"import": "./src/wrapper.mjs"
 		},
 		"./package.json": "./package.json",
 		"./": "./"
