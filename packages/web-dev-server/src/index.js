@@ -41,19 +41,20 @@ export default function preactRefreshPlugin(config, pluginOptions) {
           };
 
           self.$RefreshReg$ = (type, id) => {
-            self.__PREFRESH__.register(type, ${JSON.stringify(
-							context.originalUrl
-						)} + " " + id);
+            let url = ${JSON.stringify(context.url)};
+            if (url.includes('?')) {
+              url = url.split('?')[0];
+            }
+            self.__PREFRESH__.register(type, url + " " + id);
           };
 
           ${code}
 
-          self.$RefreshSig$ = prevRefreshSig;
-          self.$RefreshReg$ = prevRefreshReg;
-
           ${hasRefeshReg &&
 						`
           if (import.meta.hot) {
+            self.$RefreshSig$ = prevRefreshSig;
+            self.$RefreshReg$ = prevRefreshReg;
             import.meta.hot.accept(() => {
               try {
                 flushUpdates();
