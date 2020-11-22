@@ -14,7 +14,7 @@ class ReloadPlugin {
 	constructor(options) {
 		this.matcher = webpack.ModuleFilenameHelpers.matchObject.bind(
 			undefined,
-			options && options.runsInNextJs ? matcherOptions : nextMatcherOptions
+			options && options.runsInNextJs ? nextMatcherOptions : matcherOptions
 		);
 
 		this.options = {
