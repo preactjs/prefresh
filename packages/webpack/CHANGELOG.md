@@ -1,5 +1,11 @@
 # @prefresh/webpack
 
+## 2.2.1
+
+### Patch Changes
+
+- [`dd17368`](https://github.com/JoviDeCroock/prefresh/commit/dd1736845e86c3baa4da8e690a22a7017482e74e) [#226](https://github.com/JoviDeCroock/prefresh/pull/226) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Reverse condition for next.js
+
 ## 2.2.0
 
 ### Minor Changes

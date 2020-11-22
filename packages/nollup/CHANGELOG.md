@@ -1,5 +1,11 @@
 # @prefresh/nollup
 
+## 2.0.1
+
+### Patch Changes
+
+- [`5bbf5b2`](https://github.com/JoviDeCroock/prefresh/commit/5bbf5b2f9b36e672b79f542e88aa981dc130e066) [#223](https://github.com/JoviDeCroock/prefresh/pull/223) Thanks [@piotr-cz](https://github.com/piotr-cz)! - Add `.mjs` export for compatability with newer Node versions
+
 ## 2.0.0
 
 ### Major Changes
