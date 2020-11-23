@@ -9,7 +9,6 @@
     "@babel/core": "^7.9.6",
     "@prefresh/babel-plugin": "file:../../packages/babel",
     "@prefresh/vite": "file:../../packages/vite",
-    "react-refresh": "^0.8.2",
     "vite": "latest"
   }
 }
