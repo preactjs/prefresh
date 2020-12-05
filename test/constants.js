@@ -40,7 +40,7 @@ exports.binArgs = {
 
 exports.goMessage = {
 	vite: 'running',
-	snowpack: 'install complete',
+	snowpack: 'Server started',
 	webpack: 'successfully',
 	nollup: 'Compiled',
 	next: 'successfully',
