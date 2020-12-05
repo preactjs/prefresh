@@ -1,14 +1,15 @@
 import { h } from 'preact';
-import { useCounter } from './useCounter';
+import { lazy, Suspense } from 'preact/compat';
+
+const Lazy = lazy(function() { return import('./lazy') });
 
 function App() {
-  const [count, increment, decrement] = useCounter()
   return (
-    <div style={{ display: 'flex' }}>
-      <button onClick={decrement}>-10</button>
-      <p>Count: {count}</p>
-      <button onClick={increment}>+10</button>
-    </div>
+    <Suspense fallback={<div style={{ display: 'flex' }}>Loading</div>}>
+      <div style={{ display: 'flex' }}>
+        <Lazy />
+      </div>
+    </Suspense>
   );
 }
 
