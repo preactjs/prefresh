@@ -7,6 +7,6 @@
   },
   "devDependencies": {
     "@prefresh/snowpack": "file:../../packages/snowpack",
-    "snowpack": "2.18.0"
+    "snowpack": "2.10.1"
   }
 }
