@@ -1,8 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-
-const cwd = process.cwd();
-
 module.exports = {
 	mount: {
 		public: '/',

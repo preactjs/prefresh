@@ -88,12 +88,14 @@ describe('Prefresh integrations', () => {
 					}
 				);
 
-				await new Promise((resolve, reject) => {
+				await new Promise(resolve => {
 					devServer.stdout.on(
 						'data',
 						(serverConsoleListener = data => {
 							console.log('[SERVER LOG]: ', data.toString());
-							if (data.toString().match(goMessage[integration])) resolve();
+							if (data.toString().match(goMessage[integration])) {
+								resolve();
+							}
 						})
 					);
 
