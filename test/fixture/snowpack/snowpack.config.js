@@ -3,5 +3,9 @@ module.exports = {
 		public: '/',
 		src: '/_dist_'
 	},
-	plugins: ['@prefresh/snowpack']
+	plugins: ['@prefresh/snowpack'],
+	devOptions: {
+		open: 'none',
+		port: 3004
+	}
 };
