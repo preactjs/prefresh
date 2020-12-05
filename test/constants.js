@@ -25,17 +25,13 @@ exports.bin = {
 	vite: dir => path.resolve(dir, `./node_modules/vite/bin/vite.js`),
 	'web-dev-server': dir =>
 		path.resolve(dir, `./node_modules/@web/dev-server/dist/bin.js`),
-	webpack: dir =>
-		path.resolve(
-			dir,
-			`./node_modules/webpack-dev-server/bin/webpack-dev-server.js`
-		)
+	webpack: dir => path.resolve(dir, `./node_modules/webpack-cli/bin/cli.js`)
 };
 
 exports.binArgs = {
 	next: ['dev', '-p', '3002'],
 	snowpack: ['dev'],
-	webpack: [],
+	webpack: ['serve'],
 	vite: [],
 	nollup: ['-c', '--hot', '--content-base', 'public', '--port', '3003'],
 	'web-dev-server': []
@@ -43,7 +39,7 @@ exports.binArgs = {
 
 exports.goMessage = {
 	vite: 'running',
-	snowpack: 'Server started',
+	snowpack: 'install complete',
 	webpack: 'successfully',
 	nollup: 'Compiled',
 	next: 'successfully',
