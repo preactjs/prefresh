@@ -8,6 +8,7 @@ exports.integrations = [
 	'webpack',
 	'web-dev-server'
 ];
+
 exports.supportsClassComponents = [
 	'vite',
 	'snowpack',
