@@ -10,9 +10,9 @@
     "@prefresh/webpack": "file:../../packages/webpack"
   },
   "dependencies": {
-    "next": "^9.5.0",
-    "preact": "^10.4.4",
-    "preact-render-to-string": "^5.1.4",
+    "next": "^10.0.0",
+    "preact": "^10.5.7",
+    "preact-render-to-string": "^5.1.12",
     "react": "github:preact-compat/react#1.0.0",
     "react-dom": "github:preact-compat/react-dom#1.0.0",
     "react-ssr-prepass": "npm:preact-ssr-prepass@^1.0.1"

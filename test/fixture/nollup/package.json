@@ -5,18 +5,18 @@
     "build": "npm run clean && cross-env NODE_ENV=production rollup -c"
   },
   "dependencies": {
-    "preact": "^10.4.4"
+    "preact": "^10.5.7"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
     "@prefresh/babel-plugin": "file:../../packages/babel",
     "@prefresh/nollup": "file:../../packages/nollup",
-    "@rollup/plugin-babel": "^5.0.3",
+    "@rollup/plugin-babel": "^5.2.2",
     "@rollup/plugin-node-resolve": "^8.0.1",
     "babel-preset-preact": "^2.0.0",
     "cross-env": "^7.0.2",
-    "nollup": "^0.11.1",
-    "rollup": "^2.14.0",
+    "nollup": "^0.14.2",
+    "rollup": "^2.34.0",
     "rollup-plugin-terser": "^6.1.0",
     "shx": "^0.3.2"
   }

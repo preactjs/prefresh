@@ -3,10 +3,10 @@
     "start": "snowpack dev"
   },
   "dependencies": {
-    "preact": "^10.4.6"
+    "preact": "^10.5.7"
   },
   "devDependencies": {
     "@prefresh/snowpack": "file:../../packages/snowpack",
-    "snowpack": "2.10.1"
+    "snowpack": "2.18.0"
   }
 }
