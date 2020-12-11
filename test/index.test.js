@@ -50,7 +50,8 @@ describe('Prefresh integrations', () => {
       jest.setTimeout(100000);
 
       afterAll(async () => {
-        page.removeListener('console', browserConsoleListener);
+        if (process.env.DEBUG)
+          page.removeListener('console', browserConsoleListener);
 
         if (browser) await browser.close();
         if (devServer) {
@@ -109,7 +110,7 @@ describe('Prefresh integrations', () => {
         });
 
         page = await browser.newPage();
-        page.on('console', browserConsoleListener);
+        if (process.env.DEBUG) page.on('console', browserConsoleListener);
 
         await page.goto('http://localhost:' + defaultPort[integration]);
       });
