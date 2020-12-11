@@ -19,10 +19,16 @@ Add `@prefresh/babel-plugin` to your `babel.config.json`:
 
 ```json
 {
-  "presets": [["@babel/preset-react", {
-    "pragma": "h",
-    "pragmaFrag": "Fragment"
-  }], "@babel/preset-typescript"],
+  "presets": [
+    [
+      "@babel/preset-react",
+      {
+        "pragma": "h",
+        "pragmaFrag": "Fragment"
+      }
+    ],
+    "@babel/preset-typescript"
+  ],
   "plugins": ["@babel/plugin-syntax-import-meta", "@prefresh/babel-plugin"]
 }
 ```
@@ -31,10 +37,7 @@ After adding it to your `babel-config` you'll have to make sure your `snowpack.c
 
 ```json
 {
-  "plugins": [
-    "@snowpack/plugin-babel",
-    "@prefresh/snowpack"
-  ]
+  "plugins": ["@snowpack/plugin-babel", "@prefresh/snowpack"]
 }
 ```
 
@@ -50,20 +53,19 @@ Do note that a component as seen below is not named.
 
 ```jsx
 export default () => {
-  return <p>Want to refresh</p>
-}
+  return <p>Want to refresh</p>;
+};
 ```
 
 Instead do:
 
 ```jsx
 const Refresh = () => {
-  return <p>Want to refresh</p>
-}
+  return <p>Want to refresh</p>;
+};
 
 export default Refresh;
 ```
 
 When you are working with HOC's be sure to lift up the `displayName` so we can
 recognise it as a component.
-

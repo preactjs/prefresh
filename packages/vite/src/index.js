@@ -2,26 +2,26 @@ import { transformSync } from '@babel/core';
 
 /** @returns {import('vite').Plugin} */
 export default function prefreshPlugin() {
-	return {
-		transforms: [
-			{
-				test: ({ path }) => /\.(t|j)s(x)?$/.test(path),
-				transform({ code, isBuild, path }) {
-					if (
-						isBuild ||
-						process.env.NODE_ENV === 'production' ||
-						path.includes('node_modules') ||
-						path.includes('@modules')
-					)
-						return code;
+  return {
+    transforms: [
+      {
+        test: ({ path }) => /\.(t|j)s(x)?$/.test(path),
+        transform({ code, isBuild, path }) {
+          if (
+            isBuild ||
+            process.env.NODE_ENV === 'production' ||
+            path.includes('node_modules') ||
+            path.includes('@modules')
+          )
+            return code;
 
-					const result = transform(code, path);
-					const hasReg = /\$RefreshReg\$\(/.test(result.code);
-					const hasSig = /\$RefreshSig\$\(/.test(result.code);
+          const result = transform(code, path);
+          const hasReg = /\$RefreshReg\$\(/.test(result.code);
+          const hasSig = /\$RefreshSig\$\(/.test(result.code);
 
-					if (!hasSig && !hasReg) return { code };
+          if (!hasSig && !hasReg) return { code };
 
-					const prelude = `
+          const prelude = `
             ${'import'} '@prefresh/vite/runtime';
             ${'import'} { flushUpdates } from '@prefresh/vite/utils';
 
@@ -34,8 +34,8 @@ export default function prefreshPlugin() {
 
               self.$RefreshReg$ = (type, id) => {
                 self.__PREFRESH__.register(type, ${JSON.stringify(
-									path
-								)} + " " + id);
+                  path
+                )} + " " + id);
               }
 
               self.$RefreshSig$ = () => {
@@ -50,18 +50,18 @@ export default function prefreshPlugin() {
             }
             `;
 
-					if (hasSig && !hasReg) {
-						return {
-							code: `
+          if (hasSig && !hasReg) {
+            return {
+              code: `
                 ${prelude}
                 ${result.code}
               `,
-							map: result.map
-						};
-					}
+              map: result.map,
+            };
+          }
 
-					return {
-						code: `
+          return {
+            code: `
             ${prelude}
 
             ${result.code}
@@ -78,18 +78,18 @@ export default function prefreshPlugin() {
               });
             }
           `,
-						map: result.map
-					};
-				}
-			}
-		]
-	};
+            map: result.map,
+          };
+        },
+      },
+    ],
+  };
 }
 
 const transform = (code, path) =>
-	transformSync(code, {
-		plugins: [[require('@prefresh/babel-plugin'), { skipEnvCheck: true }]],
-		ast: false,
-		sourceMaps: true,
-		sourceFileName: path
-	});
+  transformSync(code, {
+    plugins: [[require('@prefresh/babel-plugin'), { skipEnvCheck: true }]],
+    ast: false,
+    sourceMaps: true,
+    sourceFileName: path,
+  });

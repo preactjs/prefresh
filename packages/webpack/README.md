@@ -7,7 +7,7 @@
 ```
 npm i -s @prefresh/webpack
 ## OR
-yarn add @prefresh/webpack 
+yarn add @prefresh/webpack
 ```
 
 Then add it to your `webpack` config by doing
@@ -22,10 +22,10 @@ const config = {
   ],
   devServer: {
     hot: true, // ensure dev-server.hot is on
-    ...moreDevServerConfig
+    ...moreDevServerConfig,
   },
-  ...moreWebpackConfig
-}
+  ...moreWebpackConfig,
+};
 ```
 
 ### Using hooks
@@ -48,20 +48,19 @@ Do note that a component as seen below is not named.
 
 ```jsx
 export default () => {
-  return <p>Want to refresh</p>
-}
+  return <p>Want to refresh</p>;
+};
 ```
 
 Instead do:
 
 ```jsx
 const Refresh = () => {
-  return <p>Want to refresh</p>
-}
+  return <p>Want to refresh</p>;
+};
 
 export default Refresh;
 ```
 
 When you are working with HOC's be sure to lift up the `displayName` so we can
 recognise it as a component.
-

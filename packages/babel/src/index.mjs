@@ -18,9 +18,9 @@ export default function (babel, opts = {}) {
     if (env !== 'development' && !opts.skipEnvCheck) {
       throw new Error(
         'Prefresh Babel transform should only be enabled in development environment. ' +
-        'Instead, the environment is: "' +
-        env +
-        '". If you want to override this check, pass {skipEnvCheck: true} as plugin options.'
+          'Instead, the environment is: "' +
+          env +
+          '". If you want to override this check, pass {skipEnvCheck: true} as plugin options.'
       );
     }
   }
@@ -39,7 +39,7 @@ export default function (babel, opts = {}) {
     const registrations = registrationsByProgramPath.get(programPath);
     registrations.push({
       handle,
-      persistentID
+      persistentID,
     });
 
     return handle;
@@ -253,7 +253,7 @@ export default function (babel, opts = {}) {
       key: fnHookCalls.map(call => call.name + '{' + call.key + '}').join('\n'),
       customHooks: fnHookCalls
         .filter(call => !isBuiltinHook(call.name))
-        .map(call => t.cloneDeep(call.callee))
+        .map(call => t.cloneDeep(call.callee)),
     };
   }
 
@@ -333,7 +333,7 @@ export default function (babel, opts = {}) {
           null,
           [],
           t.blockStatement([
-            t.returnStatement(t.arrayExpression(customHooksInScope))
+            t.returnStatement(t.arrayExpression(customHooksInScope)),
           ])
         )
       );
@@ -391,18 +391,24 @@ export default function (babel, opts = {}) {
       } else if (name === 'useReducer' && args.length > 1) {
         // useReducer second argument is initial state.
         key += '(' + args[1].getSource() + ')';
-      } else if ((name === 'useEffect' || name === 'useLayoutEffect') && args.length > 1) {
+      } else if (
+        (name === 'useEffect' || name === 'useLayoutEffect') &&
+        args.length > 1
+      ) {
         key += '(' + args[0].getSource() + ')';
-      } else if ((name === 'useCallback' || name === 'useMemo') && args.length > 1) {
+      } else if (
+        (name === 'useCallback' || name === 'useMemo') &&
+        args.length > 1
+      ) {
         key += '(' + args[0].getSource() + ')';
       }
 
       hookCallsForFn.push({
         callee: path.node.callee,
         name,
-        key
+        key,
       });
-    }
+    },
   };
 
   const createContextTemplate = template(
@@ -468,7 +474,7 @@ export default function (babel, opts = {}) {
               t.assignmentExpression('=', handle, path.node.id)
             )
           );
-        }
+        },
       },
       CallExpression(path, state) {
         if (!path.get('callee').referencesImport('preact', 'createContext'))
@@ -494,14 +500,14 @@ export default function (babel, opts = {}) {
             createContextTemplate({
               CREATECONTEXT: path.get('callee').node,
               IDENT: t.identifier(id),
-              VALUE: t.clone(getFirstNonTsExpression(path.node.arguments[0]))
+              VALUE: t.clone(getFirstNonTsExpression(path.node.arguments[0])),
             })
           );
         } else {
           path.replaceWith(
             emptyTemplate({
               CREATECONTEXT: path.get('callee').node,
-              IDENT: t.identifier(id)
+              IDENT: t.identifier(id),
             })
           );
         }
@@ -628,7 +634,7 @@ export default function (babel, opts = {}) {
           const sigCallID = path.scope.generateUidIdentifier('_s');
           path.scope.parent.push({
             id: sigCallID,
-            init: t.callExpression(refreshSig, [])
+            init: t.callExpression(refreshSig, []),
           });
 
           // The signature call is split in two parts. One part is called inside the function.
@@ -669,7 +675,7 @@ export default function (babel, opts = {}) {
               )
             )
           );
-        }
+        },
       },
       'ArrowFunctionExpression|FunctionExpression': {
         exit(path) {
@@ -690,14 +696,14 @@ export default function (babel, opts = {}) {
           const sigCallID = path.scope.generateUidIdentifier('_s');
           path.scope.parent.push({
             id: sigCallID,
-            init: t.callExpression(refreshSig, [])
+            init: t.callExpression(refreshSig, []),
           });
 
           // The signature call is split in two parts. One part is called inside the function.
           // This is used to signal when first render happens.
           if (path.node.body.type !== 'BlockStatement') {
             path.node.body = t.blockStatement([
-              t.returnStatement(path.node.body)
+              t.returnStatement(path.node.body),
             ]);
           }
           path
@@ -749,7 +755,7 @@ export default function (babel, opts = {}) {
             );
             // Result: let Foo = hoc(__signature(() => {}, ...))
           }
-        }
+        },
       },
       VariableDeclaration(path) {
         const node = path.node;
@@ -857,14 +863,14 @@ export default function (babel, opts = {}) {
               t.expressionStatement(
                 t.callExpression(refreshReg, [
                   handle,
-                  t.stringLiteral(persistentID)
+                  t.stringLiteral(persistentID),
                 ])
               )
             );
             declarators.push(t.variableDeclarator(handle));
           });
-        }
-      }
-    }
+        },
+      },
+    },
   };
 }

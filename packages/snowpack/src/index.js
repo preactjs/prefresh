@@ -1,31 +1,31 @@
 import { transformSync } from '@babel/core';
 
 export default function preactRefreshPlugin(config, pluginOptions) {
-	return {
-		knownEntrypoints: [
-			'@prefresh/snowpack/runtime',
-			'@prefresh/snowpack/utils'
-		],
-		async transform({ contents, urlPath, isDev, id }) {
-			if (!isDev || !urlPath.endsWith('.js') || config.devOptions.hmr === false)
-				return;
+  return {
+    knownEntrypoints: [
+      '@prefresh/snowpack/runtime',
+      '@prefresh/snowpack/utils',
+    ],
+    async transform({ contents, urlPath, isDev, id }) {
+      if (!isDev || !urlPath.endsWith('.js') || config.devOptions.hmr === false)
+        return;
 
-			let hasRefeshReg = /\$RefreshReg\$\(/.test(contents);
-			let hasRefeshSig = /\$RefreshSig\$\(/.test(contents);
+      let hasRefeshReg = /\$RefreshReg\$\(/.test(contents);
+      let hasRefeshSig = /\$RefreshSig\$\(/.test(contents);
 
-			if (!hasRefeshReg && !hasRefeshSig) {
-				const { code } = transform(contents, id);
-				contents = code;
+      if (!hasRefeshReg && !hasRefeshSig) {
+        const { code } = transform(contents, id);
+        contents = code;
 
-				hasRefeshReg = /\$RefreshReg\$\(/.test(contents);
-				hasRefeshSig = /\$RefreshSig\$\(/.test(contents);
-				if (!hasRefeshReg && !hasRefeshSig) {
-					return { contents };
-				}
-			}
+        hasRefeshReg = /\$RefreshReg\$\(/.test(contents);
+        hasRefeshSig = /\$RefreshSig\$\(/.test(contents);
+        if (!hasRefeshReg && !hasRefeshSig) {
+          return { contents };
+        }
+      }
 
-			return {
-				result: `
+      return {
+        result: `
           ${'import'} '@prefresh/snowpack/runtime';
           ${'import'} { flushUpdates } from '@prefresh/snowpack/utils';
 
@@ -44,8 +44,8 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 
           self.$RefreshReg$ = (type, id) => {
             self.__PREFRESH__.register(type, ${JSON.stringify(
-							urlPath
-						)} + " " + id);
+              urlPath
+            )} + " " + id);
           };
 
           ${contents}
@@ -53,8 +53,9 @@ export default function preactRefreshPlugin(config, pluginOptions) {
           self.$RefreshSig$ = prevRefreshSig;
           self.$RefreshReg$ = prevRefreshReg;
 
-          ${hasRefeshReg &&
-						`
+          ${
+            hasRefeshReg &&
+            `
           if (import.meta.hot) {
             import.meta.hot.accept(({ module }) => {
               try {
@@ -64,25 +65,26 @@ export default function preactRefreshPlugin(config, pluginOptions) {
               }
             });
           }
-          `}
+          `
+          }
 
-        `
-			};
-		}
-	};
+        `,
+      };
+    },
+  };
 }
 
 const transform = (code, id) =>
-	transformSync(code, {
-		plugins: [
-			[require('@prefresh/babel-plugin'), { skipEnvCheck: true }],
-			[require('@babel/plugin-syntax-class-properties')]
-		],
-		cwd: process.cwd(),
-		filename: id,
-		ast: false,
-		compact: false,
-		sourceMaps: false,
-		configFile: false,
-		babelrc: false
-	});
+  transformSync(code, {
+    plugins: [
+      [require('@prefresh/babel-plugin'), { skipEnvCheck: true }],
+      [require('@babel/plugin-syntax-class-properties')],
+    ],
+    cwd: process.cwd(),
+    filename: id,
+    ast: false,
+    compact: false,
+    sourceMaps: false,
+    configFile: false,
+    babelrc: false,
+  });

@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   const [count, increment, decrement] = useCounter();
-  
+
   return (
     <div class="App">
       <button onClick={decrement}>-10</button>

@@ -16,7 +16,7 @@ Then add it to your `vite.config.js` config:
 import prefresh from '@prefresh/vite';
 
 export default {
-	plugins: [prefresh()]
+  plugins: [prefresh()],
 };
 ```
 
@@ -32,20 +32,19 @@ Do note that a component as seen below is not named.
 
 ```jsx
 export default () => {
-  return <p>Want to refresh</p>
-}
+  return <p>Want to refresh</p>;
+};
 ```
 
 Instead do:
 
 ```jsx
 const Refresh = () => {
-  return <p>Want to refresh</p>
-}
+  return <p>Want to refresh</p>;
+};
 
 export default Refresh;
 ```
 
 When you are working with HOC's be sure to lift up the `displayName` so we can
 recognise it as a component.
-

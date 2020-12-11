@@ -4,26 +4,26 @@ import plugin from '@prefresh/babel-plugin';
 const { transformSync } = babel;
 
 export default function preactRefreshPlugin(config, pluginOptions) {
-	return {
-		async transform(context) {
-			if (
-				process.env.NODE_ENV === 'production' ||
-				!context.response.is('js') ||
-				context.path.includes('node_modules')
-			)
-				return;
+  return {
+    async transform(context) {
+      if (
+        process.env.NODE_ENV === 'production' ||
+        !context.response.is('js') ||
+        context.path.includes('node_modules')
+      )
+        return;
 
-			const { code } = transform(context.body);
+      const { code } = transform(context.body);
 
-			const hasRefeshReg = /\$RefreshReg\$\(/.test(code);
-			const hasRefeshSig = /\$RefreshSig\$\(/.test(code);
-			if (!hasRefeshReg && !hasRefeshSig) {
-				return context;
-			}
+      const hasRefeshReg = /\$RefreshReg\$\(/.test(code);
+      const hasRefeshSig = /\$RefreshSig\$\(/.test(code);
+      if (!hasRefeshReg && !hasRefeshSig) {
+        return context;
+      }
 
-			return {
-				...context,
-				body: `
+      return {
+        ...context,
+        body: `
           ${'import'} '@prefresh/web-dev-server/runtime';
           ${'import'} { flushUpdates } from '@prefresh/web-dev-server/utils';
 
@@ -50,8 +50,9 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 
           ${code}
 
-          ${hasRefeshReg &&
-						`
+          ${
+            hasRefeshReg &&
+            `
           if (import.meta.hot) {
             self.$RefreshSig$ = prevRefreshSig;
             self.$RefreshReg$ = prevRefreshReg;
@@ -63,21 +64,22 @@ export default function preactRefreshPlugin(config, pluginOptions) {
               }
             });
           }
-          `}
+          `
+          }
 
-        `
-			};
-		}
-	};
+        `,
+      };
+    },
+  };
 }
 
 const transform = code =>
-	transformSync(code, {
-		plugins: [[plugin, { skipEnvCheck: true }]],
-		cwd: process.cwd(),
-		ast: false,
-		compact: false,
-		sourceMaps: false,
-		configFile: false,
-		babelrc: false
-	});
+  transformSync(code, {
+    plugins: [[plugin, { skipEnvCheck: true }]],
+    cwd: process.cwd(),
+    ast: false,
+    compact: false,
+    sourceMaps: false,
+    configFile: false,
+    babelrc: false,
+  });

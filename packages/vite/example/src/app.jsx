@@ -1,5 +1,5 @@
-import { Logo } from './logo'
-import { useCounter } from './useCounter'
+import { Logo } from './logo';
+import { useCounter } from './useCounter';
 
 function Test() {
   const [count, increment] = useCounter(0);
@@ -8,7 +8,7 @@ function Test() {
       <p>Count: {count}</p>
       <button onClick={increment}>Increment</button>
     </div>
-  )
+  );
 }
 
 export function App(props) {
@@ -17,5 +17,5 @@ export function App(props) {
       <Logo />
       <Test />
     </div>
-  )
+  );
 }

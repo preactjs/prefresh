@@ -7,7 +7,7 @@
 ```
 npm i -s @prefresh/nollup
 ## OR
-yarn add @prefresh/nollup 
+yarn add @prefresh/nollup
 ```
 
 Then add it to your `rollup.config.js` config by doing
@@ -24,7 +24,7 @@ const config = {
 };
 ```
 
-Ensure that ```--hot``` flag is enabled or ```"hot": true``` is set in ```.nolluprc.js``` 
+Ensure that `--hot` flag is enabled or `"hot": true` is set in `.nolluprc.js`
 
 ### Using hooks
 
@@ -46,23 +46,22 @@ Do note that a component as seen below is not named.
 
 ```jsx
 export default () => {
-  return <p>Want to refresh</p>
-}
+  return <p>Want to refresh</p>;
+};
 ```
 
 Instead do:
 
 ```jsx
 const Refresh = () => {
-  return <p>Want to refresh</p>
-}
+  return <p>Want to refresh</p>;
+};
 
 export default Refresh;
 ```
 
 When you are working with HOC's be sure to lift up the `displayName` so we can
 recognise it as a component.
-
 
 ## Credits
 

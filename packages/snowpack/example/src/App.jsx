@@ -1,7 +1,9 @@
 import { h } from 'preact';
 import { lazy, Suspense } from 'preact/compat';
 
-const Lazy = lazy(function() { return import('./lazy') });
+const Lazy = lazy(function () {
+  return import('./lazy');
+});
 
 function App() {
   return (
