@@ -1,5 +1,6 @@
 ---
 '@prefresh/nollup': minor
+'@prefresh/utils': minor
 '@prefresh/webpack': minor
 ---
 
