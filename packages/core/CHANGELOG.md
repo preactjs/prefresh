@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.2.0
+
+### Minor Changes
+
+- [`bcd6113`](https://github.com/JoviDeCroock/prefresh/commit/bcd61138872ca0494b9b480f4b153458997071a0) [#236](https://github.com/JoviDeCroock/prefresh/pull/236) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Update oldVnodeTypes in place with newer equivalents
+
 ## 1.1.1
 
 ### Patch Changes

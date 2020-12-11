@@ -1,6 +1,6 @@
 {
 	"name": "@prefresh/webpack",
-	"version": "2.3.0",
+	"version": "2.4.0",
 	"main": "src/index.js",
 	"exports": {
 		".": {
@@ -23,8 +23,8 @@
 	},
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
-		"@prefresh/core": "^1.0.0",
-		"@prefresh/utils": "^1.0.0"
+		"@prefresh/core": "^1.2.0",
+		"@prefresh/utils": "^1.1.0"
 	},
 	"devDependencies": {
 		"preact": "^10.4.1",

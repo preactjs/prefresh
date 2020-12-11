@@ -1,5 +1,11 @@
 # @prefresh/utils
 
+## 1.1.0
+
+### Minor Changes
+
+- [`39bcf44`](https://github.com/JoviDeCroock/prefresh/commit/39bcf44604c377ca493db9ebce1d75071107704b) [#238](https://github.com/JoviDeCroock/prefresh/pull/238) Thanks [@sidujjain](https://github.com/sidujjain)! - Add prototype-check to `@prefresh/utils` isComponent check and utilize this in nollup & webpack
+
 ## 1.0.0
 
 ### Major Changes

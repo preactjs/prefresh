@@ -1,5 +1,17 @@
 # @prefresh/webpack
 
+## 2.4.0
+
+### Minor Changes
+
+- [`39bcf44`](https://github.com/JoviDeCroock/prefresh/commit/39bcf44604c377ca493db9ebce1d75071107704b) [#238](https://github.com/JoviDeCroock/prefresh/pull/238) Thanks [@sidujjain](https://github.com/sidujjain)! - Add prototype-check to `@prefresh/utils` isComponent check and utilize this in nollup & webpack
+
+### Patch Changes
+
+- Updated dependencies [[`39bcf44`](https://github.com/JoviDeCroock/prefresh/commit/39bcf44604c377ca493db9ebce1d75071107704b), [`bcd6113`](https://github.com/JoviDeCroock/prefresh/commit/bcd61138872ca0494b9b480f4b153458997071a0)]:
+  - @prefresh/utils@1.1.0
+  - @prefresh/core@1.2.0
+
 ## 2.3.0
 
 ### Patch Changes
