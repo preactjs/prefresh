@@ -1,4 +1,4 @@
-const injectEntry = originalEntry => {
+const injectEntry = (originalEntry) => {
 	const entryInjects = [require.resolve('@prefresh/core')];
 
 	if (typeof originalEntry === 'string') {

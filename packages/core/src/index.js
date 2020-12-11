@@ -53,9 +53,9 @@ function replaceComponent(OldType, NewType, resetHookState) {
 
 	mappedVNodes.set(OldType, NewType);
 
-	pendingUpdates = pendingUpdates.filter(p => p[0] !== OldType);
+	pendingUpdates = pendingUpdates.filter((p) => p[0] !== OldType);
 
-	vnodes.forEach(vnode => {
+	vnodes.forEach((vnode) => {
 		// update the type in-place to reference the new component
 		vnode.type = NewType;
 
@@ -106,7 +106,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
 					vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].length
 				) {
 					vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(
-						possibleEffect => {
+						(possibleEffect) => {
 							if (
 								possibleEffect[HOOK_CLEANUP] &&
 								typeof possibleEffect[HOOK_CLEANUP] === 'function'
@@ -118,7 +118,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
 								Object.keys(possibleEffect).length === 3
 							) {
 								const cleanupKey = Object.keys(possibleEffect).find(
-									key => key !== HOOK_ARGS && key !== HOOK_VALUE
+									(key) => key !== HOOK_ARGS && key !== HOOK_VALUE
 								);
 								if (
 									cleanupKey &&
@@ -150,7 +150,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
 }
 
 self[NAMESPACE] = {
-	getSignature: type => signaturesForType.get(type),
+	getSignature: (type) => signaturesForType.get(type),
 	register: (type, id) => {
 		if (typesById.has(id)) {
 			const existing = typesById.get(id);

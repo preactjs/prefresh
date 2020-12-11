@@ -13,10 +13,10 @@ exports.nextMatcherOptions = {
 	exclude: /node_modules\/(?!next[\\/]dist[\\/]next-server[\\/]lib).*/
 };
 
-exports.injectRefreshFunctions = function(compilation) {
+exports.injectRefreshFunctions = function (compilation) {
 	const hookVars = compilation.mainTemplate.hooks.localVars;
 
-	hookVars.tap('ReactFreshWebpackPlugin', source =>
+	hookVars.tap('ReactFreshWebpackPlugin', (source) =>
 		Template.asString([
 			source,
 			'',

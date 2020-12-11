@@ -23,8 +23,8 @@ class ReloadPlugin {
 	}
 
 	webpack4(compiler) {
-		compiler.hooks.normalModuleFactory.tap(NAME, nmf => {
-			nmf.hooks.afterResolve.tap(NAME, data => {
+		compiler.hooks.normalModuleFactory.tap(NAME, (nmf) => {
+			nmf.hooks.afterResolve.tap(NAME, (data) => {
 				if (
 					this.matcher(data.resource) &&
 					!data.resource.includes('@prefresh') &&
@@ -41,7 +41,7 @@ class ReloadPlugin {
 			});
 		});
 
-		compiler.hooks.compilation.tap(NAME, compilation => {
+		compiler.hooks.compilation.tap(NAME, (compilation) => {
 			injectRefreshFunctions(compilation);
 			compilation.mainTemplate.hooks.require.tap(NAME, (source, chunk, hash) =>
 				createRefreshTemplate(

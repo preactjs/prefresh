@@ -53,7 +53,8 @@ export default function preactRefreshPlugin(config, pluginOptions) {
           self.$RefreshSig$ = prevRefreshSig;
           self.$RefreshReg$ = prevRefreshReg;
 
-          ${hasRefeshReg &&
+          ${
+						hasRefeshReg &&
 						`
           if (import.meta.hot) {
             import.meta.hot.accept(({ module }) => {
@@ -64,7 +65,8 @@ export default function preactRefreshPlugin(config, pluginOptions) {
               }
             });
           }
-          `}
+          `
+					}
 
         `
 			};

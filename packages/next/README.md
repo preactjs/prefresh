@@ -7,7 +7,7 @@
 ```
 npm i -s @prefresh/next
 ## OR
-yarn add @prefresh/next 
+yarn add @prefresh/next
 ```
 
 Then add it to your `next` config by doing
@@ -30,20 +30,19 @@ Do note that a component as seen below is not named.
 
 ```jsx
 export default () => {
-  return <p>Want to refresh</p>
-}
+	return <p>Want to refresh</p>;
+};
 ```
 
 Instead do:
 
 ```jsx
 const Refresh = () => {
-  return <p>Want to refresh</p>
-}
+	return <p>Want to refresh</p>;
+};
 
 export default Refresh;
 ```
 
 When you are working with HOC's be sure to lift up the `displayName` so we can
 recognise it as a component.
-

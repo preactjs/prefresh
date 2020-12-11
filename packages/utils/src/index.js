@@ -25,7 +25,7 @@ export const flush = () => {
 	}
 };
 
-export const isComponent = exportValue => {
+export const isComponent = (exportValue) => {
 	const name = exportValue.name || exportValue.displayName;
 	if (typeof exportValue === 'function') {
 		if (

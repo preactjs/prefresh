@@ -1,8 +1,8 @@
 {
-  "presets": ["babel-preset-preact"],
-  "env": {
-    "development": {
-      "plugins": ["@prefresh/babel-plugin"]
-    }
-  }
+	"presets": ["babel-preset-preact"],
+	"env": {
+		"development": {
+			"plugins": ["@prefresh/babel-plugin"]
+		}
+	}
 }

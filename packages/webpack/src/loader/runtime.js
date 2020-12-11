@@ -1,5 +1,5 @@
 /* globals __prefresh_utils__ */
-module.exports = function() {
+module.exports = function () {
 	const isPrefreshComponent = __prefresh_utils__.shouldBind(module);
 
 	if (module.hot && isPrefreshComponent) {
@@ -19,7 +19,7 @@ module.exports = function() {
 			}
 		}
 
-		module.hot.dispose(function(data) {
+		module.hot.dispose(function (data) {
 			data.moduleExports = __prefresh_utils__.getExports(module);
 		});
 

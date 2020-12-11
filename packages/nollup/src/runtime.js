@@ -1,9 +1,9 @@
 import { isComponent, flush } from '@prefresh/utils';
 
 // eslint-disable-next-line
-const getExports = m => m.exports || m.__proto__.exports;
+const getExports = (m) => m.exports || m.__proto__.exports;
 
-const shouldBind = m => {
+const shouldBind = (m) => {
 	let isCitizen = false;
 	const moduleExports = getExports(m);
 
@@ -46,11 +46,11 @@ export function __$RefreshCheck$__(module) {
 			}
 		}
 
-		module.hot.dispose(function(data) {
+		module.hot.dispose(function (data) {
 			data.module = module;
 		});
 
-		module.hot.accept(function() {
+		module.hot.accept(function () {
 			require(module.id);
 		});
 	}

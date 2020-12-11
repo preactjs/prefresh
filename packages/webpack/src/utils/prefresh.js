@@ -1,9 +1,9 @@
 const { isComponent, flush } = require('@prefresh/utils');
 
 // eslint-disable-next-line
-const getExports = m => m.exports || m.__proto__.exports;
+const getExports = (m) => m.exports || m.__proto__.exports;
 
-const shouldBind = m => {
+const shouldBind = (m) => {
 	let isCitizen = false;
 	const moduleExports = getExports(m);
 

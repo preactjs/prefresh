@@ -37,7 +37,7 @@ function createRefreshTemplate(source, chunk, hash, mainTemplate, options) {
 			chunk,
 			hash,
 			contentHashType: 'javascript',
-			hashWithLength: length =>
+			hashWithLength: (length) =>
 				mainTemplate.renderCurrentHashCode(hash, length),
 			noChunkHash: mainTemplate.useChunkHash(chunk)
 		});
@@ -50,7 +50,7 @@ function createRefreshTemplate(source, chunk, hash, mainTemplate, options) {
 	const lines = source.split('\n');
 
 	// Webpack generates this line whenever the mainTemplate is called
-	const moduleInitializationLineNumber = lines.findIndex(line =>
+	const moduleInitializationLineNumber = lines.findIndex((line) =>
 		options.runsInNextJs
 			? line.includes('modules[moduleId].call(')
 			: line.startsWith('modules[moduleId].call')

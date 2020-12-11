@@ -7,7 +7,7 @@
 ```
 npm i -s @prefresh/webpack
 ## OR
-yarn add @prefresh/webpack 
+yarn add @prefresh/webpack
 ```
 
 Then add it to your `webpack` config by doing
@@ -16,16 +16,16 @@ Then add it to your `webpack` config by doing
 import PreactRefreshPlugin from '@prefresh/webpack';
 
 const config = {
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new PreactRefreshPlugin(),
-  ],
-  devServer: {
-    hot: true, // ensure dev-server.hot is on
-    ...moreDevServerConfig
-  },
-  ...moreWebpackConfig
-}
+	plugins: [
+		new webpack.HotModuleReplacementPlugin(),
+		new PreactRefreshPlugin()
+	],
+	devServer: {
+		hot: true, // ensure dev-server.hot is on
+		...moreDevServerConfig
+	},
+	...moreWebpackConfig
+};
 ```
 
 ### Using hooks
@@ -48,20 +48,19 @@ Do note that a component as seen below is not named.
 
 ```jsx
 export default () => {
-  return <p>Want to refresh</p>
-}
+	return <p>Want to refresh</p>;
+};
 ```
 
 Instead do:
 
 ```jsx
 const Refresh = () => {
-  return <p>Want to refresh</p>
-}
+	return <p>Want to refresh</p>;
+};
 
 export default Refresh;
 ```
 
 When you are working with HOC's be sure to lift up the `displayName` so we can
 recognise it as a component.
-

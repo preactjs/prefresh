@@ -50,7 +50,8 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 
           ${code}
 
-          ${hasRefeshReg &&
+          ${
+						hasRefeshReg &&
 						`
           if (import.meta.hot) {
             self.$RefreshSig$ = prevRefreshSig;
@@ -63,7 +64,8 @@ export default function preactRefreshPlugin(config, pluginOptions) {
               }
             });
           }
-          `}
+          `
+					}
 
         `
 			};
@@ -71,7 +73,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 	};
 }
 
-const transform = code =>
+const transform = (code) =>
 	transformSync(code, {
 		plugins: [[plugin, { skipEnvCheck: true }]],
 		cwd: process.cwd(),

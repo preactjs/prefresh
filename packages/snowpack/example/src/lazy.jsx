@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { useCounter } from './useCounter';
 
 function Lazy() {
-  const [count, increment, decrement] = useCounter()
+  const [count, increment, decrement] = useCounter();
   return (
     <div style={{ display: 'flex' }}>
       <button onClick={decrement}>-10</button>

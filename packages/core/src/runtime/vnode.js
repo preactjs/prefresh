@@ -2,7 +2,7 @@ import { options } from 'preact';
 import { vnodesForComponent, mappedVNodes } from './vnodesForComponent';
 import { VNODE_COMPONENT } from '../constants';
 
-const getMappedVnode = type => {
+const getMappedVnode = (type) => {
 	if (mappedVNodes.has(type)) {
 		return getMappedVnode(mappedVNodes.get(type));
 	}
@@ -11,7 +11,7 @@ const getMappedVnode = type => {
 };
 
 const oldVnode = options.vnode;
-options.vnode = vnode => {
+options.vnode = (vnode) => {
 	if (vnode && typeof vnode.type === 'function') {
 		const vnodes = vnodesForComponent.get(vnode.type);
 		if (!vnodes) {

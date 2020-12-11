@@ -1,6 +1,6 @@
 const NAMESPACE = '__PREFRESH__';
 
-module.exports = function() {
+module.exports = function () {
 	return {
 		nollupModuleWrap(code) {
 			return `

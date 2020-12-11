@@ -35,7 +35,7 @@ const config = {
 		if (dev && !isServer) {
 			const entry = config.entry;
 			config.entry = () =>
-				entry().then(entries => {
+				entry().then((entries) => {
 					entries['main.js'] = ['preact/debug'].concat(
 						entries['main.js'] || []
 					);

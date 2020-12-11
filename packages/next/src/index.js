@@ -12,7 +12,7 @@ module.exports = (nextConfig = {}) => {
 			const { dev, isServer, defaultLoaders } = options;
 			if (dev && !isServer) {
 				const reactRefresh = config.plugins.find(
-					s => s.constructor.name === 'ReactFreshWebpackPlugin'
+					(s) => s.constructor.name === 'ReactFreshWebpackPlugin'
 				);
 
 				if (reactRefresh) {
