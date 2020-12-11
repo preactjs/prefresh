@@ -5,7 +5,11 @@
   "dependencies": {
     "preact": "^10.5.7"
   },
+  "resolutions": {
+    "@prefresh/babel-plugin": "file:../../packages/babel"
+  },
   "devDependencies": {
+    "@prefresh/babel-plugin": "file:../../packages/babel",
     "@prefresh/snowpack": "file:../../packages/snowpack",
     "snowpack": "2.10.1"
   }
