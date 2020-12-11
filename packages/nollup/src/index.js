@@ -44,7 +44,7 @@ module.exports = function() {
 			return {
 				code: [
 					code,
-					'import { __$RefreshCheck$__ } from "@prefresh/nollup/src/runtime"',
+					'import { __$RefreshCheck$__ } from "@prefresh/nollup/src/runtime.js"',
 					'__$RefreshCheck$__(module)'
 				].join(';')
 			};
