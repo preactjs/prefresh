@@ -3,6 +3,7 @@ import { useCounter } from './useCounter'
 import { StoreProvider } from './context';
 import { Products } from './products'
 import { Greeting } from './greeting';
+import { Effect } from './effect';
 
 function Test() {
   const [count, increment] = useCounter();
@@ -22,6 +23,7 @@ export function App(props) {
       <StoreProvider>
         <Products />
       </StoreProvider>
+      <Effect />
     </div>
   )
 }

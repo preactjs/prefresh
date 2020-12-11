@@ -20,5 +20,4 @@ export class Greeting extends Component {
       </div>
     )
   }
-
 }
