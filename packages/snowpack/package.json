@@ -1,6 +1,6 @@
 {
 	"name": "@prefresh/snowpack",
-	"version": "2.1.0",
+	"version": "2.2.0",
 	"module": "dist/index.mjs",
 	"main": "dist/index.js",
 	"exports": {
@@ -46,7 +46,7 @@
 	"dependencies": {
 		"@babel/core": "^7.9.6",
 		"@babel/plugin-syntax-class-properties": "^7.10.0",
-		"@prefresh/babel-plugin": "0.2.2",
+		"@prefresh/babel-plugin": "0.3.0",
 		"@prefresh/core": "^1.1.0",
 		"@prefresh/utils": "^1.0.0"
 	},
@@ -56,7 +56,7 @@
 		"snowpack": "^2.0.0"
 	},
 	"peerDependencies": {
-		"@prefresh/babel-plugin": "^0.2.0",
+		"@prefresh/babel-plugin": "^0.3.0",
 		"preact": "^10.4.0",
 		"snowpack": "^2.0.0"
 	}

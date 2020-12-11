@@ -1,6 +1,6 @@
 {
 	"name": "@prefresh/web-dev-server",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"module": "dist/index.mjs",
 	"main": "dist/index.js",
 	"exports": {
@@ -45,20 +45,20 @@
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
 		"@babel/core": "^7.9.6",
-		"@prefresh/babel-plugin": "0.2.2",
+		"@prefresh/babel-plugin": "0.3.0",
 		"@prefresh/core": "^1.1.0",
 		"@prefresh/utils": "^1.0.0"
 	},
 	"devDependencies": {
-    "@web/dev-server": "^0.0.18",
-    "@web/dev-server-hmr": "^0.0.2",
+		"@web/dev-server": "^0.0.18",
+		"@web/dev-server-hmr": "^0.0.2",
 		"bundt": "^1.0.1",
 		"preact": "^10.4.1"
 	},
 	"peerDependencies": {
 		"@web/dev-server": "^0.0.18",
-    "@web/dev-server-hmr": "^0.0.2",
-		"@prefresh/babel-plugin": "^0.2.0",
+		"@web/dev-server-hmr": "^0.0.2",
+		"@prefresh/babel-plugin": "^0.3.0",
 		"preact": "^10.4.0"
 	}
 }

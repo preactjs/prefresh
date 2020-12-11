@@ -1,8 +1,8 @@
 {
 	"name": "@prefresh/babel-plugin",
-	"version": "0.2.2",
-  "main": "dist/src/index.js",
-  "module": "src/index.mjs",
+	"version": "0.3.0",
+	"main": "dist/src/index.js",
+	"module": "src/index.mjs",
 	"exports": {
 		".": {
 			"import": "./src/index.mjs",
