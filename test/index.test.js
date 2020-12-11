@@ -213,7 +213,6 @@ describe('Prefresh integrations', () => {
 			test('re-runs changed effects', async () => {
 				const value = await page.$('.effect-test');
 
-				await expectByPolling(() => getText(value), 'hello world');
 				await updateFile('src/effect.jsx', content =>
 					content.replace(
 						"useEffect(() => { setState('hello world'); }, []);",
