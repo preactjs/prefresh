@@ -1,5 +1,14 @@
 import { options } from 'preact';
-import { vnodesForComponent } from './vnodesForComponent';
+import { vnodesForComponent, mappedVNodes } from './vnodesForComponent';
+import { VNODE_COMPONENT } from '../constants';
+
+const getMappedVnode = type => {
+	if (mappedVNodes.has(type)) {
+		return getMappedVnode(mappedVNodes.get(type));
+	}
+
+	return type;
+};
 
 const oldVnode = options.vnode;
 options.vnode = vnode => {
@@ -9,6 +18,12 @@ options.vnode = vnode => {
 			vnodesForComponent.set(vnode.type, [vnode]);
 		} else {
 			vnodes.push(vnode);
+		}
+
+		const foundType = getMappedVnode(vnode.type);
+		vnode.type = foundType;
+		if (vnode[VNODE_COMPONENT]) {
+			vnode[VNODE_COMPONENT].constructor = foundType;
 		}
 	}
 

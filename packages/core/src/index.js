@@ -19,7 +19,7 @@ import {
 	HOOK_CLEANUP
 } from './constants';
 import { computeKey } from './computeKey';
-import { vnodesForComponent } from './runtime/vnodesForComponent';
+import { vnodesForComponent, mappedVNodes } from './runtime/vnodesForComponent';
 import { signaturesForType } from './runtime/signaturesForType';
 
 let typesById = new Map();
@@ -50,6 +50,8 @@ function replaceComponent(OldType, NewType, resetHookState) {
 	// migrate the list to our new constructor reference
 	vnodesForComponent.delete(OldType);
 	vnodesForComponent.set(NewType, vnodes);
+
+	mappedVNodes.set(OldType, NewType);
 
 	pendingUpdates = pendingUpdates.filter(p => p[0] !== OldType);
 
