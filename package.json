@@ -48,12 +48,6 @@
       "no-cond-assign": 0
     }
   },
-  "prettierIgnore": [
-    "dist",
-    "node_modules",
-    "test",
-    "temp"
-  ],
   "eslintIgnore": [
     "dist",
     "node_modules",
