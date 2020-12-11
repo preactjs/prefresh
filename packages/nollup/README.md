@@ -46,7 +46,7 @@ Do note that a component as seen below is not named.
 
 ```jsx
 export default () => {
-	return <p>Want to refresh</p>;
+  return <p>Want to refresh</p>;
 };
 ```
 
@@ -54,7 +54,7 @@ Instead do:
 
 ```jsx
 const Refresh = () => {
-	return <p>Want to refresh</p>;
+  return <p>Want to refresh</p>;
 };
 
 export default Refresh;

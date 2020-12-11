@@ -31,42 +31,42 @@ const afterModule = `
 `;
 
 function createRefreshTemplate(source, chunk, hash, mainTemplate, options) {
-	let filename = mainTemplate.outputOptions.filename;
-	if (typeof filename === 'function') {
-		filename = filename({
-			chunk,
-			hash,
-			contentHashType: 'javascript',
-			hashWithLength: (length) =>
-				mainTemplate.renderCurrentHashCode(hash, length),
-			noChunkHash: mainTemplate.useChunkHash(chunk)
-		});
-	}
+  let filename = mainTemplate.outputOptions.filename;
+  if (typeof filename === 'function') {
+    filename = filename({
+      chunk,
+      hash,
+      contentHashType: 'javascript',
+      hashWithLength: length =>
+        mainTemplate.renderCurrentHashCode(hash, length),
+      noChunkHash: mainTemplate.useChunkHash(chunk),
+    });
+  }
 
-	if (!filename || !filename.includes('.js')) {
-		return source;
-	}
+  if (!filename || !filename.includes('.js')) {
+    return source;
+  }
 
-	const lines = source.split('\n');
+  const lines = source.split('\n');
 
-	// Webpack generates this line whenever the mainTemplate is called
-	const moduleInitializationLineNumber = lines.findIndex((line) =>
-		options.runsInNextJs
-			? line.includes('modules[moduleId].call(')
-			: line.startsWith('modules[moduleId].call')
-	);
+  // Webpack generates this line whenever the mainTemplate is called
+  const moduleInitializationLineNumber = lines.findIndex(line =>
+    options.runsInNextJs
+      ? line.includes('modules[moduleId].call(')
+      : line.startsWith('modules[moduleId].call')
+  );
 
-	if (moduleInitializationLineNumber === -1) {
-		return source;
-	}
+  if (moduleInitializationLineNumber === -1) {
+    return source;
+  }
 
-	return Template.asString([
-		...lines.slice(0, moduleInitializationLineNumber),
-		beforeModule,
-		Template.indent(lines[moduleInitializationLineNumber]),
-		afterModule,
-		...lines.slice(moduleInitializationLineNumber + 1, lines.length)
-	]);
+  return Template.asString([
+    ...lines.slice(0, moduleInitializationLineNumber),
+    beforeModule,
+    Template.indent(lines[moduleInitializationLineNumber]),
+    afterModule,
+    ...lines.slice(moduleInitializationLineNumber + 1, lines.length),
+  ]);
 }
 
 exports.createRefreshTemplate = createRefreshTemplate;

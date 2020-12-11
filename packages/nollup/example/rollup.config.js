@@ -6,31 +6,31 @@ import prefresh from '@prefresh/nollup';
 import hotcss from 'rollup-plugin-hot-css';
 
 let config = {
-	input: './src/index.jsx',
-	output: {
-		dir: 'dist',
-		format: 'esm',
-		entryFileNames: '[name].[hash].js',
-		assetFileNames: '[name].[hash][extname]'
-	},
-	plugins: [
-		hotcss({
-			hot: process.env.NODE_ENV === 'development',
-			file: 'styles.css'
-		}),
-		babel(),
-		node_resolve(),
-		process.env.NODE_ENV === 'development' && prefresh()
-	]
+  input: './src/index.jsx',
+  output: {
+    dir: 'dist',
+    format: 'esm',
+    entryFileNames: '[name].[hash].js',
+    assetFileNames: '[name].[hash][extname]',
+  },
+  plugins: [
+    hotcss({
+      hot: process.env.NODE_ENV === 'development',
+      file: 'styles.css',
+    }),
+    babel(),
+    node_resolve(),
+    process.env.NODE_ENV === 'development' && prefresh(),
+  ],
 };
 
 if (process.env.NODE_ENV === 'production') {
-	config.plugins = config.plugins.concat([
-		static_files({
-			include: ['./public']
-		}),
-		terser()
-	]);
+  config.plugins = config.plugins.concat([
+    static_files({
+      include: ['./public'],
+    }),
+    terser(),
+  ]);
 }
 
 export default config;

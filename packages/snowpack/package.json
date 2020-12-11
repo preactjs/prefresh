@@ -1,63 +1,63 @@
 {
-	"name": "@prefresh/snowpack",
-	"version": "2.2.0",
-	"module": "dist/index.mjs",
-	"main": "dist/index.js",
-	"exports": {
-		".": {
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.js"
-		},
-		"./runtime": {
-			"import": "./runtime/index.mjs",
-			"require": "./runtime/index.js"
-		},
-		"./utils": {
-			"import": "./utils/index.mjs",
-			"require": "./utils/index.js"
-		},
-		"./package.json": "./package.json",
-		"./": "./"
-	},
-	"modes": {
-		"default": "src/index.js",
-		"runtime": "src/runtime.js",
-		"utils": "src/utils.js"
-	},
-	"files": [
-		"dist",
-		"runtime",
-		"utils"
-	],
-	"scripts": {
-		"build": "bundt",
-		"lint": "eslint src"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/JoviDeCroock/prefresh.git",
-		"directory": "packages/snowpack"
-	},
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/JoviDeCroock/prefresh/issues"
-	},
-	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
-	"dependencies": {
-		"@babel/core": "^7.9.6",
-		"@babel/plugin-syntax-class-properties": "^7.10.0",
-		"@prefresh/babel-plugin": "0.3.0",
-		"@prefresh/core": "^1.1.0",
-		"@prefresh/utils": "^1.0.0"
-	},
-	"devDependencies": {
-		"bundt": "^1.0.1",
-		"preact": "^10.4.1",
-		"snowpack": "^2.0.0"
-	},
-	"peerDependencies": {
-		"@prefresh/babel-plugin": "^0.3.0",
-		"preact": "^10.4.0",
-		"snowpack": "^2.0.0"
-	}
+  "name": "@prefresh/snowpack",
+  "version": "2.2.0",
+  "module": "dist/index.mjs",
+  "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./runtime": {
+      "import": "./runtime/index.mjs",
+      "require": "./runtime/index.js"
+    },
+    "./utils": {
+      "import": "./utils/index.mjs",
+      "require": "./utils/index.js"
+    },
+    "./package.json": "./package.json",
+    "./": "./"
+  },
+  "modes": {
+    "default": "src/index.js",
+    "runtime": "src/runtime.js",
+    "utils": "src/utils.js"
+  },
+  "files": [
+    "dist",
+    "runtime",
+    "utils"
+  ],
+  "scripts": {
+    "build": "bundt",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoviDeCroock/prefresh.git",
+    "directory": "packages/snowpack"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoviDeCroock/prefresh/issues"
+  },
+  "homepage": "https://github.com/JoviDeCroock/prefresh#readme",
+  "dependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-syntax-class-properties": "^7.10.0",
+    "@prefresh/babel-plugin": "0.3.0",
+    "@prefresh/core": "^1.1.0",
+    "@prefresh/utils": "^1.0.0"
+  },
+  "devDependencies": {
+    "bundt": "^1.0.1",
+    "preact": "^10.4.1",
+    "snowpack": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@prefresh/babel-plugin": "^0.3.0",
+    "preact": "^10.4.0",
+    "snowpack": "^2.0.0"
+  }
 }

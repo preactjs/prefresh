@@ -1,34 +1,34 @@
 {
-	"name": "preact-boilerplate",
-	"version": "1.0.0",
-	"description": "",
-	"main": "webpack.config.js",
-	"scripts": {
-		"dev": "webpack serve"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/JoviDeCroock/preact-boilerplate.git"
-	},
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/JoviDeCroock/preact-boilerplate/issues"
-	},
-	"homepage": "https://github.com/JoviDeCroock/preact-boilerplate#readme",
-	"devDependencies": {
-		"@babel/core": "^7.8.4",
-		"@babel/plugin-transform-react-jsx": "^7.8.3",
-		"@babel/preset-env": "^7.8.4",
-		"@prefresh/babel-plugin": "0.2.2",
-		"@prefresh/webpack": "^2.2.1",
-		"babel-loader": "^8.2.2",
-		"html-webpack-plugin": "^4.5.0",
-		"webpack": "^5.10.0",
-		"webpack-cli": "^4.2.0",
-		"webpack-dev-server": "^3.11.0"
-	},
-	"dependencies": {
-		"preact": "^10.4.1"
-	}
+  "name": "preact-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoviDeCroock/preact-boilerplate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoviDeCroock/preact-boilerplate/issues"
+  },
+  "homepage": "https://github.com/JoviDeCroock/preact-boilerplate#readme",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-transform-react-jsx": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@prefresh/babel-plugin": "0.2.2",
+    "@prefresh/webpack": "^2.2.1",
+    "babel-loader": "^8.2.2",
+    "html-webpack-plugin": "^4.5.0",
+    "webpack": "^5.10.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "preact": "^10.4.1"
+  }
 }

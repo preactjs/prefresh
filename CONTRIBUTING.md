@@ -18,6 +18,6 @@ This project uses [changesets](https://github.com/atlassian/changesets). This me
 every PR there must be documentation for what has been changed and which package is affected.
 
 You can document a change by running `yarn changeset` in the root, which will ask you which packages
-have changed and whether the change is major/minor/patch. It will then ask you to write a change entry as markdown. 
+have changed and whether the change is major/minor/patch. It will then ask you to write a change entry as markdown.
 
 [Read more about adding a `changeset` here.](https://github.com/atlassian/changesets/blob/master/docs/adding-a-changeset.md#i-am-in-a-multi-package-repository-a-mono-repo)

@@ -48,6 +48,12 @@
       "no-cond-assign": 0
     }
   },
+  "prettierIgnore": [
+    "dist",
+    "node_modules",
+    "test",
+    "temp"
+  ],
   "eslintIgnore": [
     "dist",
     "node_modules",
@@ -56,9 +62,8 @@
   ],
   "prettier": {
     "singleQuote": true,
-    "trailingComma": "none",
-    "useTabs": true,
-    "tabWidth": 2
+    "arrowParens": "avoid",
+    "trailingComma": "es5"
   },
   "lint-staged": {
     "**/*.{js,ts}": [

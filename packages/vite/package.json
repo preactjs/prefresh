@@ -1,64 +1,64 @@
 {
-	"name": "@prefresh/vite",
-	"version": "1.2.2",
-	"module": "dist/index.mjs",
-	"main": "dist/index.js",
-	"types": "index.d.ts",
-	"exports": {
-		".": {
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.js"
-		},
-		"./runtime": {
-			"import": "./runtime/index.mjs",
-			"require": "./runtime/index.js"
-		},
-		"./utils": {
-			"import": "./utils/index.mjs",
-			"require": "./utils/index.js"
-		},
-		"./package.json": "./package.json",
-		"./": "./"
-	},
-	"modes": {
-		"default": "src/index.js",
-		"runtime": "src/runtime.js",
-		"utils": "src/utils.js"
-	},
-	"files": [
-		"dist",
-		"runtime",
-		"utils",
-		"index.d.ts"
-	],
-	"scripts": {
-		"build": "bundt",
-		"lint": "eslint src",
-		"test": "jest --clearCache && jest --runInBand --forceExit --detectOpenHandles"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/JoviDeCroock/prefresh.git",
-		"directory": "packages/vite"
-	},
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/JoviDeCroock/prefresh/issues"
-	},
-	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
-	"dependencies": {
-		"@babel/core": "^7.9.6",
-		"@prefresh/babel-plugin": "0.3.0",
-		"@prefresh/core": "^1.0.0",
-		"@prefresh/utils": "^1.0.0"
-	},
-	"devDependencies": {
-		"bundt": "^1.1.1",
-		"preact": "^10.4.7",
-		"vite": "^1.0.0-rc.4"
-	},
-	"peerDependencies": {
-		"preact": "^10.4.0",
-		"vite": ">=1.0.0-beta.1"
-	}
+  "name": "@prefresh/vite",
+  "version": "1.2.2",
+  "module": "dist/index.mjs",
+  "main": "dist/index.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./runtime": {
+      "import": "./runtime/index.mjs",
+      "require": "./runtime/index.js"
+    },
+    "./utils": {
+      "import": "./utils/index.mjs",
+      "require": "./utils/index.js"
+    },
+    "./package.json": "./package.json",
+    "./": "./"
+  },
+  "modes": {
+    "default": "src/index.js",
+    "runtime": "src/runtime.js",
+    "utils": "src/utils.js"
+  },
+  "files": [
+    "dist",
+    "runtime",
+    "utils",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "build": "bundt",
+    "lint": "eslint src",
+    "test": "jest --clearCache && jest --runInBand --forceExit --detectOpenHandles"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoviDeCroock/prefresh.git",
+    "directory": "packages/vite"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoviDeCroock/prefresh/issues"
+  },
+  "homepage": "https://github.com/JoviDeCroock/prefresh#readme",
+  "dependencies": {
+    "@babel/core": "^7.9.6",
+    "@prefresh/babel-plugin": "0.3.0",
+    "@prefresh/core": "^1.0.0",
+    "@prefresh/utils": "^1.0.0"
+  },
+  "devDependencies": {
+    "bundt": "^1.1.1",
+    "preact": "^10.4.7",
+    "vite": "^1.0.0-rc.4"
+  },
+  "peerDependencies": {
+    "preact": "^10.4.0",
+    "vite": ">=1.0.0-beta.1"
+  }
 }

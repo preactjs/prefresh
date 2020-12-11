@@ -1,9 +1,9 @@
 const NAMESPACE = '__PREFRESH__';
 
 module.exports = function () {
-	return {
-		nollupModuleWrap(code) {
-			return `
+  return {
+    nollupModuleWrap(code) {
+      return `
                 const prevRefreshReg = self.$RefreshReg$;
                 const prevRefreshSig = self.$RefreshSig$;
 
@@ -28,26 +28,26 @@ module.exports = function () {
                     self.$RefreshSig$ = prevRefreshSig;
                 }
             `;
-		},
+    },
 
-		transform(code, id) {
-			if (this.getModuleInfo(id).isEntry) {
-				return {
-					code: 'import "@prefresh/core";' + code
-				};
-			}
+    transform(code, id) {
+      if (this.getModuleInfo(id).isEntry) {
+        return {
+          code: 'import "@prefresh/core";' + code,
+        };
+      }
 
-			if (id.includes('@prefresh') || id.includes('node_modules')) {
-				return;
-			}
+      if (id.includes('@prefresh') || id.includes('node_modules')) {
+        return;
+      }
 
-			return {
-				code: [
-					code,
-					'import { __$RefreshCheck$__ } from "@prefresh/nollup/src/runtime.js"',
-					'__$RefreshCheck$__(module)'
-				].join(';')
-			};
-		}
-	};
+      return {
+        code: [
+          code,
+          'import { __$RefreshCheck$__ } from "@prefresh/nollup/src/runtime.js"',
+          '__$RefreshCheck$__(module)',
+        ].join(';'),
+      };
+    },
+  };
 };

@@ -1,31 +1,31 @@
 {
-	"name": "@prefresh/babel-plugin",
-	"version": "0.3.0",
-	"main": "dist/src/index.js",
-	"module": "src/index.mjs",
-	"exports": {
-		".": {
-			"import": "./src/index.mjs",
-			"require": "./dist/src/index.js"
-		},
-		"./package.json": "./package.json",
-		"./": "./"
-	},
-	"scripts": {
-		"build": "cjyes src/index.mjs",
-		"lint": "eslint src"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/JoviDeCroock/prefresh.git",
-		"directory": "packages/babel"
-	},
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/JoviDeCroock/prefresh/issues"
-	},
-	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
-	"devDependencies": {
-		"cjyes": "0.3.1"
-	}
+  "name": "@prefresh/babel-plugin",
+  "version": "0.3.0",
+  "main": "dist/src/index.js",
+  "module": "src/index.mjs",
+  "exports": {
+    ".": {
+      "import": "./src/index.mjs",
+      "require": "./dist/src/index.js"
+    },
+    "./package.json": "./package.json",
+    "./": "./"
+  },
+  "scripts": {
+    "build": "cjyes src/index.mjs",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoviDeCroock/prefresh.git",
+    "directory": "packages/babel"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoviDeCroock/prefresh/issues"
+  },
+  "homepage": "https://github.com/JoviDeCroock/prefresh#readme",
+  "devDependencies": {
+    "cjyes": "0.3.1"
+  }
 }
