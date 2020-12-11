@@ -26,11 +26,14 @@
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"dependencies": {
 		"@prefresh/core": "^1.0.0",
-		"@prefresh/utils": "^1.0.0"
+		"@prefresh/utils": "file:../../packages/utils"
 	},
 	"devDependencies": {
 		"nollup": "^0.13.9",
 		"preact": "^10.4.1"
+	},
+	"resolutions": {
+		"@prefresh/utils": "file:../../packages/utils"
 	},
 	"peerDependencies": {
 		"@prefresh/babel-plugin": "^0.3.0",
