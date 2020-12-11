@@ -7,10 +7,7 @@ const shouldBind = m => {
 	let isCitizen = false;
 	const moduleExports = getExports(m);
 
-	if (
-		typeof moduleExports === 'function' &&
-		isComponent(moduleExports.name || moduleExports.displayName)
-	) {
+	if (isComponent(moduleExports)) {
 		isCitizen = true;
 	}
 
@@ -25,10 +22,7 @@ const shouldBind = m => {
 			if (key === '__esModule') continue;
 
 			const exportValue = moduleExports[key];
-			if (
-				typeof exportValue === 'function' &&
-				isComponent(exportValue.name || exportValue.displayName)
-			) {
+			if (isComponent(exportValue)) {
 				isCitizen = isCitizen || true;
 			}
 		}
