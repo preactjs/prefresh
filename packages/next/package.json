@@ -26,7 +26,7 @@
 		"@prefresh/babel-plugin": "0.3.0",
 		"@prefresh/core": "^1.0.0",
 		"@prefresh/utils": "^1.0.0",
-		"@prefresh/webpack": "^3.0.0"
+		"@prefresh/webpack": "^2.3.0"
 	},
 	"devDependencies": {
 		"next": "9.4.0",
