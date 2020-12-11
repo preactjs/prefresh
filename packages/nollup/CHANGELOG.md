@@ -1,5 +1,11 @@
 # @prefresh/nollup
 
+## 2.1.1
+
+### Patch Changes
+
+- [`dbfa0ed`](https://github.com/JoviDeCroock/prefresh/commit/dbfa0ed0f007a10a79bc53acc82ce23ef490138e) [#230](https://github.com/JoviDeCroock/prefresh/pull/230) Thanks [@iFwu](https://github.com/iFwu)! - fix runtime node module resolve error. it's necessary to use an explicit extension when import if there's an exports path field in pacakge.json
+
 ## 2.1.0
 
 ### Patch Changes
