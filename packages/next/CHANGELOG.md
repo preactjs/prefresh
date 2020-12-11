@@ -1,5 +1,11 @@
 # @prefresh/next
 
+## 1.4.3
+
+### Patch Changes
+
+- [`1fdc8c9`](https://github.com/JoviDeCroock/prefresh/commit/1fdc8c9f3ec84dddbad9292715e9fa822dd4c680) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix webpack dep
+
 ## 1.4.2
 
 ### Patch Changes
