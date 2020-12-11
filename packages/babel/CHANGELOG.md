@@ -1,5 +1,11 @@
 # @prefresh/babel-plugin
 
+## 0.3.0
+
+### Minor Changes
+
+- [`c0835d5`](https://github.com/JoviDeCroock/prefresh/commit/c0835d5c5820809563ec768296a610b45d7dc0c0) [#233](https://github.com/JoviDeCroock/prefresh/pull/233) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Calculate hashes for useEffect and useLayoutEffect
+
 ## 0.2.2
 
 ### Patch Changes
