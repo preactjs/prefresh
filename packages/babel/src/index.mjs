@@ -386,7 +386,7 @@ export default function (babel, opts = {}) {
       // Some built-in Hooks reset on edits to arguments.
       const args = path.get('arguments');
       if (name === 'useState' && args.length > 0) {
-        // useState second argument is initial state.
+        // useState first argument is initial state.
         key += '(' + args[0].getSource() + ')';
       } else if (name === 'useReducer' && args.length > 1) {
         // useReducer second argument is initial state.
