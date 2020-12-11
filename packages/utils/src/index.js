@@ -25,5 +25,18 @@ export const flush = () => {
 	}
 };
 
-export const isComponent = name =>
-	typeof name === 'string' && name[0] && name[0] == name[0].toUpperCase();
+export const isComponent = exportValue => {
+	const name = exportValue.name || exportValue.displayName;
+	if (typeof exportValue === 'function') {
+		if (
+			exportValue.prototype != null &&
+			exportValue.prototype.isReactComponent
+		) {
+			return true;
+		}
+		return (
+			typeof name === 'string' && name[0] && name[0] == name[0].toUpperCase()
+		);
+	}
+	return false;
+};
