@@ -4,4 +4,4 @@
 '@prefresh/webpack': minor
 ---
 
-Fix components not being recognised, add isReactComponent check
+Add prototype-check to `@prefresh/utils` isComponent check and utilize this in nollup & webpack
