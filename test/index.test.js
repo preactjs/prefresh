@@ -210,6 +210,21 @@ describe('Prefresh integrations', () => {
 				await expectByPolling(() => getText(value), 'Count: 10');
 			});
 
+			test('re-runs changed effects', async () => {
+				const value = await page.$('.effect-test');
+
+				await expectByPolling(() => getText(value), 'hello world');
+				await updateFile('src/effect.jsx', content =>
+					content.replace(
+						"useEffect(() => { setState('hello world'); }, []);",
+						"useEffect(() => { setState('changed world'); }, []);"
+					)
+				);
+				await timeout(TIMEOUT);
+
+				await expectByPolling(() => getText(value), 'changed world');
+			});
+
 			if (supportsClassComponents.includes(integration)) {
 				test('works for class-components', async () => {
 					const text = await page.$('.class-text');

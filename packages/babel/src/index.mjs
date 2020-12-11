@@ -391,8 +391,9 @@ export default function(babel, opts = {}) {
 			} else if (name === 'useReducer' && args.length > 1) {
 				// useReducer second argument is initial state.
 				key += '(' + args[1].getSource() + ')';
-			}
-
+			} else if ((name === 'useEffect' || name === 'useLayoutEffect') && args.length) {
+				key += '(' + args[0].getSource() + ')';
+      }
 			hookCallsForFn.push({
 				callee: path.node.callee,
 				name,
