@@ -16,7 +16,7 @@
     "url": "https://github.com/JoviDeCroock/prefresh/issues"
   },
   "authors": [
-    "Jovi De Croock <decroockjovi@gmail.com>"
+    "Jovi De Croock <jovi@preact.dev>"
   ],
   "homepage": "https://github.com/JoviDeCroock/prefresh#readme",
   "private": true,
@@ -24,19 +24,18 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@changesets/changelog-github": "^0.2.6",
-    "@changesets/cli": "^2.8.0",
-    "eslint": "5.15.1",
-    "eslint-config-developit": "^1.1.1",
-    "eslint-config-prettier": "^6.5.0",
-    "eslint-plugin-react": "7.12.4",
+    "@changesets/changelog-github": "^0.2.7",
+    "@changesets/cli": "^2.12.0",
+    "eslint": "7.15.0",
+    "eslint-config-developit": "^1.2.0",
+    "eslint-config-prettier": "^7.0.0",
     "fs-extra": "^9.0.1",
-    "husky": "^3.0.9",
-    "jest": "^26.4.2",
-    "lint-staged": "^9.4.2",
-    "prettier": "^1.18.2",
-    "puppeteer": "^5.2.1",
-    "yarn-deduplicate": "^2.0.0"
+    "husky": "^4.3.5",
+    "jest": "^26.6.3",
+    "lint-staged": "^10.5.3",
+    "prettier": "^2.2.1",
+    "puppeteer": "^5.5.0",
+    "yarn-deduplicate": "^3.1.0"
   },
   "eslintConfig": {
     "extends": [

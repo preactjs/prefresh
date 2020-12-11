@@ -24,7 +24,7 @@
 	},
 	"homepage": "https://github.com/JoviDeCroock/prefresh#readme",
 	"devDependencies": {
-		"preact": "10.4.1"
+		"preact": "10.5.7"
 	},
 	"peerDependencies": {
 		"preact": "^10.0.0"

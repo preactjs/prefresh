@@ -22,13 +22,13 @@ const TIMEOUT = 1000;
 describe('Prefresh integrations', () => {
 	let devServer, browser, page;
 
-	const browserConsoleListener = msg => {
+	const browserConsoleListener = (msg) => {
 		console.log('[BROWSER LOG]: ', msg);
 	};
 
 	let serverConsoleListener;
 
-	integrations.forEach(integration => {
+	integrations.forEach((integration) => {
 		async function updateFile(file, replacer) {
 			const compPath = path.join(getTempDir(integration), file);
 			const content = await fs.readFile(compPath, 'utf-8');
@@ -36,15 +36,15 @@ describe('Prefresh integrations', () => {
 		}
 
 		describe(integration, () => {
-			const getEl = async selectorOrEl => {
+			const getEl = async (selectorOrEl) => {
 				return typeof selectorOrEl === 'string'
 					? await page.$(selectorOrEl)
 					: selectorOrEl;
 			};
 
-			const getText = async selectorOrEl => {
+			const getText = async (selectorOrEl) => {
 				const el = await getEl(selectorOrEl);
-				return el ? el.evaluate(el => el.textContent) : null;
+				return el ? el.evaluate((el) => el.textContent) : null;
 			};
 
 			jest.setTimeout(100000);
@@ -58,7 +58,7 @@ describe('Prefresh integrations', () => {
 				if (browser) await browser.close();
 				if (devServer) {
 					devServer.kill('SIGTERM', {
-						forceKillAfterTimeout: 2000
+						forceKillAfterTimeout: 0
 					});
 				}
 			});
@@ -70,7 +70,7 @@ describe('Prefresh integrations', () => {
 				} catch (e) {}
 
 				await fs.copy(getFixtureDir(integration), getTempDir(integration), {
-					filter: file => !/dist|node_modules/.test(file)
+					filter: (file) => !/dist|node_modules/.test(file)
 				});
 
 				await execa('yarn', { cwd: getTempDir(integration) });
@@ -88,10 +88,10 @@ describe('Prefresh integrations', () => {
 					}
 				);
 
-				await new Promise(resolve => {
+				await new Promise((resolve) => {
 					devServer.stdout.on(
 						'data',
-						(serverConsoleListener = data => {
+						(serverConsoleListener = (data) => {
 							console.log('[SERVER LOG]: ', data.toString());
 							if (data.toString().match(goMessage[integration])) {
 								resolve();
@@ -101,7 +101,7 @@ describe('Prefresh integrations', () => {
 
 					devServer.stderr.on(
 						'data',
-						(serverConsoleListener = data => {
+						(serverConsoleListener = (data) => {
 							console.log('[ERROR SERVER LOG]: ', data.toString());
 						})
 					);
@@ -117,7 +117,7 @@ describe('Prefresh integrations', () => {
 				const button = await page.$('.button');
 				await expectByPolling(() => getText(button), 'Increment');
 
-				await updateFile('src/app.jsx', content =>
+				await updateFile('src/app.jsx', (content) =>
 					content.replace('Increment', 'Increment (+)')
 				);
 				await timeout(TIMEOUT);
@@ -129,7 +129,7 @@ describe('Prefresh integrations', () => {
 				const button = await page.$('.button');
 				await expectByPolling(() => getText(button), 'Increment (+)');
 
-				await updateFile('src/app.jsx', content => {
+				await updateFile('src/app.jsx', (content) => {
 					let newContent = content;
 					newContent.replace('function Test', 'export function Test');
 					newContent.replace('Increment (+)', 'Increment');
@@ -149,7 +149,7 @@ describe('Prefresh integrations', () => {
 	export const Tester = () => <p className="tester">Test</p>;`
 					);
 
-					await updateFile('src/app.jsx', content => {
+					await updateFile('src/app.jsx', (content) => {
 						let newContent = 'import { Tester } from "./test.jsx";\n' + content;
 						newContent = newContent.replace(
 							`<Test />`,
@@ -162,7 +162,7 @@ describe('Prefresh integrations', () => {
 					const testText = await page.$('.tester');
 					await expectByPolling(() => getText(testText), 'Test');
 
-					await updateFile('src/test.jsx', c =>
+					await updateFile('src/test.jsx', (c) =>
 						c.replace(
 							'<p className="tester">Test</p>',
 							'<p className="tester">Test2</p>'
@@ -183,7 +183,7 @@ describe('Prefresh integrations', () => {
 
 				await expectByPolling(() => getText(value), 'Count: 1');
 
-				await updateFile('src/useCounter.js', content =>
+				await updateFile('src/useCounter.js', (content) =>
 					content.replace('state + 1', 'state + 2')
 				);
 				await timeout(TIMEOUT);
@@ -191,7 +191,7 @@ describe('Prefresh integrations', () => {
 				await button.click();
 				await expectByPolling(() => getText(value), 'Count: 3');
 
-				await updateFile('src/useCounter.js', content =>
+				await updateFile('src/useCounter.js', (content) =>
 					content.replace('useState(0)', 'useState(10)')
 				);
 				await timeout(TIMEOUT);
@@ -202,7 +202,7 @@ describe('Prefresh integrations', () => {
 			test('resets hook state', async () => {
 				const value = await page.$('.value');
 
-				await updateFile('src/useCounter.js', content =>
+				await updateFile('src/useCounter.js', (content) =>
 					content.replace('useState(0);', 'useState(10);')
 				);
 				await timeout(TIMEOUT);
@@ -214,7 +214,7 @@ describe('Prefresh integrations', () => {
 				const value = await page.$('#effect-test');
 
 				await expectByPolling(() => getText(value), 'hello world');
-				await updateFile('src/effect.jsx', content =>
+				await updateFile('src/effect.jsx', (content) =>
 					content.replace(
 						"useEffect(() => { setState('hello world'); }, []);",
 						"useEffect(() => { setState('changed world'); }, []);"
@@ -230,7 +230,7 @@ describe('Prefresh integrations', () => {
 					const text = await page.$('.class-text');
 					await expectByPolling(() => getText(text), "I'm a class component");
 
-					await updateFile('src/greeting.jsx', content =>
+					await updateFile('src/greeting.jsx', (content) =>
 						content.replace(
 							"I'm a class component",
 							"I'm a reloaded class component"
@@ -252,7 +252,7 @@ describe('Prefresh integrations', () => {
 					await button.click();
 					await expectByPolling(() => getText(text), 'bye');
 
-					await updateFile('src/greeting.jsx', content =>
+					await updateFile('src/greeting.jsx', (content) =>
 						content.replace(
 							"this.setState({ greeting: 'bye' });",
 							"this.setState({ greeting: 'hello' });"
@@ -274,7 +274,7 @@ describe('Prefresh integrations', () => {
 				let children = await storeItems.$$('li');
 				expect(await getText(children[0])).toMatch('apple');
 
-				await updateFile('src/context.jsx', content =>
+				await updateFile('src/context.jsx', (content) =>
 					content.replace(
 						'if (!items.includes(id)) setItems([...items, id])',
 						'setItems([...items, id])'
