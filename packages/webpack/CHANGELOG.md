@@ -1,5 +1,11 @@
 # @prefresh/webpack
 
+## 2.2.2
+
+### Patch Changes
+
+- [`3a831e5`](https://github.com/JoviDeCroock/prefresh/commit/3a831e5f90547d3ae836ae50a8ab2ec50f76e7c8) [#231](https://github.com/JoviDeCroock/prefresh/pull/231) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix components not being recognised, name should take presedence over displayName
+
 ## 2.2.1
 
 ### Patch Changes
