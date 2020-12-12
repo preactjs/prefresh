@@ -1,5 +1,11 @@
 # @prefresh/utils
 
+## 1.1.1
+
+### Patch Changes
+
+- [`5d23ebc`](https://github.com/JoviDeCroock/prefresh/commit/5d23ebc771fd2da7e86e5b3a9479f97692c47e9d) [#240](https://github.com/JoviDeCroock/prefresh/pull/240) Thanks [@sidujjain](https://github.com/sidujjain)! - Fix exception in isComponent when exportValue is undefined
+
 ## 1.1.0
 
 ### Minor Changes
