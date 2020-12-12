@@ -26,7 +26,6 @@ export const flush = () => {
 };
 
 export const isComponent = exportValue => {
-  const name = exportValue.name || exportValue.displayName;
   if (typeof exportValue === 'function') {
     if (
       exportValue.prototype != null &&
@@ -34,6 +33,8 @@ export const isComponent = exportValue => {
     ) {
       return true;
     }
+
+    const name = exportValue.name || exportValue.displayName;
     return (
       typeof name === 'string' && name[0] && name[0] == name[0].toUpperCase()
     );
