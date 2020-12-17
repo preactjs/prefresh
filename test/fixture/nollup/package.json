@@ -22,7 +22,7 @@
 		"shx": "^0.3.2"
 	},
 	"resolutions": {
-		"@prefresh/core": "file:../../../packages/core",
-		"@prefresh/utils": "file:../../../packages/utils"
+		"@prefresh/core": "file:../../packages/core",
+		"@prefresh/utils": "file:../../packages/utils"
 	}
 }
