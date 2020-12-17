@@ -6,7 +6,10 @@
     "preact": "^10.5.7"
   },
   "resolutions": {
-    "@prefresh/babel-plugin": "file:../../packages/babel"
+    "@prefresh/babel-plugin": "file:../../packages/babel",
+		"@prefresh/core": "file:../../packages/core",
+		"@prefresh/snowpack": "file:../../packages/snowpack",
+		"@prefresh/utils": "file:../../packages/utils"
   },
   "devDependencies": {
     "@prefresh/babel-plugin": "file:../../packages/babel",
