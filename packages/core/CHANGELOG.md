@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.3.0
+
+### Minor Changes
+
+- [`21f8c43`](https://github.com/JoviDeCroock/prefresh/commit/21f8c4330a29edcb5d4493cda5465e6556a5f92c) [#243](https://github.com/JoviDeCroock/prefresh/pull/243) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Invalidate useEffect/useLayoutEffect/useMemo/useCallback without resetting hook-state aggressively, now hook-state will only be reset for stateful hooks.
+
 ## 1.2.0
 
 ### Minor Changes
