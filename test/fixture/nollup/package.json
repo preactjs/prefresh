@@ -12,7 +12,6 @@
 		"@prefresh/babel-plugin": "file:../../packages/babel",
 		"@prefresh/nollup": "file:../../packages/nollup",
     "@rollup/plugin-babel": "^5.2.2",
-    "@rollup/plugin-alias": "3.1.1",
 		"@rollup/plugin-node-resolve": "^8.0.1",
 		"babel-preset-preact": "^2.0.0",
 		"cross-env": "^7.0.2",

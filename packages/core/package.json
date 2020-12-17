@@ -23,6 +23,9 @@
     "url": "https://github.com/JoviDeCroock/prefresh/issues"
   },
   "homepage": "https://github.com/JoviDeCroock/prefresh#readme",
+  "devDependencies": {
+    "preact": "^10.5.7"
+  },
   "peerDependencies": {
     "preact": "^10.0.0"
   }
