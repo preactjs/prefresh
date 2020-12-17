@@ -3,9 +3,7 @@
     "dev": "web-dev-server"
   },
   "resolutions": {
-    "@prefresh/babel-plugin": "file:../../packages/babel",
 		"@prefresh/core": "file:../../packages/core",
-		"@prefresh/web-dev-server": "file:../../packages/web-dev-server",
 		"@prefresh/utils": "file:../../packages/utils"
   },
   "dependencies": {

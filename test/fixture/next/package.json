@@ -4,15 +4,10 @@
 	},
 	"devDependencies": {
 		"@prefresh/babel-plugin": "file:../../packages/babel",
-		"@prefresh/core": "file:../../packages/core",
-		"@prefresh/next": "file:../../packages/next",
-		"@prefresh/webpack": "file:../../packages/webpack",
-		"@prefresh/utils": "file:../../packages/utils"
+		"@prefresh/next": "file:../../packages/next"
 	},
 	"resolutions": {
-		"@prefresh/babel-plugin": "file:../../packages/babel",
 		"@prefresh/core": "file:../../packages/core",
-		"@prefresh/next": "file:../../packages/next",
 		"@prefresh/webpack": "file:../../packages/webpack",
 		"@prefresh/utils": "file:../../packages/utils"
 	},

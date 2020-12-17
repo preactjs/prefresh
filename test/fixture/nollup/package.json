@@ -21,9 +21,7 @@
 		"shx": "^0.3.2"
 	},
 	"resolutions": {
-    "@prefresh/babel-plugin": "file:../../packages/babel",
 		"@prefresh/core": "file:../../packages/core",
-		"@prefresh/nollup": "file:../../packages/nollup",
 		"@prefresh/utils": "file:../../packages/utils"
 	}
 }
