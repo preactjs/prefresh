@@ -6,7 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "preact": "^10.4.1"
+    "preact": "^10.5.7"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

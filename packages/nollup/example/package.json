@@ -5,7 +5,7 @@
     "build": "npm run clean && cross-env NODE_ENV=production rollup -c"
   },
   "dependencies": {
-    "preact": "^10.4.4"
+    "preact": "^10.5.7"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",

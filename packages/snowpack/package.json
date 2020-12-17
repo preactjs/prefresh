@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "bundt": "^1.0.1",
-    "preact": "^10.4.1",
+    "preact": "^10.5.7",
     "snowpack": "^2.0.0"
   },
   "peerDependencies": {

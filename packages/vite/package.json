@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "bundt": "^1.1.1",
-    "preact": "^10.4.7",
+    "preact": "^10.5.7",
     "vite": "^1.0.0-rc.4"
   },
   "peerDependencies": {

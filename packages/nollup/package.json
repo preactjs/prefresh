@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "nollup": "^0.13.9",
-    "preact": "^10.4.1"
+    "preact": "^10.5.7"
   },
   "peerDependencies": {
     "@prefresh/babel-plugin": "^0.3.0",
