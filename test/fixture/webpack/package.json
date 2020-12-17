@@ -15,9 +15,10 @@
 		"webpack-dev-server": "^3.11.0"
 	},
 	"dependencies": {
-		"preact": "^10.4.1"
+		"preact": "^10.5.7"
 	},
 	"resolutions": {
+		"@prefresh/core": "file:../../packages/core",
 		"@prefresh/utils": "file:../../packages/utils"
 	}
 }

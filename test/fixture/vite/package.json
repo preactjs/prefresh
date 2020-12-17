@@ -3,12 +3,16 @@
     "dev": "vite"
   },
   "dependencies": {
-    "preact": "^10.4.1"
+    "preact": "^10.5.7"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@prefresh/babel-plugin": "file:../../packages/babel",
     "@prefresh/vite": "file:../../packages/vite",
     "vite": "latest"
+  },
+  "resolutions": {
+		"@prefresh/core": "file:../../packages/core",
+		"@prefresh/utils": "file:../../packages/utils"
   }
 }

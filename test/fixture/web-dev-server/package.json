@@ -2,8 +2,12 @@
   "scripts": {
     "dev": "web-dev-server"
   },
+  "resolutions": {
+		"@prefresh/core": "file:../../packages/core",
+		"@prefresh/utils": "file:../../packages/utils"
+  },
   "dependencies": {
-    "preact": "^10.4.1"
+    "preact": "^10.5.7"
   },
   "devDependencies": {
     "@web/dev-server": "0.0.25",

@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "next": "9.4.0",
-    "preact": "^10.4.1",
+    "preact": "^10.5.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },

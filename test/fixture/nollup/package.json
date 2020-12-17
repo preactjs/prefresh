@@ -11,7 +11,7 @@
 		"@babel/core": "^7.10.2",
 		"@prefresh/babel-plugin": "file:../../packages/babel",
 		"@prefresh/nollup": "file:../../packages/nollup",
-		"@rollup/plugin-babel": "^5.2.2",
+    "@rollup/plugin-babel": "^5.2.2",
 		"@rollup/plugin-node-resolve": "^8.0.1",
 		"babel-preset-preact": "^2.0.0",
 		"cross-env": "^7.0.2",
@@ -21,6 +21,7 @@
 		"shx": "^0.3.2"
 	},
 	"resolutions": {
+		"@prefresh/core": "file:../../packages/core",
 		"@prefresh/utils": "file:../../packages/utils"
 	}
 }

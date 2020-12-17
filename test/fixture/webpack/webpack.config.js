@@ -28,7 +28,12 @@ const makeConfig = () => {
 			new HtmlWebpackPlugin(),
 			new webpack.HotModuleReplacementPlugin(),
 			new PreactRefreshPlugin()
-		],
+    ],
+    resolve: {
+      alias: {
+        preact: path.resolve(__dirname, 'node_modules/preact/'),
+      }
+    },
 		module: {
 			rules: [
 				{
