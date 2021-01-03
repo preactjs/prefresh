@@ -9,7 +9,7 @@
     "@babel/core": "^7.9.6",
     "@prefresh/babel-plugin": "file:../../packages/babel",
     "@prefresh/vite": "file:../../packages/vite",
-    "vite": "1.0.0-rc.13"
+    "vite": "latest"
   },
   "resolutions": {
 		"@prefresh/core": "file:../../packages/core",
