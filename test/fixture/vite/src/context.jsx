@@ -1,4 +1,4 @@
-import { createContext } from 'preact';
+import { createContext, h } from 'preact';
 import { useState } from 'preact/hooks';
 
 export const StoreContext = createContext();

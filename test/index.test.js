@@ -14,7 +14,6 @@ const {
   goMessage,
   defaultPort,
   integrations,
-  supportsClassComponents,
 } = require('./constants');
 
 const TIMEOUT = 1000;
@@ -142,39 +141,37 @@ describe('Prefresh integrations', () => {
         await expectByPolling(() => getText(button), 'Increment (+)');
       });
 
-      if (integration !== 'vite') {
-        test('add file and import it', async () => {
-          const compPath = path.join(getTempDir(integration), 'src/test.jsx');
-          await fs.writeFile(
-            compPath,
-            `import { h } from 'preact';
-	export const Tester = () => <p className="tester">Test</p>;`
+      test('add file and import it', async () => {
+        const compPath = path.join(getTempDir(integration), 'src/test.jsx');
+        await fs.writeFile(
+          compPath,
+          `import { h } from 'preact';
+export const Tester = () => <p className="tester">Test</p>;`
+        );
+
+        await updateFile('src/app.jsx', content => {
+          let newContent = 'import { Tester } from "./test.jsx";\n' + content;
+          newContent = newContent.replace(
+            `<Test />`,
+            `<Test />\n      <Tester />\n`
           );
-
-          await updateFile('src/app.jsx', content => {
-            let newContent = 'import { Tester } from "./test.jsx";\n' + content;
-            newContent = newContent.replace(
-              `<Test />`,
-              `<Test />\n      <Tester />\n`
-            );
-            return newContent;
-          });
-          await timeout(2000);
-
-          const testText = await page.$('.tester');
-          await expectByPolling(() => getText(testText), 'Test');
-
-          await updateFile('src/test.jsx', c =>
-            c.replace(
-              '<p className="tester">Test</p>',
-              '<p className="tester">Test2</p>'
-            )
-          );
-          await timeout(2000);
-
-          await expectByPolling(() => getText(testText), 'Test2');
+          return newContent;
         });
-      }
+        await timeout(2000);
+
+        const testText = await page.$('.tester');
+        await expectByPolling(() => getText(testText), 'Test');
+
+        await updateFile('src/test.jsx', c =>
+          c.replace(
+            '<p className="tester">Test</p>',
+            '<p className="tester">Test2</p>'
+          )
+        );
+        await timeout(2000);
+
+        await expectByPolling(() => getText(testText), 'Test2');
+      });
 
       test('custom hook', async () => {
         const value = await page.$('.value');
@@ -227,45 +224,43 @@ describe('Prefresh integrations', () => {
         await expectByPolling(() => getText(value), 'changed world');
       });
 
-      if (supportsClassComponents.includes(integration)) {
-        test('works for class-components', async () => {
-          const text = await page.$('.class-text');
-          await expectByPolling(() => getText(text), "I'm a class component");
+      test('works for class-components', async () => {
+        const text = await page.$('.class-text');
+        await expectByPolling(() => getText(text), "I'm a class component");
 
-          await updateFile('src/greeting.jsx', content =>
-            content.replace(
-              "I'm a class component",
-              "I'm a reloaded class component"
-            )
-          );
-          await timeout(TIMEOUT);
-
-          await expectByPolling(
-            () => getText(text),
+        await updateFile('src/greeting.jsx', content =>
+          content.replace(
+            "I'm a class component",
             "I'm a reloaded class component"
-          );
-        });
+          )
+        );
+        await timeout(TIMEOUT);
 
-        test('can change methods', async () => {
-          const text = await page.$('.greeting-text');
-          const button = await page.$('.greeting-button');
-          await expectByPolling(() => getText(text), 'hi');
+        await expectByPolling(
+          () => getText(text),
+          "I'm a reloaded class component"
+        );
+      });
 
-          await button.click();
-          await expectByPolling(() => getText(text), 'bye');
+      test('can change methods', async () => {
+        const text = await page.$('.greeting-text');
+        const button = await page.$('.greeting-button');
+        await expectByPolling(() => getText(text), 'hi');
 
-          await updateFile('src/greeting.jsx', content =>
-            content.replace(
-              "this.setState({ greeting: 'bye' });",
-              "this.setState({ greeting: 'hello' });"
-            )
-          );
-          await timeout(TIMEOUT);
+        await button.click();
+        await expectByPolling(() => getText(text), 'bye');
 
-          await button.click();
-          await expectByPolling(() => getText(text), 'hello');
-        });
-      }
+        await updateFile('src/greeting.jsx', content =>
+          content.replace(
+            "this.setState({ greeting: 'bye' });",
+            "this.setState({ greeting: 'hello' });"
+          )
+        );
+        await timeout(TIMEOUT);
+
+        await button.click();
+        await expectByPolling(() => getText(text), 'hello');
+      });
 
       test('can hot reload context', async () => {
         const appleDiv = await page.$('.apple-div');
