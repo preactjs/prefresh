@@ -1,6 +1,7 @@
-import { useCounter } from './useCounter'
+import { h } from 'preact';
+import { useCounter } from './useCounter';
 import { StoreProvider } from './context';
-import { Products } from './products'
+import { Products } from './products';
 import { Greeting } from './greeting';
 import { Effect } from './effect';
 
