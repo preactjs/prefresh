@@ -1,3 +1,4 @@
+import { h } from 'preact';
 import { Logo } from './logo';
 import { useCounter } from './useCounter';
 

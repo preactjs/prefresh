@@ -1,6 +1,9 @@
 import prefresh from '@prefresh/vite';
 
 module.exports = {
-  jsx: 'preact',
+  esbuild: {
+    jsxFactory: 'h',
+    jsxFragment: 'Fragment',
+  },
   plugins: [prefresh()],
 };
