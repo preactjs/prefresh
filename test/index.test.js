@@ -14,7 +14,6 @@ const {
   goMessage,
   defaultPort,
   integrations,
-  supportsClassComponents,
 } = require('./constants');
 
 const TIMEOUT = 1000;
@@ -227,45 +226,43 @@ describe('Prefresh integrations', () => {
         await expectByPolling(() => getText(value), 'changed world');
       });
 
-      if (supportsClassComponents.includes(integration)) {
-        test('works for class-components', async () => {
-          const text = await page.$('.class-text');
-          await expectByPolling(() => getText(text), "I'm a class component");
+      test('works for class-components', async () => {
+        const text = await page.$('.class-text');
+        await expectByPolling(() => getText(text), "I'm a class component");
 
-          await updateFile('src/greeting.jsx', content =>
-            content.replace(
-              "I'm a class component",
-              "I'm a reloaded class component"
-            )
-          );
-          await timeout(TIMEOUT);
-
-          await expectByPolling(
-            () => getText(text),
+        await updateFile('src/greeting.jsx', content =>
+          content.replace(
+            "I'm a class component",
             "I'm a reloaded class component"
-          );
-        });
+          )
+        );
+        await timeout(TIMEOUT);
 
-        test('can change methods', async () => {
-          const text = await page.$('.greeting-text');
-          const button = await page.$('.greeting-button');
-          await expectByPolling(() => getText(text), 'hi');
+        await expectByPolling(
+          () => getText(text),
+          "I'm a reloaded class component"
+        );
+      });
 
-          await button.click();
-          await expectByPolling(() => getText(text), 'bye');
+      test('can change methods', async () => {
+        const text = await page.$('.greeting-text');
+        const button = await page.$('.greeting-button');
+        await expectByPolling(() => getText(text), 'hi');
 
-          await updateFile('src/greeting.jsx', content =>
-            content.replace(
-              "this.setState({ greeting: 'bye' });",
-              "this.setState({ greeting: 'hello' });"
-            )
-          );
-          await timeout(TIMEOUT);
+        await button.click();
+        await expectByPolling(() => getText(text), 'bye');
 
-          await button.click();
-          await expectByPolling(() => getText(text), 'hello');
-        });
-      }
+        await updateFile('src/greeting.jsx', content =>
+          content.replace(
+            "this.setState({ greeting: 'bye' });",
+            "this.setState({ greeting: 'hello' });"
+          )
+        );
+        await timeout(TIMEOUT);
+
+        await button.click();
+        await expectByPolling(() => getText(text), 'hello');
+      });
 
       test('can hot reload context', async () => {
         const appleDiv = await page.$('.apple-div');
