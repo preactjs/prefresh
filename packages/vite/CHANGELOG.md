@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.0.0
+
+### Major Changes
+
+- [`bf4cf02`](https://github.com/JoviDeCroock/prefresh/commit/bf4cf02ad72297899e1d019971876e1b1f3fe03d) [#250](https://github.com/JoviDeCroock/prefresh/pull/250) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Support vite 2.0
+
 ## 1.2.3
 
 ### Patch Changes

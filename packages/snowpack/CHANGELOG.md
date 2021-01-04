@@ -1,5 +1,11 @@
 # @prefresh/snowpack
 
+## 3.0.1
+
+### Patch Changes
+
+- [`77c4718`](https://github.com/JoviDeCroock/prefresh/commit/77c4718b01e69ad85df7ca134e414d39386dfba0) [#247](https://github.com/JoviDeCroock/prefresh/pull/247) Thanks [@phuctm97](https://github.com/phuctm97)! - Remove redundant `@prefresh/babel-plugin` dependency
+
 ## 3.0.0
 
 ### Patch Changes
