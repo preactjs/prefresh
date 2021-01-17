@@ -97,4 +97,6 @@ const transform = (code, path) =>
     ast: false,
     sourceMaps: true,
     sourceFileName: path,
+    configFile: false,
+    babelrc: false,
   });
