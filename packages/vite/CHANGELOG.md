@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.0.1
+
+### Patch Changes
+
+- [`e3e8c84`](https://github.com/JoviDeCroock/prefresh/commit/e3e8c84980eed44190f564a25070a6c6519f808c) [#251](https://github.com/JoviDeCroock/prefresh/pull/251) Thanks [@itsMapleLeaf](https://github.com/itsMapleLeaf)! - Prevent detection of babel configs in the user's project
+
 ## 2.0.0
 
 ### Major Changes
