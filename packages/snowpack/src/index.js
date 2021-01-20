@@ -6,8 +6,13 @@ export default function preactRefreshPlugin(config, pluginOptions) {
       '@prefresh/snowpack/runtime',
       '@prefresh/snowpack/utils',
     ],
-    async transform({ contents, urlPath, isDev, id }) {
-      if (!isDev || !urlPath.endsWith('.js') || config.devOptions.hmr === false)
+    async transform({ contents, urlPath, isDev, isSSR, id }) {
+      if (
+        isSSR ||
+        !isDev ||
+        !urlPath.endsWith('.js') ||
+        config.devOptions.hmr === false
+      )
         return;
 
       let hasRefeshReg = /\$RefreshReg\$\(/.test(contents);
