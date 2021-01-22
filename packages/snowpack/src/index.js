@@ -35,7 +35,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
           ${'import'} { flushUpdates } from '@prefresh/snowpack/utils';
 
           const prevRefreshReg = self.$RefreshReg$ || (() => {});
-          const prevRefreshSig = self.$RefreshSig$ || (() => {});
+          const prevRefreshSig = self.$RefreshSig$ || (() => (type) => type);
 
           self.$RefreshSig$ = () => {
             let status = 'begin';

@@ -28,7 +28,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
           ${'import'} { flushUpdates } from '@prefresh/web-dev-server/utils';
 
           const prevRefreshReg = self.$RefreshReg$ || (() => {});
-          const prevRefreshSig = self.$RefreshSig$ || (() => {});
+          const prevRefreshSig = self.$RefreshSig$ || (() => (type) => type);
 
           self.$RefreshSig$ = () => {
             let status = 'begin';

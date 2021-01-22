@@ -39,7 +39,7 @@ export default function prefreshPlugin() {
 
         if (import.meta.hot) {
           prevRefreshReg = self.$RefreshReg$ || (() => {});
-          prevRefreshSig = self.$RefreshSig$ || (() => {});
+          prevRefreshSig = self.$RefreshSig$ || (() => (type) => type);
 
           self.$RefreshReg$ = (type, id) => {
             self.__PREFRESH__.register(type, ${JSON.stringify(id)} + " " + id);
