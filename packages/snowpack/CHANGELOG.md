@@ -1,5 +1,13 @@
 # @prefresh/snowpack
 
+## 3.0.2
+
+### Patch Changes
+
+- [`8d88d24`](https://github.com/JoviDeCroock/prefresh/commit/8d88d247cf1d05b5f4628318e39efa4be9c6baa0) [#256](https://github.com/JoviDeCroock/prefresh/pull/256) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Default `\$refreshSig# @prefresh/snowpack to a proper HOC
+
+* [`6587cef`](https://github.com/JoviDeCroock/prefresh/commit/6587cef9a8bde4bd224db0945ecfe7d8632ab3a7) [#254](https://github.com/JoviDeCroock/prefresh/pull/254) Thanks [@natemoo-re](https://github.com/natemoo-re)! - Avoid running in `snowpack@3.0.0` SSR mode
+
 ## 3.0.1
 
 ### Patch Changes
