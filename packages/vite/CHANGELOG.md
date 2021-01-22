@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.0.2
+
+### Patch Changes
+
+- [`8d88d24`](https://github.com/JoviDeCroock/prefresh/commit/8d88d247cf1d05b5f4628318e39efa4be9c6baa0) [#256](https://github.com/JoviDeCroock/prefresh/pull/256) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Default `\$refreshSig# @prefresh/vite to a proper HOC
+
 ## 2.0.1
 
 ### Patch Changes
