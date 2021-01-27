@@ -5,5 +5,8 @@ module.exports = {
     jsxFactory: 'h',
     jsxFragment: 'Fragment'
   },
+  optimizeDeps: {
+    include: ['preact/hooks']
+  },
 	plugins: [prefresh()]
 };
