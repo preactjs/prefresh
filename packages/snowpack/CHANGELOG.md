@@ -1,5 +1,11 @@
 # @prefresh/snowpack
 
+## 3.1.0
+
+### Minor Changes
+
+- [`7428560`](https://github.com/JoviDeCroock/prefresh/commit/7428560cfa3e6afd1d5c895ddb0aba6c21371b48) [#258](https://github.com/JoviDeCroock/prefresh/pull/258) Thanks [@davidbailey00](https://github.com/davidbailey00)! - Add support for Snowpack 3
+
 ## 3.0.2
 
 ### Patch Changes
