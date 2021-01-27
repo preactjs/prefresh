@@ -57,6 +57,6 @@
   },
   "peerDependencies": {
     "preact": "^10.4.0",
-    "snowpack": "^2.0.0"
+    "snowpack": "^2.0.0 || ^3.0.0"
   }
 }
