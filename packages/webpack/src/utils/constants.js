@@ -10,7 +10,7 @@ exports.matcherOptions = {
 
 exports.nextMatcherOptions = {
   include: /\.([jt]sx?)$/,
-  exclude: /node_modules\/(?!next[\\/]dist[\\/](next-server[\\/]lib | client | pages)).*/,
+  exclude: /node_modules/,
 };
 
 exports.injectRefreshFunctions = function (compilation) {
