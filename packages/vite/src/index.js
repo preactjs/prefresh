@@ -7,6 +7,16 @@ export default function prefreshPlugin() {
   let shouldSkip = false;
   return {
     name: 'prefresh',
+    config() {
+      return {
+        optimizeDeps: {
+          exclude: [
+            '@prefresh/vite/runtime',
+            '@prefresh/vite/utils'
+          ]
+        }
+      }
+    },
     configResolved(config) {
       shouldSkip = config.command === 'build' || config.isProduction;
     },
