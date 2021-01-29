@@ -1,6 +1,6 @@
 {
   "name": "@prefresh/vite",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
   "types": "index.d.ts",
