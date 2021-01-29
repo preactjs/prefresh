@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.0.3
+
+### Patch Changes
+
+- [`635b538`](https://github.com/JoviDeCroock/prefresh/commit/635b538cc308046b2ebfdecad26ff807c53c6cbb) [#264](https://github.com/JoviDeCroock/prefresh/pull/264) Thanks [@yyx990803](https://github.com/yyx990803)! - exclude prefresh internals from dep optimization
+
 ## 2.0.2
 
 ### Patch Changes

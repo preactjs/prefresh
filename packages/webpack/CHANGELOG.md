@@ -1,5 +1,11 @@
 # @prefresh/webpack
 
+## 3.0.1
+
+### Patch Changes
+
+- [`bfe7a1a`](https://github.com/JoviDeCroock/prefresh/commit/bfe7a1aed076949070c9847d5006e6e220988bbf) [#262](https://github.com/JoviDeCroock/prefresh/pull/262) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix issue where next needs loaded pages and client
+
 ## 3.0.0
 
 ### Patch Changes
