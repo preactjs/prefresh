@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.0.4
+
+### Patch Changes
+
+- [`2db550d`](https://github.com/JoviDeCroock/prefresh/commit/2db550d4d8078a6f011376f60e0b07652d68d311) [#267](https://github.com/JoviDeCroock/prefresh/pull/267) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix worker support
+
 ## 2.0.3
 
 ### Patch Changes
