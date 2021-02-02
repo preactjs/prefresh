@@ -10,12 +10,9 @@ export default function prefreshPlugin() {
     config() {
       return {
         optimizeDeps: {
-          exclude: [
-            '@prefresh/vite/runtime',
-            '@prefresh/vite/utils'
-          ]
-        }
-      }
+          exclude: ['@prefresh/vite/runtime', '@prefresh/vite/utils'],
+        },
+      };
     },
     configResolved(config) {
       shouldSkip = config.command === 'build' || config.isProduction;
@@ -31,7 +28,12 @@ export default function prefreshPlugin() {
       }
     },
     transform(code, id) {
-      if (shouldSkip || !/\.(t|j)sx?$/.test(id) || id.includes('node_modules'))
+      if (
+        shouldSkip ||
+        !/\.(t|j)sx?$/.test(id) ||
+        id.includes('node_modules') ||
+        id.includes('?worker')
+      )
         return;
 
       const result = transform(code, id);
