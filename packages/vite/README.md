@@ -20,6 +20,10 @@ export default {
 };
 ```
 
+## Options
+
+The plugin accepts two options `include` & `exclude` which are used in the [`@rollup/pluginutils.createFilter`](https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter) to filter out files or include them.
+
 ## Best practices
 
 ### Recognition
