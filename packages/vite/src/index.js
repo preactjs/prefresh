@@ -4,7 +4,7 @@ import { createFilter } from '@rollup/pluginutils';
 const runtimePaths = ['@prefresh/vite/runtime', '@prefresh/vite/utils'];
 
 /** @returns {import('vite').Plugin} */
-export default function prefreshPlugin() {
+export default function prefreshPlugin(options = {}) {
   let shouldSkip = false;
   const filter = createFilter(options.include, options.exclude);
 
