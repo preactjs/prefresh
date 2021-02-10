@@ -1,10 +1,13 @@
 import { transformSync } from '@babel/core';
+import { createFilter } from '@rollup/pluginutils';
 
 const runtimePaths = ['@prefresh/vite/runtime', '@prefresh/vite/utils'];
 
 /** @returns {import('vite').Plugin} */
-export default function prefreshPlugin() {
+export default function prefreshPlugin(options = {}) {
   let shouldSkip = false;
+  const filter = createFilter(options.include, options.exclude);
+
   return {
     name: 'prefresh',
     config() {
@@ -32,7 +35,8 @@ export default function prefreshPlugin() {
         shouldSkip ||
         !/\.(t|j)sx?$/.test(id) ||
         id.includes('node_modules') ||
-        id.includes('?worker')
+        id.includes('?worker') ||
+        !filter(id)
       )
         return;
 
