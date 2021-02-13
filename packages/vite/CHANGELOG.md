@@ -1,5 +1,15 @@
 # @prefresh/vite
 
+## 2.1.0
+
+### Minor Changes
+
+- [`f28edb0`](https://github.com/JoviDeCroock/prefresh/commit/f28edb079645ffefc94b4d597ce6aeb30ccffcec) [#270](https://github.com/JoviDeCroock/prefresh/pull/270) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Allow using include/exclude in the vite plugin options
+
+### Patch Changes
+
+- [`1f71a37`](https://github.com/JoviDeCroock/prefresh/commit/1f71a374cb3ee3ebb2abbc52dcfd82c55dcf717d) [#273](https://github.com/JoviDeCroock/prefresh/pull/273) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - (vite) - avoid ssr injection
+
 ## 2.0.4
 
 ### Patch Changes
