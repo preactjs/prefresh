@@ -30,13 +30,14 @@ export default function prefreshPlugin(options = {}) {
         return runtimeCode;
       }
     },
-    transform(code, id) {
+    transform(code, id, ssr) {
       if (
         shouldSkip ||
         !/\.(t|j)sx?$/.test(id) ||
         id.includes('node_modules') ||
         id.includes('?worker') ||
-        !filter(id)
+        !filter(id) ||
+        ssr
       )
         return;
 
