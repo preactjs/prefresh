@@ -4,9 +4,11 @@ const path = require('path');
 const config = {
 	experimental: {
 		modern: true,
-		polyfillsOptimization: true
-	},
-
+    polyfillsOptimization: true,
+  },
+  future: {
+    webpack5: false,
+  },
 	webpack(config, { dev, isServer }) {
 		const splitChunks = config.optimization && config.optimization.splitChunks;
 		if (splitChunks) {

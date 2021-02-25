@@ -110,6 +110,30 @@ class ReloadPlugin {
     )
       return;
 
+    const internalWebpackVersion = Number(
+      compiler.webpack ? compiler.webpack.version[0] : 4
+    );
+    const externalWebpackVersion = Number(webpack.version[0]);
+
+    if (!externalWebpackVersion) {
+      throw new Error(
+        `Missing webpack Dependency, try installing webpack@${
+          compiler.webpack ? compiler.webpack.version : 4
+        } locally.`
+      );
+    }
+
+    if (internalWebpackVersion !== externalWebpackVersion) {
+      throw new Error(`
+        Next is using webpack-version ${internalWebpackVersion} and you have ${externalWebpackVersion} installed.
+
+        Try installing ${
+          compiler.webpack ? compiler.webpack.version : 4
+        } locally.
+        Or if you want to try webpack 5 you can turn this on with { future: { webpack5:true } } in you next.config.js.
+      `);
+    }
+
     compiler.options.entry = injectEntry(compiler.options.entry);
 
     const providePlugin = new webpack.ProvidePlugin({
