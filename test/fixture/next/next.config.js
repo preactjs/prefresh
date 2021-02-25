@@ -4,7 +4,8 @@ const path = require('path');
 const config = {
 	experimental: {
 		modern: true,
-		polyfillsOptimization: true
+    polyfillsOptimization: true,
+    webpack5: true,
 	},
 
 	webpack(config, { dev, isServer }) {
