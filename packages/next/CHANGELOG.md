@@ -1,5 +1,14 @@
 # @prefresh/next
 
+## 1.4.5
+
+### Patch Changes
+
+- [`a42f01d`](https://github.com/JoviDeCroock/prefresh/commit/a42f01dcecda894ad3395d831249a6c438b38e47) [#280](https://github.com/JoviDeCroock/prefresh/pull/280) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Bump next peerDep
+
+- Updated dependencies [[`a42f01d`](https://github.com/JoviDeCroock/prefresh/commit/a42f01dcecda894ad3395d831249a6c438b38e47), [`a736728`](https://github.com/JoviDeCroock/prefresh/commit/a736728dff1d487f6d0448a69a17f4ef8902b61d)]:
+  - @prefresh/webpack@3.1.0
+
 ## 1.4.4
 
 ### Patch Changes
