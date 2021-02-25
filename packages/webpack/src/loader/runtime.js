@@ -19,7 +19,7 @@ module.exports = function () {
       }
     }
 
-    module.hot.dispose(function (data) {
+    module.hot.dispose(data => {
       data.moduleExports = __prefresh_utils__.getExports(module);
     });
 
