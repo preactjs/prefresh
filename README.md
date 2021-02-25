@@ -44,3 +44,20 @@ export default Refresh;
 
 When you are working with HOC's be sure to lift up the `displayName` so we can
 recognise it as a component.
+
+## Usage in IE11
+
+If you want to use `@prefresh/webpack` or `@prefresh/next` with IE11, you'll need to transpile the `@prefresh/core` and `@prefresh/utils` packages.
+
+For Next.js you can install `next-transpile-modules` and add the following code snippet to your `next.config.js`.
+
+```js
+const withTranspiledModules = require('next-transpile-modules')([
+  '@prefresh/core',
+  '@prefresh/utils',
+]);
+
+module.exports = withTM({
+  /* regular next.js config options here */
+});
+```
