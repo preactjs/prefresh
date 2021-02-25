@@ -7,7 +7,7 @@ const config = {
     polyfillsOptimization: true,
   },
   future: {
-    webpack5: true,
+    webpack5: false,
   },
 	webpack(config, { dev, isServer }) {
 		const splitChunks = config.optimization && config.optimization.splitChunks;

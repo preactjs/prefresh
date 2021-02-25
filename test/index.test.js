@@ -209,23 +209,20 @@ export const Tester = () => <p className="tester">Test</p>;`
         await expectByPolling(() => getText(value), 'Count: 10');
       });
 
-      if (integration !== 'next') {
-        // Temp exclusion, seems to act up when a file is added
-        test('re-runs changed effects', async () => {
-          const value = await page.$('#effect-test');
+      test('re-runs changed effects', async () => {
+        const value = await page.$('#effect-test');
 
-          await expectByPolling(() => getText(value), 'hello world');
-          await updateFile('src/effect.jsx', content =>
-            content.replace(
-              "useEffect(() => { setState('hello world'); }, []);",
-              "useEffect(() => { setState('changed world'); }, []);"
-            )
-          );
-          await timeout(TIMEOUT);
+        await expectByPolling(() => getText(value), 'hello world');
+        await updateFile('src/effect.jsx', content =>
+          content.replace(
+            "useEffect(() => { setState('hello world'); }, []);",
+            "useEffect(() => { setState('changed world'); }, []);"
+          )
+        );
+        await timeout(TIMEOUT);
 
-          await expectByPolling(() => getText(value), 'changed world');
-        });
-      }
+        await expectByPolling(() => getText(value), 'changed world');
+      });
 
       test('works for class-components', async () => {
         const text = await page.$('.class-text');

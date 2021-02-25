@@ -18,6 +18,6 @@
 		"react": "github:preact-compat/react#1.0.0",
 		"react-dom": "github:preact-compat/react-dom#1.0.0",
     "react-ssr-prepass": "npm:preact-ssr-prepass@^1.0.1",
-    "webpack": "^5.24.2"
+    "webpack": "^4.0.0"
 	}
 }
