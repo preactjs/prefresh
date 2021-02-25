@@ -5,15 +5,16 @@ const Template = require('webpack/lib/Template');
 const NAMESPACE = '__PREFRESH__';
 
 const beforeModule = `
-self.$RefreshSig$ = () => {
-  let status = 'begin';
-  let savedType;
-  return (type, key, forceReset, getCustomHooks) => {
+self.$RefreshSig$ = function() {
+  var status = 'begin';
+  var savedType;
+
+  return function(type, key, forceReset, getCustomHooks) {
     if (!savedType) savedType = type;
     status = self.${NAMESPACE}.sign(type || savedType, key, forceReset, getCustomHooks, status);
     return type;
-  };
-};
+  }
+}
 `;
 
 class PrefreshRuntimeModule extends RuntimeModule {
@@ -23,24 +24,27 @@ class PrefreshRuntimeModule extends RuntimeModule {
 
   generate() {
     const { runtimeTemplate } = this.compilation;
+    const declare = runtimeTemplate.supportsConst() ? 'const' : 'var';
+
     return Template.asString([
       `${
         RuntimeGlobals.interceptModuleExecution
       }.push(${runtimeTemplate.basicFunction('options', [
-        `${
-          runtimeTemplate.supportsConst() ? 'const' : 'var'
-        } originalFactory = options.factory;`,
+        `${declare} originalFactory = options.factory;`,
         `options.factory = ${runtimeTemplate.basicFunction(
           'moduleObject, moduleExports, webpackRequire',
           [
-            'const prevRefreshReg = self.$RefreshReg$;',
-            'const prevRefreshSig = self.$RefreshSig$;',
+            `${declare} prevRefreshReg = self.$RefreshReg$;`,
+            `${declare} prevRefreshSig = self.$RefreshSig$;`,
             beforeModule,
-            `const reg = ${runtimeTemplate.basicFunction('currentModuleId', [
-              'self.$RefreshReg$ = (type, id) => {',
-              `self.${NAMESPACE}.register(type, currentModuleId + ' ' + id);`,
-              '};',
-            ])}`,
+            `${declare} reg = ${runtimeTemplate.basicFunction(
+              'currentModuleId',
+              [
+                'self.$RefreshReg$ = function(type, id) {',
+                `self.${NAMESPACE}.register(type, currentModuleId + ' ' + id);`,
+                '};',
+              ]
+            )}`,
             'reg()',
             'try {',
             Template.indent(

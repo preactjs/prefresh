@@ -3,20 +3,20 @@ const { Template } = require('webpack');
 const NAMESPACE = '__PREFRESH__';
 
 const beforeModule = `
-const prevRefreshReg = self.$RefreshReg$;
-const prevRefreshSig = self.$RefreshSig$;
+var prevRefreshReg = self.$RefreshReg$;
+var prevRefreshSig = self.$RefreshSig$;
 
-self.$RefreshSig$ = () => {
-  let status = 'begin';
-  let savedType;
-  return (type, key, forceReset, getCustomHooks) => {
+self.$RefreshSig$ = function() {
+  var status = 'begin';
+  var savedType;
+  return function(type, key, forceReset, getCustomHooks) {
     if (!savedType) savedType = type;
     status = self.${NAMESPACE}.sign(type || savedType, key, forceReset, getCustomHooks, status);
     return type;
   };
 };
 
-self.$RefreshReg$ = (type, id) => {
+self.$RefreshReg$ = function(type, id) {
   self.${NAMESPACE}.register(type, module.i + ' ' + id);
 };
 
