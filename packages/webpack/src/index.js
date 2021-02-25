@@ -110,10 +110,10 @@ class ReloadPlugin {
     )
       return;
 
-    const internalWebpackVersion = compiler.webpack
-      ? compiler.webpack.version[0]
-      : 4;
-    const externalWebpackVersion = webpack.version[0];
+    const internalWebpackVersion = Number(
+      compiler.webpack ? compiler.webpack.version[0] : 4
+    );
+    const externalWebpackVersion = Number(webpack.version[0]);
 
     if (!externalWebpackVersion) {
       throw new Error(
