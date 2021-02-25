@@ -1,5 +1,13 @@
 # @prefresh/webpack
 
+## 3.1.0
+
+### Minor Changes
+
+- [`a42f01d`](https://github.com/JoviDeCroock/prefresh/commit/a42f01dcecda894ad3395d831249a6c438b38e47) [#280](https://github.com/JoviDeCroock/prefresh/pull/280) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Handle errors for next.js
+
+* [`a736728`](https://github.com/JoviDeCroock/prefresh/commit/a736728dff1d487f6d0448a69a17f4ef8902b61d) [#278](https://github.com/JoviDeCroock/prefresh/pull/278) Thanks [@nickrttn](https://github.com/nickrttn)! - Support IE11 in development mode
+
 ## 3.0.1
 
 ### Patch Changes
