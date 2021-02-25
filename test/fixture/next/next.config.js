@@ -5,9 +5,10 @@ const config = {
 	experimental: {
 		modern: true,
     polyfillsOptimization: true,
+  },
+  future: {
     webpack5: true,
-	},
-
+  },
 	webpack(config, { dev, isServer }) {
 		const splitChunks = config.optimization && config.optimization.splitChunks;
 		if (splitChunks) {
