@@ -7,8 +7,8 @@ const defer =
     ? Promise.prototype.then.bind(Promise.resolve())
     : setTimeout;
 
-options.debounceRendering = process => {
-  defer(() => {
+options.debounceRendering = function (process) {
+  defer(function () {
     try {
       process();
     } catch (e) {

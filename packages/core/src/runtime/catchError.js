@@ -6,7 +6,7 @@ import {
 } from '../constants';
 
 const oldCatchError = options[CATCH_ERROR_OPTION];
-options[CATCH_ERROR_OPTION] = (error, vnode) => {
+options[CATCH_ERROR_OPTION] = function (error, vnode) {
   if (vnode[VNODE_COMPONENT] && vnode[VNODE_COMPONENT][COMPONENT_DIRTY]) {
     vnode[VNODE_COMPONENT][COMPONENT_DIRTY] = false;
   }

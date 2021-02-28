@@ -25,6 +25,10 @@ import { signaturesForType } from './runtime/signaturesForType';
 let typesById = new Map();
 let pendingUpdates = [];
 
+function getEmptyArray() {
+  return [];
+}
+
 function sign(type, key, forceReset, getCustomHooks, status) {
   if (type) {
     let signature = signaturesForType.get(type);
@@ -33,7 +37,7 @@ function sign(type, key, forceReset, getCustomHooks, status) {
         type,
         key,
         forceReset,
-        getCustomHooks: getCustomHooks || (() => []),
+        getCustomHooks: getCustomHooks || getEmptyArray,
       });
 
       return 'needsHooks';
@@ -53,9 +57,11 @@ function replaceComponent(OldType, NewType, resetHookState) {
 
   mappedVNodes.set(OldType, NewType);
 
-  pendingUpdates = pendingUpdates.filter(p => p[0] !== OldType);
+  pendingUpdates = pendingUpdates.filter(function (p) {
+    return p[0] !== OldType;
+  });
 
-  vnodes.forEach(vnode => {
+  vnodes.forEach(function (vnode) {
     // update the type in-place to reference the new component
     vnode.type = NewType;
 
@@ -105,29 +111,28 @@ function replaceComponent(OldType, NewType, resetHookState) {
           vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST] &&
           vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].length
         ) {
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(
-            possibleEffect => {
-              if (
-                possibleEffect[HOOK_CLEANUP] &&
-                typeof possibleEffect[HOOK_CLEANUP] === 'function'
+          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(function (
+            possibleEffect
+          ) {
+            if (
+              possibleEffect[HOOK_CLEANUP] &&
+              typeof possibleEffect[HOOK_CLEANUP] === 'function'
+            ) {
+              possibleEffect[HOOK_CLEANUP]();
+            } else if (
+              possibleEffect[HOOK_ARGS] &&
+              possibleEffect[HOOK_VALUE] &&
+              Object.keys(possibleEffect).length === 3
+            ) {
+              const cleanupKey = Object.keys(possibleEffect).find(function (
+                key
               ) {
-                possibleEffect[HOOK_CLEANUP]();
-              } else if (
-                possibleEffect[HOOK_ARGS] &&
-                possibleEffect[HOOK_VALUE] &&
-                Object.keys(possibleEffect).length === 3
-              ) {
-                const cleanupKey = Object.keys(possibleEffect).find(
-                  key => key !== HOOK_ARGS && key !== HOOK_VALUE
-                );
-                if (
-                  cleanupKey &&
-                  typeof possibleEffect[cleanupKey] == 'function'
-                )
-                  possibleEffect[cleanupKey]();
-              }
+                return key !== HOOK_ARGS && key !== HOOK_VALUE;
+              });
+              if (cleanupKey && typeof possibleEffect[cleanupKey] == 'function')
+                possibleEffect[cleanupKey]();
             }
-          );
+          });
         }
 
         vnode[VNODE_COMPONENT][COMPONENT_HOOKS] = {
@@ -140,40 +145,37 @@ function replaceComponent(OldType, NewType, resetHookState) {
           vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST] &&
           vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].length
         ) {
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(
-            possibleEffect => {
-              if (
-                possibleEffect[HOOK_CLEANUP] &&
-                typeof possibleEffect[HOOK_CLEANUP] === 'function'
+          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(function (
+            possibleEffect
+          ) {
+            if (
+              possibleEffect[HOOK_CLEANUP] &&
+              typeof possibleEffect[HOOK_CLEANUP] === 'function'
+            ) {
+              possibleEffect[HOOK_CLEANUP]();
+            } else if (
+              possibleEffect[HOOK_ARGS] &&
+              possibleEffect[HOOK_VALUE] &&
+              Object.keys(possibleEffect).length === 3
+            ) {
+              const cleanupKey = Object.keys(possibleEffect).find(function (
+                key
               ) {
-                possibleEffect[HOOK_CLEANUP]();
-              } else if (
-                possibleEffect[HOOK_ARGS] &&
-                possibleEffect[HOOK_VALUE] &&
-                Object.keys(possibleEffect).length === 3
-              ) {
-                const cleanupKey = Object.keys(possibleEffect).find(
-                  key => key !== HOOK_ARGS && key !== HOOK_VALUE
-                );
-                if (
-                  cleanupKey &&
-                  typeof possibleEffect[cleanupKey] == 'function'
-                )
-                  possibleEffect[cleanupKey]();
-              }
-            }
-          );
+                return key !== HOOK_ARGS && key !== HOOK_VALUE;
+              });
 
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(
-            hook => {
-              if (
-                hook.__H &&
-                Array.isArray(hook.__H)
-              ) {
-                hook.__H = undefined;
-              }
+              if (cleanupKey && typeof possibleEffect[cleanupKey] == 'function')
+                possibleEffect[cleanupKey]();
             }
-          );
+          });
+
+          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(function (
+            hook
+          ) {
+            if (hook.__H && Array.isArray(hook.__H)) {
+              hook.__H = undefined;
+            }
+          });
         }
       }
 
@@ -191,8 +193,10 @@ function replaceComponent(OldType, NewType, resetHookState) {
 }
 
 self[NAMESPACE] = {
-  getSignature: type => signaturesForType.get(type),
-  register: (type, id) => {
+  getSignature: function (type) {
+    return signaturesForType.get(type);
+  },
+  register: function (type, id) {
     if (typesById.has(id)) {
       const existing = typesById.get(id);
       if (existing !== type) {
@@ -205,13 +209,15 @@ self[NAMESPACE] = {
 
     if (!signaturesForType.has(type)) {
       signaturesForType.set(type, {
-        getCustomHooks: () => [],
+        getCustomHooks: getEmptyArray,
         type,
       });
     }
   },
-  getPendingUpdates: () => pendingUpdates,
-  flush: () => {
+  getPendingUpdates: function () {
+    return pendingUpdates;
+  },
+  flush: function () {
     pendingUpdates = [];
   },
   replaceComponent,

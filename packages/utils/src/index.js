@@ -1,4 +1,4 @@
-const compareSignatures = (prev, next) => {
+function compareSignatures(prev, next) {
   const prevSignature = self.__PREFRESH__.getSignature(prev) || {};
   const nextSignature = self.__PREFRESH__.getSignature(next) || {};
 
@@ -12,20 +12,20 @@ const compareSignatures = (prev, next) => {
   } else {
     self.__PREFRESH__.replaceComponent(prev, next, false);
   }
-};
+}
 
-export const flush = () => {
-  const pending = [...self.__PREFRESH__.getPendingUpdates()];
+export function flush() {
+  const pending = [].concat(self.__PREFRESH__.getPendingUpdates());
   self.__PREFRESH__.flush();
 
   if (pending.length > 0) {
-    pending.forEach(([prev, next]) => {
-      compareSignatures(prev, next);
+    pending.forEach(function (tuple) {
+      compareSignatures(tuple[0], tuple[1]);
     });
   }
-};
+}
 
-export const isComponent = exportValue => {
+export function isComponent(exportValue) {
   if (typeof exportValue === 'function') {
     if (
       exportValue.prototype != null &&
@@ -39,5 +39,6 @@ export const isComponent = exportValue => {
       typeof name === 'string' && name[0] && name[0] == name[0].toUpperCase()
     );
   }
+
   return false;
-};
+}
