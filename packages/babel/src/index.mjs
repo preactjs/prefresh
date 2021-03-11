@@ -467,8 +467,13 @@ export default function (babel, opts = {}) {
         },
       },
       CallExpression(path, state) {
-        if (!path.get('callee').referencesImport('preact', 'createContext'))
+        if (
+          !path.get('callee').referencesImport('preact', 'createContext') &&
+          !path.get('callee').referencesImport('react', 'createContext') &&
+          !path.get('callee').referencesImport('preact/compat', 'createContext')
+        )
           return;
+
         let id = '';
         if (t.isVariableDeclarator(path.parentPath)) {
           id += '$' + path.parent.id.name;
