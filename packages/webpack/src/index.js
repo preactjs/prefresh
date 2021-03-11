@@ -136,9 +136,17 @@ class ReloadPlugin {
 
     compiler.options.entry = injectEntry(compiler.options.entry);
 
-    const providePlugin = new webpack.ProvidePlugin({
+    let provide = {
       [prefreshUtils]: require.resolve('./utils/prefresh'),
-    });
+    };
+
+    if (this.options.overlay) {
+      provide.__prefresh_errors__ = require.resolve(
+        this.options.overlay.module
+      );
+    }
+
+    const providePlugin = new webpack.ProvidePlugin(provide);
     providePlugin.apply(compiler);
 
     switch (Number(webpack.version[0])) {
