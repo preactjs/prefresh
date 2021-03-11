@@ -2,6 +2,7 @@
   "name": "@prefresh/webpack",
   "version": "3.1.0",
   "main": "src/index.js",
+  "type": "commonjs",
   "exports": {
     ".": {
       "require": "./src/index.js"

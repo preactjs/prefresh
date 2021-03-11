@@ -12,8 +12,7 @@ exports.integrations = [
 exports.bin = {
   next: dir => path.resolve(dir, `./node_modules/next/dist/bin/next`),
   nollup: dir => path.resolve(dir, `./node_modules/nollup/lib/cli.js`),
-  snowpack: dir =>
-    path.resolve(dir, `./node_modules/snowpack/dist-node/index.bin.js`),
+  snowpack: dir => path.resolve(dir, `./node_modules/snowpack/index.bin.js`),
   vite: dir => path.resolve(dir, `./node_modules/vite/bin/vite.js`),
   'web-dev-server': dir =>
     path.resolve(dir, `./node_modules/@web/dev-server/dist/bin.js`),
