@@ -18,6 +18,7 @@ class ReloadPlugin {
     );
 
     this.options = {
+      overlay: options && options.overlay,
       runsInNextJs: Boolean(options && options.runsInNextJs),
     };
   }
