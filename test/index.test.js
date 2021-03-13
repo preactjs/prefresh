@@ -285,6 +285,26 @@ export const Tester = () => <p className="tester">Test</p>;`
         expect(await getText(children[0])).toMatch('apple');
         expect(await getText(children[1])).toMatch('peach');
       });
+
+      if (integration === 'webpack' || integration === 'next') {
+        test('can hot reload externally defined JSX', async () => {
+          expect(
+            await page.$eval('#color', e => getComputedStyle(e).color)
+          ).toBe('rgb(0, 0, 0)');
+
+          await updateFile('src/styles.js', content =>
+            content.replace(
+              'background-color: #000;',
+              'background-color: #fff;'
+            )
+          );
+          await timeout(TIMEOUT);
+
+          expect(
+            await page.$eval('#color', e => getComputedStyle(e).color)
+          ).toBe('rgb(255, 255, 255)');
+        });
+      }
     });
   });
 });

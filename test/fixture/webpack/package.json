@@ -15,6 +15,7 @@
 		"webpack-dev-server": "^3.11.0"
 	},
 	"dependencies": {
+    "goober": "2.0.33",
 		"preact": "^10.5.7"
 	},
 	"resolutions": {
