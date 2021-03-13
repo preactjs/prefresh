@@ -1,7 +1,4 @@
-import { h } from 'preact';
-import { styled, setup } from 'goober';
-
-setup(h);
+import { styled } from 'goober';
 
 export const Style = styled('div')`
   background-color: #000;
