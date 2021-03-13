@@ -4,7 +4,7 @@ import { Greeting } from './greeting.jsx';
 import { StoreProvider } from './context.jsx';
 import { Products } from './products.jsx';
 import { Effect } from './effect.jsx';
-import { Style } from '../../webpack/src/styles';
+import { Style } from './styles';
 
 function Test() {
   const [count, increment] = useCounter();
