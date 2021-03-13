@@ -289,7 +289,7 @@ export const Tester = () => <p className="tester">Test</p>;`
       if (integration === 'webpack' || integration === 'next') {
         test('can hot reload externally defined JSX', async () => {
           expect(
-            await page.$eval('#color', e => getComputedStyle(e).color)
+            await page.$eval('#color', e => getComputedStyle(e).backgroundColor)
           ).toBe('rgb(0, 0, 0)');
 
           await updateFile('src/styles.js', content =>
@@ -301,7 +301,7 @@ export const Tester = () => <p className="tester">Test</p>;`
           await timeout(TIMEOUT);
 
           expect(
-            await page.$eval('#color', e => getComputedStyle(e).color)
+            await page.$eval('#color', e => getComputedStyle(e).backgroundColor)
           ).toBe('rgb(255, 255, 255)');
         });
       }
