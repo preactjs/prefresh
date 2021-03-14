@@ -11,7 +11,8 @@ exports.integrations = [
 ];
 
 exports.bin = {
-  'next-webpack5': path.resolve(dir, `./node_modules/next/dist/bin/next`),
+  'next-webpack5': dir =>
+    path.resolve(dir, `./node_modules/next/dist/bin/next`),
   next: dir => path.resolve(dir, `./node_modules/next/dist/bin/next`),
   nollup: dir => path.resolve(dir, `./node_modules/nollup/lib/cli.js`),
   snowpack: dir => path.resolve(dir, `./node_modules/snowpack/index.bin.js`),
