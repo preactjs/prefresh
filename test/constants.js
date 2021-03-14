@@ -7,9 +7,12 @@ exports.integrations = [
   'next',
   'webpack',
   'web-dev-server',
+  'next-webpack5',
 ];
 
 exports.bin = {
+  'next-webpack5': dir =>
+    path.resolve(dir, `./node_modules/next/dist/bin/next`),
   next: dir => path.resolve(dir, `./node_modules/next/dist/bin/next`),
   nollup: dir => path.resolve(dir, `./node_modules/nollup/lib/cli.js`),
   snowpack: dir => path.resolve(dir, `./node_modules/snowpack/index.bin.js`),
@@ -20,6 +23,7 @@ exports.bin = {
 };
 
 exports.binArgs = {
+  'next-webpack5': ['dev', '-p', '3006'],
   next: ['dev', '-p', '3002'],
   snowpack: ['dev'],
   webpack: ['serve'],
@@ -34,6 +38,7 @@ exports.goMessage = {
   webpack: 'successfully',
   nollup: 'Compiled',
   next: 'successfully',
+  'next-webpack5': 'successfully',
   'web-dev-server': 'started',
 };
 
@@ -44,4 +49,5 @@ exports.defaultPort = {
   nollup: 3003,
   snowpack: 3004,
   'web-dev-server': 3005,
+  'next-webpack5': 3006,
 };
