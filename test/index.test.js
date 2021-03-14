@@ -143,7 +143,7 @@ describe('Prefresh integrations', () => {
 
       // TODO: this bugs in next10webpack5 but not webpack 5...
       // integration === 'next-webpack5'
-      if (intergration !== 'next-webpack5') {
+      if (integration !== 'next-webpack5') {
         test('add file and import it', async () => {
           const compPath = path.join(getTempDir(integration), 'src/test.jsx');
           await fs.writeFile(
