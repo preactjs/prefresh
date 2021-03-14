@@ -286,7 +286,11 @@ export const Tester = () => <p className="tester">Test</p>;`
         expect(await getText(children[1])).toMatch('peach');
       });
 
-      if (integration === 'webpack' || integration === 'next') {
+      if (
+        integration === 'webpack' ||
+        integration === 'next' ||
+        integration === 'next-webpack5'
+      ) {
         test('can hot reload externally defined JSX', async () => {
           expect(
             await page.$eval('#color', e => getComputedStyle(e).backgroundColor)
