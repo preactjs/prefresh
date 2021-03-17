@@ -1,5 +1,13 @@
 # @prefresh/web-dev-server
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`c256066`](https://github.com/JoviDeCroock/prefresh/commit/c2560664e794bbd50f26d10953b0d63fb563b26c), [`010f21b`](https://github.com/JoviDeCroock/prefresh/commit/010f21b947d0cdee59fac6af6a17d10cb6a696b5)]:
+  - @prefresh/core@1.3.1
+  - @prefresh/babel-plugin@0.4.1
+
 ## 1.0.1
 
 ### Patch Changes

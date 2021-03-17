@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.3.1
+
+### Patch Changes
+
+- [`c256066`](https://github.com/JoviDeCroock/prefresh/commit/c2560664e794bbd50f26d10953b0d63fb563b26c) [#296](https://github.com/JoviDeCroock/prefresh/pull/296) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Skip registration of non-function nodes
+
 ## 1.3.0
 
 ### Minor Changes

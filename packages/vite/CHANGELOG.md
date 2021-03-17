@@ -1,5 +1,17 @@
 # @prefresh/vite
 
+## 2.1.1
+
+### Patch Changes
+
+- [`501c906`](https://github.com/JoviDeCroock/prefresh/commit/501c906a02db861052f2da1d39f8adf98274655b) [#298](https://github.com/JoviDeCroock/prefresh/pull/298) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Remove optimizeDeps
+
+* [`85119bd`](https://github.com/JoviDeCroock/prefresh/commit/85119bd4f14bfdad3e4ba995c61d5808a482ce57) [#297](https://github.com/JoviDeCroock/prefresh/pull/297) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Enable esm
+
+* Updated dependencies [[`c256066`](https://github.com/JoviDeCroock/prefresh/commit/c2560664e794bbd50f26d10953b0d63fb563b26c), [`010f21b`](https://github.com/JoviDeCroock/prefresh/commit/010f21b947d0cdee59fac6af6a17d10cb6a696b5)]:
+  - @prefresh/core@1.3.1
+  - @prefresh/babel-plugin@0.4.1
+
 ## 2.1.0
 
 ### Minor Changes
