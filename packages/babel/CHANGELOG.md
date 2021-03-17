@@ -1,5 +1,11 @@
 # @prefresh/babel-plugin
 
+## 0.4.1
+
+### Patch Changes
+
+- [`010f21b`](https://github.com/JoviDeCroock/prefresh/commit/010f21b947d0cdee59fac6af6a17d10cb6a696b5) [#287](https://github.com/JoviDeCroock/prefresh/pull/287) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix createContext detection in React-Preact/compat
+
 ## 0.4.0
 
 ### Minor Changes
