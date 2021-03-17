@@ -9,6 +9,13 @@ module.exports = function () {
     if (previousHotModuleExports) {
       try {
         __prefresh_utils__.flush();
+        if (
+          typeof __prefresh_errors__ !== 'undefined' &&
+          __prefresh_errors__ &&
+          __prefresh_errors__.clearRuntimeErrors
+        ) {
+          __prefresh_errors__.clearRuntimeErrors();
+        }
       } catch (e) {
         // Only available in newer webpack versions.
         if (module.hot.invalidate) {
@@ -24,6 +31,14 @@ module.exports = function () {
     });
 
     module.hot.accept(function errorRecovery() {
+      if (
+        typeof __prefresh_errors__ !== 'undefined' &&
+        __prefresh_errors__ &&
+        __prefresh_errors__.handleRuntimeError
+      ) {
+        __prefresh_errors__.handleRuntimeError(error);
+      }
+
       require.cache[module.id].hot.accept(errorRecovery);
     });
   }
