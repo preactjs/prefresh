@@ -11,13 +11,6 @@ export default function prefreshPlugin(options = {}) {
 
   return {
     name: 'prefresh',
-    config() {
-      return {
-        optimizeDeps: {
-          exclude: runtimePaths,
-        },
-      };
-    },
     configResolved(config) {
       shouldSkip = config.command === 'build' || config.isProduction;
     },
