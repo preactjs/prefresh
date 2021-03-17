@@ -19,10 +19,13 @@ function Test() {
   )
 }
 
+export const Anchor = 'a';
+
 export function App(props) {
   return (
     <Style id="color">
       <Test />
+      <Anchor />
       <Greeting />
       <StoreProvider>
         <Products />
