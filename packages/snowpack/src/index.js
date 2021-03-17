@@ -1,4 +1,5 @@
 import { transformSync } from '@babel/core';
+import prefreshBabelPlugin from '@prefresh/babel-plugin';
 
 export default function preactRefreshPlugin(config, pluginOptions) {
   return {
@@ -82,7 +83,7 @@ export default function preactRefreshPlugin(config, pluginOptions) {
 const transform = (code, id) =>
   transformSync(code, {
     plugins: [
-      [require('@prefresh/babel-plugin'), { skipEnvCheck: true }],
+      [prefreshBabelPlugin, { skipEnvCheck: true }],
       [require('@babel/plugin-syntax-class-properties')],
     ],
     cwd: process.cwd(),

@@ -1,6 +1,6 @@
 import prefresh from '@prefresh/vite';
 
-module.exports = {
+export default {
   esbuild: {
     jsxFactory: 'h',
     jsxFragment: 'Fragment'
