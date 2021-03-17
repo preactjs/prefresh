@@ -1,5 +1,6 @@
 import { transformSync } from '@babel/core';
 import { createFilter } from '@rollup/pluginutils';
+import prefreshBabelPlugin from '@prefresh/babel-plugin';
 
 const runtimePaths = ['@prefresh/vite/runtime', '@prefresh/vite/utils'];
 
@@ -13,7 +14,7 @@ export default function prefreshPlugin(options = {}) {
     config() {
       return {
         optimizeDeps: {
-          exclude: ['@prefresh/vite/runtime', '@prefresh/vite/utils'],
+          exclude: runtimePaths,
         },
       };
     },
@@ -110,7 +111,7 @@ export default function prefreshPlugin(options = {}) {
 
 const transform = (code, path) =>
   transformSync(code, {
-    plugins: [[require('@prefresh/babel-plugin'), { skipEnvCheck: true }]],
+    plugins: [[prefreshBabelPlugin, { skipEnvCheck: true }]],
     ast: false,
     sourceMaps: true,
     sourceFileName: path,
