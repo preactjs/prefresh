@@ -1,5 +1,11 @@
 # @prefresh/snowpack
 
+## 3.1.2
+
+### Patch Changes
+
+- [`a76a230`](https://github.com/JoviDeCroock/prefresh/commit/a76a23081a03379964685018d6c3e6c8baafda56) [#300](https://github.com/JoviDeCroock/prefresh/pull/300) Thanks [@FredKSchott](https://github.com/FredKSchott)! - Add support for snowpack 3.1.0 isPackage hook
+
 ## 3.1.1
 
 ### Patch Changes
