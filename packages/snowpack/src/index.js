@@ -3,13 +3,15 @@ import prefreshBabelPlugin from '@prefresh/babel-plugin';
 
 export default function preactRefreshPlugin(config, pluginOptions) {
   return {
+    name: '@prefresh/snowpack',
     knownEntrypoints: [
       '@prefresh/snowpack/runtime',
       '@prefresh/snowpack/utils',
     ],
-    async transform({ contents, urlPath, isDev, isSSR, id }) {
+    async transform({ contents, urlPath, isDev, isPackage, isSSR, id }) {
       if (
         isSSR ||
+        isPackage ||
         !isDev ||
         !urlPath.endsWith('.js') ||
         config.devOptions.hmr === false
