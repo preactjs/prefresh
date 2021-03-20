@@ -3,10 +3,6 @@ const Prefresh = require('./plugin');
 module.exports = (nextConfig = {}) => {
   return Object.assign({}, nextConfig, {
     webpack(config, options) {
-      if (typeof nextConfig.webpack === 'function') {
-        config = nextConfig.webpack(config, options);
-      }
-
       const { dev, isServer, defaultLoaders } = options;
       if (dev && !isServer) {
         const reactRefresh = config.plugins.find(
@@ -16,18 +12,15 @@ module.exports = (nextConfig = {}) => {
         const prefreshLoader = require.resolve(
           '@prefresh/next/src/loader/index.js'
         );
-        const loader =
-          config.module &&
-          config.module.rules.forEach(mod => {
-            // Explore loaders and add ours
-            if (Array.isArray(mod.rule.use)) {
-              const idx = mod.rule.use.findIndex(rule =>
-                rule.includes('react-refresh-utils')
-              );
-
-              if (idx !== -1) mod.rule.use.splice(idx, 1, loader);
-            }
-          });
+        config.module.rules.forEach(mod => {
+          // Explore loaders and add ours
+          if (mod.use && Array.isArray(mod.use)) {
+            const idx = mod.use.findIndex(rule =>
+              rule.includes('react-refresh-utils')
+            );
+            if (idx !== -1) mod.use.splice(idx, 1, prefreshLoader);
+          }
+        });
 
         if (reactRefresh) {
           config.plugins.splice(config.plugins.indexOf(reactRefresh), 1);
@@ -45,6 +38,10 @@ module.exports = (nextConfig = {}) => {
         ]);
 
         defaultLoaders.babel.options.hasReactRefresh = false;
+      }
+
+      if (typeof nextConfig.webpack === 'function') {
+        return nextConfig.webpack(config, options);
       }
 
       return config;
