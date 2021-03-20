@@ -18,7 +18,7 @@ function injectRefreshFunctions(compilation, Template) {
   );
 }
 
-function webpack4(this, compiler) {
+function webpack4(compiler) {
   const { Template } = this;
 
   compiler.hooks.compilation.tap('PrefreshNextWebpackPlugin', compilation => {
@@ -37,9 +37,9 @@ function webpack4(this, compiler) {
       return Template.asString([
         ...lines.slice(0, evalIndex),
         `
-        var hasRefresh = typeof self !== "undefined" && !!self.$intercept$;
+        var hasRefresh = typeof self !== "undefined" && !!self.__prefresh_intercept__;
         var cleanup = hasRefresh
-          ? self.$intercept$(moduleId)
+          ? self.__prefresh_intercept__(moduleId)
           : function() {};
         try {
         `,
@@ -55,7 +55,7 @@ function webpack4(this, compiler) {
   });
 }
 
-function webpack5(this, compiler) {
+function webpack5(compiler) {
   const { RuntimeGlobals, RuntimeModule, Template } = this;
   class ReactRefreshRuntimeModule extends RuntimeModule {
     constructor() {
@@ -77,10 +77,10 @@ function webpack5(this, compiler) {
             [
               `${
                 runtimeTemplate.supportsConst() ? 'const' : 'var'
-              } hasRefresh = typeof self !== "undefined" && !!self.$intercept$;`,
+              } hasRefresh = typeof self !== "undefined" && !!self.__prefresh_intercept__;`,
               `${
                 runtimeTemplate.supportsConst() ? 'const' : 'var'
-              } cleanup = hasRefresh ? self.$intercept$(moduleObject.id) : ${
+              } cleanup = hasRefresh ? self.__prefresh_intercept__(moduleObject.id) : ${
                 runtimeTemplate.supportsArrowFunction()
                   ? '() => {}'
                   : 'function() {}'
@@ -114,15 +114,29 @@ function webpack5(this, compiler) {
 
 class PrefreshNextWebpackPlugin {
   constructor(
-    { version, RuntimeGlobals, RuntimeModule, Template } = require('webpack')
+    {
+      version,
+      RuntimeGlobals,
+      RuntimeModule,
+      Template,
+      ProvidePlugin,
+    } = require('webpack')
   ) {
     this.webpackMajorVersion = parseInt(version ?? '', 10);
     this.RuntimeGlobals = RuntimeGlobals;
     this.RuntimeModule = RuntimeModule;
     this.Template = Template;
+    this.ProvidePlugin = ProvidePlugin;
   }
 
   apply(compiler) {
+    let provide = {
+      __prefresh_utils__: require.resolve('./helpers'),
+    };
+
+    const providePlugin = new this.ProvidePlugin(provide);
+    providePlugin.apply(compiler);
+
     switch (this.webpackMajorVersion) {
       case 4: {
         webpack4.call(this, compiler);

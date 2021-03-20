@@ -1,8 +1,8 @@
 import RefreshHelpers from './helpers';
 
-self.$RefreshHelpers$ = RefreshHelpers;
+self.__prefresh_utils__ = RefreshHelpers;
 
-self.$intercept$ = function (moduleId) {
+self.__prefresh_intercept__ = function (moduleId) {
   var prevRefreshReg = self.$RefreshReg$;
   var prevRefreshSig = self.$RefreshSig$;
 

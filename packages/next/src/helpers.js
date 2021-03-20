@@ -1,4 +1,4 @@
-import { isComponent } from '@prefresh/utils';
+import { isComponent, flush } from '@prefresh/utils';
 
 // Copied from Next.js/react-refresh-utils
 function isSafeExport(key) {
@@ -49,4 +49,5 @@ function isBoundary(moduleExports) {
 export default {
   registerExports: registerExports,
   isBoundary: isBoundary,
+  flush: flush,
 };

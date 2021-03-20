@@ -1,17 +1,13 @@
-import { loader } from 'webpack';
 import prefreshRuntime from './runtime';
 
-let prefreshRuntime = prefreshRuntime.toString();
-prefreshRuntime = prefreshRuntime.slice(
-  prefreshRuntime.indexOf('{') + 1,
-  prefreshRuntime.lastIndexOf('}')
+let prefreshModuleRuntime = prefreshRuntime.toString();
+prefreshModuleRuntime = prefreshModuleRuntime.slice(
+  prefreshModuleRuntime.indexOf('{') + 1,
+  prefreshModuleRuntime.lastIndexOf('}')
 );
 
-const ReactRefreshLoader: loader.Loader = function ReactRefreshLoader(
-  source,
-  inputSourceMap
-) {
-  this.callback(null, `${source}\n\n;${prefreshRuntime}`, inputSourceMap);
+const PrefreshLoader = function PrefreshLoader(source, inputSourceMap) {
+  this.callback(null, `${source}\n\n;${prefreshModuleRuntime}`, inputSourceMap);
 };
 
-export default ReactRefreshLoader;
+export default PrefreshLoader;

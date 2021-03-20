@@ -3,10 +3,8 @@ const Prefresh = require('./plugin');
 module.exports = (nextConfig = {}) => {
   return Object.assign({}, nextConfig, {
     webpack(config, options) {
-      if (!Prefresh.supportsNextJs) {
-        throw new Error(
-          'The version of @prefresh/webpack installed is not supported with next.js, please upgrade!'
-        );
+      if (typeof nextConfig.webpack === 'function') {
+        config = nextConfig.webpack(config, options);
       }
 
       const { dev, isServer, defaultLoaders } = options;
@@ -26,6 +24,7 @@ module.exports = (nextConfig = {}) => {
               const idx = mod.rule.use.findIndex(rule =>
                 rule.includes('react-refresh-utils')
               );
+
               if (idx !== -1) mod.rule.use.splice(idx, 1, loader);
             }
           });
@@ -46,10 +45,6 @@ module.exports = (nextConfig = {}) => {
         ]);
 
         defaultLoaders.babel.options.hasReactRefresh = false;
-      }
-
-      if (typeof nextConfig.webpack === 'function') {
-        return nextConfig.webpack(config, options);
       }
 
       return config;

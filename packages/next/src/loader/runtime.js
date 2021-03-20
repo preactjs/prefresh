@@ -1,14 +1,12 @@
-import { RefreshRuntimeGlobals } from '../helpers';
-
 export default function () {
-  if (typeof self !== 'undefined' && '$RefreshHelpers$' in self) {
+  if (typeof self !== 'undefined' && '__prefresh_utils__' in self) {
     var currentExports = module.__proto__.exports;
     const previousHotModuleExports =
       module.hot.data && module.hot.data.moduleExports;
 
-    self.$RefreshHelpers$.registerExports(currentExports, module.id);
+    self.__prefresh_utils__.registerExports(currentExports, module.id);
 
-    if (self.$RefreshHelpers$.isBoundary(currentExports)) {
+    if (self.__prefresh_utils__.isBoundary(currentExports)) {
       module.hot.dispose(function (data) {
         data.moduleExports = currentExports;
       });
