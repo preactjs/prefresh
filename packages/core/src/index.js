@@ -57,10 +57,10 @@ function replaceComponent(OldType, NewType, resetHookState) {
 
   vnodes.forEach(vnode => {
     // update the type in-place to reference the new component
-    vnode.type = NewType;
+    // vnode.type = NewType;
 
     if (vnode[VNODE_COMPONENT]) {
-      vnode[VNODE_COMPONENT].constructor = vnode.type;
+      vnode[VNODE_COMPONENT].constructor = NewType;
 
       try {
         if (vnode[VNODE_COMPONENT] instanceof OldType) {
@@ -164,16 +164,11 @@ function replaceComponent(OldType, NewType, resetHookState) {
             }
           );
 
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(
-            hook => {
-              if (
-                hook.__H &&
-                Array.isArray(hook.__H)
-              ) {
-                hook.__H = undefined;
-              }
+          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(hook => {
+            if (hook.__H && Array.isArray(hook.__H)) {
+              hook.__H = undefined;
             }
-          );
+          });
         }
       }
 
