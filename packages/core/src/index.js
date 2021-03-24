@@ -49,7 +49,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
 
   // migrate the list to our new constructor reference
   vnodesForComponent.delete(OldType);
-  vnodesForComponent.set(NewType, []);
+  vnodesForComponent.set(NewType, [...vnodes]);
 
   mappedVNodes.set(OldType, NewType);
 
