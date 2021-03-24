@@ -16,7 +16,7 @@ options.vnode = vnode => {
     const vnodes = vnodesForComponent.get(vnode.type);
     if (!vnodes) {
       vnodesForComponent.set(vnode.type, [vnode]);
-    } else {
+    } else if (vnodes.indexof(vnode) === -1) {
       vnodes.push(vnode);
     }
 

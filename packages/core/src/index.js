@@ -49,7 +49,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
 
   // migrate the list to our new constructor reference
   vnodesForComponent.delete(OldType);
-  vnodesForComponent.set(NewType, vnodes);
+  vnodesForComponent.set(NewType, []);
 
   mappedVNodes.set(OldType, NewType);
 
@@ -164,16 +164,11 @@ function replaceComponent(OldType, NewType, resetHookState) {
             }
           );
 
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(
-            hook => {
-              if (
-                hook.__H &&
-                Array.isArray(hook.__H)
-              ) {
-                hook.__H = undefined;
-              }
+          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(hook => {
+            if (hook.__H && Array.isArray(hook.__H)) {
+              hook.__H = undefined;
             }
-          );
+          });
         }
       }
 
