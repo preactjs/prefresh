@@ -292,9 +292,8 @@ describe('Prefresh integrations', () => {
 
       if (
         integration === 'webpack' ||
-        integration === 'next'
-        // TODO: this bugs in next10webpack5 but not webpack 5...
-        // integration === 'next-webpack5'
+        integration === 'next' ||
+        integration === 'next-webpack5'
       ) {
         test('can hot reload externally defined JSX', async () => {
           expect(
