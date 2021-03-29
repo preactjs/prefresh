@@ -1,6 +1,6 @@
 import { h } from 'preact'
 import { setup } from 'goober';
-import { List } from './List.jsx';
+import { List } from './list.jsx';
 import { Greeting } from './greeting.jsx';
 import { StoreProvider } from './context.jsx';
 import { Products } from './products.jsx';
