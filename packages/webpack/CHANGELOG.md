@@ -1,5 +1,11 @@
 # @prefresh/webpack
 
+## 3.2.1
+
+### Patch Changes
+
+- [`1f786bc`](https://github.com/JoviDeCroock/prefresh/commit/1f786bc381de84645f68a8fb1ac2cd3a991e1f49) [#312](https://github.com/JoviDeCroock/prefresh/pull/312) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix style importing by export registration
+
 ## 3.2.0
 
 ### Minor Changes
