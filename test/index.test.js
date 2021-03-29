@@ -339,8 +339,8 @@ describe('Prefresh integrations', () => {
           listItems = await page.$('#item-list');
           children = await listItems.$$('div');
           expect(children.length).toEqual(4);
-          expect(await getText(children[0])).toMatch('items 0 --');
-          expect(await getText(children[1])).toMatch('items 1 --');
+          expect(await getText(children[0])).toMatch('item 0 --');
+          expect(await getText(children[1])).toMatch('item 1 --');
         });
       }
     });
