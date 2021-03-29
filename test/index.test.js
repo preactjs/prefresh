@@ -307,7 +307,7 @@ describe('Prefresh integrations', () => {
 
       if (integration === 'webpack') {
         test('can update in-file HOCs', async () => {
-          const listItems = await page.$('#item-list');
+          let listItems = await page.$('#item-list');
           let children = await listItems.$$('div');
 
           expect(children.length).toEqual(4);
@@ -322,6 +322,7 @@ describe('Prefresh integrations', () => {
           );
           await timeout(TIMEOUT);
 
+          listItems = await page.$('#item-list');
           children = await listItems.$$('li');
           expect(children.length).toEqual(4);
           expect(await getText(children[0])).toMatch('items 0');
@@ -334,6 +335,8 @@ describe('Prefresh integrations', () => {
             )
           );
           await timeout(TIMEOUT);
+
+          listItems = await page.$('#item-list');
           children = await listItems.$$('li');
           expect(children.length).toEqual(4);
           expect(await getText(children[0])).toMatch('items 0 --');
