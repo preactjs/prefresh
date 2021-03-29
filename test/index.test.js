@@ -304,6 +304,42 @@ describe('Prefresh integrations', () => {
           await page.$eval('#color', e => getComputedStyle(e).backgroundColor)
         ).toBe('rgb(255, 255, 255)');
       });
+
+      if (integration === 'webpack') {
+        test('can update in-file HOCs', async () => {
+          const listItems = await page.$('#item-list');
+          let children = await storeItems.$$('div');
+
+          expect(children.length).toEqual(4);
+          expect(await getText(children[0])).toMatch('item 0');
+          expect(await getText(children[1])).toMatch('item 1');
+
+          await updateFile('src/listItem.jsx', content =>
+            content.replace(
+              'item {this.props.index}',
+              'items {this.props.index}'
+            )
+          );
+          await timeout(TIMEOUT);
+
+          children = await storeItems.$$('li');
+          expect(children.length).toEqual(4);
+          expect(await getText(children[0])).toMatch('items 0');
+          expect(await getText(children[1])).toMatch('items 1');
+
+          await updateFile('src/listItem.jsx', content =>
+            content.replace(
+              'items {this.props.index}',
+              'item {this.props.index} --'
+            )
+          );
+          await timeout(TIMEOUT);
+          children = await storeItems.$$('li');
+          expect(children.length).toEqual(4);
+          expect(await getText(children[0])).toMatch('items 0 --');
+          expect(await getText(children[1])).toMatch('items 1 --');
+        });
+      }
     });
   });
 });
