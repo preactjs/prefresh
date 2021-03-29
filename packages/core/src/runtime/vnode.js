@@ -21,7 +21,6 @@ options.vnode = vnode => {
     }
 
     const foundType = getMappedVnode(vnode.type);
-    vnode.type = foundType;
     if (vnode[VNODE_COMPONENT]) {
       vnode[VNODE_COMPONENT].constructor = foundType;
     }
