@@ -5,6 +5,7 @@
 		"build": "npm run clean && cross-env NODE_ENV=production rollup -c"
 	},
 	"dependencies": {
+    "goober": "^2.0.36",
 		"preact": "^10.5.7"
 	},
 	"devDependencies": {
