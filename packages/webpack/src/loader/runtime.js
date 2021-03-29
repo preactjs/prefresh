@@ -12,14 +12,15 @@ module.exports = function () {
     if (isPrefreshComponent) {
       if (previousHotModuleExports) {
         try {
-          __prefresh_utils__.flush();
-          if (
-            typeof __prefresh_errors__ !== 'undefined' &&
-            __prefresh_errors__ &&
-            __prefresh_errors__.clearRuntimeErrors
-          ) {
-            __prefresh_errors__.clearRuntimeErrors();
-          }
+          __prefresh_utils__.flush(function () {
+            if (
+              typeof __prefresh_errors__ !== 'undefined' &&
+              __prefresh_errors__ &&
+              __prefresh_errors__.clearRuntimeErrors
+            ) {
+              __prefresh_errors__.clearRuntimeErrors();
+            }
+          });
         } catch (e) {
           // Only available in newer webpack versions.
           if (module.hot.invalidate) {

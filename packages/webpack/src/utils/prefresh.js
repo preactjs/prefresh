@@ -52,9 +52,25 @@ const shouldBind = m => {
   return isCitizen;
 };
 
+function createDebouncedFlush() {
+  let timeout;
+
+  function enqueueUpdate(callback) {
+    if (typeof timeout === 'undefined') {
+      timeout = setTimeout(function () {
+        timeout = undefined;
+        flush();
+        callback();
+      }, 30);
+    }
+  }
+
+  return enqueueUpdate;
+}
+
 module.exports = Object.freeze({
   getExports,
   shouldBind,
-  flush,
+  flush: createDebouncedFlush(),
   registerExports,
 });
