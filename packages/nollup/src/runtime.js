@@ -10,7 +10,7 @@ function registerExports(moduleExports, moduleId) {
   for (const key in moduleExports) {
     const exportValue = moduleExports[key];
     const typeID = moduleId + ' %exports% ' + key;
-    window['__PREFRESH__'].register(exportValue, typeID);
+    self['__PREFRESH__'].register(exportValue, typeID);
   }
 }
 

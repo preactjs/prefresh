@@ -21,7 +21,7 @@ function Test() {
 
 export function App(props) {
   return (
-    <Style>
+    <Style id="color">
       <Test />
       <Greeting />
       <StoreProvider>
