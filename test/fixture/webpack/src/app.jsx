@@ -1,11 +1,12 @@
-import { useCounter } from './useCounter'
 import { h } from 'preact'
+import { setup } from 'goober';
+import { List } from './List.jsx';
 import { Greeting } from './greeting.jsx';
 import { StoreProvider } from './context.jsx';
 import { Products } from './products.jsx';
 import { Effect } from './effect.jsx';
 import { Style } from './styles';
-import { setup } from 'goober';
+import { useCounter } from './useCounter'
 
 setup(h);
 
@@ -31,6 +32,7 @@ export function App(props) {
         <Products />
       </StoreProvider>
       <Effect />
+      <List />
     </Style>
   )
 }
