@@ -20,7 +20,7 @@ function registerExports(moduleExports, moduleId) {
     if (isSafeExport(key)) continue;
     const exportValue = moduleExports[key];
     const typeID = moduleId + ' %exports% ' + key;
-    window['__PREFRESH__'].register(exportValue, typeID);
+    self['__PREFRESH__'].register(exportValue, typeID);
   }
 }
 

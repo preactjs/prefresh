@@ -4,6 +4,10 @@ import { Greeting } from './greeting.jsx';
 import { StoreProvider } from './context.jsx';
 import { Products } from './products.jsx';
 import { Effect } from './effect.jsx';
+import { Style } from './styles';
+import { setup } from 'goober';
+
+setup(h);
 
 function Test() {
   const [count, increment] = useCounter();
@@ -17,13 +21,13 @@ function Test() {
 
 export function App(props) {
   return (
-    <div>
+    <Style id="color">
       <Test />
       <Greeting />
       <StoreProvider>
         <Products />
       </StoreProvider>
       <Effect />
-    </div>
+    </Style>
   )
 }

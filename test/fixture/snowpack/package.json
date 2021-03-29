@@ -3,6 +3,7 @@
     "start": "snowpack dev"
   },
   "dependencies": {
+    "goober": "^2.0.36",
     "preact": "^10.5.7"
   },
   "resolutions": {
