@@ -1,11 +1,12 @@
 import { h } from 'preact';
-import { useCounter } from './useCounter';
+import { setup } from 'goober';
 import { StoreProvider } from './context';
 import { Products } from './products';
 import { Greeting } from './greeting';
 import { Effect } from './effect';
-import { setup } from 'goober';
 import { Style } from './styles';
+import { List } from './list';
+import { useCounter } from './useCounter';
 
 setup(h);
 
@@ -28,6 +29,7 @@ export function App(props) {
         <Products />
       </StoreProvider>
       <Effect />
+      <List />
     </Style>
   )
 }

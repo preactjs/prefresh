@@ -305,7 +305,7 @@ describe('Prefresh integrations', () => {
         ).toBe('rgb(255, 255, 255)');
       });
 
-      if (integration === 'webpack') {
+      if (integration === 'webpack' || integration === 'vite') {
         test('can update in-file HOCs', async () => {
           let listItems = await page.$('#item-list');
           let children = await listItems.$$('div');
