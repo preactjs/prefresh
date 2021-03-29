@@ -13,14 +13,23 @@ const getMappedVnode = type => {
 const oldVnode = options.vnode;
 options.vnode = vnode => {
   if (vnode && typeof vnode.type === 'function') {
-    const vnodes = vnodesForComponent.get(vnode.type);
+    let vnodeType = vnode.type;
+    if (
+      vnode[VNODE_COMPONENT] &&
+      vnode[VNODE_COMPONENT].constructor &&
+      vnode[VNODE_COMPONENT].constructor !== vnode.type
+    ) {
+      vnodeType = vnode[VNODE_COMPONENT].constructor;
+    }
+
+    const vnodes = vnodesForComponent.get(vnodeType);
     if (!vnodes) {
-      vnodesForComponent.set(vnode.type, [vnode]);
+      vnodesForComponent.set(vnodeType, [vnode]);
     } else {
       vnodes.push(vnode);
     }
 
-    const foundType = getMappedVnode(vnode.type);
+    const foundType = getMappedVnode(vnodeType);
     if (vnode[VNODE_COMPONENT]) {
       vnode[VNODE_COMPONENT].constructor = foundType;
     }
