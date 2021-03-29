@@ -323,7 +323,7 @@ describe('Prefresh integrations', () => {
           await timeout(TIMEOUT);
 
           listItems = await page.$('#item-list');
-          children = await listItems.$$('li');
+          children = await listItems.$$('div');
           expect(children.length).toEqual(4);
           expect(await getText(children[0])).toMatch('items 0');
           expect(await getText(children[1])).toMatch('items 1');
@@ -337,7 +337,7 @@ describe('Prefresh integrations', () => {
           await timeout(TIMEOUT);
 
           listItems = await page.$('#item-list');
-          children = await listItems.$$('li');
+          children = await listItems.$$('div');
           expect(children.length).toEqual(4);
           expect(await getText(children[0])).toMatch('items 0 --');
           expect(await getText(children[1])).toMatch('items 1 --');
