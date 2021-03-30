@@ -89,12 +89,19 @@ describe('Prefresh integrations', () => {
           }
         );
 
-        await new Promise(resolve => {
+        await new Promise((resolve, reject) => {
+          const heap = [];
+          const bailTime = setTimeout(() => {
+            console.error(JSON.stringify(heap));
+            throw new Error(`Could not find start command for ${integration}`);
+          }, 30000);
           devServer.stdout.on(
             'data',
             (serverConsoleListener = data => {
               console.log('[SERVER LOG]: ', data.toString());
+              console.log(heap.push(data.toString()));
               if (data.toString().match(goMessage[integration])) {
+                clearTimeout(bailTime);
                 resolve();
               }
             })
