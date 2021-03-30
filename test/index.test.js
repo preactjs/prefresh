@@ -305,39 +305,39 @@ describe('Prefresh integrations', () => {
         ).toBe('rgb(255, 255, 255)');
       });
 
-      test('can update in-file HOCs', async () => {
-        let listItems = await page.$('#item-list');
-        let children = await listItems.$$('div');
+      // test('can update in-file HOCs', async () => {
+      //   let listItems = await page.$('#item-list');
+      //   let children = await listItems.$$('div');
 
-        expect(children.length).toEqual(4);
-        expect(await getText(children[0])).toMatch('item 0');
-        expect(await getText(children[1])).toMatch('item 1');
+      //   expect(children.length).toEqual(4);
+      //   expect(await getText(children[0])).toMatch('item 0');
+      //   expect(await getText(children[1])).toMatch('item 1');
 
-        await updateFile('src/listItem.jsx', content =>
-          content.replace('item {this.props.index}', 'items {this.props.index}')
-        );
-        await timeout(TIMEOUT);
+      //   await updateFile('src/listItem.jsx', content =>
+      //     content.replace('item {this.props.index}', 'items {this.props.index}')
+      //   );
+      //   await timeout(TIMEOUT);
 
-        listItems = await page.$('#item-list');
-        children = await listItems.$$('div');
-        expect(children.length).toEqual(4);
-        expect(await getText(children[0])).toMatch('items 0');
-        expect(await getText(children[1])).toMatch('items 1');
+      //   listItems = await page.$('#item-list');
+      //   children = await listItems.$$('div');
+      //   expect(children.length).toEqual(4);
+      //   expect(await getText(children[0])).toMatch('items 0');
+      //   expect(await getText(children[1])).toMatch('items 1');
 
-        await updateFile('src/listItem.jsx', content =>
-          content.replace(
-            'items {this.props.index}',
-            'item {this.props.index} --'
-          )
-        );
-        await timeout(TIMEOUT);
+      //   await updateFile('src/listItem.jsx', content =>
+      //     content.replace(
+      //       'items {this.props.index}',
+      //       'item {this.props.index} --'
+      //     )
+      //   );
+      //   await timeout(TIMEOUT);
 
-        listItems = await page.$('#item-list');
-        children = await listItems.$$('div');
-        expect(children.length).toEqual(4);
-        expect(await getText(children[0])).toMatch('item 0 --');
-        expect(await getText(children[1])).toMatch('item 1 --');
-      });
+      //   listItems = await page.$('#item-list');
+      //   children = await listItems.$$('div');
+      //   expect(children.length).toEqual(4);
+      //   expect(await getText(children[0])).toMatch('item 0 --');
+      //   expect(await getText(children[1])).toMatch('item 1 --');
+      // });
     });
   });
 });
