@@ -98,17 +98,20 @@ function replaceComponent(OldType, NewType, resetHookState) {
         vnode[VNODE_COMPONENT].constructor = NewType;
       }
 
-      if (vnode[VNODE_PARENT]) {
-        if (
-          vnode[VNODE_PARENT][VNODE_CHILDREN] &&
-          vnode[VNODE_PARENT][VNODE_CHILDREN].length
-        ) {
-          vnode[VNODE_PARENT][VNODE_CHILDREN].forEach(child => {
-            if (child.type === OldType) {
-              child.type = NewType;
-            }
-          });
-        }
+      if (
+        vnode[VNODE_PARENT] &&
+        vnode[VNODE_PARENT][VNODE_CHILDREN] &&
+        vnode[VNODE_PARENT][VNODE_CHILDREN].length
+      ) {
+        vnode[VNODE_PARENT][VNODE_CHILDREN].forEach(child => {
+          if (
+            child &&
+            typeof child.type === 'function' &&
+            child.type === OldType
+          ) {
+            child.type = NewType;
+          }
+        });
       }
 
       if (resetHookState) {
