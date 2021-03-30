@@ -151,39 +151,39 @@ describe('Prefresh integrations', () => {
 
       // TODO: this bugs in next10webpack5 but not webpack 5...
       // integration === 'next-webpack5'
-      //if (integration !== 'next-webpack5') {
-      test('add file and import it', async () => {
-        const compPath = path.join(getTempDir(integration), 'src/test.jsx');
-        await fs.writeFile(
-          compPath,
-          `import { h } from 'preact';
-  export const Tester = () => <p className="tester">Test</p>;`
-        );
-
-        await updateFile('src/app.jsx', content => {
-          let newContent = 'import { Tester } from "./test.jsx";\n' + content;
-          newContent = newContent.replace(
-            `<Test />`,
-            `<Test />\n      <Tester />\n`
+      if (integration !== 'next-webpack5') {
+        test('add file and import it', async () => {
+          const compPath = path.join(getTempDir(integration), 'src/test.jsx');
+          await fs.writeFile(
+            compPath,
+            `import { h } from 'preact';
+    export const Tester = () => <p className="tester">Test</p>;`
           );
-          return newContent;
+
+          await updateFile('src/app.jsx', content => {
+            let newContent = 'import { Tester } from "./test.jsx";\n' + content;
+            newContent = newContent.replace(
+              `<Test />`,
+              `<Test />\n      <Tester />\n`
+            );
+            return newContent;
+          });
+          await timeout(2000);
+
+          const testText = await page.$('.tester');
+          await expectByPolling(() => getText(testText), 'Test');
+
+          await updateFile('src/test.jsx', c =>
+            c.replace(
+              '<p className="tester">Test</p>',
+              '<p className="tester">Test2</p>'
+            )
+          );
+          await timeout(2000);
+
+          await expectByPolling(() => getText(testText), 'Test2');
         });
-        await timeout(2000);
-
-        const testText = await page.$('.tester');
-        await expectByPolling(() => getText(testText), 'Test');
-
-        await updateFile('src/test.jsx', c =>
-          c.replace(
-            '<p className="tester">Test</p>',
-            '<p className="tester">Test2</p>'
-          )
-        );
-        await timeout(2000);
-
-        await expectByPolling(() => getText(testText), 'Test2');
-      });
-      //}
+      }
 
       test('custom hook', async () => {
         const value = await page.$('.value');
@@ -313,39 +313,44 @@ describe('Prefresh integrations', () => {
         ).toBe('rgb(255, 255, 255)');
       });
 
-      // test('can update in-file HOCs', async () => {
-      //   let listItems = await page.$('#item-list');
-      //   let children = await listItems.$$('div');
+      if (integration === 'vite' || integration === 'webpack') {
+        test('can update in-file HOCs', async () => {
+          let listItems = await page.$('#item-list');
+          let children = await listItems.$$('div');
 
-      //   expect(children.length).toEqual(4);
-      //   expect(await getText(children[0])).toMatch('item 0');
-      //   expect(await getText(children[1])).toMatch('item 1');
+          expect(children.length).toEqual(4);
+          expect(await getText(children[0])).toMatch('item 0');
+          expect(await getText(children[1])).toMatch('item 1');
 
-      //   await updateFile('src/listItem.jsx', content =>
-      //     content.replace('item {this.props.index}', 'items {this.props.index}')
-      //   );
-      //   await timeout(TIMEOUT);
+          await updateFile('src/listItem.jsx', content =>
+            content.replace(
+              'item {this.props.index}',
+              'items {this.props.index}'
+            )
+          );
+          await timeout(TIMEOUT);
 
-      //   listItems = await page.$('#item-list');
-      //   children = await listItems.$$('div');
-      //   expect(children.length).toEqual(4);
-      //   expect(await getText(children[0])).toMatch('items 0');
-      //   expect(await getText(children[1])).toMatch('items 1');
+          listItems = await page.$('#item-list');
+          children = await listItems.$$('div');
+          expect(children.length).toEqual(4);
+          expect(await getText(children[0])).toMatch('items 0');
+          expect(await getText(children[1])).toMatch('items 1');
 
-      //   await updateFile('src/listItem.jsx', content =>
-      //     content.replace(
-      //       'items {this.props.index}',
-      //       'item {this.props.index} --'
-      //     )
-      //   );
-      //   await timeout(TIMEOUT);
+          await updateFile('src/listItem.jsx', content =>
+            content.replace(
+              'items {this.props.index}',
+              'item {this.props.index} --'
+            )
+          );
+          await timeout(TIMEOUT);
 
-      //   listItems = await page.$('#item-list');
-      //   children = await listItems.$$('div');
-      //   expect(children.length).toEqual(4);
-      //   expect(await getText(children[0])).toMatch('item 0 --');
-      //   expect(await getText(children[1])).toMatch('item 1 --');
-      // });
+          listItems = await page.$('#item-list');
+          children = await listItems.$$('div');
+          expect(children.length).toEqual(4);
+          expect(await getText(children[0])).toMatch('item 0 --');
+          expect(await getText(children[1])).toMatch('item 1 --');
+        });
+      }
     });
   });
 });
