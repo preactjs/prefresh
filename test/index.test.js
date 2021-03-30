@@ -26,7 +26,7 @@ describe('Prefresh integrations', () => {
       console.log('[BROWSER LOG]: ', msg);
     };
 
-    let serverConsoleListener;
+    let serverConsoleListener, serverErrorListener;
 
     async function updateFile(file, replacer) {
       const compPath = path.join(getTempDir(integration), file);
@@ -99,8 +99,9 @@ describe('Prefresh integrations', () => {
             'data',
             (serverConsoleListener = data => {
               console.log('[SERVER LOG]: ', data.toString());
-              console.log(heap.push(data.toString()));
+              heap.push(data.toString());
               if (data.toString().match(goMessage[integration])) {
+                console.log('[BOOT]:', integration);
                 clearTimeout(bailTime);
                 resolve();
               }
@@ -109,7 +110,7 @@ describe('Prefresh integrations', () => {
 
           devServer.stderr.on(
             'data',
-            (serverConsoleListener = data => {
+            (serverErrorListener = data => {
               console.log('[ERROR SERVER LOG]: ', data.toString());
             })
           );

@@ -33,7 +33,7 @@ exports.binArgs = {
 };
 
 exports.goMessage = {
-  vite: 'running',
+  vite: 'ready',
   snowpack: 'Server started',
   webpack: 'successfully',
   nollup: 'Compiled',
