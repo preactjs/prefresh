@@ -17,6 +17,7 @@ import {
   HOOK_ARGS,
   HOOK_VALUE,
   HOOK_CLEANUP,
+  VNODE_PARENT,
 } from './constants';
 import { computeKey } from './computeKey';
 import { vnodesForComponent, mappedVNodes } from './runtime/vnodesForComponent';
@@ -95,6 +96,19 @@ function replaceComponent(OldType, NewType, resetHookState) {
       } catch (e) {
         /* Functional component */
         vnode[VNODE_COMPONENT].constructor = NewType;
+      }
+
+      if (vnode[VNODE_PARENT]) {
+        if (
+          vnode[VNODE_PARENT][VNODE_CHILDREN] &&
+          vnode[VNODE_PARENT][VNODE_CHILDREN].length
+        ) {
+          vnode[VNODE_PARENT][VNODE_CHILDREN].forEach(child => {
+            if (child.type === OldType) {
+              child.type = NewType;
+            }
+          });
+        }
       }
 
       if (resetHookState) {
