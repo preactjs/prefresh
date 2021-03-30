@@ -4,7 +4,7 @@ import { Greeting } from './greeting.jsx';
 import { StoreProvider } from './context.jsx';
 import { Products } from './products.jsx';
 import { Effect } from './effect.jsx';
-import { List } from './list.jsx';
+// import { List } from './list.jsx';
 import { Style } from './styles';
 import { useCounter } from './useCounter'
 
@@ -29,7 +29,7 @@ export function App(props) {
         <Products />
       </StoreProvider>
       <Effect />
-      <List />
+      {/* <List /> */}
     </Style>
   )
 }

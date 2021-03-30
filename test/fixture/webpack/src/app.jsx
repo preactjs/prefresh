@@ -1,6 +1,6 @@
 import { h } from 'preact'
 import { setup } from 'goober';
-import { List } from './list.jsx';
+// import { List } from './list.jsx';
 import { Greeting } from './greeting.jsx';
 import { StoreProvider } from './context.jsx';
 import { Products } from './products.jsx';
@@ -32,7 +32,7 @@ export function App(props) {
         <Products />
       </StoreProvider>
       <Effect />
-      <List />
+      {/* <List /> */}
     </Style>
   )
 }

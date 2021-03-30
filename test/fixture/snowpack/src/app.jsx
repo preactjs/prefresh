@@ -5,7 +5,7 @@ import { Products } from './products';
 import { Greeting } from './greeting';
 import { Effect } from './effect';
 import { Style } from './styles';
-import { List } from './list';
+// import { List } from './list';
 import { useCounter } from './useCounter'
 
 setup(h);
@@ -29,7 +29,7 @@ export function App(props) {
         <Products />
       </StoreProvider>
       <Effect />
-      <List />
+      {/* <List /> */}
     </Style>
   )
 }
