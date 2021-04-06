@@ -1,5 +1,11 @@
 # @prefresh/webpack
 
+## 3.2.2
+
+### Patch Changes
+
+- [`ba56343`](https://github.com/JoviDeCroock/prefresh/commit/ba56343d001adf649d4816f9919fcc9e0af85579) [#316](https://github.com/JoviDeCroock/prefresh/pull/316) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix non hot-updating node propagation
+
 ## 3.2.1
 
 ### Patch Changes
