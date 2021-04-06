@@ -1,5 +1,9 @@
 import { Plugin } from 'vite';
 
-declare const prefreshPlugin: () => Plugin;
+export interface Options {
+  parserPlugins?: string[];
+}
+
+declare const prefreshPlugin: (options: Options) => Plugin;
 
 export default prefreshPlugin;

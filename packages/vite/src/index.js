@@ -2,8 +2,6 @@ import { transformSync } from '@babel/core';
 import { createFilter } from '@rollup/pluginutils';
 import prefreshBabelPlugin from '@prefresh/babel-plugin';
 
-const runtimePaths = ['@prefresh/vite/runtime', '@prefresh/vite/utils'];
-
 /** @returns {import('vite').Plugin} */
 export default function prefreshPlugin(options = {}) {
   let shouldSkip = false;
@@ -13,16 +11,6 @@ export default function prefreshPlugin(options = {}) {
     name: 'prefresh',
     configResolved(config) {
       shouldSkip = config.command === 'build' || config.isProduction;
-    },
-    resolveId(id) {
-      if (runtimePaths.includes(id)) {
-        return id;
-      }
-    },
-    load(id) {
-      if (runtimePaths.includes(id)) {
-        return runtimeCode;
-      }
     },
     transform(code, id, ssr) {
       if (
@@ -35,7 +23,16 @@ export default function prefreshPlugin(options = {}) {
       )
         return;
 
-      const result = transform(code, id);
+      const parserPlugins = [
+        'jsx',
+        'classProperties',
+        'classPrivateProperties',
+        'classPrivateMethods',
+        /\.tsx?$/.test(id) && 'typescript',
+        ...((opts && opts.parserPlugins) || []),
+      ].filter(Boolean);
+
+      const result = transform(code, id, parserPlugins);
       const hasReg = /\$RefreshReg\$\(/.test(result.code);
       const hasSig = /\$RefreshSig\$\(/.test(result.code);
 
@@ -102,9 +99,12 @@ export default function prefreshPlugin(options = {}) {
   };
 }
 
-const transform = (code, path) =>
+const transform = (code, path, plugins) =>
   transformSync(code, {
     plugins: [[prefreshBabelPlugin, { skipEnvCheck: true }]],
+    parserOpts: {
+      plugins,
+    },
     ast: false,
     sourceMaps: true,
     sourceFileName: path,
