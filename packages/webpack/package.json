@@ -1,6 +1,6 @@
 {
   "name": "@prefresh/webpack",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "main": "src/index.js",
   "type": "commonjs",
   "exports": {

@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.2.0
+
+### Minor Changes
+
+- [`34ac439`](https://github.com/JoviDeCroock/prefresh/commit/34ac439cb0ea64a4f062490b1fde4b03da80b641) [#320](https://github.com/JoviDeCroock/prefresh/pull/320) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Add `parserPlugins` to the `options` object, this allows the addition of [plugins](https://babeljs.io/docs/en/babel-parser#plugins)
+
 ## 2.1.1
 
 ### Patch Changes
