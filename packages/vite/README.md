@@ -24,6 +24,8 @@ export default {
 
 The plugin accepts two options `include` & `exclude` which are used in the [`@rollup/pluginutils.createFilter`](https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter) to filter out files or include them.
 
+The plugin also accepts the addition of [`parserPlugins`](https://babeljs.io/docs/en/babel-parser#plugins)
+
 ## Best practices
 
 ### Recognition
