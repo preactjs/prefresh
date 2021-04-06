@@ -29,7 +29,7 @@ export default function prefreshPlugin(options = {}) {
         'classPrivateProperties',
         'classPrivateMethods',
         /\.tsx?$/.test(id) && 'typescript',
-        ...((opts && opts.parserPlugins) || []),
+        ...(options.parserPlugins || []),
       ].filter(Boolean);
 
       const result = transform(code, id, parserPlugins);
