@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.3.2
+
+### Patch Changes
+
+- [`0121873`](https://github.com/JoviDeCroock/prefresh/commit/01218735288c380a1d7ad6909f5b94bff4c77ead) [#325](https://github.com/JoviDeCroock/prefresh/pull/325) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Forward thirth prop for catchError
+
 ## 1.3.1
 
 ### Patch Changes
