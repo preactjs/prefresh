@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.2.1
+
+### Patch Changes
+
+- [`aff0aa2`](https://github.com/JoviDeCroock/prefresh/commit/aff0aa2a1b252dd2f6aecabdfaeb4ca4ad61201e) [#322](https://github.com/JoviDeCroock/prefresh/pull/322) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - update typings, make options optional
+
 ## 2.2.0
 
 ### Minor Changes
