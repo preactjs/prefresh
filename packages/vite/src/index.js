@@ -12,7 +12,7 @@ export default function prefreshPlugin(options = {}) {
     configResolved(config) {
       shouldSkip = config.command === 'build' || config.isProduction;
     },
-    transform(code, id, ssr) {
+    async transform(code, id, ssr) {
       if (
         shouldSkip ||
         !/\.(t|j)sx?$/.test(id) ||
@@ -38,9 +38,12 @@ export default function prefreshPlugin(options = {}) {
 
       if (!hasSig && !hasReg) return code;
 
+      const prefreshRuntime = await this.resolve('@prefresh/vite/runtime', __filename) // fixme: use import.meta.url for the mjs output
+      const prefreshUtils = await this.resolve('@prefresh/vite/utils', __filename) // fixme: use import.meta.url for the mjs output
+
       const prelude = `
-        ${'import'} '@prefresh/vite/runtime';
-        ${'import'} { flushUpdates } from '@prefresh/vite/utils';
+        ${'import'} ${JSON.stringify(prefreshRuntime.id)};
+        ${'import'} { flushUpdates } from ${JSON.stringify(prefreshUtils.id)};
 
         let prevRefreshReg;
         let prevRefreshSig;
