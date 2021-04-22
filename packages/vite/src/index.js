@@ -38,12 +38,12 @@ export default function prefreshPlugin(options = {}) {
 
       if (!hasSig && !hasReg) return code;
 
-      const prefreshRuntime = await this.resolve('@prefresh/vite/runtime', __filename) // fixme: use import.meta.url for the mjs output
-      const prefreshUtils = await this.resolve('@prefresh/vite/utils', __filename) // fixme: use import.meta.url for the mjs output
+      const prefreshCore = await this.resolve('@prefresh/core', __filename); // fixme: use import.meta.url for the mjs output
+      const prefreshUtils = await this.resolve('@prefresh/utils', __filename); // fixme: use import.meta.url for the mjs output
 
       const prelude = `
-        ${'import'} ${JSON.stringify(prefreshRuntime.id)};
-        ${'import'} { flushUpdates } from ${JSON.stringify(prefreshUtils.id)};
+        ${'import'} ${JSON.stringify(prefreshCore.id)};
+        ${'import'} { flush as flushUpdates } from ${JSON.stringify(prefreshUtils.id)};
 
         let prevRefreshReg;
         let prevRefreshSig;
