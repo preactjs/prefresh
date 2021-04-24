@@ -5,10 +5,7 @@
   "main": "dist/index.js",
   "types": "index.d.ts",
   "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    },
+    ".": "./src/index.js",
     "./package.json": "./package.json",
     "./": "./"
   },
@@ -22,7 +19,6 @@
     "index.d.ts"
   ],
   "scripts": {
-    "build": "bundt",
     "lint": "eslint src",
     "test": "jest --clearCache && jest --runInBand --forceExit --detectOpenHandles"
   },
@@ -44,7 +40,6 @@
     "@rollup/pluginutils": "^4.1.0"
   },
   "devDependencies": {
-    "bundt": "^1.1.1",
     "preact": "^10.5.7",
     "vite": "^2.0.0-beta.3"
   },

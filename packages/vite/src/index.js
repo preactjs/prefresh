@@ -1,9 +1,9 @@
-import { transformSync } from '@babel/core';
-import { createFilter } from '@rollup/pluginutils';
-import prefreshBabelPlugin from '@prefresh/babel-plugin';
+const { transformSync } = require('@babel/core');
+const { createFilter } = require('@rollup/pluginutils');
+const prefreshBabelPlugin = require('@prefresh/babel-plugin');
 
 /** @returns {import('vite').Plugin} */
-export default function prefreshPlugin(options = {}) {
+module.exports = function prefreshPlugin(options = {}) {
   let shouldSkip = false;
   const filter = createFilter(options.include, options.exclude);
 
