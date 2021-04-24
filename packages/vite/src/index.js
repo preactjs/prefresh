@@ -38,8 +38,8 @@ module.exports = function prefreshPlugin(options = {}) {
 
       if (!hasSig && !hasReg) return code;
 
-      const prefreshCore = await this.resolve('@prefresh/core', __filename); // fixme: use import.meta.url for the mjs output
-      const prefreshUtils = await this.resolve('@prefresh/utils', __filename); // fixme: use import.meta.url for the mjs output
+      const prefreshCore = await this.resolve('@prefresh/core', __filename);
+      const prefreshUtils = await this.resolve('@prefresh/utils', __filename);
 
       const prelude = `
         ${'import'} ${JSON.stringify(prefreshCore.id)};
