@@ -1,9 +1,9 @@
-import { transformSync } from '@babel/core';
-import { createFilter } from '@rollup/pluginutils';
-import prefreshBabelPlugin from '@prefresh/babel-plugin';
+const { transformSync } = require('@babel/core');
+const { createFilter } = require('@rollup/pluginutils');
+const prefreshBabelPlugin = require('@prefresh/babel-plugin');
 
 /** @returns {import('vite').Plugin} */
-export default function prefreshPlugin(options = {}) {
+module.exports = function prefreshPlugin(options = {}) {
   let shouldSkip = false;
   const filter = createFilter(options.include, options.exclude);
 
@@ -12,7 +12,7 @@ export default function prefreshPlugin(options = {}) {
     configResolved(config) {
       shouldSkip = config.command === 'build' || config.isProduction;
     },
-    transform(code, id, ssr) {
+    async transform(code, id, ssr) {
       if (
         shouldSkip ||
         !/\.(t|j)sx?$/.test(id) ||
@@ -38,9 +38,12 @@ export default function prefreshPlugin(options = {}) {
 
       if (!hasSig && !hasReg) return code;
 
+      const prefreshCore = await this.resolve('@prefresh/core', __filename);
+      const prefreshUtils = await this.resolve('@prefresh/utils', __filename);
+
       const prelude = `
-        ${'import'} '@prefresh/vite/runtime';
-        ${'import'} { flushUpdates } from '@prefresh/vite/utils';
+        ${'import'} ${JSON.stringify(prefreshCore.id)};
+        ${'import'} { flush as flushUpdates } from ${JSON.stringify(prefreshUtils.id)};
 
         let prevRefreshReg;
         let prevRefreshSig;

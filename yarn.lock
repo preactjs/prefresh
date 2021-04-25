@@ -3308,16 +3308,6 @@ bundt@^1.0.1:
     rewrite-imports "^2.0.0"
     terser "^4.6.0"
 
-bundt@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/bundt/-/bundt-1.1.1.tgz#c7beb5d806c1b5160bbdd476f1e1544cbc5f04b5"
-  integrity sha512-x3GRBxMMgcd+EfkyrLxBOg+gbM6ivnjSWZAmUX9RpTOx9Jv5VLu8l7ZbxSnP09BpVMT+qlgw19FCamUwOX4cxg==
-  dependencies:
-    kleur "^4.0.0"
-    mk-dirs "^3.0.0"
-    rewrite-imports "^2.0.0"
-    terser "^4.8.0"
-
 bytes@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.0.0.tgz#d32815404d689699f85a4ea4fa8755dd13a96048"
@@ -7450,11 +7440,6 @@ kleur@^3.0.1, kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-kleur@^4.0.0:
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/kleur/-/kleur-4.1.3.tgz#8d262a56d79a137ee1b706e967c0b08a7fef4f4c"
-  integrity sha512-H1tr8QP2PxFTNwAFM74Mui2b6ovcY9FoxJefgrwxY+OCJcq01k5nvhf4M/KnizzrJvLRap5STUy7dgDV35iUBw==
-
 koa-compose@^3.0.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/koa-compose/-/koa-compose-3.2.1.tgz#a85ccb40b7d986d8e5a345b3a1ace8eabcf54de7"
@@ -8088,11 +8073,6 @@ mk-dirs@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/mk-dirs/-/mk-dirs-1.0.0.tgz#44ee67f82341c6762718e88e85e577882e1f67fd"
   integrity sha1-RO5n+CNBxnYnGOiOheV3iC4fZ/0=
-
-mk-dirs@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/mk-dirs/-/mk-dirs-3.0.0.tgz#1a0296e04ae5c2e5063db4089907efbdff79b7c4"
-  integrity sha512-FEZDdUFb88hgdnsfAPa4VxcPVOd+8GyZ2jsI965im5bjBlBYhrvXuTqLka/UHa6YdUNN/kZBsVgofhZ3322AJw==
 
 mkdirp-classic@^0.5.2:
   version "0.5.3"
@@ -11261,15 +11241,6 @@ terser@^4.1.2, terser@^4.6.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/terser/-/terser-4.7.0.tgz#15852cf1a08e3256a80428e865a2fa893ffba006"
   integrity sha512-Lfb0RiZcjRDXCC3OSHJpEkxJ9Qeqs6mp2v4jf2MHfy8vGERmVDuvjXdd/EnP5Deme5F2yBRBymKmKHCBg2echw==
-  dependencies:
-    commander "^2.20.0"
-    source-map "~0.6.1"
-    source-map-support "~0.5.12"
-
-terser@^4.8.0:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-4.8.0.tgz#63056343d7c70bb29f3af665865a46fe03a0df17"
-  integrity sha512-EAPipTNeWsb/3wLPeup1tVPaXfIaU68xMnVdPafIL1TV05OhASArYyIfFvnvJCNrR2NIOvDVNNTFRa+Re2MWyw==
   dependencies:
     commander "^2.20.0"
     source-map "~0.6.1"
