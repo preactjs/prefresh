@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.2.2
+
+### Patch Changes
+
+- [`946ea26`](https://github.com/JoviDeCroock/prefresh/commit/946ea26174a4b55f27757bca92871a1a177f00df) [#330](https://github.com/JoviDeCroock/prefresh/pull/330) Thanks [@cyyynthia](https://github.com/cyyynthia)! - Fix compatibility issues with pnpm (#328)
+
 ## 2.2.1
 
 ### Patch Changes
