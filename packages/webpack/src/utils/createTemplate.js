@@ -17,7 +17,7 @@ self.$RefreshSig$ = function() {
 };
 
 self.$RefreshReg$ = function(type, id) {
-  self.${NAMESPACE}.register(type, module.i + ' ' + id);
+  self.${NAMESPACE}.register(type, module.id + ' ' + id);
 };
 
 try {

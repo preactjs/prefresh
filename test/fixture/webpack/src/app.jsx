@@ -6,6 +6,7 @@ import { Products } from './products.jsx';
 import { Effect } from './effect.jsx';
 import { Style } from './styles';
 import { setup } from 'goober';
+import Default from './default.jsx';
 
 setup(h);
 
@@ -31,6 +32,7 @@ export function App(props) {
         <Products />
       </StoreProvider>
       <Effect />
+      <Default />
     </Style>
   )
 }

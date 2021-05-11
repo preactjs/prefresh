@@ -304,6 +304,20 @@ describe('Prefresh integrations', () => {
           await page.$eval('#color', e => getComputedStyle(e).backgroundColor)
         ).toBe('rgb(255, 255, 255)');
       });
+
+      if (integration === 'webpack') {
+        test('can hot reload a default export', async () => {
+          const greet = await page.$('#greet');
+          await expectByPolling(() => getText(greet), 'hi');
+
+          await updateFile('src/default.jsx', content =>
+            content.replace('<p id="greet">hi</p>', '<p id="greet">bye</p>')
+          );
+          await timeout(TIMEOUT);
+
+          await expectByPolling(() => getText(greet), 'bye');
+        });
+      }
     });
   });
 });
