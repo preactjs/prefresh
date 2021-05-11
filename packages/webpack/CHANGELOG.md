@@ -1,5 +1,11 @@
 # @prefresh/webpack
 
+## 3.2.3
+
+### Patch Changes
+
+- [`c002ce3`](https://github.com/JoviDeCroock/prefresh/commit/c002ce36a3e903dc09eb3944d596b7a1cc7757a6) [#341](https://github.com/JoviDeCroock/prefresh/pull/341) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix issue where default export would conflate moduleIds
+
 ## 3.2.2
 
 ### Patch Changes
