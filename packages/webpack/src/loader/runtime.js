@@ -7,7 +7,7 @@ module.exports = function () {
     const previousHotModuleExports =
       module.hot.data && module.hot.data.moduleExports;
 
-    __prefresh_utils__.registerExports(currentExports, module.i);
+    __prefresh_utils__.registerExports(currentExports, module.id);
 
     if (isPrefreshComponent) {
       if (previousHotModuleExports) {
