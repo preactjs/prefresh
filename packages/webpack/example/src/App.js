@@ -2,10 +2,10 @@ import { h } from 'preact';
 import { useCounter } from './useCounter';
 
 const Comp1 = () => {
-  const [count, increment] = useCounter(0);
+  const [count, increment] = useCounter();
   return (
     <div>
-      <p>Counter: {count}</p>
+      <p>Count: {count}</p>
       <button onClick={increment}>Increment</button>
     </div>
   );

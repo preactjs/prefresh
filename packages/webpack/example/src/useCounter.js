@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks';
 
-export const useCounter = initialValue => {
+export const useCounter = () => {
   const [state, setState] = useState(0);
-  return [state, () => setState(state + 2)];
+  return [state, () => setState(state + 1)];
 };
