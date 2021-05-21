@@ -135,8 +135,6 @@ class ReloadPlugin {
       `);
     }
 
-    compiler.options.entry = injectEntry(compiler.options.entry);
-
     let provide = {
       [prefreshUtils]: require.resolve('./utils/prefresh'),
     };
@@ -152,10 +150,23 @@ class ReloadPlugin {
 
     switch (Number(webpack.version[0])) {
       case 4: {
+        compiler.options.entry = injectEntry(compiler.options.entry);
         this.webpack4(compiler);
         break;
       }
       case 5: {
+        const dependency = webpack.EntryPlugin.createDependency(
+          '@prefresh/core',
+          { name: '@prefresh/core' }
+        );
+        compiler.hooks.make.tapAsync(NAME, (compilation, callback) => {
+          compilation.addEntry(
+            compiler.context,
+            dependency,
+            undefined,
+            callback
+          );
+        });
         this.webpack5(compiler);
         break;
       }
