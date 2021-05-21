@@ -1,5 +1,11 @@
 # @prefresh/webpack
 
+## 3.3.0
+
+### Minor Changes
+
+- [`c9b3bdf`](https://github.com/JoviDeCroock/prefresh/commit/c9b3bdf1b38d91e1158d78dd3b3094b020d6284e) [#345](https://github.com/JoviDeCroock/prefresh/pull/345) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Use newly introduced dependency injection for webpack 5
+
 ## 3.2.3
 
 ### Patch Changes
