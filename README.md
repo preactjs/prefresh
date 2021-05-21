@@ -4,15 +4,15 @@ Fast-refresh for Preact!
 
 ## Integrations
 
-- [@web/dev-server](https://github.com/JoviDeCroock/prefresh/tree/main/packages/web-dev-server)
+- [@web/dev-server](https://github.com/preactjs/prefresh/tree/main/packages/web-dev-server)
 - [CRA with prefresh](https://github.com/jeremy-coleman/prefresh-cra)
 - [gatsby](https://www.gatsbyjs.org/packages/gatsby-plugin-preact/)
-- [next](https://github.com/JoviDeCroock/prefresh/tree/main/packages/next)
-- [nollup](https://github.com/JoviDeCroock/prefresh/tree/main/packages/nollup)
+- [next](https://github.com/preactjs/prefresh/tree/main/packages/next)
+- [nollup](https://github.com/preactjs/prefresh/tree/main/packages/nollup)
 - [preact-cli (--refresh)](https://github.com/preactjs/preact-cli#preact-watch)
-- [snowpack](https://github.com/JoviDeCroock/prefresh/tree/main/packages/snowpack)
-- [vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite)
-- [webpack](https://github.com/JoviDeCroock/prefresh/tree/main/packages/webpack)
+- [snowpack](https://github.com/preactjs/prefresh/tree/main/packages/snowpack)
+- [vite](https://github.com/preactjs/prefresh/tree/main/packages/vite)
+- [webpack](https://github.com/preactjs/prefresh/tree/main/packages/webpack)
 
 [Writing your own integration](https://dev.to/jovidecroock/prefresh-fast-refresh-for-preact-26kg)
 

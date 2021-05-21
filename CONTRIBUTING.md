@@ -6,7 +6,7 @@ This document is intended for developers interested in making contributions to p
 
 This steps will help you to set up your development environment.
 
-1. Clone the git repository: `git clone git@github.com:jovidecroock/prefresh.git`
+1. Clone the git repository: `git clone git@github.com:preactjs/prefresh.git`
 2. Go into the cloned folder: `cd prefresh/`
 3. Install all dependencies: `yarn`
 

@@ -23,14 +23,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JoviDeCroock/prefresh.git",
+    "url": "git+https://github.com/preactjs/prefresh.git",
     "directory": "packages/vite"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JoviDeCroock/prefresh/issues"
+    "url": "https://github.com/preactjs/prefresh/issues"
   },
-  "homepage": "https://github.com/JoviDeCroock/prefresh#readme",
+  "homepage": "https://github.com/preactjs/prefresh#readme",
   "dependencies": {
     "@babel/core": "^7.9.6",
     "@prefresh/babel-plugin": "0.4.1",

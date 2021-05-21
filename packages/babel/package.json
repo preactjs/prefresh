@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JoviDeCroock/prefresh.git",
+    "url": "git+https://github.com/preactjs/prefresh.git",
     "directory": "packages/babel"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JoviDeCroock/prefresh/issues"
+    "url": "https://github.com/preactjs/prefresh/issues"
   },
-  "homepage": "https://github.com/JoviDeCroock/prefresh#readme",
+  "homepage": "https://github.com/preactjs/prefresh#readme",
   "devDependencies": {
     "cjyes": "0.3.1"
   }
