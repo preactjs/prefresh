@@ -9,16 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JoviDeCroock/prefresh.git"
+    "url": "git+https://github.com/preactjs/prefresh.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JoviDeCroock/prefresh/issues"
+    "url": "https://github.com/preactjs/prefresh/issues"
   },
   "authors": [
-    "Jovi De Croock <jovi@preact.dev>"
+    "The Preact Authors (https://github.com/preactjs/preact/contributors)"
   ],
-  "homepage": "https://github.com/JoviDeCroock/prefresh#readme",
+  "homepage": "https://github.com/preactjs/prefresh#readme",
   "private": true,
   "workspaces": [
     "packages/*"

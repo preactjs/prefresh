@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JoviDeCroock/prefresh.git",
+    "url": "git+https://github.com/preactjs/prefresh.git",
     "directory": "packages/webpack"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JoviDeCroock/prefresh/issues"
+    "url": "https://github.com/preactjs/prefresh/issues"
   },
-  "homepage": "https://github.com/JoviDeCroock/prefresh#readme",
+  "homepage": "https://github.com/preactjs/prefresh#readme",
   "dependencies": {
     "@prefresh/core": "^1.3.1",
     "@prefresh/utils": "^1.1.0"

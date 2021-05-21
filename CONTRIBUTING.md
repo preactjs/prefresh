@@ -6,7 +6,7 @@ This document is intended for developers interested in making contributions to p
 
 This steps will help you to set up your development environment.
 
-1. Clone the git repository: `git clone git@github.com:jovidecroock/prefresh.git`
+1. Clone the git repository: `git clone git@github.com:preactjs/prefresh.git`
 2. Go into the cloned folder: `cd prefresh/`
 3. Install all dependencies: `yarn`
 
@@ -21,3 +21,10 @@ You can document a change by running `yarn changeset` in the root, which will as
 have changed and whether the change is major/minor/patch. It will then ask you to write a change entry as markdown.
 
 [Read more about adding a `changeset` here.](https://github.com/atlassian/changesets/blob/master/docs/adding-a-changeset.md#i-am-in-a-multi-package-repository-a-mono-repo)
+
+## Publishing
+
+1. run `yarn`
+2. run `yarn build`
+3. run `yarn changeset publish`
+4. run `git push --follow-tags`
