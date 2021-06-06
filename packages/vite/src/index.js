@@ -54,7 +54,7 @@ module.exports = function prefreshPlugin(options = {}) {
 
           self.$RefreshReg$ = (type, id) => {
             self.__PREFRESH__.register(type, ${JSON.stringify(id)} + " " + id);
-          }
+          };
 
           self.$RefreshSig$ = () => {
             let status = 'begin';
@@ -66,23 +66,17 @@ module.exports = function prefreshPlugin(options = {}) {
             };
           };
         }
-        `;
+        `.replace(/[\n]+/gm, '');
 
       if (hasSig && !hasReg) {
         return {
-          code: `
-            ${prelude}
-            ${result.code}
-          `,
+          code: `${prelude}${result.code}`,
           map: result.map,
         };
       }
 
       return {
-        code: `
-        ${prelude}
-
-        ${result.code}
+        code: `${prelude}${result.code}
 
         if (import.meta.hot) {
           self.$RefreshReg$ = prevRefreshReg;
