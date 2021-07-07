@@ -1,5 +1,15 @@
 # @prefresh/vite
 
+## 2.2.3
+
+### Patch Changes
+
+- [`9f4f98b`](https://github.com/preactjs/prefresh/commit/9f4f98bb9c5f4fb77e6b2bf78888c039d4145ada) [#352](https://github.com/preactjs/prefresh/pull/352) Thanks [@TobiasMelen](https://github.com/TobiasMelen)! - Concatenate inserted prelude to first line of script for sourcemaps
+
+  Prelude and footer code blocks are not supplied to babel sourcemap generation and new lines in them will offset sourcemaps.
+  This patch concatenates all of the prelude onto first line of module source to keep source map line mappings the same.
+  Footer is unchanged, but since it's at the end of the file it will not offset any code.
+
 ## 2.2.2
 
 ### Patch Changes
