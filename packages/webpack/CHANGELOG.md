@@ -1,5 +1,11 @@
 # @prefresh/webpack
 
+## 3.3.2
+
+### Patch Changes
+
+- [`25f27cb`](https://github.com/preactjs/prefresh/commit/25f27cb6955281a24fab68fcb88da89ab16be09f) [#362](https://github.com/preactjs/prefresh/pull/362) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix unfound module in ModuleRuntime
+
 ## 3.3.1
 
 ### Patch Changes
