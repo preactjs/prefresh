@@ -56,10 +56,7 @@ class ReloadPlugin {
     });
   }
 
-  webpack5(compiler) {
-    const ConstDependency = require('webpack/lib/dependencies/ConstDependency');
-
-    const RuntimeGlobals = require('webpack/lib/RuntimeGlobals');
+  webpack5(compiler, RuntimeGlobals) {
     const PrefreshRuntimeModule = require('./utils/Runtime');
 
     compiler.hooks.compilation.tap(
@@ -70,11 +67,6 @@ class ReloadPlugin {
         }
 
         injectRefreshFunctions(compilation);
-
-        compilation.dependencyTemplates.set(
-          ConstDependency,
-          new ConstDependency.Template()
-        );
 
         compilation.hooks.additionalTreeRuntimeRequirements.tap(
           NAME,
@@ -167,7 +159,8 @@ class ReloadPlugin {
             callback
           );
         });
-        this.webpack5(compiler);
+        
+        this.webpack5(compiler, compiler.webpack ? compiler.webpack.RuntimeGlobals : webpack.RuntimeGlobals);
         break;
       }
       default: {
