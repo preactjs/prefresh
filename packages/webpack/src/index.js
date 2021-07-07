@@ -57,7 +57,10 @@ class ReloadPlugin {
   }
 
   webpack5(compiler, RuntimeGlobals) {
-    const PrefreshRuntimeModule = require('./utils/Runtime');
+    const createPrefreshRuntimeModule = require('./utils/Runtime');
+    const PrefreshRuntimeModule = createPrefreshRuntimeModule(
+      compiler.webpack ? compiler.webpack : webpack
+    );
 
     compiler.hooks.compilation.tap(
       NAME,
@@ -159,8 +162,13 @@ class ReloadPlugin {
             callback
           );
         });
-        
-        this.webpack5(compiler, compiler.webpack ? compiler.webpack.RuntimeGlobals : webpack.RuntimeGlobals);
+
+        this.webpack5(
+          compiler,
+          compiler.webpack
+            ? compiler.webpack.RuntimeGlobals
+            : webpack.RuntimeGlobals
+        );
         break;
       }
       default: {
