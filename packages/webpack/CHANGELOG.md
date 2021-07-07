@@ -1,5 +1,11 @@
 # @prefresh/webpack
 
+## 3.3.1
+
+### Patch Changes
+
+- [`0505ba1`](https://github.com/preactjs/prefresh/commit/0505ba125628c02adb301a6f8f255f9ae37488a1) [#361](https://github.com/preactjs/prefresh/pull/361) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Remove obsolete webpack deps
+
 ## 3.3.0
 
 ### Minor Changes
