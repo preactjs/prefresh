@@ -2,13 +2,7 @@ const withPrefresh = require('@prefresh/next');
 const path = require('path');
 
 const config = {
-	experimental: {
-		modern: true,
-    polyfillsOptimization: true,
-  },
-  future: {
-    webpack5: true,
-  },
+  webpack5: true,
 	webpack(config, { dev, isServer }) {
 		const splitChunks = config.optimization && config.optimization.splitChunks;
 		if (splitChunks && isServer && splitChunks.cacheGroups) {
@@ -33,18 +27,6 @@ const config = {
 		const aliases = config.resolve.alias || (config.resolve.alias = {});
 		aliases.react = aliases['react-dom'] = 'preact/compat';
 		aliases.preact = path.resolve(__dirname, 'node_modules', 'preact');
-
-		// inject Preact DevTools
-		if (dev && !isServer) {
-			const entry = config.entry;
-			config.entry = () =>
-				entry().then(entries => {
-					entries['main.js'] = ['preact/debug'].concat(
-						entries['main.js'] || []
-					);
-					return entries;
-				});
-		}
 
 		return config;
 	}
