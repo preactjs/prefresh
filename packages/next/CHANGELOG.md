@@ -1,5 +1,11 @@
 # @prefresh/next
 
+## 1.4.7
+
+### Patch Changes
+
+- [`3c87988`](https://github.com/preactjs/prefresh/commit/3c8798858282ce340ab05f55c59e9d4ccdac2beb) [#367](https://github.com/preactjs/prefresh/pull/367) Thanks [@marvinhagemeister](https://github.com/marvinhagemeister)! - Add next 11.0.0 to `peerDependencies`
+
 ## 1.4.6
 
 ### Patch Changes
