@@ -1,5 +1,11 @@
 # @prefresh/next
 
+## 1.5.0
+
+### Minor Changes
+
+- [`5678ccd`](https://github.com/preactjs/prefresh/commit/5678ccdfec8a77203fa2ebffef0c617262806cc9) [#397](https://github.com/preactjs/prefresh/pull/397) Thanks [@Izook](https://github.com/Izook)! - update peer dependencies to include nextjs 12
+
 ## 1.4.7
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.2.4
+
+### Patch Changes
+
+- [`718d212`](https://github.com/preactjs/prefresh/commit/718d21209365bdf298e858d8792b1334c442840a) [#395](https://github.com/preactjs/prefresh/pull/395) Thanks [@NotWoods](https://github.com/NotWoods)! - Include all options in vite typings
+
 ## 2.2.3
 
 ### Patch Changes
