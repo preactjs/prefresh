@@ -1,5 +1,5 @@
+import { createElement } from 'react'
 import { useCounter } from './useCounter'
-import { h } from 'preact'
 import { Greeting } from './greeting.jsx';
 import { StoreProvider } from './context.jsx';
 import { Products } from './products.jsx';
@@ -7,7 +7,7 @@ import { Effect } from './effect.jsx';
 import { Style } from './styles';
 import { setup } from 'goober';
 
-setup(h);
+setup(createElement);
 
 function Test() {
   const [count, increment] = useCounter();
