@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.2.5
+
+### Patch Changes
+
+- [`a53d9a1`](https://github.com/preactjs/prefresh/commit/a53d9a191d208b9b36b9bac433c30f38ccc61e37) [#405](https://github.com/preactjs/prefresh/pull/405) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Add support for 2.7.0
+
 ## 2.2.4
 
 ### Patch Changes
