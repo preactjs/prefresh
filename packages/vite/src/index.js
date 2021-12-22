@@ -12,7 +12,8 @@ module.exports = function prefreshPlugin(options = {}) {
     configResolved(config) {
       shouldSkip = config.command === 'build' || config.isProduction;
     },
-    async transform(code, id, ssr) {
+    async transform(code, id, options) {
+      const ssr = typeof options === 'boolean' ? options : options.ssr;
       if (
         shouldSkip ||
         !/\.(t|j)sx?$/.test(id) ||
