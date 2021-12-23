@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.2.6
+
+### Patch Changes
+
+- [`8e9d7f9`](https://github.com/preactjs/prefresh/commit/8e9d7f9d0d94f3c025e78249a80531260b68d5ba) [#412](https://github.com/preactjs/prefresh/pull/412) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix issue where options would be undefined
+
 ## 2.2.5
 
 ### Patch Changes
