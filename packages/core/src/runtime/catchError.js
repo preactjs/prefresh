@@ -1,15 +1,13 @@
 import { options } from 'preact';
-import {
-  CATCH_ERROR_OPTION,
-  COMPONENT_DIRTY,
-  VNODE_COMPONENT,
-} from '../constants';
+import { CATCH_ERROR_OPTION } from '../constants';
+
+const DIRTY_BIT = 1 << 14;
 
 const oldCatchError = options[CATCH_ERROR_OPTION];
-options[CATCH_ERROR_OPTION] = (error, vnode, oldVNode) => {
-  if (vnode[VNODE_COMPONENT] && vnode[VNODE_COMPONENT][COMPONENT_DIRTY]) {
-    vnode[VNODE_COMPONENT][COMPONENT_DIRTY] = false;
+options[CATCH_ERROR_OPTION] = (error, internal) => {
+  if (internal.flags & DIRTY_BIT) {
+    internal.flags |= DIRTY_BIT;
   }
 
-  if (oldCatchError) oldCatchError(error, vnode, oldVNode);
+  if (oldCatchError) oldCatchError(error, internal);
 };

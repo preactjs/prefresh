@@ -1,18 +1,18 @@
 import { options } from 'preact';
-import { vnodesForComponent } from './vnodesForComponent';
+import { internalsByType } from './internalsByType';
 
 const oldUnmount = options.unmount;
-options.unmount = vnode => {
-  const type = (vnode || {}).type;
-  if (typeof type === 'function' && vnodesForComponent.has(type)) {
-    const vnodes = vnodesForComponent.get(type);
-    if (vnodes) {
-      const index = vnodes.indexOf(vnode);
+options.unmount = internal => {
+  const type = (internal || {}).type;
+  if (typeof type === 'function' && internalsByType.has(type)) {
+    const internals = internalsByType.get(type);
+    if (internals) {
+      const index = internals.indexOf(internal);
       if (index !== -1) {
-        vnodes.splice(index, 1);
+        internals.splice(index, 1);
       }
     }
   }
 
-  if (oldUnmount) oldUnmount(vnode);
+  if (oldUnmount) oldUnmount(internal);
 };
