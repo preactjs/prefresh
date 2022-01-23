@@ -28,3 +28,10 @@ have changed and whether the change is major/minor/patch. It will then ask you t
 2. run `yarn build`
 3. run `yarn changeset publish`
 4. run `git push --follow-tags`
+
+## Running a fixture
+
+Running a fixture locally can be somewhat of a pain as the paths in the `package.json`
+are meant for it being hoisted one level higher, the process we use to test locally is
+to adjust the local paths like `file:../../packages/core` to `file:../../../packages/core`
+and then run `yarn`, this will enable you to run this fixture locally.
