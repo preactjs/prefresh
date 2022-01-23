@@ -9,12 +9,8 @@ const makeConfig = () => {
 		entry: './src/index.js',
 		stats: 'minimal',
 		devServer: {
-			contentBase: path.join(__dirname, 'dist'),
-			host: 'localhost',
 			port: 3001,
-			historyApiFallback: true,
 			hot: true,
-			inline: true,
 			open: false
 		},
 		output: {
