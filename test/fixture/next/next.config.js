@@ -2,18 +2,19 @@ const withPrefresh = require('@prefresh/next');
 const path = require('path');
 
 const config = {
-  experimental: {
+	experimental: {
 		modern: true,
     polyfillsOptimization: true,
   },
   future: {
     webpack5: true,
   },
-	webpack(config) {
+	webpack(config, { isServer }) {
 		const splitChunks = config.optimization && config.optimization.splitChunks;
-		if (splitChunks) {
+		if (splitChunks && isServer && splitChunks.cacheGroups) {
 			const cacheGroups = splitChunks.cacheGroups;
 			const preactModules = /[\\/]node_modules[\\/](preact|preact-render-to-string|preact-context-provider)[\\/]/;
+
 			if (cacheGroups.framework) {
 				cacheGroups.preact = Object.assign({}, cacheGroups.framework, {
 					test: preactModules
