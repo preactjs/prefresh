@@ -5,8 +5,7 @@
   "types": "index.d.ts",
   "exports": {
     ".": "./src/index.js",
-    "./package.json": "./package.json",
-    "./": "./"
+    "./package.json": "./package.json"
   },
   "modes": {
     "default": "src/index.js"

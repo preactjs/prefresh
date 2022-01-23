@@ -16,8 +16,7 @@
       "import": "./utils/index.mjs",
       "require": "./utils/index.js"
     },
-    "./package.json": "./package.json",
-    "./": "./"
+    "./package.json": "./package.json"
   },
   "modes": {
     "default": "src/index.js",
