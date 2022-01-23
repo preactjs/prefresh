@@ -16,7 +16,6 @@ const makeConfig = () => {
 			hot: true,
 			inline: true,
 			publicPath: '/',
-			clientLogLevel: 'none',
 			open: false
 		},
 		output: {
