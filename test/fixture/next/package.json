@@ -13,7 +13,7 @@
 	},
 	"dependencies": {
     "goober": "latest",
-		"next": "12.0.8",
+		"next": "^11.0.0",
 		"preact": "^10.5.7",
 		"preact-render-to-string": "^5.1.12",
 		"react": "npm:@preact/compat@17.0.2",
