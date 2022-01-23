@@ -9,9 +9,16 @@ const makeConfig = () => {
 		entry: './src/index.js',
 		stats: 'minimal',
 		devServer: {
+			contentBase: path.join(__dirname, 'dist'),
+			host: 'localhost',
 			port: 3001,
+			historyApiFallback: true,
 			hot: true,
-			open: false
+			inline: true,
+			publicPath: '/',
+			clientLogLevel: 'none',
+			open: false,
+			overlay: true
 		},
 		output: {
 			path: path.resolve(__dirname, 'dist'),

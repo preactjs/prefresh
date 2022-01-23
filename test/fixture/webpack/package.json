@@ -9,10 +9,10 @@
 		"@prefresh/babel-plugin": "file:../../packages/babel",
 		"@prefresh/webpack": "file:../../packages/webpack",
 		"babel-loader": "^8.2.2",
-		"html-webpack-plugin": "^5.5.0",
-		"webpack": "^5.67.0",
-		"webpack-cli": "^4.9.1",
-		"webpack-dev-server": "^4.7.3"
+		"html-webpack-plugin": "^4.5.0",
+		"webpack": "^5.10.0",
+		"webpack-cli": "^4.2.0",
+		"webpack-dev-server": "^3.11.0"
 	},
 	"dependencies": {
     "goober": "2.0.33",
