@@ -1,5 +1,4 @@
-import { h } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useState } from 'react';
 
 export const Effect = () => {
   const [state, setState] = useState('');

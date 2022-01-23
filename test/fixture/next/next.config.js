@@ -7,7 +7,7 @@ const config = {
       config.optimization && config.optimization.splitChunks;
     if (splitChunks && splitChunks.cacheGroups) {
       const cacheGroups = splitChunks.cacheGroups;
-      const test = /[\\/]node_modules[\\/](preact|preact-render-to-string|preact-context-provider)[\\/]/;
+      const test = /[\\/]node_modules[\\/](@preact|preact|preact-render-to-string|preact-context-provider)[\\/]/;
       if (cacheGroups.framework) {
         cacheGroups.preact = Object.assign({}, cacheGroups.framework, {
           test

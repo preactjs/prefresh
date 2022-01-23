@@ -1,4 +1,4 @@
-import { h, Component } from 'preact'
+import { Component } from 'react'
 
 export class Greeting extends Component {
   constructor(props) {
