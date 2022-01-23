@@ -15,7 +15,6 @@ const makeConfig = () => {
 			historyApiFallback: true,
 			hot: true,
 			inline: true,
-			publicPath: '/',
 			open: false
 		},
 		output: {
