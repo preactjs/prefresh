@@ -31,7 +31,6 @@ const config = {
 
 		// Install webpack aliases:
 		const aliases = config.resolve.alias || (config.resolve.alias = {});
-		aliases['react/jsx-dev-runtime'] = 'preact/jsx-runtime';
 		aliases.react = aliases['react-dom'] = 'preact/compat';
 		aliases.preact = path.resolve(__dirname, 'node_modules', 'preact');
 
