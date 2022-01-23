@@ -11,9 +11,9 @@
     "preact": "^10.5.7"
   },
   "devDependencies": {
-    "@web/dev-server": "0.0.25",
-    "@web/dev-server-esbuild": "^0.2.8",
-    "@web/dev-server-hmr": "0.1.7",
+    "@web/dev-server": "0.1.29",
+    "@web/dev-server-esbuild": "^0.2.16",
+    "@web/dev-server-hmr": "0.1.9",
     "@prefresh/babel-plugin": "file:../../packages/babel",
     "@prefresh/web-dev-server": "file:../../packages/web-dev-server"
   }
