@@ -141,9 +141,8 @@ describe('Prefresh integrations', () => {
         await expectByPolling(() => getText(button), 'Increment (+)');
       });
 
-      // TODO: this bugs in next10webpack5 but not webpack 5...
-      // integration === 'next-webpack5'
-      if (integration !== 'next-webpack5') {
+      // Works with v11 and v12
+      if (integration !== 'next') {
         test('add file and import it', async () => {
           const compPath = path.join(getTempDir(integration), 'src/test.jsx');
           await fs.writeFile(

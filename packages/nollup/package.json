@@ -8,8 +8,7 @@
       "require": "./src/index.js",
       "import": "./src/wrapper.mjs"
     },
-    "./package.json": "./package.json",
-    "./": "./"
+    "./package.json": "./package.json"
   },
   "scripts": {
     "lint": "eslint src"
