@@ -17,8 +17,7 @@ const makeConfig = () => {
 			inline: true,
 			publicPath: '/',
 			clientLogLevel: 'none',
-			open: false,
-			overlay: true
+			open: false
 		},
 		output: {
 			path: path.resolve(__dirname, 'dist'),
