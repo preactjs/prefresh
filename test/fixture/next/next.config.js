@@ -2,6 +2,13 @@ const withPrefresh = require('@prefresh/next');
 const path = require('path');
 
 const config = {
+  experimental: {
+		modern: true,
+    polyfillsOptimization: true,
+  },
+  future: {
+    webpack5: false,
+  },
 	webpack(config) {
 		const splitChunks = config.optimization && config.optimization.splitChunks;
 		if (splitChunks) {
