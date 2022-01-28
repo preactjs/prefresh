@@ -1,5 +1,13 @@
 # @prefresh/babel-plugin
 
+## 0.4.2
+
+### Patch Changes
+
+- [`eb9aa93`](https://github.com/preactjs/prefresh/commit/eb9aa932fc2a01fed3ecb662e195422986529419) [#425](https://github.com/preactjs/prefresh/pull/425) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix import paths for newer node versions
+
+* [`f39ab40`](https://github.com/preactjs/prefresh/commit/f39ab409a46a7a06f8e892920e407be728fcefa1) [#432](https://github.com/preactjs/prefresh/pull/432) Thanks [@jvdsande](https://github.com/jvdsande)! - Allow curried HOC and any parameter order for HOC
+
 ## 0.4.1
 
 ### Patch Changes

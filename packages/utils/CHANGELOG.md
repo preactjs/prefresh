@@ -1,5 +1,11 @@
 # @prefresh/utils
 
+## 1.1.2
+
+### Patch Changes
+
+- [`eb9aa93`](https://github.com/preactjs/prefresh/commit/eb9aa932fc2a01fed3ecb662e195422986529419) [#425](https://github.com/preactjs/prefresh/pull/425) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix import paths for newer node versions
+
 ## 1.1.1
 
 ### Patch Changes

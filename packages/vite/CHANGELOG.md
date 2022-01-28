@@ -1,5 +1,16 @@
 # @prefresh/vite
 
+## 2.2.7
+
+### Patch Changes
+
+- [`eb9aa93`](https://github.com/preactjs/prefresh/commit/eb9aa932fc2a01fed3ecb662e195422986529419) [#425](https://github.com/preactjs/prefresh/pull/425) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix import paths for newer node versions
+
+- Updated dependencies [[`eb9aa93`](https://github.com/preactjs/prefresh/commit/eb9aa932fc2a01fed3ecb662e195422986529419), [`f39ab40`](https://github.com/preactjs/prefresh/commit/f39ab409a46a7a06f8e892920e407be728fcefa1)]:
+  - @prefresh/babel-plugin@0.4.2
+  - @prefresh/core@1.3.3
+  - @prefresh/utils@1.1.2
+
 ## 2.2.6
 
 ### Patch Changes
