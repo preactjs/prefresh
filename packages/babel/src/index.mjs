@@ -91,16 +91,16 @@ export default function (babel, opts = {}) {
         }
         const calleePath = path.get('callee');
         switch (calleePath.node.type) {
+          case 'CallExpression':
           case 'MemberExpression':
           case 'Identifier': {
-            const calleeSource = calleePath.getSource();
-            const firstArgPath = argsPath[0];
+            const calleeSource = calleePath.getSource().split('(')[0];
             const innerName = inferredName + '$' + calleeSource;
-            const foundInside = findInnerComponents(
+            const foundInside = argsPath.some((argPath) => findInnerComponents(
               innerName,
-              firstArgPath,
+              argPath,
               callback
-            );
+            ));
             if (!foundInside) {
               return false;
             }
