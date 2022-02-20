@@ -40,6 +40,10 @@ function sign(type, key, forceReset, getCustomHooks, status) {
   }
 }
 
+function doRender(props, state, context) {
+  return this.constructor(props, context);
+}
+
 function replaceComponent(OldType, NewType, resetHookState) {
   const internals = internalsByType.get(OldType);
   if (!internals) return;
@@ -55,11 +59,14 @@ function replaceComponent(OldType, NewType, resetHookState) {
   internals.forEach(internal => {
     internal.type = NewType;
 
-    if (internal[VNODE_COMPONENT] && internal.flags & TYPE_CLASS) {
+    if (internal[VNODE_COMPONENT]) {
       internal[VNODE_COMPONENT].constructor = internal.type;
 
       try {
-        if (internal[VNODE_COMPONENT] instanceof OldType) {
+        if (
+          internal[VNODE_COMPONENT] instanceof OldType &&
+          internal.flags & TYPE_CLASS
+        ) {
           const oldInst = internal[VNODE_COMPONENT];
 
           const newInst = new NewType(internal.props, internal.c);
@@ -86,6 +93,8 @@ function replaceComponent(OldType, NewType, resetHookState) {
               }
             }
           }
+        } else {
+          internal[VNODE_COMPONENT].render = doRender;
         }
       } catch (e) {
         /* Functional component */
