@@ -6,12 +6,11 @@ exports.integrations = [
   'nollup',
   'webpack',
   'web-dev-server',
-  'next',
+  // 'next',
 ];
 
 exports.bin = {
-  'next': dir =>
-    path.resolve(dir, `./node_modules/next/dist/bin/next`),
+  next: dir => path.resolve(dir, `./node_modules/next/dist/bin/next`),
   nollup: dir => path.resolve(dir, `./node_modules/nollup/lib/cli.js`),
   snowpack: dir => path.resolve(dir, `./node_modules/snowpack/index.bin.js`),
   vite: dir => path.resolve(dir, `./node_modules/vite/bin/vite.js`),
@@ -21,7 +20,7 @@ exports.bin = {
 };
 
 exports.binArgs = {
-  'next': ['dev', '-p', '3006'],
+  next: ['dev', '-p', '3006'],
   snowpack: ['dev'],
   webpack: ['serve'],
   vite: [],
@@ -34,7 +33,7 @@ exports.goMessage = {
   snowpack: 'Server started',
   webpack: 'successfully',
   nollup: 'Compiled',
-  'next': 'successfully',
+  next: 'successfully',
   'web-dev-server': 'started',
 };
 
@@ -44,5 +43,5 @@ exports.defaultPort = {
   nollup: 3003,
   snowpack: 3004,
   'web-dev-server': 3005,
-  'next': 3006,
+  next: 3006,
 };

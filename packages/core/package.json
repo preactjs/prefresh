@@ -26,6 +26,6 @@
     "preact": "^11.0.0-experimental.0"
   },
   "peerDependencies": {
-    "preact": "^10.0.0"
+    "preact": "^11.0.0"
   }
 }
