@@ -11,3 +11,4 @@ export const VNODE_CHILDREN = '__k';
 export const HOOK_VALUE = '__';
 export const HOOK_ARGS = '__H';
 export const HOOK_CLEANUP = '__c';
+export const TYPE_CLASS = 1 << 2;

@@ -1,6 +1,6 @@
 import { options } from 'preact';
 import { internalsByType, mappedTypes } from './internalsByType';
-import { VNODE_COMPONENT } from '../constants';
+import { TYPE_CLASS, VNODE_COMPONENT } from '../constants';
 
 const getMappedInternal = type => {
   if (mappedTypes.has(type)) {
@@ -22,7 +22,7 @@ options.__i = internal => {
 
     const foundType = getMappedInternal(internal.type);
     internal.type = foundType;
-    if (internal[VNODE_COMPONENT]) {
+    if (internal[VNODE_COMPONENT] && internal.flags & TYPE_CLASS) {
       internal[VNODE_COMPONENT].constructor = foundType;
     }
   }

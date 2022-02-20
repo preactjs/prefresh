@@ -13,6 +13,7 @@ import {
   HOOK_ARGS,
   HOOK_VALUE,
   HOOK_CLEANUP,
+  TYPE_CLASS,
 } from './constants';
 import { computeKey } from './computeKey';
 import { internalsByType, mappedTypes } from './runtime/internalsByType';
@@ -54,17 +55,14 @@ function replaceComponent(OldType, NewType, resetHookState) {
   internals.forEach(internal => {
     internal.type = NewType;
 
-    if (internal[VNODE_COMPONENT]) {
+    if (internal[VNODE_COMPONENT] && internal.flags & TYPE_CLASS) {
       internal[VNODE_COMPONENT].constructor = internal.type;
 
       try {
         if (internal[VNODE_COMPONENT] instanceof OldType) {
           const oldInst = internal[VNODE_COMPONENT];
 
-          const newInst = new NewType(
-            internal[VNODE_COMPONENT].props,
-            internal[VNODE_COMPONENT].context
-          );
+          const newInst = new NewType(internal.props, internal.c);
 
           internal[VNODE_COMPONENT] = newInst;
           // copy old properties onto the new instance.
@@ -91,7 +89,6 @@ function replaceComponent(OldType, NewType, resetHookState) {
         }
       } catch (e) {
         /* Functional component */
-        internal[VNODE_COMPONENT].constructor = NewType;
       }
 
       if (resetHookState) {
