@@ -6,7 +6,7 @@ exports.integrations = [
   'nollup',
   'webpack',
   'web-dev-server',
-  'next',
+  // 'next',
 ];
 
 exports.bin = {

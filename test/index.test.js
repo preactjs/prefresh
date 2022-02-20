@@ -302,6 +302,8 @@ export const Tester = () => <p className="tester">Test</p>;`
         ).toBe('rgb(255, 255, 255)');
       });
 
+      // a bug that only happened in webpack, hence the extra
+      // default.jsx file in that fixture
       if (integration === 'webpack') {
         test('can hot reload a default export', async () => {
           const greet = await page.$('#greet');
