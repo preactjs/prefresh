@@ -1,7 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
 const execa = require('execa');
-const puppeteer = require('puppeteer');
 const { chromium } = require('playwright-chromium');
 const {
   expectByPolling,
@@ -17,11 +16,10 @@ const {
   integrations,
 } = require('./constants');
 
-const TIMEOUT = 1000;
-
 describe('Prefresh integrations', () => {
   integrations.forEach(integration => {
     let devServer, browser, page;
+    const TIMEOUT = integration === 'webpack' ? 1000 : 200;
 
     const browserConsoleListener = msg => {
       console.log('[BROWSER LOG]: ', msg);
