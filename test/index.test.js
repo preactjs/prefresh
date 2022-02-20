@@ -2,6 +2,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const execa = require('execa');
 const puppeteer = require('puppeteer');
+const { chromium } = require('playwright-chromium');
 const {
   expectByPolling,
   getFixtureDir,
@@ -25,8 +26,6 @@ describe('Prefresh integrations', () => {
     const browserConsoleListener = msg => {
       console.log('[BROWSER LOG]: ', msg);
     };
-
-    let serverConsoleListener;
 
     async function updateFile(file, replacer) {
       const compPath = path.join(getTempDir(integration), file);
@@ -76,8 +75,8 @@ describe('Prefresh integrations', () => {
 
         await execa('yarn', { cwd: getTempDir(integration) });
 
-        browser = await puppeteer.launch({
-          args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        browser = await chromium.launch({
+          headless: true,
         });
         page = await browser.newPage();
 
@@ -112,7 +111,9 @@ describe('Prefresh integrations', () => {
         page = await browser.newPage();
         if (process.env.DEBUG) page.on('console', browserConsoleListener);
 
-        await page.goto('http://localhost:' + defaultPort[integration]);
+        await page.goto('http://localhost:' + defaultPort[integration], {
+          waitUntil: 'networkIdle2',
+        });
       });
 
       test('basic component', async () => {
