@@ -3,13 +3,13 @@
 		"dev": "next"
 	},
 	"devDependencies": {
-		"@prefresh/babel-plugin": "file:../../../packages/babel",
-		"@prefresh/next": "file:../../../packages/next"
+		"@prefresh/babel-plugin": "file:../../packages/babel",
+		"@prefresh/next": "file:../../packages/next"
 	},
 	"resolutions": {
-		"@prefresh/core": "file:../../../packages/core",
-		"@prefresh/webpack": "file:../../../packages/webpack",
-		"@prefresh/utils": "file:../../../packages/utils"
+		"@prefresh/core": "file:../../packages/core",
+		"@prefresh/webpack": "file:../../packages/webpack",
+		"@prefresh/utils": "file:../../packages/utils"
 	},
 	"dependencies": {
     "goober": "latest",
@@ -18,6 +18,6 @@
 		"preact-render-to-string": "^6.0.0-experimental.0",
 		"react": "npm:@preact/compat@17.0.2",
 		"react-dom": "npm:@preact/compat@17.0.2",
-    	"react-ssr-prepass": "npm:preact-ssr-prepass"
+    "react-ssr-prepass": "npm:preact-ssr-prepass"
 	}
 }
