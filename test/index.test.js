@@ -1,7 +1,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const execa = require('execa');
-const puppeteer = require('puppeteer');
+const { chromium } = require('playwright-chromium');
 const {
   expectByPolling,
   getFixtureDir,
@@ -16,17 +16,14 @@ const {
   integrations,
 } = require('./constants');
 
-const TIMEOUT = 1000;
-
 describe('Prefresh integrations', () => {
   integrations.forEach(integration => {
-    let devServer, browser, page;
+    let devServer, browser, page, serverConsoleListener;
+    const TIMEOUT = integration === 'webpack' ? 1000 : 200;
 
     const browserConsoleListener = msg => {
       console.log('[BROWSER LOG]: ', msg);
     };
-
-    let serverConsoleListener;
 
     async function updateFile(file, replacer) {
       const compPath = path.join(getTempDir(integration), file);
@@ -76,8 +73,8 @@ describe('Prefresh integrations', () => {
 
         await execa('yarn', { cwd: getTempDir(integration) });
 
-        browser = await puppeteer.launch({
-          args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        browser = await chromium.launch({
+          headless: true,
         });
         page = await browser.newPage();
 
@@ -112,7 +109,9 @@ describe('Prefresh integrations', () => {
         page = await browser.newPage();
         if (process.env.DEBUG) page.on('console', browserConsoleListener);
 
-        await page.goto('http://localhost:' + defaultPort[integration]);
+        await page.goto('http://localhost:' + defaultPort[integration], {
+          waitUntil: 'networkidle',
+        });
       });
 
       test('basic component', async () => {
@@ -303,6 +302,8 @@ export const Tester = () => <p className="tester">Test</p>;`
         ).toBe('rgb(255, 255, 255)');
       });
 
+      // a bug that only happened in webpack, hence the extra
+      // default.jsx file in that fixture
       if (integration === 'webpack') {
         test('can hot reload a default export', async () => {
           const greet = await page.$('#greet');

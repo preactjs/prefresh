@@ -8,6 +8,7 @@ function isSafeExport(key) {
     key === '__esModule' ||
     key === '__N_SSG' ||
     key === '__N_SSP' ||
+    key === '__N_RSC' ||
     key === 'config'
   );
 }
