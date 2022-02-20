@@ -18,7 +18,7 @@ const {
 
 describe('Prefresh integrations', () => {
   integrations.forEach(integration => {
-    let devServer, browser, page;
+    let devServer, browser, page, serverConsoleListener;
     const TIMEOUT = integration === 'webpack' ? 1000 : 200;
 
     const browserConsoleListener = msg => {
@@ -110,7 +110,7 @@ describe('Prefresh integrations', () => {
         if (process.env.DEBUG) page.on('console', browserConsoleListener);
 
         await page.goto('http://localhost:' + defaultPort[integration], {
-          waitUntil: 'networkIdle2',
+          waitUntil: 'networkidle',
         });
       });
 
