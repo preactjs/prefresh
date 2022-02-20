@@ -1,7 +1,7 @@
 const Prefresh = require('@prefresh/webpack');
 
-module.exports = (nextConfig = {}) => {
-  return Object.assign({}, nextConfig, {
+module.exports = (nextConfig = {}) =>
+  Object.assign({}, nextConfig, {
     webpack(config, options) {
       if (!Prefresh.supportsNextJs) {
         throw new Error(
@@ -40,4 +40,3 @@ module.exports = (nextConfig = {}) => {
       return config;
     },
   });
-};

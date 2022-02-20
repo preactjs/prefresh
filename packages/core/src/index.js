@@ -132,7 +132,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
         internal.data[HOOKS_LIST] &&
         internal.data[HOOKS_LIST].length
       ) {
-        internal[VNODE_COMPONENT].data[HOOKS_LIST].forEach(possibleEffect => {
+        internal.data[HOOKS_LIST].forEach(possibleEffect => {
           if (
             possibleEffect[HOOK_CLEANUP] &&
             typeof possibleEffect[HOOK_CLEANUP] === 'function'
