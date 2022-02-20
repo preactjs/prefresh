@@ -10,8 +10,6 @@ import {
   NAMESPACE,
   HOOKS_LIST,
   EFFECTS_LIST,
-  VNODE_DOM,
-  VNODE_CHILDREN,
   HOOK_ARGS,
   HOOK_VALUE,
   HOOK_CLEANUP,
@@ -56,8 +54,6 @@ function replaceComponent(OldType, NewType, resetHookState) {
   internals.forEach(internal => {
     internal.type = NewType;
 
-    // TODO: reconsider now with the different implementations of
-    // class vs func
     if (internal[VNODE_COMPONENT]) {
       internal[VNODE_COMPONENT].constructor = internal.type;
 
@@ -133,25 +129,17 @@ function replaceComponent(OldType, NewType, resetHookState) {
         internal.data[DATA_HOOKS][HOOKS_LIST] &&
         internal.data[DATA_HOOKS][HOOKS_LIST].length
       ) {
+        // Run possible cleanups
         internal.data[DATA_HOOKS][HOOKS_LIST].forEach(possibleEffect => {
           if (
             possibleEffect[HOOK_CLEANUP] &&
             typeof possibleEffect[HOOK_CLEANUP] === 'function'
           ) {
             possibleEffect[HOOK_CLEANUP]();
-          } else if (
-            possibleEffect[HOOK_ARGS] &&
-            possibleEffect[HOOK_VALUE] &&
-            Object.keys(possibleEffect).length === 4
-          ) {
-            const cleanupKey = Object.keys(possibleEffect).find(
-              key => key === '__c'
-            );
-            if (cleanupKey && typeof possibleEffect[cleanupKey] == 'function')
-              possibleEffect[cleanupKey]();
           }
         });
 
+        // Reset the args on hooks so they will run again during the next render
         internal.data[DATA_HOOKS][HOOKS_LIST].forEach(hook => {
           if (hook[HOOK_ARGS] && Array.isArray(hook[HOOK_ARGS])) {
             hook[HOOK_ARGS] = undefined;
@@ -159,13 +147,16 @@ function replaceComponent(OldType, NewType, resetHookState) {
         });
       }
 
-      // Cleanup when an async component has thrown.
-      if (
-        (internal[VNODE_DOM] && !document.contains(internal[VNODE_DOM])) ||
-        (!internal[VNODE_DOM] && !internal[VNODE_CHILDREN])
-      ) {
-        location.reload();
-      }
+      // TODO: Cleanup when an async component has thrown.
+      // add tests for this because it does not seem to behave the way
+      // it is intended to
+      // https://github.com/preactjs/prefresh/issues/404
+      // if (
+      //   (internal[VNODE_DOM] && !document.contains(internal[VNODE_DOM])) ||
+      //   (!internal[VNODE_DOM] && !internal[VNODE_CHILDREN])
+      // ) {
+      //   location.reload();
+      // }
 
       internal.rerender(internal);
     }
