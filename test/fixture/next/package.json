@@ -18,6 +18,6 @@
 		"preact-render-to-string": "^5.1.12",
 		"react": "npm:@preact/compat@17.0.2",
 		"react-dom": "npm:@preact/compat@17.0.2",
-    "react-ssr-prepass": "npm:preact-ssr-prepass"
+    	"react-ssr-prepass": "npm:preact-ssr-prepass"
 	}
 }

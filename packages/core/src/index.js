@@ -5,6 +5,7 @@ import './runtime/vnode';
 import './runtime/unmount';
 
 import {
+  DATA_HOOKS,
   VNODE_COMPONENT,
   NAMESPACE,
   HOOKS_LIST,
@@ -99,11 +100,11 @@ function replaceComponent(OldType, NewType, resetHookState) {
 
       if (resetHookState) {
         if (
-          internal.data &&
-          internal.data[HOOKS_LIST] &&
-          internal.data[HOOKS_LIST].length
+          internal.data[DATA_HOOKS] &&
+          internal.data[DATA_HOOKS][HOOKS_LIST] &&
+          internal.data[DATA_HOOKS][HOOKS_LIST].length
         ) {
-          internal.data[HOOKS_LIST].forEach(possibleEffect => {
+          internal.data[DATA_HOOKS][HOOKS_LIST].forEach(possibleEffect => {
             if (
               possibleEffect[HOOK_CLEANUP] &&
               typeof possibleEffect[HOOK_CLEANUP] === 'function'
@@ -123,16 +124,16 @@ function replaceComponent(OldType, NewType, resetHookState) {
           });
         }
 
-        internal.data = {
+        internal.data[DATA_HOOKS] = {
           [HOOKS_LIST]: [],
           [EFFECTS_LIST]: [],
         };
       } else if (
-        internal.data &&
-        internal.data[HOOKS_LIST] &&
-        internal.data[HOOKS_LIST].length
+        internal.data[DATA_HOOKS] &&
+        internal.data[DATA_HOOKS][HOOKS_LIST] &&
+        internal.data[DATA_HOOKS][HOOKS_LIST].length
       ) {
-        internal.data[HOOKS_LIST].forEach(possibleEffect => {
+        internal.data[DATA_HOOKS][HOOKS_LIST].forEach(possibleEffect => {
           if (
             possibleEffect[HOOK_CLEANUP] &&
             typeof possibleEffect[HOOK_CLEANUP] === 'function'
@@ -151,7 +152,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
           }
         });
 
-        internal.data[HOOKS_LIST].forEach(hook => {
+        internal.data[DATA_HOOKS][HOOKS_LIST].forEach(hook => {
           if (hook[HOOK_ARGS] && Array.isArray(hook[HOOK_ARGS])) {
             hook[HOOK_ARGS] = undefined;
           }
