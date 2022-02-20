@@ -4,14 +4,11 @@ import './runtime/debounceRendering';
 import './runtime/vnode';
 import './runtime/unmount';
 
-import { Component } from 'preact';
-
 import {
   VNODE_COMPONENT,
   NAMESPACE,
   HOOKS_LIST,
   EFFECTS_LIST,
-  COMPONENT_HOOKS,
   VNODE_DOM,
   VNODE_CHILDREN,
   HOOK_ARGS,
@@ -65,7 +62,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
 
       try {
         if (internal[VNODE_COMPONENT] instanceof OldType) {
-          const oldInst = vnode[VNODE_COMPONENT];
+          const oldInst = internal[VNODE_COMPONENT];
 
           const newInst = new NewType(
             internal[VNODE_COMPONENT].props,
@@ -102,80 +99,63 @@ function replaceComponent(OldType, NewType, resetHookState) {
 
       if (resetHookState) {
         if (
-          internal[COMPONENT_HOOKS] &&
-          internal[COMPONENT_HOOKS][HOOKS_LIST] &&
-          internal[COMPONENT_HOOKS][HOOKS_LIST].length
+          internal.data &&
+          internal.data[HOOKS_LIST] &&
+          internal.data[HOOKS_LIST].length
         ) {
-          internal[COMPONENT_HOOKS][HOOKS_LIST].forEach(
-            possibleEffect => {
-              if (
-                possibleEffect[HOOK_CLEANUP] &&
-                typeof possibleEffect[HOOK_CLEANUP] === 'function'
-              ) {
-                possibleEffect[HOOK_CLEANUP]();
-              } else if (
-                possibleEffect[HOOK_ARGS] &&
-                possibleEffect[HOOK_VALUE] &&
-                Object.keys(possibleEffect).length === 3
-              ) {
-                const cleanupKey = Object.keys(possibleEffect).find(
-                  key => key !== HOOK_ARGS && key !== HOOK_VALUE
-                );
-                if (
-                  cleanupKey &&
-                  typeof possibleEffect[cleanupKey] == 'function'
-                )
-                  possibleEffect[cleanupKey]();
-              }
+          internal.data[HOOKS_LIST].forEach(possibleEffect => {
+            if (
+              possibleEffect[HOOK_CLEANUP] &&
+              typeof possibleEffect[HOOK_CLEANUP] === 'function'
+            ) {
+              possibleEffect[HOOK_CLEANUP]();
+            } else if (
+              possibleEffect[HOOK_ARGS] &&
+              possibleEffect[HOOK_VALUE] &&
+              Object.keys(possibleEffect).length === 3
+            ) {
+              const cleanupKey = Object.keys(possibleEffect).find(
+                key => key !== HOOK_ARGS && key !== HOOK_VALUE
+              );
+              if (cleanupKey && typeof possibleEffect[cleanupKey] == 'function')
+                possibleEffect[cleanupKey]();
             }
-          );
+          });
         }
 
-        internal[COMPONENT_HOOKS] = {
+        internal.data = {
           [HOOKS_LIST]: [],
           [EFFECTS_LIST]: [],
         };
-      } else {
-        if (
-          internal[COMPONENT_HOOKS] &&
-          internal[COMPONENT_HOOKS][HOOKS_LIST] &&
-          internal[COMPONENT_HOOKS][HOOKS_LIST].length
-        ) {
-          internal[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(
-            possibleEffect => {
-              if (
-                possibleEffect[HOOK_CLEANUP] &&
-                typeof possibleEffect[HOOK_CLEANUP] === 'function'
-              ) {
-                possibleEffect[HOOK_CLEANUP]();
-              } else if (
-                possibleEffect[HOOK_ARGS] &&
-                possibleEffect[HOOK_VALUE] &&
-                Object.keys(possibleEffect).length === 3
-              ) {
-                const cleanupKey = Object.keys(possibleEffect).find(
-                  key => key !== HOOK_ARGS && key !== HOOK_VALUE
-                );
-                if (
-                  cleanupKey &&
-                  typeof possibleEffect[cleanupKey] == 'function'
-                )
-                  possibleEffect[cleanupKey]();
-              }
-            }
-          );
+      } else if (
+        internal.data &&
+        internal.data[HOOKS_LIST] &&
+        internal.data[HOOKS_LIST].length
+      ) {
+        internal[VNODE_COMPONENT].data[HOOKS_LIST].forEach(possibleEffect => {
+          if (
+            possibleEffect[HOOK_CLEANUP] &&
+            typeof possibleEffect[HOOK_CLEANUP] === 'function'
+          ) {
+            possibleEffect[HOOK_CLEANUP]();
+          } else if (
+            possibleEffect[HOOK_ARGS] &&
+            possibleEffect[HOOK_VALUE] &&
+            Object.keys(possibleEffect).length === 3
+          ) {
+            const cleanupKey = Object.keys(possibleEffect).find(
+              key => key !== HOOK_ARGS && key !== HOOK_VALUE
+            );
+            if (cleanupKey && typeof possibleEffect[cleanupKey] == 'function')
+              possibleEffect[cleanupKey]();
+          }
+        });
 
-          internal[COMPONENT_HOOKS][HOOKS_LIST].forEach(
-            hook => {
-              if (
-                hook.__H &&
-                Array.isArray(hook.__H)
-              ) {
-                hook.__H = undefined;
-              }
-            }
-          );
-        }
+        internal.data[HOOKS_LIST].forEach(hook => {
+          if (hook.__H && Array.isArray(hook.__H)) {
+            hook.__H = undefined;
+          }
+        });
       }
 
       // Cleanup when an async component has thrown.

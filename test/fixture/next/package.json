@@ -14,7 +14,7 @@
 	"dependencies": {
     "goober": "latest",
 		"next": "^10.0.7",
-		"preact": "^10.5.7",
+		"preact": "^11.0.0-experimental.0",
 		"preact-render-to-string": "^5.1.12",
 		"react": "npm:@preact/compat@17.0.2",
 		"react-dom": "npm:@preact/compat@17.0.2",

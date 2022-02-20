@@ -8689,10 +8689,10 @@ postcss@^8.3.5:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-preact@^10.5.7:
-  version "10.5.7"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.7.tgz#f1d84725539e18f7ccbea937cf3db5895661dbd3"
-  integrity sha512-4oEpz75t/0UNcwmcsjk+BIcDdk68oao+7kxcpc1hQPNs2Oo3ZL9xFz8UBf350mxk/VEdD41L5b4l2dE3Ug3RYg==
+preact@^11.0.0-experimental.0:
+  version "11.0.0-experimental.0"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-11.0.0-experimental.0.tgz#67f9c6faf5cdf90a5b723516f0dbcb261c5abe33"
+  integrity sha512-TXVw49O11z34ouJOe9+wzN9/ReoXoNyO1Jth48SiJDuqLKrdAiuXkBlmtTWeDgiaJr1SSPDMBdLufMDjDkb5bg==
 
 preferred-pm@^3.0.0:
   version "3.0.0"

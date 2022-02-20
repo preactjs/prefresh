@@ -38,7 +38,7 @@
     "@rollup/pluginutils": "^4.1.0"
   },
   "devDependencies": {
-    "preact": "^10.5.7",
+    "preact": "^11.0.0-experimental.0",
     "vite": "^2.0.0-beta.3"
   },
   "peerDependencies": {

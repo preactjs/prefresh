@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "goober": "^2.0.36",
-    "preact": "^10.5.7"
+    "preact": "^11.0.0-experimental.0"
   },
   "devDependencies": {
     "@web/dev-server": "0.1.29",
