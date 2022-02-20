@@ -4,22 +4,19 @@ import './runtime/debounceRendering';
 import './runtime/vnode';
 import './runtime/unmount';
 
-import { Component } from 'preact';
-
 import {
+  DATA_HOOKS,
   VNODE_COMPONENT,
   NAMESPACE,
   HOOKS_LIST,
   EFFECTS_LIST,
-  COMPONENT_HOOKS,
-  VNODE_DOM,
-  VNODE_CHILDREN,
   HOOK_ARGS,
   HOOK_VALUE,
   HOOK_CLEANUP,
+  TYPE_CLASS,
 } from './constants';
 import { computeKey } from './computeKey';
-import { vnodesForComponent, mappedVNodes } from './runtime/vnodesForComponent';
+import { internalsByType, mappedTypes } from './runtime/internalsByType';
 import { signaturesForType } from './runtime/signaturesForType';
 
 let typesById = new Map();
@@ -43,35 +40,38 @@ function sign(type, key, forceReset, getCustomHooks, status) {
   }
 }
 
+function doRender(props, state, context) {
+  return this.constructor(props, context);
+}
+
 function replaceComponent(OldType, NewType, resetHookState) {
-  const vnodes = vnodesForComponent.get(OldType);
-  if (!vnodes) return;
+  const internals = internalsByType.get(OldType);
+  if (!internals) return;
 
   // migrate the list to our new constructor reference
-  vnodesForComponent.delete(OldType);
-  vnodesForComponent.set(NewType, vnodes);
+  internalsByType.delete(OldType);
+  internalsByType.set(NewType, internals);
 
-  mappedVNodes.set(OldType, NewType);
+  mappedTypes.set(OldType, NewType);
 
   pendingUpdates = pendingUpdates.filter(p => p[0] !== OldType);
 
-  vnodes.forEach(vnode => {
-    // update the type in-place to reference the new component
-    vnode.type = NewType;
+  internals.forEach(internal => {
+    internal.type = NewType;
 
-    if (vnode[VNODE_COMPONENT]) {
-      vnode[VNODE_COMPONENT].constructor = vnode.type;
+    if (internal[VNODE_COMPONENT]) {
+      internal[VNODE_COMPONENT].constructor = internal.type;
 
       try {
-        if (vnode[VNODE_COMPONENT] instanceof OldType) {
-          const oldInst = vnode[VNODE_COMPONENT];
+        if (
+          internal[VNODE_COMPONENT] instanceof OldType &&
+          internal.flags & TYPE_CLASS
+        ) {
+          const oldInst = internal[VNODE_COMPONENT];
 
-          const newInst = new NewType(
-            vnode[VNODE_COMPONENT].props,
-            vnode[VNODE_COMPONENT].context
-          );
+          const newInst = new NewType(internal.props, internal.c);
 
-          vnode[VNODE_COMPONENT] = newInst;
+          internal[VNODE_COMPONENT] = newInst;
           // copy old properties onto the new instance.
           //   - Objects (including refs) in the new instance are updated with their old values
           //   - Missing or null properties are restored to their old values
@@ -93,99 +93,78 @@ function replaceComponent(OldType, NewType, resetHookState) {
               }
             }
           }
+        } else {
+          internal[VNODE_COMPONENT].render = doRender;
         }
       } catch (e) {
         /* Functional component */
-        vnode[VNODE_COMPONENT].constructor = NewType;
       }
 
       if (resetHookState) {
         if (
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS] &&
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST] &&
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].length
+          internal.data[DATA_HOOKS] &&
+          internal.data[DATA_HOOKS][HOOKS_LIST] &&
+          internal.data[DATA_HOOKS][HOOKS_LIST].length
         ) {
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(
-            possibleEffect => {
-              if (
-                possibleEffect[HOOK_CLEANUP] &&
-                typeof possibleEffect[HOOK_CLEANUP] === 'function'
-              ) {
-                possibleEffect[HOOK_CLEANUP]();
-              } else if (
-                possibleEffect[HOOK_ARGS] &&
-                possibleEffect[HOOK_VALUE] &&
-                Object.keys(possibleEffect).length === 3
-              ) {
-                const cleanupKey = Object.keys(possibleEffect).find(
-                  key => key !== HOOK_ARGS && key !== HOOK_VALUE
-                );
-                if (
-                  cleanupKey &&
-                  typeof possibleEffect[cleanupKey] == 'function'
-                )
-                  possibleEffect[cleanupKey]();
-              }
+          internal.data[DATA_HOOKS][HOOKS_LIST].forEach(possibleEffect => {
+            if (
+              possibleEffect[HOOK_CLEANUP] &&
+              typeof possibleEffect[HOOK_CLEANUP] === 'function'
+            ) {
+              possibleEffect[HOOK_CLEANUP]();
+            } else if (
+              possibleEffect[HOOK_ARGS] &&
+              possibleEffect[HOOK_VALUE] &&
+              Object.keys(possibleEffect).length === 3
+            ) {
+              const cleanupKey = Object.keys(possibleEffect).find(
+                key => key !== HOOK_ARGS && key !== HOOK_VALUE
+              );
+              if (cleanupKey && typeof possibleEffect[cleanupKey] == 'function')
+                possibleEffect[cleanupKey]();
             }
-          );
+          });
         }
 
-        vnode[VNODE_COMPONENT][COMPONENT_HOOKS] = {
+        internal.data[DATA_HOOKS] = {
           [HOOKS_LIST]: [],
           [EFFECTS_LIST]: [],
         };
-      } else {
-        if (
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS] &&
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST] &&
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].length
-        ) {
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(
-            possibleEffect => {
-              if (
-                possibleEffect[HOOK_CLEANUP] &&
-                typeof possibleEffect[HOOK_CLEANUP] === 'function'
-              ) {
-                possibleEffect[HOOK_CLEANUP]();
-              } else if (
-                possibleEffect[HOOK_ARGS] &&
-                possibleEffect[HOOK_VALUE] &&
-                Object.keys(possibleEffect).length === 3
-              ) {
-                const cleanupKey = Object.keys(possibleEffect).find(
-                  key => key !== HOOK_ARGS && key !== HOOK_VALUE
-                );
-                if (
-                  cleanupKey &&
-                  typeof possibleEffect[cleanupKey] == 'function'
-                )
-                  possibleEffect[cleanupKey]();
-              }
-            }
-          );
-
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(
-            hook => {
-              if (
-                hook.__H &&
-                Array.isArray(hook.__H)
-              ) {
-                hook.__H = undefined;
-              }
-            }
-          );
-        }
-      }
-
-      // Cleanup when an async component has thrown.
-      if (
-        (vnode[VNODE_DOM] && !document.contains(vnode[VNODE_DOM])) ||
-        (!vnode[VNODE_DOM] && !vnode[VNODE_CHILDREN])
+      } else if (
+        internal.data[DATA_HOOKS] &&
+        internal.data[DATA_HOOKS][HOOKS_LIST] &&
+        internal.data[DATA_HOOKS][HOOKS_LIST].length
       ) {
-        location.reload();
+        // Run possible cleanups
+        internal.data[DATA_HOOKS][HOOKS_LIST].forEach(possibleEffect => {
+          if (
+            possibleEffect[HOOK_CLEANUP] &&
+            typeof possibleEffect[HOOK_CLEANUP] === 'function'
+          ) {
+            possibleEffect[HOOK_CLEANUP]();
+          }
+        });
+
+        // Reset the args on hooks so they will run again during the next render
+        internal.data[DATA_HOOKS][HOOKS_LIST].forEach(hook => {
+          if (hook[HOOK_ARGS] && Array.isArray(hook[HOOK_ARGS])) {
+            hook[HOOK_ARGS] = undefined;
+          }
+        });
       }
 
-      Component.prototype.forceUpdate.call(vnode[VNODE_COMPONENT]);
+      // TODO: Cleanup when an async component has thrown.
+      // add tests for this because it does not seem to behave the way
+      // it is intended to
+      // https://github.com/preactjs/prefresh/issues/404
+      // if (
+      //   (internal[VNODE_DOM] && !document.contains(internal[VNODE_DOM])) ||
+      //   (!internal[VNODE_DOM] && !internal[VNODE_CHILDREN])
+      // ) {
+      //   location.reload();
+      // }
+
+      internal.rerender(internal);
     }
   });
 }

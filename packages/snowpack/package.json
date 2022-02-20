@@ -51,11 +51,11 @@
   },
   "devDependencies": {
     "bundt": "^1.0.1",
-    "preact": "^10.5.7",
+    "preact": "^11.0.0-experimental.0",
     "snowpack": "^3.8.8"
   },
   "peerDependencies": {
-    "preact": "^10.4.0",
+    "preact": "^11.0.0",
     "snowpack": "^2.0.0 || ^3.0.0"
   }
 }

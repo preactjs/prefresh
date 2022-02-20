@@ -1,31 +1,31 @@
 import { options } from 'preact';
-import { vnodesForComponent, mappedVNodes } from './vnodesForComponent';
-import { VNODE_COMPONENT } from '../constants';
+import { internalsByType, mappedTypes } from './internalsByType';
+import { TYPE_CLASS, VNODE_COMPONENT } from '../constants';
 
-const getMappedVnode = type => {
-  if (mappedVNodes.has(type)) {
-    return getMappedVnode(mappedVNodes.get(type));
+const getMappedInternal = type => {
+  if (mappedTypes.has(type)) {
+    return getMappedInternal(mappedTypes.get(type));
   }
 
   return type;
 };
 
-const oldVnode = options.vnode;
-options.vnode = vnode => {
-  if (vnode && typeof vnode.type === 'function') {
-    const vnodes = vnodesForComponent.get(vnode.type);
-    if (!vnodes) {
-      vnodesForComponent.set(vnode.type, [vnode]);
+const oldInternal = options.__i;
+options.__i = internal => {
+  if (internal && typeof internal.type === 'function') {
+    const internals = internalsByType.get(internal.type);
+    if (!internals) {
+      internalsByType.set(internal.type, [internal]);
     } else {
-      vnodes.push(vnode);
+      internals.push(internal);
     }
 
-    const foundType = getMappedVnode(vnode.type);
-    vnode.type = foundType;
-    if (vnode[VNODE_COMPONENT]) {
-      vnode[VNODE_COMPONENT].constructor = foundType;
+    const foundType = getMappedInternal(internal.type);
+    internal.type = foundType;
+    if (internal[VNODE_COMPONENT] && internal.flags & TYPE_CLASS) {
+      internal[VNODE_COMPONENT].constructor = foundType;
     }
   }
 
-  if (oldVnode) oldVnode(vnode);
+  if (oldInternal) oldInternal(internal);
 };
