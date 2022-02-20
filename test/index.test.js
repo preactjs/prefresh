@@ -93,7 +93,8 @@ describe('Prefresh integrations', () => {
           devServer.stdout.on(
             'data',
             (serverConsoleListener = data => {
-              console.log('[SERVER LOG]: ', data.toString());
+              if (process.env.DEBUG)
+                console.log('[SERVER LOG]: ', data.toString());
               if (data.toString().match(goMessage[integration])) {
                 resolve();
               }
