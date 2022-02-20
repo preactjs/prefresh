@@ -141,10 +141,10 @@ function replaceComponent(OldType, NewType, resetHookState) {
           } else if (
             possibleEffect[HOOK_ARGS] &&
             possibleEffect[HOOK_VALUE] &&
-            Object.keys(possibleEffect).length === 3
+            Object.keys(possibleEffect).length === 4
           ) {
             const cleanupKey = Object.keys(possibleEffect).find(
-              key => key !== HOOK_ARGS && key !== HOOK_VALUE
+              key => key === '__c'
             );
             if (cleanupKey && typeof possibleEffect[cleanupKey] == 'function')
               possibleEffect[cleanupKey]();
@@ -152,8 +152,8 @@ function replaceComponent(OldType, NewType, resetHookState) {
         });
 
         internal.data[HOOKS_LIST].forEach(hook => {
-          if (hook.__H && Array.isArray(hook.__H)) {
-            hook.__H = undefined;
+          if (hook[HOOK_ARGS] && Array.isArray(hook[HOOK_ARGS])) {
+            hook[HOOK_ARGS] = undefined;
           }
         });
       }
