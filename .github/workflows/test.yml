@@ -1,16 +1,16 @@
-name: test
+name: test-preact-x
 
 on:
   pull_request:
     branches:
-      - '**'
+      - 'v1-preact-x'
   push:
     branches:
-      - main
+      - v1-preact-x
 
 jobs:
   build_test:
-    name: Build & Test
+    name: Build & Test Preact X
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
