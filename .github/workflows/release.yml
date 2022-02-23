@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - main
+      - v1-preact-x
 
 jobs:
   release:
@@ -24,6 +24,8 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Create Release Pull Request
-        uses: changesets/action@master
+        uses: changesets/action@v1
+        with:
+          title: Version Packages (Preact X)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
