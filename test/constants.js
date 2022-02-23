@@ -25,7 +25,7 @@ exports.binArgs = {
   next: ['dev', '-p', '3006'],
   snowpack: ['dev'],
   webpack: ['serve'],
-  'vite-preact-compat': ['-p', '3002'],
+  'vite-preact-compat': [],
   vite: [],
   nollup: ['-c', '--hot', '--content-base', 'public', '--port', '3003'],
   'web-dev-server': [],

@@ -1,6 +1,9 @@
 import prefresh from '@prefresh/vite';
 
 export default {
+  server: {
+    port: 3002,
+  },
   esbuild: {
     jsxFactory: 'h',
     jsxFragment: 'Fragment'

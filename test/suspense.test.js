@@ -88,6 +88,17 @@ describe('Suspense', () => {
     await page.goto('http://localhost:' + defaultPort[integration]);
   });
 
+  const getEl = async selectorOrEl => {
+    return typeof selectorOrEl === 'string'
+      ? await page.$(selectorOrEl)
+      : selectorOrEl;
+  };
+
+  const getText = async selectorOrEl => {
+    const el = await getEl(selectorOrEl);
+    return el ? el.evaluate(el => el.textContent) : null;
+  };
+
   /**
    * Bug reproduction
    *
