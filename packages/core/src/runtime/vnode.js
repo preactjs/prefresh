@@ -21,9 +21,22 @@ options.vnode = vnode => {
     }
 
     const foundType = getMappedVnode(vnode.type);
+    if (foundType !== vnode.type) {
+      const vnodes = vnodesForComponent.get(foundType);
+      if (!vnodes) {
+        vnodesForComponent.set(foundType, [vnode]);
+      } else {
+        vnodes.push(vnode);
+      }
+    }
+
     vnode.type = foundType;
-    if (vnode[VNODE_COMPONENT]) {
-      vnode[VNODE_COMPONENT].constructor = foundType;
+    if (
+      vnode[VNODE_COMPONENT] &&
+      'prototype' in vnode.type &&
+      vnode.type.prototype.render
+    ) {
+      vnode[VNODE_COMPONENT].constructor = vnode.type;
     }
   }
 

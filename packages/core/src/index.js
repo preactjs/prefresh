@@ -134,47 +134,37 @@ function replaceComponent(OldType, NewType, resetHookState) {
           [HOOKS_LIST]: [],
           [EFFECTS_LIST]: [],
         };
-      } else {
-        if (
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS] &&
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST] &&
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].length
-        ) {
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(
-            possibleEffect => {
-              if (
-                possibleEffect[HOOK_CLEANUP] &&
-                typeof possibleEffect[HOOK_CLEANUP] === 'function'
-              ) {
-                possibleEffect[HOOK_CLEANUP]();
-              } else if (
-                possibleEffect[HOOK_ARGS] &&
-                possibleEffect[HOOK_VALUE] &&
-                Object.keys(possibleEffect).length === 3
-              ) {
-                const cleanupKey = Object.keys(possibleEffect).find(
-                  key => key !== HOOK_ARGS && key !== HOOK_VALUE
-                );
-                if (
-                  cleanupKey &&
-                  typeof possibleEffect[cleanupKey] == 'function'
-                )
-                  possibleEffect[cleanupKey]();
-              }
+      } else if (
+        vnode[VNODE_COMPONENT][COMPONENT_HOOKS] &&
+        vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST] &&
+        vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].length
+      ) {
+        vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(
+          possibleEffect => {
+            if (
+              possibleEffect[HOOK_CLEANUP] &&
+              typeof possibleEffect[HOOK_CLEANUP] === 'function'
+            ) {
+              possibleEffect[HOOK_CLEANUP]();
+            } else if (
+              possibleEffect[HOOK_ARGS] &&
+              possibleEffect[HOOK_VALUE] &&
+              Object.keys(possibleEffect).length === 3
+            ) {
+              const cleanupKey = Object.keys(possibleEffect).find(
+                key => key !== HOOK_ARGS && key !== HOOK_VALUE
+              );
+              if (cleanupKey && typeof possibleEffect[cleanupKey] == 'function')
+                possibleEffect[cleanupKey]();
             }
-          );
+          }
+        );
 
-          vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(
-            hook => {
-              if (
-                hook.__H &&
-                Array.isArray(hook.__H)
-              ) {
-                hook.__H = undefined;
-              }
-            }
-          );
-        }
+        vnode[VNODE_COMPONENT][COMPONENT_HOOKS][HOOKS_LIST].forEach(hook => {
+          if (hook.__H && Array.isArray(hook.__H)) {
+            hook.__H = undefined;
+          }
+        });
       }
 
       Component.prototype.forceUpdate.call(vnode[VNODE_COMPONENT]);
