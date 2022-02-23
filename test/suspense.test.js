@@ -67,7 +67,7 @@ describe('Suspense', () => {
       devServer.stdout.on(
         'data',
         (serverConsoleListener = data => {
-          console.log('[SERVER LOG]: ', data.toString());
+          if (process.env.DEBUG) console.log('[SERVER LOG]: ', data.toString());
           if (data.toString().match(goMessage[integration])) {
             resolve();
           }
@@ -99,20 +99,19 @@ describe('Suspense', () => {
     return el ? el.evaluate(el => el.textContent) : null;
   };
 
-  /**
-   * Bug reproduction
-   *
-   * - change text in test1.jsx
-   * - press button twice
-   * - change text again --> won't go through
-   */
+  async function updateFile(file, replacer) {
+    const compPath = path.join(getTempDir(integration), file);
+    const content = await fs.readFile(compPath, 'utf-8');
+    await fs.writeFile(compPath, replacer(content));
+  }
+
   test('Can make change to lazy loaded components', async () => {
     const button = await page.$('.toggle');
-    const text1 = await page.$('.test-1');
+    let text1 = await page.$('.test-1');
     await expectByPolling(() => getText(text1), 'Test 1');
 
     await updateFile('src/test1.jsx', content =>
-      content.replace('Test 1', 'Test 1!!!!')
+      content.replace('Test 1', 'Test 1!!!')
     );
 
     await timeout(TIMEOUT);
@@ -127,6 +126,7 @@ describe('Suspense', () => {
     await button.click();
     await timeout(TIMEOUT);
 
+    text1 = await page.$('.test-1');
     await expectByPolling(() => getText(text1), 'Test 1!!!');
 
     await updateFile('src/test1.jsx', content =>
