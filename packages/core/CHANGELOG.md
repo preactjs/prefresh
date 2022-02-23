@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.3.4
+
+### Patch Changes
+
+- [`f89017d`](https://github.com/preactjs/prefresh/commit/f89017df1d9194468dbde4241c6d8431d77d0377) [#447](https://github.com/preactjs/prefresh/pull/447) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - remove async component check
+
 ## 1.3.3
 
 ### Patch Changes
