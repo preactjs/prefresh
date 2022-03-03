@@ -6,7 +6,7 @@
 '@prefresh/snowpack': major
 '@prefresh/vite': major
 '@prefresh/nollup': major
-'@prefresh/babel': major
+'@prefresh/babel-plugin': major
 '@prefresh/web-dev-server': major
 ---
 
