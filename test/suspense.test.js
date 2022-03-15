@@ -53,7 +53,6 @@ describe('Suspense', () => {
     browser = await chromium.launch({
       headless: true,
     });
-    page = await browser.newPage();
 
     devServer = execa(
       bin[integration](getTempDir(integration)),
@@ -85,7 +84,9 @@ describe('Suspense', () => {
     page = await browser.newPage();
     if (process.env.DEBUG) page.on('console', browserConsoleListener);
 
-    await page.goto('http://localhost:' + defaultPort[integration]);
+    await page.goto('http://localhost:' + defaultPort[integration], {
+      waitUntil: 'networkidle',
+    });
   });
 
   const getEl = async selectorOrEl => {
