@@ -76,7 +76,6 @@ describe('Prefresh integrations', () => {
         browser = await chromium.launch({
           headless: true,
         });
-        page = await browser.newPage();
 
         devServer = execa(
           bin[integration](getTempDir(integration)),
