@@ -14,6 +14,8 @@ exports.bin = {
   nollup: dir => path.resolve(dir, `./node_modules/nollup/lib/cli.js`),
   snowpack: dir => path.resolve(dir, `./node_modules/snowpack/index.bin.js`),
   vite: dir => path.resolve(dir, `./node_modules/vite/bin/vite.js`),
+  'vite-preact-compat': dir =>
+    path.resolve(dir, `./node_modules/vite/bin/vite.js`),
   'web-dev-server': dir =>
     path.resolve(dir, `./node_modules/@web/dev-server/dist/bin.js`),
   webpack: dir => path.resolve(dir, `./node_modules/webpack-cli/bin/cli.js`),
@@ -24,12 +26,14 @@ exports.binArgs = {
   snowpack: ['dev'],
   webpack: ['serve'],
   vite: [],
+  'vite-preact-compat': [],
   nollup: ['-c', '--hot', '--content-base', 'public', '--port', '3003'],
   'web-dev-server': [],
 };
 
 exports.goMessage = {
   vite: 'running',
+  'vite-preact-compat': 'running',
   snowpack: 'Server started',
   webpack: 'successfully',
   nollup: 'Compiled',
@@ -40,6 +44,7 @@ exports.goMessage = {
 exports.defaultPort = {
   vite: 3000,
   webpack: 3001,
+  'vite-preact-compat': 3002,
   nollup: 3003,
   snowpack: 3004,
   'web-dev-server': 3005,
