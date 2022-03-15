@@ -21,6 +21,15 @@ options.__i = internal => {
     }
 
     const foundType = getMappedInternal(internal.type);
+    if (foundType !== internal.type) {
+      const ints = internalsByType.get(foundType);
+      if (!ints) {
+        internalsByType.set(foundType, [internal]);
+      } else {
+        ints.push(internal);
+      }
+    }
+
     internal.type = foundType;
     if (internal[VNODE_COMPONENT] && internal.flags & TYPE_CLASS) {
       internal[VNODE_COMPONENT].constructor = foundType;

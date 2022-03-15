@@ -1,0 +1,19 @@
+{
+  "scripts": {
+    "dev": "vite"
+  },
+  "dependencies": {
+    "goober": "^2.0.36",
+    "preact": "^10.5.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@prefresh/babel-plugin": "file:../../packages/babel",
+    "@prefresh/vite": "file:../../packages/vite",
+    "vite": "^2.7.13"
+  },
+  "resolutions": {
+		"@prefresh/core": "file:../../packages/core",
+		"@prefresh/utils": "file:../../packages/utils"
+  }
+}
