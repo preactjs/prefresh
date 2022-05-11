@@ -5,6 +5,7 @@
   "type": "commonjs",
   "exports": {
     ".": {
+      "import": "./src/index.js",
       "require": "./src/index.js"
     },
     "./package.json": "./package.json"
