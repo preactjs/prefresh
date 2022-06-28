@@ -2,10 +2,26 @@
 module.exports = function () {
   const isPrefreshComponent = __prefresh_utils__.shouldBind(module);
 
-  if (module.hot) {
+  // `@vanilla-extract/webpack` does some custom preprocessing where
+  // `module.hot` is partially replaced. This leads to our injected
+  // code being executed although it shouldn't be:
+  //
+  // Intermediate result:
+  //
+  //   if (true) { // <- inlined by intermediate compile step
+  //     const previousHotModuleExports = module.hot.data && ...
+  //                    // Crash happens here ---^
+  //
+  // It crashes at that line because some intermediate compiler isn't
+  // running in hot mode, but the overall guard condition was compiled
+  // down to being truthy. By moving `module.hot` outside of the
+  // condition of the if-statement, it will be left as is.
+  const moduleHot = module.hot;
+
+  if (moduleHot) {
     const currentExports = __prefresh_utils__.getExports(module);
     const previousHotModuleExports =
-      module.hot.data && module.hot.data.moduleExports;
+      moduleHot.data && moduleHot.data.moduleExports;
 
     __prefresh_utils__.registerExports(currentExports, module.id);
 
@@ -22,19 +38,19 @@ module.exports = function () {
           }
         } catch (e) {
           // Only available in newer webpack versions.
-          if (module.hot.invalidate) {
-            module.hot.invalidate();
+          if (moduleHot.invalidate) {
+            moduleHot.invalidate();
           } else {
             self.location.reload();
           }
         }
       }
 
-      module.hot.dispose(data => {
+      moduleHot.dispose(data => {
         data.moduleExports = __prefresh_utils__.getExports(module);
       });
 
-      module.hot.accept(function errorRecovery() {
+      moduleHot.accept(function errorRecovery() {
         if (
           typeof __prefresh_errors__ !== 'undefined' &&
           __prefresh_errors__ &&
