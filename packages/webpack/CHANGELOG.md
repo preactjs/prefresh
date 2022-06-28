@@ -1,5 +1,11 @@
 # @prefresh/webpack
 
+## 3.3.4
+
+### Patch Changes
+
+- [`9991c5b`](https://github.com/preactjs/prefresh/commit/9991c5bf6579bb8d1d759bd35041cebafd4b9540) [#461](https://github.com/preactjs/prefresh/pull/461) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix vanilla-extract issue
+
 ## 3.3.3
 
 ### Patch Changes
