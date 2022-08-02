@@ -1,6 +1,6 @@
-const Prefresh = require('@prefresh/webpack');
+import Prefresh from '@prefresh/webpack';
 
-module.exports = (nextConfig = {}) => {
+export default function prefreshNextPlugin(nextConfig = {}) {
   return Object.assign({}, nextConfig, {
     webpack(config, options) {
       if (!Prefresh.supportsNextJs) {
@@ -40,4 +40,4 @@ module.exports = (nextConfig = {}) => {
       return config;
     },
   });
-};
+}

@@ -1,10 +1,12 @@
 {
   "name": "@prefresh/next",
   "version": "1.5.2",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "exports": {
     ".": {
-      "require": "./src/index.js"
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
     },
     "./package.json": "./package.json"
   },
