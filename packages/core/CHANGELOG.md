@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.4.0
+
+### Minor Changes
+
+- [`1121bae`](https://github.com/preactjs/prefresh/commit/1121baecfaf9d2206a216f7c7cb2d2ea260540d7) [#470](https://github.com/preactjs/prefresh/pull/470) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Support signals that are globally defined
+
 ## 1.3.4
 
 ### Patch Changes
