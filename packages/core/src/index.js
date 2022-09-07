@@ -178,13 +178,13 @@ function replaceComponent(OldType, NewType, resetHookState) {
 function findSignals(vnode) {
   if (!vnode) return;
 
-  if (vnode.type && vnode.type.displayName === '_st') {
+  if (vnode.type.displayName === '_st') {
     vnode[VNODE_COMPONENT][COMPONENT_HOOKS] = undefined;
   }
 
   if (vnode[VNODE_CHILDREN] && typeof vnode.type !== 'function') {
     vnode[VNODE_CHILDREN].forEach(v => {
-      if (v.type) {
+      if (v && v.type) {
         findSignals(v);
       }
     });
