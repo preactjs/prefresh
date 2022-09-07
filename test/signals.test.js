@@ -99,6 +99,11 @@ describe('Signals', () => {
     return el ? el.evaluate(el => el.textContent) : null;
   };
 
+  const getInputValue = async selectorOrEl => {
+    const el = await getEl(selectorOrEl);
+    return el ? el.evaluate(el => el.value) : null;
+  };
+
   async function updateFile(file, replacer) {
     const compPath = path.join(getTempDir(integration), file);
     const content = await fs.readFile(compPath, 'utf-8');
@@ -120,9 +125,9 @@ describe('Signals', () => {
     // TODO: theoretically this should be 0
     await expectByPolling(() => getText(countValue), 'count: 1');
 
-    await button.click();
-    await button.click();
-    await button.click();
+    await increment.click();
+    await increment.click();
+    await increment.click();
 
     await expectByPolling(() => getText(countValue), 'count: 3');
 
@@ -131,13 +136,12 @@ describe('Signals', () => {
     );
     await timeout(TIMEOUT);
 
-    await button.click();
+    await increment.click();
     await expectByPolling(() => getText(countValue), 'Count: 1');
   });
 
   test('Reacts to adjusting the initial value', async () => {
     const countValue = await page.$('.value');
-    await expectByPolling(() => getText(countValue), 'Count: 0');
 
     await updateFile('src/app.jsx', content =>
       content.replace('signal(0)', 'signal(10)')
@@ -145,5 +149,23 @@ describe('Signals', () => {
 
     await timeout(TIMEOUT);
     await expectByPolling(() => getText(countValue), 'Count: 10');
+  });
+
+  test('Can change input values', async () => {
+    const input = await page.$('.input');
+    await expectByPolling(() => getInputValue(input), 'foo');
+
+    await input.fill('foooo');
+    await expectByPolling(() => getInputValue(input), 'foooo');
+
+    await updateFile('src/Input.jsx', content =>
+      content.replace("signal('foo')", "signal('bar')")
+    );
+
+    await timeout(TIMEOUT);
+    await expectByPolling(() => getInputValue(input), 'bar');
+
+    await input.fill('barfoo');
+    await expectByPolling(() => getInputValue(input), 'barfoo');
   });
 });
