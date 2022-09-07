@@ -6,7 +6,7 @@ export function App() {
   return (
     <div>
       <p className="value">Count: {count}</p>
-      <button className="button" onClick={() => { count.value = count.peek() + 1 }}>Increment</button>
+      <button className="increment" onClick={() => { count.value = count.peek() + 1 }}>Increment</button>
     </div>
   )
 }

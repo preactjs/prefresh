@@ -8,12 +8,12 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
-    "@prefresh/babel-plugin": "file:../../../packages/babel",
-    "@prefresh/vite": "file:../../../packages/vite",
+    "@prefresh/babel-plugin": "file:../../packages/babel",
+    "@prefresh/vite": "file:../../packages/vite",
     "vite": "^2.7.13"
   },
   "resolutions": {
-    "@prefresh/core": "file:../../../packages/core",
-    "@prefresh/utils": "file:../../../packages/utils"
+    "@prefresh/core": "file:../../packages/core",
+    "@prefresh/utils": "file:../../packages/utils"
   }
 }
