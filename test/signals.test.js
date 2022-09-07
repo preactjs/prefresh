@@ -131,7 +131,7 @@ describe('Signals', () => {
 
     await expectByPolling(() => getText(countValue), 'count: 3');
 
-    await updateFile('src/test1.jsx', content =>
+    await updateFile('src/app.jsx', content =>
       content.replace('count:', 'Count:')
     );
     await timeout(TIMEOUT);
@@ -155,7 +155,8 @@ describe('Signals', () => {
     const input = await page.$('.input');
     await expectByPolling(() => getInputValue(input), 'foo');
 
-    await input.fill('foooo');
+    await page.focus('.input');
+    await page.keyboard.type('foooo');
     await expectByPolling(() => getInputValue(input), 'foooo');
 
     await updateFile('src/Input.jsx', content =>
@@ -165,7 +166,8 @@ describe('Signals', () => {
     await timeout(TIMEOUT);
     await expectByPolling(() => getInputValue(input), 'bar');
 
-    await input.fill('barfoo');
+    await page.focus('.input');
+    await page.keyboard.type('barfoo');
     await expectByPolling(() => getInputValue(input), 'barfoo');
   });
 });

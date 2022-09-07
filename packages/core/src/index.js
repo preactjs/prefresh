@@ -176,6 +176,8 @@ function replaceComponent(OldType, NewType, resetHookState) {
 }
 
 function findSignals(vnode) {
+  if (!vnode) return;
+
   if (vnode.type && vnode.type.displayName === '_st') {
     vnode[VNODE_COMPONENT][COMPONENT_HOOKS] = undefined;
   }
