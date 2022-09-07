@@ -1,5 +1,16 @@
 # @prefresh/next
 
+## 1.6.0
+
+### Minor Changes
+
+- [`2abdc89`](https://github.com/preactjs/prefresh/commit/2abdc89746414210c5c74a5992b5aec2d64f9b13) [#466](https://github.com/preactjs/prefresh/pull/466) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Support ESM within Next.JS
+
+### Patch Changes
+
+- Updated dependencies [[`1121bae`](https://github.com/preactjs/prefresh/commit/1121baecfaf9d2206a216f7c7cb2d2ea260540d7)]:
+  - @prefresh/core@1.4.0
+
 ## 1.5.1
 
 ### Patch Changes
