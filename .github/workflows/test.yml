@@ -27,4 +27,3 @@ jobs:
         run: yarn test
         env:
           CI: false
-          DEBUG: true
