@@ -12,7 +12,6 @@ import {
   HOOKS_LIST,
   EFFECTS_LIST,
   COMPONENT_HOOKS,
-  VNODE_DOM,
   VNODE_CHILDREN,
   HOOK_ARGS,
   HOOK_VALUE,
@@ -167,9 +166,29 @@ function replaceComponent(OldType, NewType, resetHookState) {
         });
       }
 
+      vnode[VNODE_CHILDREN].forEach(element => {
+        findSignals(element);
+      });
+
       Component.prototype.forceUpdate.call(vnode[VNODE_COMPONENT]);
     }
   });
+}
+
+function findSignals(vnode) {
+  if (!vnode) return;
+
+  if (vnode.type.displayName === '_st') {
+    vnode[VNODE_COMPONENT][COMPONENT_HOOKS] = undefined;
+  }
+
+  if (vnode[VNODE_CHILDREN] && typeof vnode.type !== 'function') {
+    vnode[VNODE_CHILDREN].forEach(v => {
+      if (v && v.type) {
+        findSignals(v);
+      }
+    });
+  }
 }
 
 self[NAMESPACE] = {
