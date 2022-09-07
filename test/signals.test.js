@@ -12,7 +12,7 @@ const { bin, binArgs, goMessage, defaultPort } = require('./constants');
 
 const TIMEOUT = 1000;
 
-describe('Suspense', () => {
+describe('Signals', () => {
   const integration = 'vite-signals';
   let devServer, browser, page, serverConsoleListener;
 
@@ -133,5 +133,17 @@ describe('Suspense', () => {
 
     await button.click();
     await expectByPolling(() => getText(countValue), 'Count: 1');
+  });
+
+  test('Reacts to adjusting the initial value', async () => {
+    const countValue = await page.$('.value');
+    await expectByPolling(() => getText(countValue), 'Count: 0');
+
+    await updateFile('src/app.jsx', content =>
+      content.replace('signal(0)', 'signal(10)')
+    );
+
+    await timeout(TIMEOUT);
+    await expectByPolling(() => getText(countValue), 'Count: 10');
   });
 });

@@ -52,5 +52,5 @@ exports.defaultPort = {
   snowpack: 3004,
   'web-dev-server': 3005,
   next: 3006,
-  'vite-preact-compat': 3007,
+  'vite-signals': 3007,
 };
