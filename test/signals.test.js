@@ -122,8 +122,7 @@ describe('Signals', () => {
     );
 
     await timeout(TIMEOUT);
-    // TODO: theoretically this should be 0
-    await expectByPolling(() => getText(countValue), 'count: 1');
+    await expectByPolling(() => getText(countValue), 'count: 0');
 
     await increment.click();
     await increment.click();
