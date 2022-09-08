@@ -5,6 +5,6 @@ const inputValue = signal('foo')
 export function Input() {
   return (
     // TODO: after merging https://github.com/preactjs/signals/pull/76 make this value={signal}
-    <input className='input' value={inputValue.value} onInput={e => { inputValue.value = e.currentTarget.value }} />
+    <input className='input' value={inputValue} onInput={e => { inputValue.value = e.currentTarget.value }} />
   )
 }
