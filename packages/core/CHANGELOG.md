@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.4.1
+
+### Patch Changes
+
+- [`a4f25c2`](https://github.com/preactjs/prefresh/commit/a4f25c25ccec53df522aa9b506a4b2dee973af7d) [#471](https://github.com/preactjs/prefresh/pull/471) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - update signal handling to not dispose all state
+
 ## 1.4.0
 
 ### Minor Changes
