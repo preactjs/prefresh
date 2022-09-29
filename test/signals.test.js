@@ -139,6 +139,41 @@ describe('Signals', () => {
     await expectByPolling(() => getText(countValue), 'Count: 1');
   });
 
+  test('Can increment after HMR with hooked signals', async () => {
+    const increment = await page.$('.incrementHook');
+    const countValue = await page.$('.signalValue');
+    const doubleValue = await page.$('.computedValue');
+    await expectByPolling(() => getText(countValue), 'SignalCount: 1');
+    await expectByPolling(() => getText(doubleValue), 'DoubleCount: 2');
+    await increment.click();
+    await expectByPolling(() => getText(countValue), 'SignalCount: 2');
+    await expectByPolling(() => getText(doubleValue), 'DoubleCount: 4');
+
+    await updateFile('src/app.jsx', content =>
+      content.replace('SignalCount:', 'signalcount:')
+    );
+
+    await timeout(TIMEOUT);
+    await expectByPolling(() => getText(countValue), 'signalcount: 1');
+    await expectByPolling(() => getText(doubleValue), 'DoubleCount: 2');
+
+    await increment.click();
+    await increment.click();
+    await increment.click();
+
+    await expectByPolling(() => getText(countValue), 'count: 4');
+    await expectByPolling(() => getText(doubleValue), 'DoubleCount: 8');
+
+    await updateFile('src/app.jsx', content =>
+      content.replace('signalcount:', 'SignalCount:')
+    );
+    await timeout(TIMEOUT);
+
+    await increment.click();
+    await expectByPolling(() => getText(countValue), 'SignalCount: 2');
+    await expectByPolling(() => getText(doubleValue), 'DoubleCount: 4');
+  });
+
   test('Reacts to adjusting the initial value', async () => {
     const countValue = await page.$('.value');
 
