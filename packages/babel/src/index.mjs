@@ -221,6 +221,9 @@ export default function (babel, opts = {}) {
       case 'useState':
       case 'React.useState':
       case 'useReducer':
+      case 'useSignal':
+      case 'useComputed':
+      case 'useSignalEffect':
       case 'React.useReducer':
       case 'useEffect':
       case 'React.useEffect':
@@ -391,6 +394,8 @@ export default function (babel, opts = {}) {
       } else if (name === 'useReducer' && args.length > 1) {
         // useReducer second argument is initial state.
         key += '(' + args[1].getSource() + ')';
+      } else if (name === 'useSignal' && args.length > 0) {
+        key += '(' + args[0].getSource() + ')';
       }
 
       hookCallsForFn.push({
