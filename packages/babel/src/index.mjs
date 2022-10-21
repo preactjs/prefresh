@@ -475,7 +475,9 @@ export default function (babel, opts = {}) {
           return;
 
         let id = '';
-        if (t.isVariableDeclarator(path.parentPath)) {
+        if (t.isObjectProperty(path.parentPath)) {
+          id += '__' + path.parent.key.name;
+        } else if (t.isVariableDeclarator(path.parentPath)) {
           id += '$' + path.parent.id.name;
         } else if (t.isAssignmentExpression(path.parentPath)) {
           if (t.isIdentifier(path.parent.left)) {
