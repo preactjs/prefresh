@@ -122,13 +122,13 @@ describe('Signals', () => {
     );
 
     await timeout(TIMEOUT);
-    await expectByPolling(() => getText(countValue), 'count: 0');
+    await expectByPolling(() => getText(countValue), 'count: 1');
 
     await increment.click();
     await increment.click();
     await increment.click();
 
-    await expectByPolling(() => getText(countValue), 'count: 3');
+    await expectByPolling(() => getText(countValue), 'count: 4');
 
     await updateFile('src/app.jsx', content =>
       content.replace('count:', 'Count:')
@@ -136,7 +136,7 @@ describe('Signals', () => {
     await timeout(TIMEOUT);
 
     await increment.click();
-    await expectByPolling(() => getText(countValue), 'Count: 1');
+    await expectByPolling(() => getText(countValue), 'Count: 5');
   });
 
   test('Reacts to adjusting the initial value', async () => {
