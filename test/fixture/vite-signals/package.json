@@ -3,7 +3,7 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@preact/signals": "1.0.4",
+    "@preact/signals": "^1.0.4",
     "preact": "^10.10.6"
   },
   "devDependencies": {
