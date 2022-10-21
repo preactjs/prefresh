@@ -1,5 +1,12 @@
 # @prefresh/snowpack
 
+## 3.1.5
+
+### Patch Changes
+
+- Updated dependencies [[`01bf615`](https://github.com/preactjs/prefresh/commit/01bf615f99f8615d892883c6e47d4f0c94822e89)]:
+  - @prefresh/babel-plugin@0.4.4
+
 ## 3.1.3
 
 ### Patch Changes
