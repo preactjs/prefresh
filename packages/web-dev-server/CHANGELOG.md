@@ -1,5 +1,12 @@
 # @prefresh/web-dev-server
 
+## 1.0.5
+
+### Patch Changes
+
+- Updated dependencies [[`01bf615`](https://github.com/preactjs/prefresh/commit/01bf615f99f8615d892883c6e47d4f0c94822e89)]:
+  - @prefresh/babel-plugin@0.4.4
+
 ## 1.0.3
 
 ### Patch Changes

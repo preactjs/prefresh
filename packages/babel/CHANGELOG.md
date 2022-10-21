@@ -1,5 +1,11 @@
 # @prefresh/babel-plugin
 
+## 0.4.4
+
+### Patch Changes
+
+- [`01bf615`](https://github.com/preactjs/prefresh/commit/01bf615f99f8615d892883c6e47d4f0c94822e89) [#477](https://github.com/preactjs/prefresh/pull/477) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Support contexts nested in an object
+
 ## 0.4.2
 
 ### Patch Changes
