@@ -45,6 +45,22 @@ export default Refresh;
 When you are working with HOC's be sure to lift up the `displayName` so we can
 recognise it as a component.
 
+
+### Recognition of `createContext` calls
+
+Prefresh will statically identify unique calls to `createContext()`.  This means you should have an explicit `createContext()` call for every context you create.  For example:
+
+```js
+// Don't do this:
+const contextHelper = () => createContext("Some default");
+const ContextA = contextHelper();
+const ContextB = contextHelper();
+
+// Instead do this:
+const ContextA = createContext("Some default");
+const ContextB = createContext("Some default");
+```
+
 ## Usage in IE11
 
 If you want to use `@prefresh/webpack` or `@prefresh/next` with IE11, you'll need to transpile the `@prefresh/core` and `@prefresh/utils` packages.
