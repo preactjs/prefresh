@@ -1,6 +1,6 @@
 {
   "name": "@prefresh/webpack",
-  "version": "3.3.3",
+  "version": "4.0.0",
   "main": "src/index.js",
   "type": "commonjs",
   "exports": {
@@ -24,8 +24,8 @@
   },
   "homepage": "https://github.com/preactjs/prefresh#readme",
   "dependencies": {
-    "@prefresh/core": "^1.3.3",
-    "@prefresh/utils": "^1.1.2"
+    "@prefresh/core": "^2.0.0",
+    "@prefresh/utils": "^2.0.0"
   },
   "devDependencies": {
     "preact": "^11.0.0-experimental.0",
@@ -33,7 +33,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "peerDependencies": {
-    "@prefresh/babel-plugin": "^0.4.0",
+    "@prefresh/babel-plugin": "^1.0.0",
     "preact": "^11.0.0",
     "webpack": "^4.0.0 || ^5.0.0"
   }

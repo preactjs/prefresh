@@ -1,5 +1,22 @@
 # @prefresh/webpack
 
+## 4.0.0
+
+### Major Changes
+
+- [#424](https://github.com/preactjs/prefresh/pull/424) [`61c2b62`](https://github.com/preactjs/prefresh/commit/61c2b624823855a0e8381c5902b1ca22b63f3829) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Support Preact v11, this drops support for Preact 10 - to use Preact 10 refer to the v1 release line
+
+### Patch Changes
+
+- [#460](https://github.com/preactjs/prefresh/pull/460) [`45dec2c`](https://github.com/preactjs/prefresh/commit/45dec2cbed26256fe6549263e525b55f303a5113) Thanks [@marvinhagemeister](https://github.com/marvinhagemeister)! - Fix crash with vanilla-extract in webpack 4
+
+* [#456](https://github.com/preactjs/prefresh/pull/456) [`808b16d`](https://github.com/preactjs/prefresh/commit/808b16df691a20af2fa735de86dd723e595677ed) Thanks [@kane-c](https://github.com/kane-c)! - Fix ES module import
+
+* Updated dependencies [[`0d42e69`](https://github.com/preactjs/prefresh/commit/0d42e6916f8f37eb79ffe68e33c872b68fa4ede9), [`61c2b62`](https://github.com/preactjs/prefresh/commit/61c2b624823855a0e8381c5902b1ca22b63f3829)]:
+  - @prefresh/core@2.0.0
+  - @prefresh/utils@2.0.0
+  - @prefresh/babel-plugin@1.0.0
+
 ## 3.3.3
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@prefresh/utils",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "module": "src/index.js",
   "main": "dist/src/index.js",
   "exports": {

@@ -1,6 +1,6 @@
 {
   "name": "@prefresh/web-dev-server",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
   "exports": {
@@ -44,9 +44,9 @@
   "homepage": "https://github.com/preactjs/prefresh#readme",
   "dependencies": {
     "@babel/core": "^7.9.6",
-    "@prefresh/babel-plugin": "0.4.2",
-    "@prefresh/core": "^1.3.3",
-    "@prefresh/utils": "^1.1.2"
+    "@prefresh/babel-plugin": "1.0.0",
+    "@prefresh/core": "^2.0.0",
+    "@prefresh/utils": "^2.0.0"
   },
   "devDependencies": {
     "@web/dev-server": "^0.0.18",
@@ -57,7 +57,7 @@
   "peerDependencies": {
     "@web/dev-server": "^0.0.18",
     "@web/dev-server-hmr": "^0.0.2",
-    "@prefresh/babel-plugin": "^0.4.0",
+    "@prefresh/babel-plugin": "^1.0.0",
     "preact": "^11.0.0"
   }
 }

@@ -1,5 +1,18 @@
 # @prefresh/web-dev-server
 
+## 2.0.0
+
+### Major Changes
+
+- [#424](https://github.com/preactjs/prefresh/pull/424) [`61c2b62`](https://github.com/preactjs/prefresh/commit/61c2b624823855a0e8381c5902b1ca22b63f3829) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Support Preact v11, this drops support for Preact 10 - to use Preact 10 refer to the v1 release line
+
+### Patch Changes
+
+- Updated dependencies [[`0d42e69`](https://github.com/preactjs/prefresh/commit/0d42e6916f8f37eb79ffe68e33c872b68fa4ede9), [`61c2b62`](https://github.com/preactjs/prefresh/commit/61c2b624823855a0e8381c5902b1ca22b63f3829)]:
+  - @prefresh/core@2.0.0
+  - @prefresh/utils@2.0.0
+  - @prefresh/babel-plugin@1.0.0
+
 ## 1.0.3
 
 ### Patch Changes
