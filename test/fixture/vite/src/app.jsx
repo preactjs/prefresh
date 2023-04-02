@@ -4,6 +4,7 @@ import { StoreProvider } from './context';
 import { Products } from './products';
 import { Greeting } from './greeting';
 import { Effect } from './effect';
+import { GenericContext } from './genericCtx';
 import { setup } from 'goober';
 import { Style } from './styles';
 
@@ -28,6 +29,7 @@ export function App(props) {
         <Products />
       </StoreProvider>
       <Effect />
+      <GenericContext />
     </Style>
   )
 }

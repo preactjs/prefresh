@@ -304,19 +304,23 @@ describe('Prefresh integrations', () => {
         ).toBe('rgb(255, 255, 255)');
       });
 
-      if (integration === 'webpack') {
-        test('can hot reload a default export', async () => {
-          const greet = await page.$('#greet');
-          await expectByPolling(() => getText(greet), 'hi');
+      test('maintains context references', async () => {
+        const ctxB = await page.$('#ctx-b-error');
+        await expectByPolling(
+          () => getText(ctxB),
+          'Correct behavior: Context B Error'
+        );
 
-          await updateFile('src/default.jsx', content =>
-            content.replace('<p id="greet">hi</p>', '<p id="greet">bye</p>')
-          );
-          await timeout(TIMEOUT);
-
-          await expectByPolling(() => getText(greet), 'bye');
+        await updateFile('src/genericCtx.js', content => {
+          let c = content.replace('ContextA.Provider', 'ContextB.Provider');
+          c = c.replace('ContextA.Provider', 'ContextB.Provider');
+          return c;
         });
-      }
+        await timeout(TIMEOUT);
+
+        const ctxBGood = await page.$('#ctx-b-success');
+        await expectByPolling(() => getText(ctxBGood), 'Context A');
+      });
     });
   });
 });
