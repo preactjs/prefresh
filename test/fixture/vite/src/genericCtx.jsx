@@ -1,3 +1,4 @@
+import { h } from 'preact';
 import { createContextWithoutDefault } from './helpers';
 
 const [ContextA, useContextA] =

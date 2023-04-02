@@ -276,7 +276,7 @@ describe('Prefresh integrations', () => {
           'Correct behavior: Context B Error'
         );
 
-        await updateFile('src/genericCtx.js', content => {
+        await updateFile('src/genericCtx.jsx', content => {
           let c = content.replace('ContextA.Provider', 'ContextB.Provider');
           c = c.replace('ContextA.Provider', 'ContextB.Provider');
           return c;

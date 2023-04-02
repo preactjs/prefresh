@@ -3,7 +3,7 @@ import { useContext } from 'preact/hooks';
 
 export const createContextWithoutDefault = (errorMessage) => {
   const emptyContext = Symbol();
-  const context = createContext<T>(emptyContext);
+  const context = createContext(emptyContext);
   const useCtx = () => {
     const ctx = useContext(context);
     if ((ctx) === emptyContext) {
