@@ -409,7 +409,7 @@ export default function (babel, opts = {}) {
   );
 
   const emptyTemplate = template(`
-    (CREATECONTEXT.IDENT || (CREATECONTEXT.IDENT=CREATECONTEXT()));
+    (CREATECONTEXT[IDENT] || (CREATECONTEXT[IDENT]=CREATECONTEXT()));
 	`);
 
   const getFirstNonTsExpression = expression =>

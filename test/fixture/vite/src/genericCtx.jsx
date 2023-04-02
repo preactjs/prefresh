@@ -19,7 +19,7 @@ const Test = () => {
     // Expect this to throw.
     contextB = useContextB();
   } catch (e) {
-    return <h2 id='ctx-b-error'>Correct behavior: {(e).message}</h2>;
+    return <h2 id='ctx-b-error'>Correct behavior: {e.message}</h2>;
   }
 
   // Instead it has the value of "Context A"!
