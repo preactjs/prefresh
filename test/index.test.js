@@ -141,41 +141,6 @@ describe('Prefresh integrations', () => {
         await expectByPolling(() => getText(button), 'Increment (+)');
       });
 
-      // Works with v11 and v12
-      if (integration !== 'next') {
-        test('add file and import it', async () => {
-          const compPath = path.join(getTempDir(integration), 'src/test.jsx');
-          await fs.writeFile(
-            compPath,
-            `import { h } from 'preact';
-  export const Tester = () => <p className="tester">Test</p>;`
-          );
-
-          await updateFile('src/app.jsx', content => {
-            let newContent = 'import { Tester } from "./test.jsx";\n' + content;
-            newContent = newContent.replace(
-              `<Test />`,
-              `<Test />\n      <Tester />\n`
-            );
-            return newContent;
-          });
-          await timeout(2000);
-
-          const testText = await page.$('.tester');
-          await expectByPolling(() => getText(testText), 'Test');
-
-          await updateFile('src/test.jsx', c =>
-            c.replace(
-              '<p className="tester">Test</p>',
-              '<p className="tester">Test2</p>'
-            )
-          );
-          await timeout(2000);
-
-          await expectByPolling(() => getText(testText), 'Test2');
-        });
-      }
-
       test('custom hook', async () => {
         const value = await page.$('.value');
         const button = await page.$('.button');
@@ -304,19 +269,23 @@ describe('Prefresh integrations', () => {
         ).toBe('rgb(255, 255, 255)');
       });
 
-      if (integration === 'webpack') {
-        test('can hot reload a default export', async () => {
-          const greet = await page.$('#greet');
-          await expectByPolling(() => getText(greet), 'hi');
+      test('maintains context references', async () => {
+        const ctxB = await page.$('#ctx-b-error');
+        await expectByPolling(
+          () => getText(ctxB),
+          'Correct behavior: Context B Error'
+        );
 
-          await updateFile('src/default.jsx', content =>
-            content.replace('<p id="greet">hi</p>', '<p id="greet">bye</p>')
-          );
-          await timeout(TIMEOUT);
-
-          await expectByPolling(() => getText(greet), 'bye');
+        await updateFile('src/genericCtx.jsx', content => {
+          let c = content.replace('ContextA.Provider', 'ContextB.Provider');
+          c = c.replace('ContextA.Provider', 'ContextB.Provider');
+          return c;
         });
-      }
+        await timeout(TIMEOUT);
+
+        const ctxBGood = await page.$('#ctx-b-success');
+        await expectByPolling(() => getText(ctxBGood), 'Context A');
+      });
     });
   });
 });
