@@ -48,7 +48,7 @@ describe('Signals', () => {
       filter: file => !/dist|node_modules/.test(file),
     });
 
-    await execa('pnpm i', { cwd: getTempDir(integration) });
+    await execa('pnpm', ['i'], { cwd: getTempDir(integration) });
 
     browser = await puppeteer.launch({
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
