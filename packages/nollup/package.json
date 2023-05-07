@@ -24,8 +24,8 @@
   },
   "homepage": "https://github.com/preactjs/prefresh#readme",
   "dependencies": {
-    "@prefresh/core": "^1.3.3",
-    "@prefresh/utils": "^1.1.2"
+    "@prefresh/core": "workspace:*",
+    "@prefresh/utils": "workspace:*"
   },
   "devDependencies": {
     "nollup": "^0.13.9",
