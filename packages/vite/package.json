@@ -44,5 +44,8 @@
   "peerDependencies": {
     "preact": "^10.4.0",
     "vite": ">=2.0.0-beta.3"
+  },
+  "publishConfig": {
+    "provenance": true
   }
 }

@@ -26,5 +26,8 @@
   "homepage": "https://github.com/preactjs/prefresh#readme",
   "devDependencies": {
     "cjyes": "0.3.1"
+  },
+  "publishConfig": {
+    "provenance": true
   }
 }
