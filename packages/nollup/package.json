@@ -34,5 +34,8 @@
   "peerDependencies": {
     "@prefresh/babel-plugin": "^0.4.0",
     "preact": "^10.4.0"
+  },
+  "publishConfig": {
+    "provenance": true
   }
 }

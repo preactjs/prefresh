@@ -27,5 +27,8 @@
   },
   "peerDependencies": {
     "preact": "^10.0.0"
+  },
+  "publishConfig": {
+    "provenance": true
   }
 }
