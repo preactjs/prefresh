@@ -71,6 +71,9 @@ importers:
         specifier: ^4.0.0 || ^5.0.0
         version: 4.43.0
     devDependencies:
+      bundt:
+        specifier: ^1.0.1
+        version: 1.0.1
       next:
         specifier: ^12.0.0
         version: 12.0.0(@babel/core@7.11.4)(react-dom@17.0.2)(react@17.0.2)(webpack@4.43.0)
