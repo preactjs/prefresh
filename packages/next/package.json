@@ -12,7 +12,8 @@
   },
   "scripts": {
     "lint": "eslint src",
-    "build": "bundt"
+    "build": "bundt",
+    "prepublishOnly": "bundt"
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,7 @@
 {
   "name": "prefresh",
   "scripts": {
-    "build": "yarn workspace @prefresh/web-dev-server build && yarn workspace @prefresh/next build && yarn workspace @prefresh/snowpack build && yarn workspace @prefresh/utils build && yarn workspace @prefresh/babel-plugin build",
+    "build": "pnpm build",
     "lint": "eslint src",
     "test": "jest --clearCache && jest --runInBand --forceExit --detectOpenHandles"
   },
@@ -18,9 +18,6 @@
   ],
   "homepage": "https://github.com/preactjs/prefresh#readme",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "devDependencies": {
     "@changesets/changelog-github": "^0.2.7",
     "@changesets/cli": "^2.12.0",
