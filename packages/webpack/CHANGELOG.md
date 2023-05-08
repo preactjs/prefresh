@@ -1,5 +1,18 @@
 # @prefresh/webpack
 
+## 4.0.0
+
+### Minor Changes
+
+- [`e641c69`](https://github.com/preactjs/prefresh/commit/e641c69c610c3adeeb5dcb9e912d030a6fbb5229) [#499](https://github.com/preactjs/prefresh/pull/499) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Publish automatically with npm provenance enabled
+
+### Patch Changes
+
+- Updated dependencies [[`e641c69`](https://github.com/preactjs/prefresh/commit/e641c69c610c3adeeb5dcb9e912d030a6fbb5229), [`35e18f7`](https://github.com/preactjs/prefresh/commit/35e18f719cf17415e33cd2ac0ed83031b1f62b44)]:
+  - @prefresh/babel-plugin@0.5.0
+  - @prefresh/core@1.5.0
+  - @prefresh/utils@1.2.0
+
 ## 3.3.4
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.5.0
+
+### Minor Changes
+
+- [`e641c69`](https://github.com/preactjs/prefresh/commit/e641c69c610c3adeeb5dcb9e912d030a6fbb5229) [#499](https://github.com/preactjs/prefresh/pull/499) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Publish automatically with npm provenance enabled
+
 ## 1.4.1
 
 ### Patch Changes
