@@ -26,10 +26,10 @@
   },
   "homepage": "https://github.com/preactjs/prefresh#readme",
   "dependencies": {
-    "@prefresh/babel-plugin": "workspace:*",
-    "@prefresh/core": "workspace:*",
-    "@prefresh/utils": "workspace:*",
-    "@prefresh/webpack": "workspace:*"
+    "@prefresh/babel-plugin": "0.4.4",
+    "@prefresh/core": "^1.4.0",
+    "@prefresh/utils": "^1.1.2",
+    "@prefresh/webpack": "^3.3.3"
   },
   "devDependencies": {
     "bundt": "^1.0.1",
