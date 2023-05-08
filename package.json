@@ -1,9 +1,10 @@
 {
   "name": "prefresh",
   "scripts": {
-    "build": "yarn workspace @prefresh/web-dev-server build && yarn workspace @prefresh/next build && yarn workspace @prefresh/snowpack build && yarn workspace @prefresh/utils build && yarn workspace @prefresh/babel-plugin build",
+    "build": "pnpm --filter @prefresh/web-dev-server build && pnpm --filter @prefresh/next build && pnpm --filter @prefresh/snowpack build && pnpm --filter @prefresh/utils build && pnpm --filter @prefresh/babel-plugin build",
     "lint": "eslint src",
-    "test": "jest --clearCache && jest --runInBand --forceExit --detectOpenHandles"
+    "test": "jest --clearCache && jest --runInBand --forceExit --detectOpenHandles",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -18,9 +19,6 @@
   ],
   "homepage": "https://github.com/preactjs/prefresh#readme",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "devDependencies": {
     "@changesets/changelog-github": "^0.2.7",
     "@changesets/cli": "^2.12.0",
@@ -28,7 +26,7 @@
     "eslint-config-developit": "^1.2.0",
     "eslint-config-prettier": "^7.0.0",
     "fs-extra": "^9.0.1",
-    "husky": "^4.3.5",
+    "husky": "^8.0.0",
     "jest": "^26.6.3",
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
@@ -61,10 +59,5 @@
     "**/*.{js,ts}": [
       "prettier --write"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }

@@ -22,13 +22,6 @@ have changed and whether the change is major/minor/patch. It will then ask you t
 
 [Read more about adding a `changeset` here.](https://github.com/atlassian/changesets/blob/master/docs/adding-a-changeset.md#i-am-in-a-multi-package-repository-a-mono-repo)
 
-## Publishing
-
-1. run `yarn`
-2. run `yarn build`
-3. run `yarn changeset publish`
-4. run `git push --follow-tags`
-
 ## Running a fixture
 
 Running a fixture locally can be somewhat of a pain as the paths in the `package.json`
