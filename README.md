@@ -7,10 +7,8 @@ Fast-refresh for Preact!
 - [@web/dev-server](https://github.com/preactjs/prefresh/tree/main/packages/web-dev-server)
 - [CRA with prefresh](https://github.com/jeremy-coleman/prefresh-cra)
 - [gatsby](https://www.gatsbyjs.org/packages/gatsby-plugin-preact/)
-- [next](https://github.com/preactjs/prefresh/tree/main/packages/next)
 - [nollup](https://github.com/preactjs/prefresh/tree/main/packages/nollup)
 - [preact-cli (--refresh)](https://github.com/preactjs/preact-cli#preact-watch)
-- [snowpack](https://github.com/preactjs/prefresh/tree/main/packages/snowpack)
 - [vite](https://github.com/preactjs/prefresh/tree/main/packages/vite)
 - [webpack](https://github.com/preactjs/prefresh/tree/main/packages/webpack)
 

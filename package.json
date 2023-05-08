@@ -1,7 +1,7 @@
 {
   "name": "prefresh",
   "scripts": {
-    "build": "pnpm --filter @prefresh/web-dev-server build && pnpm --filter @prefresh/next build && pnpm --filter @prefresh/snowpack build && pnpm --filter @prefresh/utils build && pnpm --filter @prefresh/babel-plugin build",
+    "build": "pnpm --filter @prefresh/web-dev-server build && pnpm --filter @prefresh/utils build && pnpm --filter @prefresh/babel-plugin build",
     "lint": "eslint src",
     "test": "jest --clearCache && jest --runInBand --forceExit --detectOpenHandles",
     "prepare": "husky install"
