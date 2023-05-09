@@ -30,6 +30,7 @@
   ],
   "scripts": {
     "build": "bundt",
+    "prepublishOnly": "bundt",
     "lint": "eslint src"
   },
   "repository": {
