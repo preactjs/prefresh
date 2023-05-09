@@ -111,6 +111,4 @@ packages/vite/runtime
 packages/vite/utils
 packages/web-dev-server/runtime
 packages/web-dev-server/utils
-packages/snowpack/runtime
-packages/snowpack/utils
 test/fixture/**/yarn.lock
