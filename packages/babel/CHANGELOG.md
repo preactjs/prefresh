@@ -1,5 +1,13 @@
 # @prefresh/babel-plugin
 
+## 0.5.0
+
+### Minor Changes
+
+- [`e641c69`](https://github.com/preactjs/prefresh/commit/e641c69c610c3adeeb5dcb9e912d030a6fbb5229) [#499](https://github.com/preactjs/prefresh/pull/499) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Publish automatically with npm provenance enabled
+
+* [`35e18f7`](https://github.com/preactjs/prefresh/commit/35e18f719cf17415e33cd2ac0ed83031b1f62b44) [#488](https://github.com/preactjs/prefresh/pull/488) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Transform createContext calls that we find within a closure to make them unique
+
 ## 0.4.4
 
 ### Patch Changes
