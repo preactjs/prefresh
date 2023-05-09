@@ -12,7 +12,6 @@
   },
   "scripts": {
     "build": "cjyes src/index.mjs",
-    "prepublishOnly": "cjyes src/index.mjs",
     "lint": "eslint src"
   },
   "repository": {
