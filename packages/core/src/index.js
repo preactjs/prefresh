@@ -54,6 +54,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
   pendingUpdates = pendingUpdates.filter(p => p[0] !== OldType);
 
   vnodes.forEach(vnode => {
+    if (!vnode.__c.__P) return;
     // update the type in-place to reference the new component
     vnode.type = NewType;
 
@@ -110,6 +111,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
                 typeof possibleEffect[HOOK_CLEANUP] === 'function'
               ) {
                 possibleEffect[HOOK_CLEANUP]();
+                possibleEffect[HOOK_CLEANUP] = undefined;
               } else if (
                 possibleEffect[HOOK_ARGS] &&
                 possibleEffect[HOOK_VALUE] &&
@@ -121,8 +123,10 @@ function replaceComponent(OldType, NewType, resetHookState) {
                 if (
                   cleanupKey &&
                   typeof possibleEffect[cleanupKey] == 'function'
-                )
+                ) {
                   possibleEffect[cleanupKey]();
+                  possibleEffect[cleanupKey] = undefined;
+                }
               }
             }
           );
@@ -144,6 +148,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
               typeof possibleEffect[HOOK_CLEANUP] === 'function'
             ) {
               possibleEffect[HOOK_CLEANUP]();
+              possibleEffect[HOOK_CLEANUP] = undefined;
             } else if (
               possibleEffect[HOOK_ARGS] &&
               possibleEffect[HOOK_VALUE] &&
@@ -154,6 +159,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
               );
               if (cleanupKey && typeof possibleEffect[cleanupKey] == 'function')
                 possibleEffect[cleanupKey]();
+              possibleEffect[cleanupKey] = undefined;
             }
           }
         );

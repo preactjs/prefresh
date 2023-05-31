@@ -42,3 +42,19 @@ options.vnode = vnode => {
 
   if (oldVnode) oldVnode(vnode);
 };
+
+const oldDiffed = options.diffed;
+options.diffed = vnode => {
+  if (vnode && typeof vnode.type === 'function') {
+    const vnodes = vnodesForComponent.get(vnode.type);
+    if (vnodes) {
+      const matchingDom = vnodes.filter(p => p.__c === vnode.__c);
+      if (matchingDom.length > 1) {
+        const i = vnodes.findIndex(p => p === matchingDom[0]);
+        vnodes.splice(i, 1);
+      }
+    }
+  }
+
+  if (oldDiffed) oldDiffed(vnode);
+};

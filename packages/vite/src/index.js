@@ -13,7 +13,10 @@ module.exports = function prefreshPlugin(options = {}) {
       shouldSkip = config.command === 'build' || config.isProduction;
     },
     async transform(code, id, options) {
-      const ssr = typeof options === 'boolean' ? options : (options && options.ssr === true)
+      const ssr =
+        typeof options === 'boolean'
+          ? options
+          : options && options.ssr === true;
       if (
         shouldSkip ||
         !/\.(t|j)sx?$/.test(id) ||
@@ -30,7 +33,7 @@ module.exports = function prefreshPlugin(options = {}) {
         'classPrivateProperties',
         'classPrivateMethods',
         /\.tsx?$/.test(id) && 'typescript',
-        ...(options.parserPlugins || []),
+        ...((options && options.parserPlugins) || []),
       ].filter(Boolean);
 
       const result = transform(code, id, parserPlugins);
@@ -44,7 +47,9 @@ module.exports = function prefreshPlugin(options = {}) {
 
       const prelude = `
         ${'import'} ${JSON.stringify(prefreshCore.id)};
-        ${'import'} { flush as flushUpdates } from ${JSON.stringify(prefreshUtils.id)};
+        ${'import'} { flush as flushUpdates } from ${JSON.stringify(
+        prefreshUtils.id
+      )};
 
         let prevRefreshReg;
         let prevRefreshSig;
@@ -95,7 +100,7 @@ module.exports = function prefreshPlugin(options = {}) {
       };
     },
   };
-}
+};
 
 const transform = (code, path, plugins) =>
   transformSync(code, {
