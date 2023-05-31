@@ -48,7 +48,7 @@ jobs:
             ${{ runner.os }}-pnpm-
 
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile false --prefer-offline
 
       - name: Release or Create Pull Request
         uses: changesets/action@v1.4.1
