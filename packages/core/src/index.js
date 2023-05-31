@@ -110,6 +110,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
                 typeof possibleEffect[HOOK_CLEANUP] === 'function'
               ) {
                 possibleEffect[HOOK_CLEANUP]();
+                possibleEffect[HOOK_CLEANUP] = undefined;
               } else if (
                 possibleEffect[HOOK_ARGS] &&
                 possibleEffect[HOOK_VALUE] &&
@@ -121,8 +122,10 @@ function replaceComponent(OldType, NewType, resetHookState) {
                 if (
                   cleanupKey &&
                   typeof possibleEffect[cleanupKey] == 'function'
-                )
+                ) {
                   possibleEffect[cleanupKey]();
+                  possibleEffect[cleanupKey] = undefined;
+                }
               }
             }
           );
@@ -144,6 +147,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
               typeof possibleEffect[HOOK_CLEANUP] === 'function'
             ) {
               possibleEffect[HOOK_CLEANUP]();
+              possibleEffect[HOOK_CLEANUP] = undefined;
             } else if (
               possibleEffect[HOOK_ARGS] &&
               possibleEffect[HOOK_VALUE] &&
@@ -154,6 +158,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
               );
               if (cleanupKey && typeof possibleEffect[cleanupKey] == 'function')
                 possibleEffect[cleanupKey]();
+              possibleEffect[cleanupKey] = undefined;
             }
           }
         );
