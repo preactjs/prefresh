@@ -1,5 +1,16 @@
 # @prefresh/vite
 
+## 2.4.0
+
+### Minor Changes
+
+- [`9ad0839`](https://github.com/preactjs/prefresh/commit/9ad083939801a5eae6fbb78ec94f58b357667ece) [#505](https://github.com/preactjs/prefresh/pull/505) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Support missing options in transform
+
+### Patch Changes
+
+- Updated dependencies [[`9ad0839`](https://github.com/preactjs/prefresh/commit/9ad083939801a5eae6fbb78ec94f58b357667ece), [`9ad0839`](https://github.com/preactjs/prefresh/commit/9ad083939801a5eae6fbb78ec94f58b357667ece)]:
+  - @prefresh/core@1.5.1
+
 ## 2.3.0
 
 ### Minor Changes

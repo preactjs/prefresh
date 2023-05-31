@@ -1,5 +1,13 @@
 # @prefresh/core
 
+## 1.5.1
+
+### Patch Changes
+
+- [`9ad0839`](https://github.com/preactjs/prefresh/commit/9ad083939801a5eae6fbb78ec94f58b357667ece) [#505](https://github.com/preactjs/prefresh/pull/505) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Stop invoking setState on unmounted vnodes
+
+* [`9ad0839`](https://github.com/preactjs/prefresh/commit/9ad083939801a5eae6fbb78ec94f58b357667ece) [#505](https://github.com/preactjs/prefresh/pull/505) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix case where a repeatedly called upon component would have a lot of entries in the vnodesForComponent
+
 ## 1.5.0
 
 ### Minor Changes
