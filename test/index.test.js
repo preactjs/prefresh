@@ -74,7 +74,7 @@ describe('Prefresh integrations', () => {
           filter: file => !/dist|node_modules/.test(file),
         });
 
-        await execa('yarn', { cwd: getTempDir(integration) });
+        await execa('yarn', { cwd: getTempDir(integration), shell: true });
 
         browser = await puppeteer.launch({
           args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -86,6 +86,7 @@ describe('Prefresh integrations', () => {
           binArgs[integration],
           {
             cwd: getTempDir(integration),
+            shell: true,
           }
         );
 
