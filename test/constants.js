@@ -22,7 +22,7 @@ exports.goMessage = {
 };
 
 exports.defaultPort = {
-  vite: 5173,
+  vite: 3000,
   'vite-preact-compat': 3002,
   'vite-signals': 3007,
 };
