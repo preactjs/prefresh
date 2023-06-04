@@ -4,13 +4,13 @@
   },
   "dependencies": {
     "goober": "^2.0.36",
-    "preact": "^10.5.7"
+    "preact": "^10.15.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.6",
+    "@babel/core": "^7.22.1",
     "@prefresh/babel-plugin": "file:../../packages/babel",
     "@prefresh/vite": "file:../../packages/vite",
-    "vite": "^2.7.13"
+    "vite": "^4.3.9"
   },
   "resolutions": {
 		"@prefresh/core": "file:../../packages/core",
