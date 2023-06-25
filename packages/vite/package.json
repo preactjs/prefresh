@@ -31,19 +31,19 @@
   },
   "homepage": "https://github.com/preactjs/prefresh#readme",
   "dependencies": {
-    "@babel/core": "^7.9.6",
+    "@babel/core": "^7.22.1",
     "@prefresh/babel-plugin": "0.5.0",
     "@prefresh/core": "^1.5.1",
     "@prefresh/utils": "^1.2.0",
-    "@rollup/pluginutils": "^4.1.0"
+    "@rollup/pluginutils": "^4.2.1"
   },
   "devDependencies": {
-    "preact": "^10.5.7",
-    "vite": "^2.0.0-beta.3"
+    "preact": "^10.15.1",
+    "vite": "^4.3.9"
   },
   "peerDependencies": {
     "preact": "^10.4.0",
-    "vite": ">=2.0.0-beta.3"
+    "vite": ">=2.0.0"
   },
   "publishConfig": {
     "provenance": true

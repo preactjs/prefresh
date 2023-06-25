@@ -16,9 +16,9 @@ exports.binArgs = {
 };
 
 exports.goMessage = {
-  vite: 'running',
-  'vite-preact-compat': 'running',
-  'vite-signals': 'running',
+  vite: 'ready',
+  'vite-preact-compat': 'ready',
+  'vite-signals': 'ready',
 };
 
 exports.defaultPort = {

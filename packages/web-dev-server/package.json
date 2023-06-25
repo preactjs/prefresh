@@ -44,7 +44,7 @@
   },
   "homepage": "https://github.com/preactjs/prefresh#readme",
   "dependencies": {
-    "@babel/core": "^7.9.6",
+    "@babel/core": "^7.22.1",
     "@prefresh/babel-plugin": "0.5.0",
     "@prefresh/core": "^1.5.0",
     "@prefresh/utils": "^1.2.0"
@@ -52,8 +52,8 @@
   "devDependencies": {
     "@web/dev-server": "^0.0.18",
     "@web/dev-server-hmr": "^0.0.2",
-    "bundt": "^1.0.1",
-    "preact": "^10.5.7"
+    "bundt": "^1.1.5",
+    "preact": "^10.15.1"
   },
   "peerDependencies": {
     "@web/dev-server": "^0.0.18",

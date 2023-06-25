@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/preactjs/prefresh#readme",
   "devDependencies": {
-    "preact": "^10.5.7"
+    "preact": "^10.15.1"
   },
   "peerDependencies": {
     "preact": "^10.0.0"
