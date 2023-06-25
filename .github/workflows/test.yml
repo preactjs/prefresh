@@ -43,7 +43,7 @@ jobs:
             ${{ runner.os }}-pnpm-
 
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile && node ./node_modules/puppeteer/install.js
       - name: Build packages
         run: yarn build
 
