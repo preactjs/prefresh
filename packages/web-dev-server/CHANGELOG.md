@@ -1,5 +1,11 @@
 # @prefresh/web-dev-server
 
+## 1.1.1
+
+### Patch Changes
+
+- [`9074503`](https://github.com/preactjs/prefresh/commit/90745038652ae54e82166e683e3771561bf486fe) [#507](https://github.com/preactjs/prefresh/pull/507) Thanks [@takurinton](https://github.com/takurinton)! - Update @babel/core in dependencies to v7.22.1
+
 ## 1.1.0
 
 ### Minor Changes

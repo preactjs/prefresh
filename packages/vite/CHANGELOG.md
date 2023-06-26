@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.4.1
+
+### Patch Changes
+
+- [`9074503`](https://github.com/preactjs/prefresh/commit/90745038652ae54e82166e683e3771561bf486fe) [#507](https://github.com/preactjs/prefresh/pull/507) Thanks [@takurinton](https://github.com/takurinton)! - Update @babel/core in dependencies to v7.22.1, @rollup/pluginutils to v4.2.1, and vite in peerDependencies to over v2 or v3 or v4
+
 ## 2.4.0
 
 ### Minor Changes
