@@ -54,7 +54,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
   pendingUpdates = pendingUpdates.filter(p => p[0] !== OldType);
 
   vnodes.forEach(vnode => {
-    if (!vnode.__c.__P) return;
+    if (!vnode.__c || !vnode.__c.__P) return;
     // update the type in-place to reference the new component
     vnode.type = NewType;
 
