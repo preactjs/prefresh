@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.5.2
+
+### Patch Changes
+
+- [`1101d1f`](https://github.com/preactjs/prefresh/commit/1101d1f34c31c58196ffcaa044b9c80625a4ed81) [#514](https://github.com/preactjs/prefresh/pull/514) Thanks [@antran22](https://github.com/antran22)! - add guard for undefined component before accessing parentDom
+
 ## 1.5.1
 
 ### Patch Changes
