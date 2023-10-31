@@ -6,7 +6,8 @@
   "exports": {
     ".": {
       "types": "./index.d.ts",
-      "require": "./src/index.js"
+      "require": "./src/index.js",
+      "import": "./src/index.js"
     },
     "./package.json": "./package.json"
   },
