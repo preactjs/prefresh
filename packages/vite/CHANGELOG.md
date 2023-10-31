@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.4.3
+
+### Patch Changes
+
+- [`d5cff74`](https://github.com/preactjs/prefresh/commit/d5cff744fcc5e378d5956e710a3bd5f7f6785213) [#522](https://github.com/preactjs/prefresh/pull/522) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Add import key to export maps
+
 ## 2.4.2
 
 ### Patch Changes
