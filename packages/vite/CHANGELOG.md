@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.4.2
+
+### Patch Changes
+
+- [`85ba71c`](https://github.com/preactjs/prefresh/commit/85ba71cb6847e7a000939a2f70d1efdbaacf3fef) [#519](https://github.com/preactjs/prefresh/pull/519) Thanks [@lemonmade](https://github.com/lemonmade)! - Fix type type resolution for `type: "module"` projects
+
 ## 2.4.1
 
 ### Patch Changes
