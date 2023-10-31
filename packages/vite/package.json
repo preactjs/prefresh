@@ -4,7 +4,10 @@
   "main": "src/index.js",
   "types": "index.d.ts",
   "exports": {
-    ".": "./src/index.js",
+    ".": {
+      "types": "./index.d.ts",
+      "require": "./src/index.js"
+    },
     "./package.json": "./package.json"
   },
   "modes": {
