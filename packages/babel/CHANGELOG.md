@@ -1,5 +1,11 @@
 # @prefresh/babel-plugin
 
+## 0.5.1
+
+### Patch Changes
+
+- [`7e47061`](https://github.com/preactjs/prefresh/commit/7e470614e70915e994937e97245df9914806be86) [#524](https://github.com/preactjs/prefresh/pull/524) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Ensure we accoutn for the filename when hashing
+
 ## 0.5.0
 
 ### Minor Changes

@@ -1,5 +1,14 @@
 # @prefresh/vite
 
+## 2.4.4
+
+### Patch Changes
+
+- [`7e47061`](https://github.com/preactjs/prefresh/commit/7e470614e70915e994937e97245df9914806be86) [#524](https://github.com/preactjs/prefresh/pull/524) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Add filename to the vite options as well
+
+- Updated dependencies [[`7e47061`](https://github.com/preactjs/prefresh/commit/7e470614e70915e994937e97245df9914806be86)]:
+  - @prefresh/babel-plugin@0.5.1
+
 ## 2.4.3
 
 ### Patch Changes
