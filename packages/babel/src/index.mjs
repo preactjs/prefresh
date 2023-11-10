@@ -96,11 +96,9 @@ export default function (babel, opts = {}) {
           case 'Identifier': {
             const calleeSource = calleePath.getSource().split('(')[0];
             const innerName = inferredName + '$' + calleeSource;
-            const foundInside = argsPath.some((argPath) => findInnerComponents(
-              innerName,
-              argPath,
-              callback
-            ));
+            const foundInside = argsPath.some(argPath =>
+              findInnerComponents(innerName, argPath, callback)
+            );
             if (!foundInside) {
               return false;
             }
@@ -487,13 +485,17 @@ export default function (babel, opts = {}) {
           }
         }
 
-        const getFirstParent = (parentPath) => {
-        	if (t.isProgram(parentPath) || t.isFunctionDeclaration(parentPath) || t.isArrowFunctionExpression(parentPath)) return parentPath;
-          return getFirstParent(parentPath.parentPath)
+        const getFirstParent = parentPath => {
+          if (
+            t.isProgram(parentPath) ||
+            t.isFunctionDeclaration(parentPath) ||
+            t.isArrowFunctionExpression(parentPath)
+          )
+            return parentPath;
+          return getFirstParent(parentPath.parentPath);
+        };
 
-        }
-
-        const closestClosurePath = getFirstParent(path.parentPath)
+        const closestClosurePath = getFirstParent(path.parentPath);
 
         const contexts = state.get('contexts');
         let counter = (contexts.get(id) || -1) + 1;
@@ -502,34 +504,50 @@ export default function (babel, opts = {}) {
         id = '_' + state.get('filehash') + id;
         path.skip();
         if (!t.isProgram(closestClosurePath)) {
-          const params = closestClosurePath.node.params
+          const params = closestClosurePath.node.params;
           params.forEach(param => {
             if (t.isIdentifier(param)) {
-            	id += '_PARAM' + param.name
+              id += '_PARAM' + param.name;
             }
-          })
+          });
         }
 
         // TODO: maybe wrap with JSON.stringify
         if (path.node.arguments[0]) {
           const [quasi, ...expressions] = id.split('_PARAM');
-          const first = t.templateElement({ raw: quasi, cooked: '' })
-          const expr = expressions.map(x => t.identifier(x.replace('}', '')))
+          const first = t.templateElement({ raw: quasi, cooked: '' });
+          const expr = expressions.map(x => t.identifier(x.replace('}', '')));
           path.replaceWith(
             createContextTemplate({
               CREATECONTEXT: path.get('callee').node,
-              IDENT: t.templateLiteral([first, ...expressions.map(() => t.templateElement({ raw: '', cooked: '' }, true))], expr),
+              IDENT: t.templateLiteral(
+                [
+                  first,
+                  ...expressions.map(() =>
+                    t.templateElement({ raw: '', cooked: '' }, true)
+                  ),
+                ],
+                expr
+              ),
               VALUE: t.clone(getFirstNonTsExpression(path.node.arguments[0])),
             })
           );
         } else {
           const [quasi, ...expressions] = id.split('_PARAM');
-          const first = t.templateElement({ raw: quasi, cooked: '' })
-          const expr = expressions.map(x => t.identifier(x.replace('}', '')))
+          const first = t.templateElement({ raw: quasi, cooked: '' });
+          const expr = expressions.map(x => t.identifier(x.replace('}', '')));
           path.replaceWith(
             emptyTemplate({
               CREATECONTEXT: path.get('callee').node,
-              IDENT: t.templateLiteral([first, ...expressions.map(() => t.templateElement({ raw: '', cooked: '' }, true))], expr),
+              IDENT: t.templateLiteral(
+                [
+                  first,
+                  ...expressions.map(() =>
+                    t.templateElement({ raw: '', cooked: '' }, true)
+                  ),
+                ],
+                expr
+              ),
             })
           );
         }
@@ -853,7 +871,15 @@ export default function (babel, opts = {}) {
       },
       Program: {
         enter(path, state) {
-          state.set('filehash', hash(path.hub.file.opts.filename || 'unnamed'));
+          state.set(
+            'filehash',
+            hash(
+              path.hub.file.opts.filename ||
+                path.hub.file.opts.sourceFileName ||
+                path.hub.file.opts.generatorOpts?.sourceFileName ||
+                'unnamed'
+            )
+          );
           state.set('contexts', new Map());
           // This is a separate early visitor because we need to collect Hook calls
           // and "const [foo, setFoo] = ..." signatures before the destructuring
