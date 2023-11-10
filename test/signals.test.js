@@ -51,6 +51,7 @@ describe('Signals', () => {
     await execa('yarn', { cwd: getTempDir(integration) });
 
     browser = await puppeteer.launch({
+      headless: 'new',
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
     page = await browser.newPage();
