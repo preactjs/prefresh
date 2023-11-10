@@ -110,6 +110,7 @@ const transform = (code, path, plugins) =>
     },
     ast: false,
     sourceMaps: true,
+    filename: path,
     sourceFileName: path,
     configFile: false,
     babelrc: false,
