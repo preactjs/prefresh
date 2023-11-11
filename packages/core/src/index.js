@@ -98,7 +98,9 @@ function replaceComponent(OldType, NewType, resetHookState) {
         vnode[VNODE_COMPONENT].constructor = NewType;
       }
 
+      vnode.type = NewType
       vnode[VNODE_COMPONENT].__v = vnode;
+      vnode[VNODE_COMPONENT].__v.type = NewType;
 
       if (resetHookState) {
         if (
