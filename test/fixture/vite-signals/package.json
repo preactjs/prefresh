@@ -4,7 +4,7 @@
   },
   "dependencies": {
     "@preact/signals": "^1.1.2",
-    "preact": "^10.15.1"
+    "preact": "^10.19.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.1",
