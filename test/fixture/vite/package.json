@@ -4,7 +4,7 @@
   },
   "dependencies": {
     "goober": "^2.0.36",
-    "preact": "10.19.1"
+    "preact": "10.18.2"
   },
   "devDependencies": {
     "@babel/core": "^7.22.1",
