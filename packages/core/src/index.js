@@ -59,7 +59,6 @@ function replaceComponent(OldType, NewType, resetHookState) {
     vnode.type = NewType;
 
     if (vnode[VNODE_COMPONENT]) {
-      let oldHooks = vnode[VNODE_COMPONENT][COMPONENT_HOOKS];
       vnode[VNODE_COMPONENT].constructor = vnode.type;
 
       try {
@@ -98,9 +97,6 @@ function replaceComponent(OldType, NewType, resetHookState) {
         /* Functional component */
         vnode[VNODE_COMPONENT].constructor = NewType;
       }
-
-      vnode[VNODE_COMPONENT].__v = vnode;
-      vnode[VNODE_COMPONENT][COMPONENT_HOOKS] = oldHooks;
 
       if (resetHookState) {
         if (

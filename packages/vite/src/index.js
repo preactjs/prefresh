@@ -91,6 +91,8 @@ module.exports = function prefreshPlugin(options = {}) {
             try {
               flushUpdates();
             } catch (e) {
+              // TODO: remove debugging code
+              console.log(e);
               self.location.reload();
             }
           });
