@@ -31,14 +31,12 @@ options.vnode = vnode => {
     }
 
     vnode.type = foundType;
-    if (vnode[VNODE_COMPONENT]) {
-      vnode[VNODE_COMPONENT].__v = vnode;
-      if (
-        'prototype' in vnode.type &&
-        vnode.type.prototype.render
-      ) {
-        vnode[VNODE_COMPONENT].constructor = vnode.type;
-      }
+    if (
+      vnode[VNODE_COMPONENT] &&
+      'prototype' in vnode.type &&
+      vnode.type.prototype.render
+    ) {
+      vnode[VNODE_COMPONENT].constructor = vnode.type;
     }
   }
 
