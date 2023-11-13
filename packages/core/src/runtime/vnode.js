@@ -30,13 +30,13 @@ options.vnode = vnode => {
       }
     }
 
-    // vnode.type = foundType;
+    vnode.type = foundType;
     if (
       vnode[VNODE_COMPONENT] &&
       'prototype' in vnode.type &&
       vnode.type.prototype.render
     ) {
-      vnode[VNODE_COMPONENT].constructor = foundType;
+      vnode[VNODE_COMPONENT].constructor = vnode.type;
     }
   }
 
