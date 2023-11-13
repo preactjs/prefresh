@@ -17,6 +17,7 @@ const {
 } = require('./constants');
 
 const TIMEOUT = 1000;
+const DEBUG = process.env.DEBUG;
 
 describe('Prefresh integrations', () => {
   integrations.forEach(integration => {
@@ -49,8 +50,7 @@ describe('Prefresh integrations', () => {
       jest.setTimeout(100000);
 
       afterAll(async () => {
-        if (process.env.DEBUG)
-          page.removeListener('console', browserConsoleListener);
+        if (DEBUG) page.removeListener('console', browserConsoleListener);
 
         if (browser) await browser.close();
         if (devServer) {
@@ -77,7 +77,8 @@ describe('Prefresh integrations', () => {
         await execa('yarn', { cwd: getTempDir(integration) });
 
         browser = await puppeteer.launch({
-          headless: 'new',
+          headless: DEBUG ? false : 'new',
+          devtools: !!DEBUG,
           args: ['--no-sandbox', '--disable-setuid-sandbox'],
         });
         page = await browser.newPage();
@@ -110,7 +111,7 @@ describe('Prefresh integrations', () => {
         });
 
         page = await browser.newPage();
-        if (process.env.DEBUG) page.on('console', browserConsoleListener);
+        if (DEBUG) page.on('console', browserConsoleListener);
 
         await page.goto('http://localhost:' + defaultPort[integration]);
       });

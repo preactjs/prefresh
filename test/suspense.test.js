@@ -11,6 +11,7 @@ const {
 const { bin, binArgs, goMessage, defaultPort } = require('./constants');
 
 const TIMEOUT = 1000;
+const DEBUG = process.env.DEBUG;
 
 describe('Suspense', () => {
   const integration = 'vite-preact-compat';
@@ -23,8 +24,7 @@ describe('Suspense', () => {
   jest.setTimeout(100000);
 
   afterAll(async () => {
-    if (process.env.DEBUG)
-      page.removeListener('console', browserConsoleListener);
+    if (DEBUG) page.removeListener('console', browserConsoleListener);
 
     if (browser) await browser.close();
     if (devServer) {
@@ -51,7 +51,8 @@ describe('Suspense', () => {
     await execa('yarn', { cwd: getTempDir(integration) });
 
     browser = await puppeteer.launch({
-      headless: 'new',
+      headless: DEBUG ? false : 'new',
+      devtools: !!DEBUG,
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
     page = await browser.newPage();
@@ -68,7 +69,7 @@ describe('Suspense', () => {
       devServer.stdout.on(
         'data',
         (serverConsoleListener = data => {
-          if (process.env.DEBUG) console.log('[SERVER LOG]: ', data.toString());
+          if (DEBUG) console.log('[SERVER LOG]: ', data.toString());
           if (data.toString().match(goMessage[integration])) {
             resolve();
           }
@@ -84,7 +85,7 @@ describe('Suspense', () => {
     });
 
     page = await browser.newPage();
-    if (process.env.DEBUG) page.on('console', browserConsoleListener);
+    if (DEBUG) page.on('console', browserConsoleListener);
 
     await page.goto('http://localhost:' + defaultPort[integration]);
   });
