@@ -1,7 +1,7 @@
 import { FilterPattern } from '@rollup/pluginutils';
 import { Plugin } from 'vite';
 
-export interface Options {
+interface Options {
   parserPlugins?: readonly string[];
   include?: FilterPattern;
   exclude?: FilterPattern;
@@ -9,4 +9,4 @@ export interface Options {
 
 declare const prefreshPlugin: (options?: Options) => Plugin;
 
-export default prefreshPlugin;
+export = prefreshPlugin;
