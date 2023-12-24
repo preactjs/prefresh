@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.4.5
+
+### Patch Changes
+
+- [`0efb604`](https://github.com/preactjs/prefresh/commit/0efb6040dab3a95e3318bfd214da83035314fdc9) [#531](https://github.com/preactjs/prefresh/pull/531) Thanks [@rschristian](https://github.com/rschristian)! - Fix for incorrect default export of types under TS's Node16 module resolution
+
 ## 2.4.4
 
 ### Patch Changes
