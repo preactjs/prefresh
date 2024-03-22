@@ -121,9 +121,9 @@ class ReloadPlugin {
 
     if (internalWebpackVersion !== externalWebpackVersion) {
       throw new Error(`
-        You are using webpack version ${internalWebpackVersion} and yet you have ${externalWebpackVersion} installed, which Prefresh is pulling.
+        You are using webpack v${internalWebpackVersion} and yet you have v${externalWebpackVersion} installed, which Prefresh is pulling.
 
-        You may want to uninstall ${externalWebpackVersion} if possible, set overrides, or fix your lockfile to correct this.
+        You may want to uninstall v${externalWebpackVersion} if possible, set overrides so that you only have v${internalWebpackVersion} available, or fix your lockfile to correct this.
       `);
     }
 
