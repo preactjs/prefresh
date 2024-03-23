@@ -1,5 +1,11 @@
 # @prefresh/webpack
 
+## 4.0.1
+
+### Patch Changes
+
+- [`28eb8d5`](https://github.com/preactjs/prefresh/commit/28eb8d5c5b972fe11bc0bcfad04f64b526e748dc) [#536](https://github.com/preactjs/prefresh/pull/536) Thanks [@rschristian](https://github.com/rschristian)! - Swap out NextJS-specific error message in the Webpack package for something more generic
+
 ## 4.0.0
 
 ### Minor Changes
