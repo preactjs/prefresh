@@ -148,7 +148,7 @@ class ReloadPlugin {
       }
       case 5: {
         const dependency = webpack.EntryPlugin.createDependency(
-          '@prefresh/core',
+          require.resolve('@prefresh/core'),
           { name: '@prefresh/core' }
         );
         compiler.hooks.make.tapAsync(NAME, (compilation, callback) => {
