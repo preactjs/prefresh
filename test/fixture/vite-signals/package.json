@@ -10,7 +10,7 @@
     "@babel/core": "^7.22.1",
     "@prefresh/babel-plugin": "file:../../packages/babel",
     "@prefresh/vite": "file:../../packages/vite",
-    "vite": "^5.0.0"
+    "vite": "^5.2.11"
   },
   "resolutions": {
     "@prefresh/core": "file:../../packages/core",
