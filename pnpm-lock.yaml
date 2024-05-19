@@ -104,8 +104,8 @@ importers:
         specifier: ^10.15.1
         version: 10.15.1
       vite:
-        specifier: ^5.0.5
-        version: 5.0.5
+        specifier: ^5.0.13
+        version: 5.0.13
 
   packages/web-dev-server:
     dependencies:
@@ -8982,8 +8982,8 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
-  /vite@5.0.5:
-    resolution: {integrity: sha512-OekeWqR9Ls56f3zd4CaxzbbS11gqYkEiBtnWFFgYR2WV8oPJRRKq0mpskYy/XaoCL3L7VINDhqqOMNDiYdGvGg==}
+  /vite@5.0.13:
+    resolution: {integrity: sha512-/9ovhv2M2dGTuA+dY93B9trfyWMDRQw2jdVBhHNP6wr0oF34wG2i/N55801iZIpgUpnHDm4F/FabGQLyc+eOgg==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
