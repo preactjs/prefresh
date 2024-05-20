@@ -1,5 +1,11 @@
 # @prefresh/nollup
 
+## 4.0.1
+
+### Patch Changes
+
+- [`3a61544`](https://github.com/preactjs/prefresh/commit/3a61544bf0ca29681ce3e45f7f2d4aff268db485) [#547](https://github.com/preactjs/prefresh/pull/547) Thanks [@Sanshain](https://github.com/Sanshain)! - fixes "could not resolve runtime.js" error within prefresh/nollup
+
 ## 4.0.0
 
 ### Minor Changes
