@@ -1,6 +1,6 @@
 {
   "name": "@prefresh/nollup",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "main": "src/index.js",
   "module": "src/wrapper.mjs",
   "exports": {
@@ -11,7 +11,7 @@
     "./src/runtime.js": {
       "require": "./src/runtime.js",
       "import": "./src/runtime.js"
-    },	
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
