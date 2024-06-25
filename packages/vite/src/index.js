@@ -19,7 +19,7 @@ module.exports = function prefreshPlugin(options = {}) {
           : options && options.ssr === true;
       if (
         shouldSkip ||
-        !/\.(t|j)sx?$/.test(id) ||
+        !/\.(c|m)?(t|j)sx?$/.test(id) ||
         id.includes('node_modules') ||
         id.includes('?worker') ||
         !filter(id) ||
