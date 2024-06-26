@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.4.6
+
+### Patch Changes
+
+- [`b729d4d`](https://github.com/preactjs/prefresh/commit/b729d4d80ca1870574d8731c037d4092b7be2cff) [#549](https://github.com/preactjs/prefresh/pull/549) Thanks [@rschristian](https://github.com/rschristian)! - Support `.cjs` and `.mjs` file extensions in Vite plugin
+
 ## 2.4.5
 
 ### Patch Changes
