@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.5.3
+
+### Patch Changes
+
+- [`06f97ac`](https://github.com/preactjs/prefresh/commit/06f97ac8dfa17492bab9a1f9d711fba2069d0f48) [#559](https://github.com/preactjs/prefresh/pull/559) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Avoid memory leak by not registering built-in types
+
 ## 1.5.2
 
 ### Patch Changes
