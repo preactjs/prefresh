@@ -10,9 +10,15 @@ const getMappedVnode = type => {
   return type;
 };
 
+const BUILT_IN_COMPONENTS = ['Fragment', 'Suspense', 'SuspenseList'];
+
+const isBuiltIn = type => {
+  return BUILT_IN_COMPONENTS.includes(type.name)
+}
+
 const oldVnode = options.vnode;
 options.vnode = vnode => {
-  if (vnode && typeof vnode.type === 'function') {
+  if (vnode && typeof vnode.type === 'function' && !isBuiltIn(vnode.type)) {
     const vnodes = vnodesForComponent.get(vnode.type);
     if (!vnodes) {
       vnodesForComponent.set(vnode.type, [vnode]);
