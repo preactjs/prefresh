@@ -10,7 +10,7 @@ module.exports = function prefreshPlugin(options = {}) {
   return {
     name: 'prefresh',
     configResolved(config) {
-      shouldSkip = config.command === 'build' || config.isProduction;
+      shouldSkip = config.mode !== 'development';
     },
     async transform(code, id, options) {
       const ssr =
