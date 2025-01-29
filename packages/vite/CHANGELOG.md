@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.4.7
+
+### Patch Changes
+
+- [`d58e598`](https://github.com/preactjs/prefresh/commit/d58e598da66e61b274a3f6b195c460793db53ee8) [#563](https://github.com/preactjs/prefresh/pull/563) Thanks [@rschristian](https://github.com/rschristian)! - Ensures plugin does not run alongside Vitest, fixing an issue that may occur when using mocks/fakes.
+
 ## 2.4.6
 
 ### Patch Changes
