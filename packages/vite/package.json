@@ -1,6 +1,6 @@
 {
   "name": "@prefresh/vite",
-  "version": "2.4.6",
+  "version": "2.4.7",
   "main": "src/index.js",
   "types": "index.d.ts",
   "exports": {
