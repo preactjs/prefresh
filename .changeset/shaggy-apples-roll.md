@@ -2,4 +2,4 @@
 '@prefresh/vite': patch
 ---
 
-Ensures plugin does not run alongside Vitest. Plugin will be limited to only running in development mode.
+Ensures plugin does not run alongside Vitest, fixing an issue that may occur when using mocks/fakes.
