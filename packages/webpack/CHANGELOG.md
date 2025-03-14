@@ -1,5 +1,11 @@
 # @prefresh/webpack
 
+## 4.0.2
+
+### Patch Changes
+
+- [`be5378d`](https://github.com/preactjs/prefresh/commit/be5378da372fb9aad792fe032ee419196293b4b3) [#566](https://github.com/preactjs/prefresh/pull/566) Thanks [@lfre](https://github.com/lfre)! - Add entryOptions option to the webpack entry
+
 ## 4.0.1
 
 ### Patch Changes
