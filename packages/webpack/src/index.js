@@ -20,6 +20,7 @@ class ReloadPlugin {
     this.options = {
       overlay: options && options.overlay,
       runsInNextJs: Boolean(options && options.runsInNextJs),
+      entryOptions: options && options.entryOptions,
     };
   }
 
@@ -155,7 +156,7 @@ class ReloadPlugin {
           compilation.addEntry(
             compiler.context,
             dependency,
-            undefined,
+            this.options.entryOptions,
             callback
           );
         });
