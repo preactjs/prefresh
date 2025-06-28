@@ -1,5 +1,11 @@
 # @prefresh/utils
 
+## 1.2.1
+
+### Patch Changes
+
+- [`b0e73ed`](https://github.com/preactjs/prefresh/commit/b0e73ed6d97f6313200922f2914462c0f016313d) [#572](https://github.com/preactjs/prefresh/pull/572) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Add descriptions to package.json
+
 ## 1.2.0
 
 ### Minor Changes

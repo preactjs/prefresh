@@ -1,6 +1,6 @@
 {
   "name": "@prefresh/utils",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Shared utilities for the prefresh integrations.",
   "module": "src/index.js",
   "main": "dist/src/index.js",
