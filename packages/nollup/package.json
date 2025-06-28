@@ -1,6 +1,7 @@
 {
   "name": "@prefresh/nollup",
   "version": "4.0.1",
+  "description": "A nollup plugin to enable fast-refresh for Preact components.",
   "main": "src/index.js",
   "module": "src/wrapper.mjs",
   "exports": {
