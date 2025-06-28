@@ -1,6 +1,7 @@
 {
   "name": "@prefresh/web-dev-server",
   "version": "1.1.2",
+  "description": "A web-dev-server plugin to enable fast-refresh for Preact components.",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
   "exports": {

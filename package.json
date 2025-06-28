@@ -1,5 +1,6 @@
 {
   "name": "prefresh",
+  "description": "Prefresh is a library for fast-refresh with Preact.",
   "scripts": {
     "build": "pnpm --filter @prefresh/web-dev-server build && pnpm --filter @prefresh/utils build && pnpm --filter @prefresh/babel-plugin build",
     "lint": "eslint src",
