@@ -1,5 +1,5 @@
 import { options } from 'preact';
-import { vnodesForComponent, mappedVNodes } from './vnodesForComponent';
+import { vnodesForComponent, mappedVNodes, lastSeen } from './vnodesForComponent';
 import { VNODE_COMPONENT } from '../constants';
 
 const getMappedVnode = type => {
@@ -53,6 +53,7 @@ const oldDiffed = options.diffed;
 options.diffed = vnode => {
   if (vnode && typeof vnode.type === 'function') {
     const vnodes = vnodesForComponent.get(vnode.type);
+    lastSeen.set(vnode.__v, vnode);
     if (vnodes) {
       const matchingDom = vnodes.filter(p => p.__c === vnode.__c);
       if (matchingDom.length > 1) {

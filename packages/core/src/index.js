@@ -17,7 +17,7 @@ import {
   HOOK_CLEANUP,
 } from './constants';
 import { computeKey } from './computeKey';
-import { vnodesForComponent, mappedVNodes } from './runtime/vnodesForComponent';
+import { vnodesForComponent, mappedVNodes, lastSeen } from './runtime/vnodesForComponent';
 import { signaturesForType } from './runtime/signaturesForType';
 
 let typesById = new Map();
@@ -53,8 +53,15 @@ function replaceComponent(OldType, NewType, resetHookState) {
 
   pendingUpdates = pendingUpdates.filter(p => p[0] !== OldType);
 
-  vnodes.forEach(vnode => {
-    if (!vnode.__c || !vnode.__c.__P) return;
+  vnodes.forEach(node => {
+    let vnode = node;
+    if (!vnode.__c) {
+      vnode = lastSeen.get(vnode.__v, vnode);
+      lastSeen.delete(vnode.__v);
+    }
+
+    // if the vnode
+    if (!vnode || !vnode.__c || !vnode.__c.__P) return;
     // update the type in-place to reference the new component
     vnode.type = NewType;
 
@@ -171,6 +178,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
         });
       }
 
+      console.log('Forcing update for vnode', vnode);
       Component.prototype.forceUpdate.call(vnode[VNODE_COMPONENT]);
     }
   });
