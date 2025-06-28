@@ -1,5 +1,15 @@
 # @prefresh/webpack
 
+## 4.0.3
+
+### Patch Changes
+
+- [`b0e73ed`](https://github.com/preactjs/prefresh/commit/b0e73ed6d97f6313200922f2914462c0f016313d) [#572](https://github.com/preactjs/prefresh/pull/572) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Add descriptions to package.json
+
+- Updated dependencies [[`dbf8e68`](https://github.com/preactjs/prefresh/commit/dbf8e68afd27f338a683426214f52ed4e453051c), [`b0e73ed`](https://github.com/preactjs/prefresh/commit/b0e73ed6d97f6313200922f2914462c0f016313d)]:
+  - @prefresh/core@1.5.4
+  - @prefresh/utils@1.2.1
+
 ## 4.0.2
 
 ### Patch Changes

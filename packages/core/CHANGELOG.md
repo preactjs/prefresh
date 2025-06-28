@@ -1,5 +1,13 @@
 # @prefresh/core
 
+## 1.5.4
+
+### Patch Changes
+
+- [`dbf8e68`](https://github.com/preactjs/prefresh/commit/dbf8e68afd27f338a683426214f52ed4e453051c) [#571](https://github.com/preactjs/prefresh/pull/571) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix case where Fragment wrapped children loses all references
+
+- [`b0e73ed`](https://github.com/preactjs/prefresh/commit/b0e73ed6d97f6313200922f2914462c0f016313d) [#572](https://github.com/preactjs/prefresh/pull/572) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Add descriptions to package.json
+
 ## 1.5.3
 
 ### Patch Changes
