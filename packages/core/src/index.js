@@ -178,7 +178,6 @@ function replaceComponent(OldType, NewType, resetHookState) {
         });
       }
 
-      console.log('Forcing update for vnode', vnode);
       Component.prototype.forceUpdate.call(vnode[VNODE_COMPONENT]);
     }
   });
