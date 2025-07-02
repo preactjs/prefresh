@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.5.5
+
+### Patch Changes
+
+- [`73807d24be7ff38cfe111edeaaba8fc8f7a9cb21`](https://github.com/preactjs/prefresh/commit/73807d24be7ff38cfe111edeaaba8fc8f7a9cb21) [#575](https://github.com/preactjs/prefresh/pull/575) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Remove log from update logic
+
 ## 1.5.4
 
 ### Patch Changes
