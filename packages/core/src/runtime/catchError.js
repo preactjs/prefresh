@@ -1,14 +1,13 @@
 import { options } from 'preact';
 import {
   CATCH_ERROR_OPTION,
-  COMPONENT_DIRTY,
-  VNODE_COMPONENT,
 } from '../constants';
+import { isDirty, unsetDirty } from '../utils';
 
 const oldCatchError = options[CATCH_ERROR_OPTION];
 options[CATCH_ERROR_OPTION] = (error, vnode, oldVNode) => {
-  if (vnode[VNODE_COMPONENT] && vnode[VNODE_COMPONENT][COMPONENT_DIRTY]) {
-    vnode[VNODE_COMPONENT][COMPONENT_DIRTY] = false;
+  if (isDirty(vnode)) {
+    unsetDirty(vnode);
   }
 
   if (oldCatchError) oldCatchError(error, vnode, oldVNode);
