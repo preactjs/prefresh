@@ -1,6 +1,6 @@
 {
   "name": "@prefresh/web-dev-server",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "A web-dev-server plugin to enable fast-refresh for Preact components.",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
@@ -47,7 +47,7 @@
   "dependencies": {
     "@babel/core": "^7.22.1",
     "@prefresh/babel-plugin": "0.5.2",
-    "@prefresh/core": "^1.5.4",
+    "@prefresh/core": "^1.5.6",
     "@prefresh/utils": "^1.2.1"
   },
   "devDependencies": {
