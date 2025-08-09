@@ -27,7 +27,7 @@
     "preact": "^10.15.1"
   },
   "peerDependencies": {
-    "preact": "^10.0.0"
+    "preact": "^10.0.0 || ^11.0.0"
   },
   "publishConfig": {
     "provenance": true
