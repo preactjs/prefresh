@@ -1,5 +1,14 @@
 # @prefresh/nollup
 
+## 4.0.3
+
+### Patch Changes
+
+- [`071ae156bf2eb715b7369f48c35b0ce5318ebaf3`](https://github.com/preactjs/prefresh/commit/071ae156bf2eb715b7369f48c35b0ce5318ebaf3) [#581](https://github.com/preactjs/prefresh/pull/581) Thanks [@rschristian](https://github.com/rschristian)! - Expand semver ranges to support the upcoming v11 beta release
+
+- Updated dependencies [[`071ae156bf2eb715b7369f48c35b0ce5318ebaf3`](https://github.com/preactjs/prefresh/commit/071ae156bf2eb715b7369f48c35b0ce5318ebaf3), [`a896aff2ca548b596c10756f62a9adeb50b5fcbe`](https://github.com/preactjs/prefresh/commit/a896aff2ca548b596c10756f62a9adeb50b5fcbe), [`7337e7073db08d4bebaad7bbe7ebd6368af46b94`](https://github.com/preactjs/prefresh/commit/7337e7073db08d4bebaad7bbe7ebd6368af46b94), [`34af6dde0004498a31a32b0daddea9808a9bf3a0`](https://github.com/preactjs/prefresh/commit/34af6dde0004498a31a32b0daddea9808a9bf3a0)]:
+  - @prefresh/core@1.5.6
+
 ## 4.0.2
 
 ### Patch Changes
