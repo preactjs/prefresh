@@ -66,10 +66,10 @@ importers:
         specifier: ^0.5.0
         version: 0.5.1
       '@prefresh/core':
-        specifier: ^1.5.0
-        version: 1.5.4(preact@10.26.9)
+        specifier: ^1.5.6
+        version: 1.5.6(preact@10.26.9)
       '@prefresh/utils':
-        specifier: ^1.2.0
+        specifier: ^1.2.1
         version: 1.2.1
     devDependencies:
       nollup:
@@ -687,6 +687,11 @@ packages:
     resolution: {integrity: sha512-F7Sd/qnPX2QEkgiJr0hmImYjp6s85chlkR3Y9ncWVSMusN3UM9vMhQIdcYo/ugqxqo7cKH7Y7Oofrsimf7TWuQ==}
     peerDependencies:
       preact: ^10.0.0
+
+  '@prefresh/core@1.5.6':
+    resolution: {integrity: sha512-rmCc3ioWqUkWZo1/0T/dsz8gae52d1J1n/sHg3bnNzqyzD/TrBYlkBeE2i9L78DV3a99vuiUGz1oE+uliK1+4g==}
+    peerDependencies:
+      preact: ^10.0.0 || ^11.0.0
 
   '@prefresh/utils@1.2.1':
     resolution: {integrity: sha512-vq/sIuN5nYfYzvyayXI4C2QkprfNaHUQ9ZX+3xLD8nL3rWyzpxOm1+K7RtMbhd+66QcaISViK7amjnheQ/4WZw==}
@@ -5643,6 +5648,10 @@ snapshots:
   '@prefresh/babel-plugin@0.5.2': {}
 
   '@prefresh/core@1.5.4(preact@10.26.9)':
+    dependencies:
+      preact: 10.26.9
+
+  '@prefresh/core@1.5.6(preact@10.26.9)':
     dependencies:
       preact: 10.26.9
 
