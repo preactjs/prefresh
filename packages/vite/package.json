@@ -47,7 +47,7 @@
     "vite": "^5.0.13"
   },
   "peerDependencies": {
-    "preact": "^10.4.0 || ^11.0.0",
+    "preact": "^10.4.0 || ^11.0.0-0",
     "vite": ">=2.0.0"
   },
   "publishConfig": {
