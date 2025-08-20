@@ -59,7 +59,7 @@
   "peerDependencies": {
     "@web/dev-server": "^0.0.18",
     "@web/dev-server-hmr": "^0.0.2",
-    "preact": "^10.4.0 || ^11.0.0"
+    "preact": "^10.4.0 || ^11.0.0-0"
   },
   "publishConfig": {
     "provenance": true
