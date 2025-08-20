@@ -1,5 +1,14 @@
 # @prefresh/webpack
 
+## 4.0.5
+
+### Patch Changes
+
+- [`c1f1372542cb586643151693c32cc46079150ef7`](https://github.com/preactjs/prefresh/commit/c1f1372542cb586643151693c32cc46079150ef7) [#585](https://github.com/preactjs/prefresh/pull/585) Thanks [@rschristian](https://github.com/rschristian)! - Correct semver range to support _beta_ releases of Preact v11
+
+- Updated dependencies [[`c1f1372542cb586643151693c32cc46079150ef7`](https://github.com/preactjs/prefresh/commit/c1f1372542cb586643151693c32cc46079150ef7)]:
+  - @prefresh/core@1.5.7
+
 ## 4.0.4
 
 ### Patch Changes

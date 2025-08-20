@@ -1,6 +1,6 @@
 {
   "name": "@prefresh/vite",
-  "version": "2.4.9",
+  "version": "2.4.10",
   "description": "A vite plugin to enable fast-refresh for Preact components.",
   "main": "src/index.js",
   "types": "index.d.ts",
@@ -38,7 +38,7 @@
   "dependencies": {
     "@babel/core": "^7.22.1",
     "@prefresh/babel-plugin": "0.5.2",
-    "@prefresh/core": "^1.5.0",
+    "@prefresh/core": "^1.5.7",
     "@prefresh/utils": "^1.2.0",
     "@rollup/pluginutils": "^4.2.1"
   },
