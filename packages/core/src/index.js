@@ -55,7 +55,7 @@ function replaceComponent(OldType, NewType, resetHookState) {
 
   vnodes.forEach(node => {
     let vnode = node;
-    if (vnode && vnode.__v && !vnode.__c) {
+    if (vnode && vnode.__v && !vnode.__c && lastSeen.has(vnode.__v)) {
       vnode = lastSeen.get(vnode.__v, vnode);
       lastSeen.delete(vnode.__v);
     }
