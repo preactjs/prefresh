@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.5.8
+
+### Patch Changes
+
+- [`ef00e88492e2f75388ce7c293753532afcb8e595`](https://github.com/preactjs/prefresh/commit/ef00e88492e2f75388ce7c293753532afcb8e595) [#590](https://github.com/preactjs/prefresh/pull/590) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Add check for last seen vnode in index.js
+
 ## 1.5.7
 
 ### Patch Changes
