@@ -41,6 +41,7 @@ module.exports = function () {
           if (moduleHot.invalidate) {
             moduleHot.invalidate();
           } else {
+            console.log('[PREFRESH] Failed to flush updates:', e);
             self.location.reload();
           }
         }
