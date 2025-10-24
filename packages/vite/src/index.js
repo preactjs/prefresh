@@ -10,7 +10,10 @@ module.exports = function prefreshPlugin(options = {}) {
   return {
     name: 'prefresh',
     configResolved(config) {
-      shouldSkip = config.isProduction || config.command === 'build' || config.server.hmr === false;
+      shouldSkip =
+        config.isProduction ||
+        config.command === 'build' ||
+        config.server.hmr === false;
     },
     async transform(code, id, options) {
       const ssr =
@@ -91,6 +94,7 @@ module.exports = function prefreshPlugin(options = {}) {
             try {
               flushUpdates();
             } catch (e) {
+              console.log('[PREFRESH] Failed to flush updates:', e);
               self.location.reload();
             }
           });
