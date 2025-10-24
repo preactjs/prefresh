@@ -94,7 +94,7 @@ module.exports = function prefreshPlugin(options = {}) {
             try {
               flushUpdates();
             } catch (e) {
-             console.log('[PREFRESH] Failed to flush updates:', e);
+              console.log('[PREFRESH] Failed to flush updates:', e);
               self.location.reload();
             }
           });
