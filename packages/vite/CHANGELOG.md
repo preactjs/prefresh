@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 2.4.11
+
+### Patch Changes
+
+- [`e4dbe7ad8701300a018c4e915afce923d2531866`](https://github.com/preactjs/prefresh/commit/e4dbe7ad8701300a018c4e915afce923d2531866) [#593](https://github.com/preactjs/prefresh/pull/593) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Convey information when an update fails
+
 ## 2.4.10
 
 ### Patch Changes
