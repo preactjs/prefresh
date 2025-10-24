@@ -1,6 +1,6 @@
 {
   "name": "@prefresh/vite",
-  "version": "2.4.10",
+  "version": "2.4.11",
   "description": "A vite plugin to enable fast-refresh for Preact components.",
   "main": "src/index.js",
   "types": "index.d.ts",

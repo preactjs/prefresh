@@ -1,6 +1,6 @@
 {
   "name": "@prefresh/webpack",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "description": "A webpack plugin to enable fast-refresh for Preact components.",
   "main": "src/index.js",
   "type": "commonjs",
