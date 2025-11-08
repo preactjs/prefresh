@@ -48,7 +48,7 @@ describe('Suspense', () => {
       filter: file => !/dist|node_modules/.test(file),
     });
 
-    await execa('yarn', { cwd: getTempDir(integration) });
+    await execa('pnpm', { cwd: getTempDir(integration) });
 
     browser = await puppeteer.launch({
       headless: 'new',
