@@ -8,7 +8,7 @@ This steps will help you to set up your development environment.
 
 1. Clone the git repository: `git clone git@github.com:preactjs/prefresh.git`
 2. Go into the cloned folder: `cd prefresh/`
-3. Install all dependencies: `pnpm`
+3. Install all dependencies: `pnpm install`
 
 All linting will be done in pre-commit hooks and we're using eslint + prettier for that.
 
@@ -27,4 +27,4 @@ have changed and whether the change is major/minor/patch. It will then ask you t
 Running a fixture locally can be somewhat of a pain as the paths in the `package.json`
 are meant for it being hoisted one level higher, the process we use to test locally is
 to adjust the local paths like `file:../../packages/core` to `file:../../../packages/core`
-and then run `pnpm`, this will enable you to run this fixture locally.
+and then run `pnpm install`, this will enable you to run this fixture locally.

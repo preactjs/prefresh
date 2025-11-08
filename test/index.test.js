@@ -74,7 +74,7 @@ describe('Prefresh integrations', () => {
           filter: file => !/dist|node_modules/.test(file),
         });
 
-        await execa('pnpm', { cwd: getTempDir(integration) });
+        await execa('pnpm install', { cwd: getTempDir(integration) });
 
         browser = await puppeteer.launch({
           headless: 'new',
