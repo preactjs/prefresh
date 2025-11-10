@@ -20,6 +20,25 @@ const isBuiltIn = type => {
   return BUILT_IN_COMPONENTS.includes(type.name);
 };
 
+const oldVnode = options.vnode;
+options.vnode = vnode => {
+  if (vnode && typeof vnode.type === 'function' && !isBuiltIn(vnode.type)) {
+    const foundType = getMappedVnode(vnode.type);
+    if (foundType !== vnode.type) {
+      vnode.type = foundType;
+      if (
+        vnode[VNODE_COMPONENT] &&
+        'prototype' in vnode.type &&
+        vnode.type.prototype.render
+      ) {
+        vnode[VNODE_COMPONENT].constructor = vnode.type;
+      }
+    }
+  }
+
+  if (oldVnode) oldVnode(vnode);
+};
+
 const oldDiff = options.__b;
 options.__b = vnode => {
   if (vnode && typeof vnode.type === 'function' && !isBuiltIn(vnode.type)) {
@@ -28,25 +47,6 @@ options.__b = vnode => {
       vnodesForComponent.set(vnode.type, [vnode]);
     } else {
       vnodes.push(vnode);
-    }
-
-    const foundType = getMappedVnode(vnode.type);
-    if (foundType !== vnode.type) {
-      const vnodes = vnodesForComponent.get(foundType);
-      if (!vnodes) {
-        vnodesForComponent.set(foundType, [vnode]);
-      } else {
-        vnodes.push(vnode);
-      }
-    }
-
-    vnode.type = foundType;
-    if (
-      vnode[VNODE_COMPONENT] &&
-      'prototype' in vnode.type &&
-      vnode.type.prototype.render
-    ) {
-      vnode[VNODE_COMPONENT].constructor = vnode.type;
     }
   }
 
