@@ -1,5 +1,9 @@
 import { options } from 'preact';
-import { vnodesForComponent, mappedVNodes, lastSeen } from './vnodesForComponent';
+import {
+  vnodesForComponent,
+  mappedVNodes,
+  lastSeen,
+} from './vnodesForComponent';
 import { VNODE_COMPONENT } from '../constants';
 
 const getMappedVnode = type => {
@@ -13,11 +17,11 @@ const getMappedVnode = type => {
 const BUILT_IN_COMPONENTS = ['Fragment', 'Suspense', 'SuspenseList'];
 
 const isBuiltIn = type => {
-  return BUILT_IN_COMPONENTS.includes(type.name)
-}
+  return BUILT_IN_COMPONENTS.includes(type.name);
+};
 
-const oldVnode = options.vnode;
-options.vnode = vnode => {
+const oldVnode = options.__b;
+options.__b = vnode => {
   if (vnode && typeof vnode.type === 'function' && !isBuiltIn(vnode.type)) {
     const vnodes = vnodesForComponent.get(vnode.type);
     if (!vnodes) {
