@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.5.9
+
+### Patch Changes
+
+- [`6ad366f68fb445493881c13be98055038aed08a9`](https://github.com/preactjs/prefresh/commit/6ad366f68fb445493881c13be98055038aed08a9) [#599](https://github.com/preactjs/prefresh/pull/599) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Cleanup unmounted vnodes
+
 ## 1.5.8
 
 ### Patch Changes
