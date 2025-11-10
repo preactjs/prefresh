@@ -20,7 +20,7 @@ const isBuiltIn = type => {
   return BUILT_IN_COMPONENTS.includes(type.name);
 };
 
-const oldVnode = options.__b;
+const oldDiff = options.__b;
 options.__b = vnode => {
   if (vnode && typeof vnode.type === 'function' && !isBuiltIn(vnode.type)) {
     const vnodes = vnodesForComponent.get(vnode.type);
@@ -50,7 +50,7 @@ options.__b = vnode => {
     }
   }
 
-  if (oldVnode) oldVnode(vnode);
+  if (oldDiff) oldDiff(vnode);
 };
 
 const oldDiffed = options.diffed;
