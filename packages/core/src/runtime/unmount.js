@@ -7,10 +7,10 @@ options.unmount = vnode => {
   if (typeof type === 'function' && vnodesForComponent.has(type)) {
     const vnodes = vnodesForComponent.get(type);
     if (vnodes) {
-      const index = vnodes.indexOf(vnode);
-      if (index !== -1) {
-        vnodes.splice(index, 1);
-      }
+      const mountedVnodesForType = vnodes.filter(
+        p => p.__c && p.__c !== vnode.__c
+      );
+      vnodesForComponent.set(vnode.type, mountedVnodesForType);
     }
   }
 
