@@ -123,7 +123,7 @@ describe('Signals', () => {
     );
 
     await timeout(TIMEOUT);
-    await expectByPolling(() => getText(countValue), 'count: 1');
+    await expectByPolling(() => getText(countValue), 'count: 0');
 
     await increment.click();
     await increment.click();
@@ -135,6 +135,7 @@ describe('Signals', () => {
       content.replace('count:', 'Count:')
     );
     await timeout(TIMEOUT);
+    await expectByPolling(() => getText(countValue), 'Count: 0');
 
     await increment.click();
     await expectByPolling(() => getText(countValue), 'Count: 1');
