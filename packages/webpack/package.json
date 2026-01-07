@@ -29,7 +29,7 @@
     "@prefresh/utils": "^1.2.0"
   },
   "devDependencies": {
-    "preact": "^10.15.1",
+    "preact": "^10.26.10",
     "webpack": "^4.46.0",
     "webpack-dev-server": "^5.2.1"
   },

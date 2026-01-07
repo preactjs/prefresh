@@ -57,8 +57,8 @@ importers:
   packages/core:
     devDependencies:
       preact:
-        specifier: ^10.15.1
-        version: 10.26.9
+        specifier: ^10.26.10
+        version: 10.26.10
 
   packages/nollup:
     dependencies:
@@ -67,7 +67,7 @@ importers:
         version: 0.5.1
       '@prefresh/core':
         specifier: ^1.5.6
-        version: 1.5.6(preact@10.26.9)
+        version: 1.5.6(preact@10.26.10)
       '@prefresh/utils':
         specifier: ^1.2.1
         version: 1.2.1
@@ -76,8 +76,8 @@ importers:
         specifier: ^0.13.13
         version: 0.13.13(rollup@4.52.5)
       preact:
-        specifier: ^10.15.1
-        version: 10.26.9
+        specifier: ^10.26.10
+        version: 10.26.10
 
   packages/utils:
     devDependencies:
@@ -95,7 +95,7 @@ importers:
         version: 0.5.2
       '@prefresh/core':
         specifier: ^1.5.0
-        version: 1.5.4(preact@10.26.9)
+        version: 1.5.4(preact@10.26.10)
       '@prefresh/utils':
         specifier: ^1.2.0
         version: 1.2.1
@@ -104,8 +104,8 @@ importers:
         version: 4.2.1
     devDependencies:
       preact:
-        specifier: ^10.15.1
-        version: 10.26.9
+        specifier: ^10.26.10
+        version: 10.26.10
       vite:
         specifier: ^5.4.21
         version: 5.4.21(@types/node@24.3.0)
@@ -120,7 +120,7 @@ importers:
         version: 0.5.2
       '@prefresh/core':
         specifier: ^1.5.0
-        version: 1.5.4(preact@10.26.9)
+        version: 1.5.4(preact@10.26.10)
       '@prefresh/utils':
         specifier: ^1.2.0
         version: 1.2.1
@@ -135,8 +135,8 @@ importers:
         specifier: ^1.1.5
         version: 1.1.5
       preact:
-        specifier: ^10.15.1
-        version: 10.26.9
+        specifier: ^10.26.10
+        version: 10.26.10
 
   packages/webpack:
     dependencies:
@@ -145,14 +145,14 @@ importers:
         version: 0.5.1
       '@prefresh/core':
         specifier: ^1.5.0
-        version: 1.5.4(preact@10.26.9)
+        version: 1.5.4(preact@10.26.10)
       '@prefresh/utils':
         specifier: ^1.2.0
         version: 1.2.1
     devDependencies:
       preact:
-        specifier: ^10.15.1
-        version: 10.26.9
+        specifier: ^10.26.10
+        version: 10.26.10
       webpack:
         specifier: ^4.46.0
         version: 4.47.0
@@ -3185,6 +3185,7 @@ packages:
   keygrip@1.1.0:
     resolution: {integrity: sha512-iYSchDJ+liQ8iwbSI2QqsQOvqv58eJCEanyJPJi+Khyu8smkcKSFUCbPwzFcL7YVtZ6eONjqRX/38caJ7QjRAQ==}
     engines: {node: '>= 0.6'}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -3772,8 +3773,8 @@ packages:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
     engines: {node: ^10 || ^12 || >=14}
 
-  preact@10.26.9:
-    resolution: {integrity: sha512-SSjF9vcnF27mJK1XyFMNJzFd5u3pQiATFqoaDy03XuN00u4ziveVVEGt5RKJrDR8MHE/wJo9Nnad56RLzS2RMA==}
+  preact@10.26.10:
+    resolution: {integrity: sha512-sqdfdSa8AZeJ+wfMYjFImIRTnhfyPSLCH+LEb1+BoRUDKLnE6AnvZeClx3Bkj2Q9nn44GFAefOKIx5oc54q93A==}
 
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
@@ -5633,13 +5634,13 @@ snapshots:
 
   '@prefresh/babel-plugin@0.5.2': {}
 
-  '@prefresh/core@1.5.4(preact@10.26.9)':
+  '@prefresh/core@1.5.4(preact@10.26.10)':
     dependencies:
-      preact: 10.26.9
+      preact: 10.26.10
 
-  '@prefresh/core@1.5.6(preact@10.26.9)':
+  '@prefresh/core@1.5.6(preact@10.26.10)':
     dependencies:
-      preact: 10.26.9
+      preact: 10.26.10
 
   '@prefresh/utils@1.2.1': {}
 
@@ -9455,7 +9456,7 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  preact@10.26.9: {}
+  preact@10.26.10: {}
 
   prelude-ls@1.2.1: {}
 
