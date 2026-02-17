@@ -1,5 +1,11 @@
 # @prefresh/babel-plugin
 
+## 0.5.3
+
+### Patch Changes
+
+- [`2b79884480b19bc02ee06eba59f2882672c0e7f0`](https://github.com/preactjs/prefresh/commit/2b79884480b19bc02ee06eba59f2882672c0e7f0) [#604](https://github.com/preactjs/prefresh/pull/604) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Properly support signals
+
 ## 0.5.2
 
 ### Patch Changes
