@@ -1,5 +1,12 @@
 # @prefresh/vite
 
+## 2.4.12
+
+### Patch Changes
+
+- Updated dependencies [[`2b79884480b19bc02ee06eba59f2882672c0e7f0`](https://github.com/preactjs/prefresh/commit/2b79884480b19bc02ee06eba59f2882672c0e7f0)]:
+  - @prefresh/babel-plugin@0.5.3
+
 ## 2.4.11
 
 ### Patch Changes
