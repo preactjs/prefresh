@@ -236,6 +236,8 @@ export default function (babel, opts = {}) {
       case 'React.useImperativeMethods':
       case 'useDebugValue':
       case 'React.useDebugValue':
+      case 'useSignal':
+      case 'React.useSignal':
         return true;
       default:
         return false;
@@ -389,6 +391,9 @@ export default function (babel, opts = {}) {
       } else if (name === 'useReducer' && args.length > 1) {
         // useReducer second argument is initial state.
         key += '(' + args[1].getSource() + ')';
+      } else if (name === 'useSignal' && args.length > 0) {
+        // useSignal first argument is initial value.
+        key += '(' + args[0].getSource() + ')';
       }
 
       hookCallsForFn.push({
