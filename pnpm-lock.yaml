@@ -91,7 +91,7 @@ importers:
         specifier: ^7.22.1
         version: 7.27.7
       '@prefresh/babel-plugin':
-        specifier: 0.5.2
+        specifier: ^0.5.2
         version: 0.5.2
       '@prefresh/core':
         specifier: ^1.5.0
@@ -116,7 +116,7 @@ importers:
         specifier: ^7.22.1
         version: 7.27.7
       '@prefresh/babel-plugin':
-        specifier: 0.5.2
+        specifier: ^0.5.2
         version: 0.5.2
       '@prefresh/core':
         specifier: ^1.5.0
