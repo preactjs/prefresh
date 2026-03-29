@@ -7,6 +7,7 @@ Fast-refresh for Preact!
 - [@web/dev-server](https://github.com/preactjs/prefresh/tree/main/packages/web-dev-server)
 - [gatsby](https://www.gatsbyjs.org/packages/gatsby-plugin-preact/)
 - [nollup](https://github.com/preactjs/prefresh/tree/main/packages/nollup)
+- [rolldown](https://github.com/preactjs/prefresh/tree/main/packages/rolldown)
 - [vite](https://github.com/preactjs/prefresh/tree/main/packages/vite)
 - [webpack](https://github.com/preactjs/prefresh/tree/main/packages/webpack)
 
