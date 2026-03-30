@@ -28,17 +28,22 @@ function preactOptionsPlugin(useBabel) {
       const oxc = config.oxc || {};
       const jsx = oxc.jsx || {};
 
-      return {
+      const supportsRolldown =
+				this && "meta" in this && this.meta && typeof this.meta === "object"
+					? "rolldownVersion" in this.meta
+					: false;
+
+      return supportsRolldown ? {
         oxc: {
           ...oxc,
           jsx: {
             ...jsx,
-            importSource: 'preact',
+            importSource: oxc.jsx.importSource || 'preact',
             refresh: !useBabel && command === 'serve',
           },
           jsxRefreshInclude: oxc.jsxRefreshInclude || /\.[jt]sx$/,
         },
-      };
+      } : {};
     },
   };
 }
