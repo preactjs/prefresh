@@ -2,18 +2,109 @@ const { transformSync } = require('@babel/core');
 const { createFilter } = require('@rollup/pluginutils');
 const prefreshBabelPlugin = require('@prefresh/babel-plugin');
 
+const SCRIPT_LANG_RE = /\.(c|m)?(t|j)sx?$/;
+
+/** @returns {Promise<import('vite').PluginOption>} */
+module.exports = async function prefreshPlugin(options = {}) {
+  const { default: prefreshRolldown } = await import('@prefresh/rolldown');
+  const useBabel = Object.prototype.hasOwnProperty.call(
+    options,
+    'parserPlugins'
+  );
+
+  return [
+    preactOptionsPlugin(useBabel),
+    ...(useBabel ? [prefreshBabelTransformPlugin(options)] : []),
+    prefreshRolldown(),
+    prefreshWrapperPlugin(options),
+  ];
+};
+
 /** @returns {import('vite').Plugin} */
-module.exports = function prefreshPlugin(options = {}) {
+function preactOptionsPlugin(useBabel) {
+  return {
+    name: 'prefresh-preact-options',
+    config(config, { command }) {
+      const oxc = config.oxc || {};
+      const jsx = oxc.jsx || {};
+
+      return {
+        oxc: {
+          ...oxc,
+          jsx: {
+            ...jsx,
+            importSource: 'preact',
+            refresh: !useBabel && command === 'serve',
+          },
+          jsxRefreshInclude: oxc.jsxRefreshInclude || /\.[jt]sx$/,
+        },
+      };
+    },
+  };
+}
+
+/** @returns {import('vite').Plugin} */
+function prefreshBabelTransformPlugin(options = {}) {
   let shouldSkip = false;
   const filter = createFilter(options.include, options.exclude);
 
   return {
-    name: 'prefresh',
+    name: 'prefresh-babel-transform',
+    apply: 'serve',
     configResolved(config) {
-      shouldSkip =
-        config.isProduction ||
-        config.command === 'build' ||
-        config.server.hmr === false;
+      shouldSkip = config.server.hmr === false;
+    },
+    transform(code, id, transformOptions) {
+      const ssr =
+        typeof transformOptions === 'boolean'
+          ? transformOptions
+          : transformOptions && transformOptions.ssr === true;
+      if (
+        shouldSkip ||
+        !SCRIPT_LANG_RE.test(id) ||
+        id.includes('node_modules') ||
+        id.includes('?worker') ||
+        !filter(id) ||
+        ssr
+      ) {
+        return;
+      }
+
+      const parserPlugins = [
+        'jsx',
+        'classProperties',
+        'classPrivateProperties',
+        'classPrivateMethods',
+        /\.(c|m)?tsx?$/.test(id) && 'typescript',
+        ...((options && options.parserPlugins) || []),
+      ].filter(Boolean);
+
+      return transform(code, id, parserPlugins);
+    },
+  };
+}
+
+/** @returns {import('vite').Plugin} */
+function prefreshWrapperPlugin(options = {}) {
+  let shouldSkip = false;
+  const filter = createFilter(options.include, options.exclude);
+
+  return {
+    name: 'prefresh-wrapper',
+    apply: 'serve',
+    config(config) {
+      const include = config.optimizeDeps?.include || [];
+
+      return {
+        optimizeDeps: {
+          include: [
+            ...new Set([...include, '@prefresh/core', '@prefresh/utils']),
+          ],
+        },
+      };
+    },
+    configResolved(config) {
+      shouldSkip = config.server.hmr === false;
     },
     async transform(code, id, options) {
       const ssr =
@@ -22,28 +113,19 @@ module.exports = function prefreshPlugin(options = {}) {
           : options && options.ssr === true;
       if (
         shouldSkip ||
-        !/\.(c|m)?(t|j)sx?$/.test(id) ||
+        !SCRIPT_LANG_RE.test(id) ||
         id.includes('node_modules') ||
         id.includes('?worker') ||
         !filter(id) ||
         ssr
-      )
+      ) {
         return;
+      }
 
-      const parserPlugins = [
-        'jsx',
-        'classProperties',
-        'classPrivateProperties',
-        'classPrivateMethods',
-        /\.tsx?$/.test(id) && 'typescript',
-        ...((options && options.parserPlugins) || []),
-      ].filter(Boolean);
+      const hasReg = /\$RefreshReg\$\(/.test(code);
+      const hasSig = /\$RefreshSig\$\(/.test(code);
 
-      const result = transform(code, id, parserPlugins);
-      const hasReg = /\$RefreshReg\$\(/.test(result.code);
-      const hasSig = /\$RefreshSig\$\(/.test(result.code);
-
-      if (!hasSig && !hasReg) return code;
+      if (!hasSig && !hasReg) return;
 
       const prefreshCore = await this.resolve('@prefresh/core', __filename);
       const prefreshUtils = await this.resolve('@prefresh/utils', __filename);
@@ -79,13 +161,13 @@ module.exports = function prefreshPlugin(options = {}) {
 
       if (hasSig && !hasReg) {
         return {
-          code: `${prelude}${result.code}`,
-          map: result.map,
+          code: `${prelude}${code}`,
+          map: null,
         };
       }
 
       return {
-        code: `${prelude}${result.code}
+        code: `${prelude}${code}
 
         if (import.meta.hot) {
           self.$RefreshReg$ = prevRefreshReg;
@@ -100,11 +182,11 @@ module.exports = function prefreshPlugin(options = {}) {
           });
         }
       `,
-        map: result.map,
+        map: null,
       };
     },
   };
-};
+}
 
 const transform = (code, path, plugins) =>
   transformSync(code, {

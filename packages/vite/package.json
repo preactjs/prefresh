@@ -37,18 +37,20 @@
   "homepage": "https://github.com/preactjs/prefresh#readme",
   "dependencies": {
     "@babel/core": "^7.22.1",
-    "@prefresh/babel-plugin": "^0.5.2",
     "@prefresh/core": "^1.5.0",
+    "@prefresh/babel-plugin": "^0.5.2",
+    "@prefresh/rolldown": "workspace:*",
     "@prefresh/utils": "^1.2.0",
-    "@rollup/pluginutils": "^4.2.1"
+    "@rollup/pluginutils": "^4.2.1",
+    "rolldown": "^1.0.0-rc.12"
   },
   "devDependencies": {
     "preact": "^10.26.10",
-    "vite": "^5.4.21"
+    "vite": "^8.0.0"
   },
   "peerDependencies": {
     "preact": "^10.4.0 || ^11.0.0-0",
-    "vite": ">=2.0.0"
+    "vite": "^8.0.0"
   },
   "publishConfig": {
     "provenance": true
