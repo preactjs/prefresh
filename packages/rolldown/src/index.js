@@ -4,12 +4,13 @@ import { Visitor } from 'rolldown/utils';
 import { ScopedVisitor } from 'oxc-unshadowed-visitor';
 
 const DEFAULT_LIBRARY = ['preact', 'react', 'preact/compat'];
+const SCRIPT_LANG_RE = /\.(c|m)?(t|j)sx?$/;
 const walk = (program, visitor) => new Visitor(visitor).visit(program);
 
 function getLang(id) {
-  if (id.endsWith('.tsx')) return 'tsx';
-  if (id.endsWith('.ts')) return 'ts';
-  if (id.endsWith('.jsx')) return 'jsx';
+  if (/\.(c|m)?tsx$/.test(id)) return 'tsx';
+  if (/\.(c|m)?ts$/.test(id)) return 'ts';
+  if (/\.(c|m)?jsx$/.test(id)) return 'jsx';
   return 'js';
 }
 
@@ -49,21 +50,21 @@ export default function prefreshPlugin(options = {}) {
     enforce: 'pre',
     configResolved(config) {
       isEnabled ??= !config.isProduction;
-      if (!isEnabled) delete plugin.transform;
     },
     outputOptions() {
       if ('viteVersion' in this.meta) return;
       isEnabled ??= process.env.NODE_ENV === 'development';
-      if (!isEnabled) delete plugin.transform;
     },
     transform: {
       filter: {
-        id: /\.[jt]sx?$/,
+        id: SCRIPT_LANG_RE,
         code: {
           include: 'createContext',
         },
       },
       handler: withMagicString(function (s, id, meta) {
+        if (!isEnabled) return;
+
         const program =
           meta?.ast || this.parse(s.original, { lang: getLang(id) });
         const namedImports = new Set();

@@ -60,8 +60,54 @@ test('supports custom library configuration', async () => {
   );
 });
 
+test('matches the full prefresh vite extension set', () => {
+  const idFilter = prefreshPlugin({ enabled: true }).transform.filter.id;
+  const supported = [
+    'virtual:entry.js',
+    'virtual:entry.jsx',
+    'virtual:entry.ts',
+    'virtual:entry.tsx',
+    'virtual:entry.mjs',
+    'virtual:entry.mjsx',
+    'virtual:entry.mts',
+    'virtual:entry.mtsx',
+    'virtual:entry.cjs',
+    'virtual:entry.cjsx',
+    'virtual:entry.cts',
+    'virtual:entry.ctsx',
+  ];
+
+  for (const filename of supported) {
+    assert.equal(idFilter.test(filename), true, filename);
+  }
+
+  assert.equal(idFilter.test('virtual:entry.json'), false);
+});
+
+test('supports mjs and mtsx transforms', async () => {
+  const filenames = [
+    'virtual:entry.mjs',
+    'virtual:entry.mts',
+    'virtual:entry.mjsx',
+    'virtual:entry.mtsx',
+  ];
+
+  for (const filename of filenames) {
+    const code = await transform(
+      `import { createContext } from 'preact';\n\nexport const context = createContext();\n`,
+      {},
+      filename
+    );
+
+    assert.match(
+      stripRolldownRuntime(code),
+      /createContext\[`[0-9a-f]{16}\$context1`\] \|\| \(createContext\[`[0-9a-f]{16}\$context1`\] = createContext\(\)\);/
+    );
+  }
+});
+
 async function transform(code, options = {}, filename = 'virtual:entry.js') {
-  const ext = filename.match(/\.[jt]sx?$/)?.[0] || '.js';
+  const ext = filename.match(/\.(c|m)?(t|j)sx?$/)?.[0] || '.js';
   const virtualEntry = `virtual:entry${ext}`;
 
   const bundle = await rolldown({
