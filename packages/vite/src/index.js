@@ -14,7 +14,7 @@ module.exports = async function prefreshPlugin(options = {}) {
 
   return [
     preactOptionsPlugin(useBabel),
-    ...(useBabel ? [prefreshBabelTransformPlugin(options)] : []),
+    prefreshBabelTransformPlugin(options, useBabel),
     prefreshRolldown(),
     prefreshWrapperPlugin(options),
   ];
@@ -29,27 +29,29 @@ function preactOptionsPlugin(useBabel) {
       const jsx = oxc.jsx || {};
 
       const supportsRolldown =
-				this && "meta" in this && this.meta && typeof this.meta === "object"
-					? "rolldownVersion" in this.meta
-					: false;
+        this && 'meta' in this && this.meta && typeof this.meta === 'object'
+          ? 'rolldownVersion' in this.meta
+          : false;
 
-      return supportsRolldown ? {
-        oxc: {
-          ...oxc,
-          jsx: {
-            ...jsx,
-            importSource: oxc.jsx.importSource || 'preact',
-            refresh: !useBabel && command === 'serve',
-          },
-          jsxRefreshInclude: oxc.jsxRefreshInclude || /\.[jt]sx$/,
-        },
-      } : {};
+      return supportsRolldown
+        ? {
+            oxc: {
+              ...oxc,
+              jsx: {
+                ...jsx,
+                importSource: oxc.jsx.importSource || 'preact',
+                refresh: !useBabel && command === 'serve',
+              },
+              jsxRefreshInclude: oxc.jsxRefreshInclude || /\.[jt]sx$/,
+            },
+          }
+        : {};
     },
   };
 }
 
 /** @returns {import('vite').Plugin} */
-function prefreshBabelTransformPlugin(options = {}) {
+function prefreshBabelTransformPlugin(options = {}, useBabel) {
   let shouldSkip = false;
   const filter = createFilter(options.include, options.exclude);
 
@@ -57,7 +59,11 @@ function prefreshBabelTransformPlugin(options = {}) {
     name: 'prefresh-babel-transform',
     apply: 'serve',
     configResolved(config) {
-      shouldSkip = config.server.hmr === false;
+      const supportsRolldown =
+        this && 'meta' in this && this.meta && typeof this.meta === 'object'
+          ? 'rolldownVersion' in this.meta
+          : false;
+      shouldSkip = config.server.hmr === false || (!useBabel && supportsRolldown);
     },
     transform(code, id, transformOptions) {
       const ssr =
