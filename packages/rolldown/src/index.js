@@ -44,6 +44,173 @@ function buildContextKey(fileHash, parentKey, count, paramNames) {
 export default function prefreshPlugin(options = {}) {
   const libraries = new Set(options.library || DEFAULT_LIBRARY);
   let isEnabled = options.enabled;
+  const transformWithMagicString = withMagicString(function (s, id, meta) {
+    const program = meta?.ast || this.parse(s.original, { lang: getLang(id) });
+    const namedImports = new Set();
+    const namespaceImports = new Set();
+
+    for (const node of program.body) {
+      if (node.type !== 'ImportDeclaration') continue;
+      if (!libraries.has(node.source.value)) continue;
+
+      for (const specifier of node.specifiers) {
+        if (specifier.type === 'ImportSpecifier') {
+          const importedName =
+            specifier.imported.type === 'Identifier'
+              ? specifier.imported.name
+              : specifier.imported.value;
+
+          if (importedName === 'createContext') {
+            namedImports.add(specifier.local.name);
+          }
+        } else if (
+          specifier.type === 'ImportDefaultSpecifier' ||
+          specifier.type === 'ImportNamespaceSpecifier'
+        ) {
+          namespaceImports.add(specifier.local.name);
+        }
+      }
+    }
+
+    const trackedNames = [...namedImports, ...namespaceImports];
+    if (trackedNames.length === 0) return;
+
+    const paramNamesStack = [[]];
+    const parentKeyStack = [''];
+    let objectPatternDepth = 0;
+
+    const visitor = new ScopedVisitor({
+      trackedNames,
+      walk,
+      visitor: {
+        FunctionDeclaration(node) {
+          paramNamesStack.push(getSimpleParamNames(node.params));
+        },
+        'FunctionDeclaration:exit'() {
+          paramNamesStack.pop();
+        },
+        FunctionExpression(node) {
+          paramNamesStack.push(getSimpleParamNames(node.params));
+        },
+        'FunctionExpression:exit'() {
+          paramNamesStack.pop();
+        },
+        ArrowFunctionExpression(node) {
+          paramNamesStack.push(getSimpleParamNames(node.params));
+        },
+        'ArrowFunctionExpression:exit'() {
+          paramNamesStack.pop();
+        },
+        VariableDeclarator(node) {
+          if (node.id.type === 'Identifier') {
+            parentKeyStack.push(`$${node.id.name}`);
+          } else {
+            parentKeyStack.push(parentKeyStack[parentKeyStack.length - 1]);
+          }
+        },
+        'VariableDeclarator:exit'() {
+          parentKeyStack.pop();
+        },
+        AssignmentExpression(node) {
+          if (node.left.type === 'Identifier') {
+            parentKeyStack.push(`_${node.left.name}`);
+          } else {
+            parentKeyStack.push(parentKeyStack[parentKeyStack.length - 1]);
+          }
+        },
+        'AssignmentExpression:exit'() {
+          parentKeyStack.pop();
+        },
+        ObjectPattern() {
+          objectPatternDepth++;
+        },
+        'ObjectPattern:exit'() {
+          objectPatternDepth--;
+        },
+        Property(node) {
+          if (objectPatternDepth > 0) {
+            const key = getObjectPatternKey(node);
+            if (key) {
+              parentKeyStack.push(`__${key}`);
+              return;
+            }
+          }
+
+          parentKeyStack.push(parentKeyStack[parentKeyStack.length - 1]);
+        },
+        'Property:exit'() {
+          parentKeyStack.pop();
+        },
+        CallExpression(node, ctx) {
+          const callee = node.callee;
+          const parentKey = parentKeyStack[parentKeyStack.length - 1];
+          const paramNames = paramNamesStack[paramNamesStack.length - 1];
+
+          if (callee.type === 'Identifier' && namedImports.has(callee.name)) {
+            ctx.record({
+              name: callee.name,
+              node,
+              data: { callNode: node, parentKey, paramNames },
+            });
+            return;
+          }
+
+          if (
+            callee.type === 'MemberExpression' &&
+            callee.object.type === 'Identifier' &&
+            namespaceImports.has(callee.object.name)
+          ) {
+            const isCreateContext = callee.computed
+              ? callee.property.type === 'Literal' &&
+                typeof callee.property.value === 'string' &&
+                callee.property.value === 'createContext'
+              : callee.property.type === 'Identifier' &&
+                callee.property.name === 'createContext';
+
+            if (isCreateContext) {
+              ctx.record({
+                name: callee.object.name,
+                node,
+                data: { callNode: node, parentKey, paramNames },
+              });
+            }
+          }
+        },
+      },
+    });
+
+    const records = visitor.walk(program);
+    if (records.length === 0) return;
+
+    const counters = new Map();
+    const fileHash = createFileHash(id);
+
+    for (const record of records) {
+      const { callNode, parentKey, paramNames } = record.data;
+      const counter = (counters.get(parentKey) || 0) + 1;
+      counters.set(parentKey, counter);
+
+      const callee = s.slice(callNode.callee.start, callNode.callee.end);
+      const key = buildContextKey(fileHash, parentKey, counter, paramNames);
+      const firstArg = callNode.arguments[0];
+
+      if (firstArg && firstArg.type !== 'SpreadElement') {
+        const value = s.slice(firstArg.start, firstArg.end);
+        s.update(
+          callNode.start,
+          callNode.end,
+          `Object.assign(${callee}[${key}] || (${callee}[${key}] = ${callee}(${value})), { __: ${value} })`
+        );
+        continue;
+      }
+
+      s.update(
+        callNode.start,
+        callNode.end,
+        `${callee}[${key}] || (${callee}[${key}] = ${callee}())`
+      );
+    }
+  });
 
   const plugin = {
     name: 'prefresh-rolldown',
@@ -62,179 +229,11 @@ export default function prefreshPlugin(options = {}) {
           include: 'createContext',
         },
       },
-      handler: withMagicString(function (s, id, meta) {
+      handler(code, id, meta) {
         if (!isEnabled) return;
 
-        const program =
-          meta?.ast || this.parse(s.original, { lang: getLang(id) });
-        const namedImports = new Set();
-        const namespaceImports = new Set();
-
-        for (const node of program.body) {
-          if (node.type !== 'ImportDeclaration') continue;
-          if (!libraries.has(node.source.value)) continue;
-
-          for (const specifier of node.specifiers) {
-            if (specifier.type === 'ImportSpecifier') {
-              const importedName =
-                specifier.imported.type === 'Identifier'
-                  ? specifier.imported.name
-                  : specifier.imported.value;
-
-              if (importedName === 'createContext') {
-                namedImports.add(specifier.local.name);
-              }
-            } else if (
-              specifier.type === 'ImportDefaultSpecifier' ||
-              specifier.type === 'ImportNamespaceSpecifier'
-            ) {
-              namespaceImports.add(specifier.local.name);
-            }
-          }
-        }
-
-        const trackedNames = [...namedImports, ...namespaceImports];
-        if (trackedNames.length === 0) return;
-
-        const paramNamesStack = [[]];
-        const parentKeyStack = [''];
-        let objectPatternDepth = 0;
-
-        const visitor = new ScopedVisitor({
-          trackedNames,
-          walk,
-          visitor: {
-            FunctionDeclaration(node) {
-              paramNamesStack.push(getSimpleParamNames(node.params));
-            },
-            'FunctionDeclaration:exit'() {
-              paramNamesStack.pop();
-            },
-            FunctionExpression(node) {
-              paramNamesStack.push(getSimpleParamNames(node.params));
-            },
-            'FunctionExpression:exit'() {
-              paramNamesStack.pop();
-            },
-            ArrowFunctionExpression(node) {
-              paramNamesStack.push(getSimpleParamNames(node.params));
-            },
-            'ArrowFunctionExpression:exit'() {
-              paramNamesStack.pop();
-            },
-            VariableDeclarator(node) {
-              if (node.id.type === 'Identifier') {
-                parentKeyStack.push(`$${node.id.name}`);
-              } else {
-                parentKeyStack.push(parentKeyStack[parentKeyStack.length - 1]);
-              }
-            },
-            'VariableDeclarator:exit'() {
-              parentKeyStack.pop();
-            },
-            AssignmentExpression(node) {
-              if (node.left.type === 'Identifier') {
-                parentKeyStack.push(`_${node.left.name}`);
-              } else {
-                parentKeyStack.push(parentKeyStack[parentKeyStack.length - 1]);
-              }
-            },
-            'AssignmentExpression:exit'() {
-              parentKeyStack.pop();
-            },
-            ObjectPattern() {
-              objectPatternDepth++;
-            },
-            'ObjectPattern:exit'() {
-              objectPatternDepth--;
-            },
-            Property(node) {
-              if (objectPatternDepth > 0) {
-                const key = getObjectPatternKey(node);
-                if (key) {
-                  parentKeyStack.push(`__${key}`);
-                  return;
-                }
-              }
-
-              parentKeyStack.push(parentKeyStack[parentKeyStack.length - 1]);
-            },
-            'Property:exit'() {
-              parentKeyStack.pop();
-            },
-            CallExpression(node, ctx) {
-              const callee = node.callee;
-              const parentKey = parentKeyStack[parentKeyStack.length - 1];
-              const paramNames = paramNamesStack[paramNamesStack.length - 1];
-
-              if (
-                callee.type === 'Identifier' &&
-                namedImports.has(callee.name)
-              ) {
-                ctx.record({
-                  name: callee.name,
-                  node,
-                  data: { callNode: node, parentKey, paramNames },
-                });
-                return;
-              }
-
-              if (
-                callee.type === 'MemberExpression' &&
-                callee.object.type === 'Identifier' &&
-                namespaceImports.has(callee.object.name)
-              ) {
-                const isCreateContext = callee.computed
-                  ? callee.property.type === 'Literal' &&
-                    typeof callee.property.value === 'string' &&
-                    callee.property.value === 'createContext'
-                  : callee.property.type === 'Identifier' &&
-                    callee.property.name === 'createContext';
-
-                if (isCreateContext) {
-                  ctx.record({
-                    name: callee.object.name,
-                    node,
-                    data: { callNode: node, parentKey, paramNames },
-                  });
-                }
-              }
-            },
-          },
-        });
-
-        const records = visitor.walk(program);
-        if (records.length === 0) return;
-
-        const counters = new Map();
-        const fileHash = createFileHash(id);
-
-        for (const record of records) {
-          const { callNode, parentKey, paramNames } = record.data;
-          const counter = (counters.get(parentKey) || 0) + 1;
-          counters.set(parentKey, counter);
-
-          const callee = s.slice(callNode.callee.start, callNode.callee.end);
-          const key = buildContextKey(fileHash, parentKey, counter, paramNames);
-          const firstArg = callNode.arguments[0];
-
-          if (firstArg && firstArg.type !== 'SpreadElement') {
-            const value = s.slice(firstArg.start, firstArg.end);
-            s.update(
-              callNode.start,
-              callNode.end,
-              `Object.assign(${callee}[${key}] || (${callee}[${key}] = ${callee}(${value})), { __: ${value} })`
-            );
-            continue;
-          }
-
-          s.update(
-            callNode.start,
-            callNode.end,
-            `${callee}[${key}] || (${callee}[${key}] = ${callee}())`
-          );
-        }
-      }),
+        return transformWithMagicString.call(this, code, id, meta);
+      },
     },
   };
 
