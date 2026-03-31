@@ -1,0 +1,69 @@
+{
+  "name": "@prefresh/rolldown",
+  "version": "0.0.0",
+  "description": "A rolldown plugin to preserve Preact context identity during HMR.",
+  "$schema": "https://raw.githubusercontent.com/vitejs/vite-plugin-registry/refs/heads/main/data/schema/extended-package-json.schema.json",
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./src/index.js",
+      "default": "./src/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "lint": "node --check src/index.js",
+    "test": "node --test test/index.test.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/preactjs/prefresh.git",
+    "directory": "packages/rolldown"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/preactjs/prefresh/issues"
+  },
+  "homepage": "https://github.com/preactjs/prefresh/tree/main/packages/rolldown#readme",
+  "keywords": [
+    "hmr",
+    "preact",
+    "prefresh",
+    "rolldown",
+    "rolldown-plugin",
+    "vite-plugin"
+  ],
+  "dependencies": {
+    "oxc-unshadowed-visitor": "^0.0.1",
+    "rolldown-string": "^0.3.0"
+  },
+  "devDependencies": {
+    "rolldown": "^1.0.0-rc.12"
+  },
+  "peerDependencies": {
+    "rolldown": "^1.0.0-rc.12",
+    "vite": "^8.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    }
+  },
+  "compatiblePackages": {
+    "schemaVersion": 1,
+    "rollup": {
+      "type": "incompatible",
+      "reason": "Uses Rolldown-specific APIs"
+    }
+  },
+  "publishConfig": {
+    "provenance": true
+  }
+}
