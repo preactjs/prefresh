@@ -3,35 +3,53 @@ const { createFilter } = require('@rollup/pluginutils');
 const prefreshBabelPlugin = require('@prefresh/babel-plugin');
 
 const SCRIPT_LANG_RE = /\.(c|m)?(t|j)sx?$/;
+let prefreshRolldownPromise;
+
+function loadPrefreshRolldown() {
+  prefreshRolldownPromise ||= import('@prefresh/rolldown').then(
+    ({ default: prefreshRolldown }) => prefreshRolldown
+  );
+  return prefreshRolldownPromise;
+}
+
+function hasRolldownSupport(pluginContext) {
+  return !!(
+    pluginContext &&
+    typeof pluginContext === 'object' &&
+    pluginContext.meta &&
+    typeof pluginContext.meta === 'object' &&
+    'rolldownVersion' in pluginContext.meta
+  );
+}
+
+function hasOxcSupport(config) {
+  return !!(config.oxc && typeof config.oxc === 'object');
+}
 
 /** @returns {Promise<import('vite').PluginOption>} */
 module.exports = async function prefreshPlugin(options = {}) {
-  const { default: prefreshRolldown } = await import('@prefresh/rolldown');
-  const useBabel = Object.prototype.hasOwnProperty.call(
+  const prefreshRolldown = await loadPrefreshRolldown();
+  const forceBabel = Object.prototype.hasOwnProperty.call(
     options,
     'parserPlugins'
   );
 
   return [
-    preactOptionsPlugin(useBabel),
-    prefreshBabelTransformPlugin(options, useBabel),
+    preactOptionsPlugin(forceBabel),
+    prefreshBabelTransformPlugin(options, forceBabel),
     prefreshRolldown(),
     prefreshWrapperPlugin(options),
   ];
 };
 
 /** @returns {import('vite').Plugin} */
-function preactOptionsPlugin(useBabel) {
+function preactOptionsPlugin(forceBabel) {
   return {
     name: 'prefresh-preact-options',
     config(config, { command }) {
       const oxc = config.oxc || {};
       const jsx = oxc.jsx || {};
-
-      const supportsRolldown =
-        this && 'meta' in this && this.meta && typeof this.meta === 'object'
-          ? 'rolldownVersion' in this.meta
-          : false;
+      const supportsRolldown = hasRolldownSupport(this);
 
       return supportsRolldown
         ? {
@@ -40,7 +58,7 @@ function preactOptionsPlugin(useBabel) {
               jsx: {
                 ...jsx,
                 importSource: oxc.jsx.importSource || 'preact',
-                refresh: !useBabel && command === 'serve',
+                refresh: !forceBabel && command === 'serve',
               },
               jsxRefreshInclude: oxc.jsxRefreshInclude || /\.[jt]sx$/,
             },
@@ -51,7 +69,7 @@ function preactOptionsPlugin(useBabel) {
 }
 
 /** @returns {import('vite').Plugin} */
-function prefreshBabelTransformPlugin(options = {}, useBabel) {
+function prefreshBabelTransformPlugin(options = {}, forceBabel) {
   let shouldSkip = false;
   const filter = createFilter(options.include, options.exclude);
 
@@ -59,11 +77,8 @@ function prefreshBabelTransformPlugin(options = {}, useBabel) {
     name: 'prefresh-babel-transform',
     apply: 'serve',
     configResolved(config) {
-      const supportsRolldown =
-        this && 'meta' in this && this.meta && typeof this.meta === 'object'
-          ? 'rolldownVersion' in this.meta
-          : false;
-      shouldSkip = config.server.hmr === false || (!useBabel && supportsRolldown);
+      shouldSkip =
+        config.server.hmr === false || (!forceBabel && hasOxcSupport(config));
     },
     transform(code, id, transformOptions) {
       const ssr =
