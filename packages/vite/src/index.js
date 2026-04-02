@@ -1,15 +1,50 @@
-const { transformSync } = require('@babel/core');
 const { createFilter } = require('@rollup/pluginutils');
-const prefreshBabelPlugin = require('@prefresh/babel-plugin');
 
 const SCRIPT_LANG_RE = /\.(c|m)?(t|j)sx?$/;
+let babel;
 let prefreshRolldownPromise;
+let viteSupportsHookFilters;
+
+function loadBabel() {
+  babel ||= {
+    transformSync: require('@babel/core').transformSync,
+    prefreshBabelPlugin: require('@prefresh/babel-plugin'),
+  };
+  return babel;
+}
 
 function loadPrefreshRolldown() {
   prefreshRolldownPromise ||= import('@prefresh/rolldown').then(
     ({ default: prefreshRolldown }) => prefreshRolldown
   );
   return prefreshRolldownPromise;
+}
+
+function supportsHookFilters() {
+  if (viteSupportsHookFilters !== undefined) return viteSupportsHookFilters;
+
+  try {
+    const [major, minor] = require('vite/package.json')
+      .version.split('.')
+      .map(Number);
+
+    viteSupportsHookFilters = major > 6 || (major === 6 && minor >= 3);
+  } catch (error) {
+    viteSupportsHookFilters = false;
+  }
+
+  return viteSupportsHookFilters;
+}
+
+function withScriptHookFilter(handler) {
+  return supportsHookFilters()
+    ? {
+        filter: {
+          id: SCRIPT_LANG_RE,
+        },
+        handler,
+      }
+    : handler;
 }
 
 function hasRolldownSupport(pluginContext) {
@@ -20,10 +55,6 @@ function hasRolldownSupport(pluginContext) {
     typeof pluginContext.meta === 'object' &&
     'rolldownVersion' in pluginContext.meta
   );
-}
-
-function hasOxcSupport(config) {
-  return !!(config.oxc && typeof config.oxc === 'object');
 }
 
 /** @returns {Promise<import('vite').PluginOption>} */
@@ -57,7 +88,7 @@ function preactOptionsPlugin(forceBabel) {
               ...oxc,
               jsx: {
                 ...jsx,
-                importSource: oxc.jsx.importSource || 'preact',
+                importSource: jsx.importSource || 'preact',
                 refresh: !forceBabel && command === 'serve',
               },
               jsxRefreshInclude: oxc.jsxRefreshInclude || /\.[jt]sx$/,
@@ -77,16 +108,16 @@ function prefreshBabelTransformPlugin(options = {}, forceBabel) {
     name: 'prefresh-babel-transform',
     apply: 'serve',
     configResolved(config) {
-      shouldSkip =
-        config.server.hmr === false || (!forceBabel && hasOxcSupport(config));
+      shouldSkip = config.server.hmr === false;
     },
-    transform(code, id, transformOptions) {
+    transform: withScriptHookFilter(function (code, id, transformOptions) {
       const ssr =
         typeof transformOptions === 'boolean'
           ? transformOptions
           : transformOptions && transformOptions.ssr === true;
       if (
         shouldSkip ||
+        (!forceBabel && hasRolldownSupport(this)) ||
         !SCRIPT_LANG_RE.test(id) ||
         id.includes('node_modules') ||
         id.includes('?worker') ||
@@ -106,7 +137,7 @@ function prefreshBabelTransformPlugin(options = {}, forceBabel) {
       ].filter(Boolean);
 
       return transform(code, id, parserPlugins);
-    },
+    }),
   };
 }
 
@@ -118,21 +149,17 @@ function prefreshWrapperPlugin(options = {}) {
   return {
     name: 'prefresh-wrapper',
     apply: 'serve',
-    config(config) {
-      const include = config.optimizeDeps?.include || [];
-
+    config() {
       return {
         optimizeDeps: {
-          include: [
-            ...new Set([...include, '@prefresh/core', '@prefresh/utils']),
-          ],
+          include: ['@prefresh/core', '@prefresh/utils'],
         },
       };
     },
     configResolved(config) {
       shouldSkip = config.server.hmr === false;
     },
-    async transform(code, id, options) {
+    transform: withScriptHookFilter(async function (code, id, options) {
       const ssr =
         typeof options === 'boolean'
           ? options
@@ -210,12 +237,14 @@ function prefreshWrapperPlugin(options = {}) {
       `,
         map: null,
       };
-    },
+    }),
   };
 }
 
-const transform = (code, path, plugins) =>
-  transformSync(code, {
+const transform = (code, path, plugins) => {
+  const { transformSync, prefreshBabelPlugin } = loadBabel();
+
+  return transformSync(code, {
     plugins: [[prefreshBabelPlugin, { skipEnvCheck: true }]],
     parserOpts: {
       plugins,
@@ -227,3 +256,4 @@ const transform = (code, path, plugins) =>
     configFile: false,
     babelrc: false,
   });
+};

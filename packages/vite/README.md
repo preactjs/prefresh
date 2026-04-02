@@ -20,7 +20,7 @@ export default {
 };
 ```
 
-`@prefresh/vite` configures Vite's OXC JSX transform for Preact and composes
+`@prefresh/vite` configures Vite's Oxc JSX transform for Preact and composes
 `@prefresh/rolldown` internally. Babel is only used as a selective fallback when
 you pass `parserPlugins`.
 
