@@ -4,6 +4,7 @@ const SCRIPT_LANG_RE = /\.(c|m)?(t|j)sx?$/;
 let babel;
 let prefreshRolldownPromise;
 let viteSupportsHookFilters;
+let viteVersionParts;
 
 function loadBabel() {
   babel ||= {
@@ -23,17 +24,29 @@ function loadPrefreshRolldown() {
 function supportsHookFilters() {
   if (viteSupportsHookFilters !== undefined) return viteSupportsHookFilters;
 
-  try {
-    const [major, minor] = require('vite/package.json')
-      .version.split('.')
-      .map(Number);
-
-    viteSupportsHookFilters = major > 6 || (major === 6 && minor >= 3);
-  } catch (error) {
-    viteSupportsHookFilters = false;
-  }
+  const [major, minor] = getViteVersionParts();
+  viteSupportsHookFilters = major > 6 || (major === 6 && minor >= 3);
 
   return viteSupportsHookFilters;
+}
+
+function getViteVersionParts() {
+  if (viteVersionParts) return viteVersionParts;
+
+  try {
+    viteVersionParts = require('vite/package.json')
+      .version.split('.')
+      .map(Number);
+  } catch (error) {
+    viteVersionParts = [0, 0, 0];
+  }
+
+  return viteVersionParts;
+}
+
+function supportsRolldownVite() {
+  const [major] = getViteVersionParts();
+  return major >= 8;
 }
 
 function withScriptHookFilter(handler) {
@@ -75,6 +88,16 @@ function resolveJsxRuntime(jsx, esbuild) {
   return 'classic';
 }
 
+function resolvePrefreshJsxOptions(jsx, esbuild) {
+  return {
+    ...jsx,
+    runtime: resolveJsxRuntime(jsx, esbuild),
+    pragma: jsx.pragma || esbuild.jsxFactory || 'h',
+    pragmaFrag: jsx.pragmaFrag || esbuild.jsxFragment || 'Fragment',
+    importSource: jsx.importSource || esbuild.jsxImportSource || 'preact',
+  };
+}
+
 function hasRolldownSupport(pluginContext) {
   return !!(
     pluginContext &&
@@ -87,16 +110,18 @@ function hasRolldownSupport(pluginContext) {
 
 /** @returns {Promise<import('vite').PluginOption>} */
 module.exports = async function prefreshPlugin(options = {}) {
-  const prefreshRolldown = await loadPrefreshRolldown();
   const forceBabel = Object.prototype.hasOwnProperty.call(
     options,
     'parserPlugins'
   );
+  const prefreshRolldown = supportsRolldownVite()
+    ? await loadPrefreshRolldown()
+    : null;
 
   return [
     preactOptionsPlugin(forceBabel),
     prefreshBabelTransformPlugin(options, forceBabel),
-    prefreshRolldown(),
+    ...(prefreshRolldown ? [prefreshRolldown()] : []),
     prefreshWrapperPlugin(options),
   ];
 };
@@ -109,24 +134,36 @@ function preactOptionsPlugin(forceBabel) {
       const oxc = getOxcOptions(config);
       const jsx = oxc.jsx || {};
       const esbuild = getEsbuildOptions(config);
+      const prefreshJsx = resolvePrefreshJsxOptions(jsx, esbuild);
+      const optimizeDeps = config.optimizeDeps || {};
+      const rolldownOptions = optimizeDeps.rolldownOptions || {};
+      const transformOptions = rolldownOptions.transform || {};
       const supportsRolldown = hasRolldownSupport(this);
 
       return supportsRolldown
         ? {
             esbuild: stripHandledEsbuildOptions(config),
+            optimizeDeps: {
+              ...optimizeDeps,
+              rolldownOptions: {
+                ...rolldownOptions,
+                transform: {
+                  ...transformOptions,
+                  jsx: {
+                    ...prefreshJsx,
+                  },
+                },
+              },
+            },
             oxc: {
               ...oxc,
+              include: oxc.include || SCRIPT_LANG_RE,
               jsxInject: oxc.jsxInject || esbuild.jsxInject,
               jsx: {
-                ...jsx,
-                runtime: resolveJsxRuntime(jsx, esbuild),
-                pragma: jsx.pragma || esbuild.jsxFactory || 'h',
-                pragmaFrag: jsx.pragmaFrag || esbuild.jsxFragment || 'Fragment',
-                importSource:
-                  jsx.importSource || esbuild.jsxImportSource || 'preact',
+                ...prefreshJsx,
                 refresh: !forceBabel && command === 'serve',
               },
-              jsxRefreshInclude: oxc.jsxRefreshInclude || /\.[jt]sx$/,
+              jsxRefreshInclude: oxc.jsxRefreshInclude || SCRIPT_LANG_RE,
             },
           }
         : {};
@@ -146,13 +183,13 @@ function prefreshBabelTransformPlugin(options = {}, forceBabel) {
       shouldSkip = config.server.hmr === false;
     },
     transform: withScriptHookFilter(function (code, id, transformOptions) {
+      const useOxcRefresh = !forceBabel && hasRolldownSupport(this);
       const ssr =
         typeof transformOptions === 'boolean'
           ? transformOptions
           : transformOptions && transformOptions.ssr === true;
       if (
         shouldSkip ||
-        (!forceBabel && hasRolldownSupport(this)) ||
         !SCRIPT_LANG_RE.test(id) ||
         id.includes('node_modules') ||
         id.includes('?worker') ||
@@ -171,7 +208,23 @@ function prefreshBabelTransformPlugin(options = {}, forceBabel) {
         ...((options && options.parserPlugins) || []),
       ].filter(Boolean);
 
-      return transform(code, id, parserPlugins);
+      if (useOxcRefresh) {
+        const hasReg = /\$RefreshReg\$\(/.test(code);
+        const hasSig = /\$RefreshSig\$\(/.test(code);
+
+        if (hasReg || hasSig) return;
+      }
+
+      const result = transform(code, id, parserPlugins);
+
+      if (useOxcRefresh) {
+        const hasReg = /\$RefreshReg\$\(/.test(result.code);
+        const hasSig = /\$RefreshSig\$\(/.test(result.code);
+
+        if (!hasReg && !hasSig) return;
+      }
+
+      return result;
     }),
   };
 }
