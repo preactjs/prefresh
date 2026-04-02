@@ -47,6 +47,34 @@ function withScriptHookFilter(handler) {
     : handler;
 }
 
+function getEsbuildOptions(config) {
+  return config.esbuild && typeof config.esbuild === 'object'
+    ? config.esbuild
+    : {};
+}
+
+function getOxcOptions(config) {
+  return config.oxc && typeof config.oxc === 'object' ? config.oxc : {};
+}
+
+function stripHandledEsbuildOptions(config) {
+  const esbuild = getEsbuildOptions(config);
+
+  if (!Object.keys(esbuild).length) return config.esbuild;
+
+  const { jsx, jsxFactory, jsxFragment, jsxImportSource, jsxInject, ...rest } =
+    esbuild;
+
+  return Object.keys(rest).length ? rest : false;
+}
+
+function resolveJsxRuntime(jsx, esbuild) {
+  if (jsx.runtime) return jsx.runtime;
+  if (esbuild.jsx === 'automatic') return 'automatic';
+  if (esbuild.jsx === 'preserve') return 'preserve';
+  return 'classic';
+}
+
 function hasRolldownSupport(pluginContext) {
   return !!(
     pluginContext &&
@@ -78,17 +106,24 @@ function preactOptionsPlugin(forceBabel) {
   return {
     name: 'prefresh-preact-options',
     config(config, { command }) {
-      const oxc = config.oxc || {};
+      const oxc = getOxcOptions(config);
       const jsx = oxc.jsx || {};
+      const esbuild = getEsbuildOptions(config);
       const supportsRolldown = hasRolldownSupport(this);
 
       return supportsRolldown
         ? {
+            esbuild: stripHandledEsbuildOptions(config),
             oxc: {
               ...oxc,
+              jsxInject: oxc.jsxInject || esbuild.jsxInject,
               jsx: {
                 ...jsx,
-                importSource: jsx.importSource || 'preact',
+                runtime: resolveJsxRuntime(jsx, esbuild),
+                pragma: jsx.pragma || esbuild.jsxFactory || 'h',
+                pragmaFrag: jsx.pragmaFrag || esbuild.jsxFragment || 'Fragment',
+                importSource:
+                  jsx.importSource || esbuild.jsxImportSource || 'preact',
                 refresh: !forceBabel && command === 'serve',
               },
               jsxRefreshInclude: oxc.jsxRefreshInclude || /\.[jt]sx$/,

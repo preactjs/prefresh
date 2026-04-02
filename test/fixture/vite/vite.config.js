@@ -4,7 +4,7 @@ export default {
   server: {
     port: 3000,
   },
-  esbuild: {
+  oxc: {
     jsxFactory: 'h',
     jsxFragment: 'Fragment'
   },
