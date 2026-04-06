@@ -20,11 +20,17 @@ export default {
 };
 ```
 
+`@prefresh/vite` configures Vite's Oxc JSX transform for Preact and composes
+`@prefresh/rolldown` internally. Babel is only used as a selective fallback when
+you pass `parserPlugins`.
+
 ## Options
 
 The plugin accepts two options `include` & `exclude` which are used in the [`@rollup/pluginutils.createFilter`](https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter) to filter out files or include them.
 
-The plugin also accepts the addition of [`parserPlugins`](https://babeljs.io/docs/en/babel-parser#plugins)
+The plugin also accepts the addition of [`parserPlugins`](https://babeljs.io/docs/en/babel-parser#plugins).
+Providing `parserPlugins` opts that file transform back into the Babel-based path,
+similar to how `@preact/preset-vite` only enables Babel when that path is requested.
 
 ## Best practices
 
@@ -32,7 +38,7 @@ The plugin also accepts the addition of [`parserPlugins`](https://babeljs.io/doc
 
 We need to be able to recognise your components, this means that components should
 start with a capital letter and hook should start with `use` followed by a capital letter.
-This allows the Babel plugin to effectively recognise these.
+This allows the refresh transform to effectively recognise these.
 
 Do note that a component as seen below is not named.
 

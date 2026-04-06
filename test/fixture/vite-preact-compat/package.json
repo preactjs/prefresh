@@ -7,13 +7,13 @@
     "preact": "^10.19.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.1",
-    "@prefresh/babel-plugin": "file:../../packages/babel",
     "@prefresh/vite": "file:../../packages/vite",
-    "vite": "^5.0.0"
+    "rolldown": "^1.0.0-rc.12",
+    "vite": "^8.0.0"
   },
   "resolutions": {
-		"@prefresh/core": "file:../../packages/core",
-		"@prefresh/utils": "file:../../packages/utils"
+    "@prefresh/rolldown": "file:../../packages/rolldown",
+    "@prefresh/core": "file:../../packages/core",
+    "@prefresh/utils": "file:../../packages/utils"
   }
 }
