@@ -1,5 +1,16 @@
 # @prefresh/vite
 
+## 3.0.0
+
+### Major Changes
+
+- [`117dde9ca19d69bb53f4c410c3fd55cb4b895c97`](https://github.com/preactjs/prefresh/commit/117dde9ca19d69bb53f4c410c3fd55cb4b895c97) [#607](https://github.com/preactjs/prefresh/pull/607) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Add true vite 8 support with native rolldown rather than babel
+
+### Patch Changes
+
+- Updated dependencies [[`06555599cec8198540d221d6a1fd26fdd22de169`](https://github.com/preactjs/prefresh/commit/06555599cec8198540d221d6a1fd26fdd22de169)]:
+  - @prefresh/rolldown@0.1.0
+
 ## 2.4.12
 
 ### Patch Changes

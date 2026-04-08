@@ -1,6 +1,6 @@
 {
   "name": "@prefresh/rolldown",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A rolldown plugin to preserve Preact context identity during HMR.",
   "$schema": "https://raw.githubusercontent.com/vitejs/vite-plugin-registry/refs/heads/main/data/schema/extended-package-json.schema.json",
   "type": "module",
