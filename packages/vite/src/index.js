@@ -293,7 +293,7 @@ function prefreshWrapperPlugin(options = {}) {
             let savedType;
             return (type, key, forceReset, getCustomHooks) => {
               if (!savedType) savedType = type;
-              status = self.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, status);
+              status = self.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, key ? 'begin' : status);
               return type;
             };
           };
