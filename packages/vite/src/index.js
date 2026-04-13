@@ -294,8 +294,6 @@ function prefreshWrapperPlugin(options = {}) {
             let didCollectHooks = false;
             return (type, key, forceReset, getCustomHooks) => {
               if (typeof key === 'string') {
-                // Keyed call: register this type. May be called multiple times
-                // for HOC chains like _s(memo(_c = _s(inner, key)), key).
                 if (!savedType) {
                   savedType = type;
                   hasCustomHooks = typeof getCustomHooks === 'function';
@@ -304,7 +302,6 @@ function prefreshWrapperPlugin(options = {}) {
                   self.__PREFRESH__.sign(type, key, forceReset, getCustomHooks, 'begin');
                 }
               } else {
-                // Body call _s() — collect custom hooks once on first render.
                 if (!didCollectHooks && hasCustomHooks) {
                   didCollectHooks = true;
                   self.__PREFRESH__.sign(savedType, undefined, undefined, undefined, 'needsHooks');
