@@ -53,3 +53,9 @@ jobs:
         run: yarn test
         env:
           CI: false
+
+      - name: Run package unit tests
+        run: |
+          node --test packages/rolldown/test/index.test.mjs
+          node --test packages/rolldown/test/memo.test.mjs
+          node --test packages/vite/test/refreshSig.test.mjs

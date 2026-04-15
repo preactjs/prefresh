@@ -289,11 +289,24 @@ function prefreshWrapperPlugin(options = {}) {
           };
 
           self.$RefreshSig$ = () => {
-            let status = 'begin';
             let savedType;
+            let hasCustomHooks = false;
+            let didCollectHooks = false;
             return (type, key, forceReset, getCustomHooks) => {
-              if (!savedType) savedType = type;
-              status = self.__PREFRESH__.sign(type || savedType, key, forceReset, getCustomHooks, key ? 'begin' : status);
+              if (typeof key === 'string') {
+                if (!savedType) {
+                  savedType = type;
+                  hasCustomHooks = typeof getCustomHooks === 'function';
+                }
+                if (type != null) {
+                  self.__PREFRESH__.sign(type, key, forceReset, getCustomHooks, 'begin');
+                }
+              } else {
+                if (!didCollectHooks && hasCustomHooks) {
+                  didCollectHooks = true;
+                  self.__PREFRESH__.sign(savedType, undefined, undefined, undefined, 'needsHooks');
+                }
+              }
               return type;
             };
           };

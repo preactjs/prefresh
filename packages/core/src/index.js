@@ -17,7 +17,11 @@ import {
   HOOK_CLEANUP,
 } from './constants';
 import { computeKey } from './computeKey';
-import { vnodesForComponent, mappedVNodes, lastSeen } from './runtime/vnodesForComponent';
+import {
+  vnodesForComponent,
+  mappedVNodes,
+  lastSeen,
+} from './runtime/vnodesForComponent';
 import { signaturesForType } from './runtime/signaturesForType';
 
 let typesById = new Map();
@@ -27,16 +31,22 @@ function sign(type, key, forceReset, getCustomHooks, status) {
   if (type) {
     let signature = signaturesForType.get(type);
     if (status === 'begin') {
-      signaturesForType.set(type, {
-        type,
-        key,
-        forceReset,
-        getCustomHooks: getCustomHooks || (() => []),
-      });
+      // Don't overwrite an existing signature — the innermost call in an HOC
+      // chain already carries the correct key and getCustomHooks.
+      if (!signature) {
+        signaturesForType.set(type, {
+          type,
+          key,
+          forceReset,
+          getCustomHooks: getCustomHooks || (() => []),
+        });
+      }
 
       return 'needsHooks';
     } else if (status === 'needsHooks') {
-      signature.fullKey = computeKey(signature);
+      if (signature) {
+        signature.fullKey = computeKey(signature);
+      }
     }
   }
 }

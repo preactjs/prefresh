@@ -23,7 +23,7 @@
   ],
   "scripts": {
     "lint": "eslint src",
-    "test": "jest --clearCache && jest --runInBand --forceExit --detectOpenHandles"
+    "test": "node --test test/refreshSig.test.mjs"
   },
   "repository": {
     "type": "git",
