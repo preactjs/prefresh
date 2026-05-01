@@ -103,12 +103,6 @@ importers:
 
   packages/vite:
     dependencies:
-      '@babel/core':
-        specifier: ^7.22.1
-        version: 7.27.7
-      '@prefresh/babel-plugin':
-        specifier: ^0.5.2
-        version: 0.5.2
       '@prefresh/core':
         specifier: ^1.5.0
         version: 1.5.4(preact@10.26.10)
@@ -125,6 +119,12 @@ importers:
         specifier: ^1.0.0-rc.12
         version: 1.0.0-rc.12(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)
     devDependencies:
+      '@babel/core':
+        specifier: ^7.22.1
+        version: 7.27.7
+      '@prefresh/babel-plugin':
+        specifier: ^0.5.2
+        version: 0.5.2
       preact:
         specifier: ^10.26.10
         version: 10.26.10
@@ -134,12 +134,6 @@ importers:
 
   packages/web-dev-server:
     dependencies:
-      '@babel/core':
-        specifier: ^7.22.1
-        version: 7.27.7
-      '@prefresh/babel-plugin':
-        specifier: ^0.5.2
-        version: 0.5.2
       '@prefresh/core':
         specifier: ^1.5.0
         version: 1.5.4(preact@10.26.10)
@@ -147,6 +141,12 @@ importers:
         specifier: ^1.2.0
         version: 1.2.1
     devDependencies:
+      '@babel/core':
+        specifier: ^7.22.1
+        version: 7.27.7
+      '@prefresh/babel-plugin':
+        specifier: ^0.5.2
+        version: 0.5.2
       '@web/dev-server':
         specifier: ^0.0.18
         version: 0.0.18(rollup@4.52.5)
