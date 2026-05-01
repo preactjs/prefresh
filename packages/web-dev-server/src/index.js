@@ -1,7 +1,30 @@
-import babel from '@babel/core';
-import plugin from '@prefresh/babel-plugin';
+let babelLoaderPromise;
 
-const { transformSync } = babel;
+function loadBabel() {
+  if (!babelLoaderPromise) {
+    babelLoaderPromise = Promise.all([
+      import('@babel/core'),
+      import('@prefresh/babel-plugin'),
+    ])
+      .then(([babelMod, pluginMod]) => ({
+        transformSync: (babelMod.default || babelMod).transformSync,
+        plugin: pluginMod.default || pluginMod,
+      }))
+      .catch(err => {
+        if (
+          err &&
+          (err.code === 'ERR_MODULE_NOT_FOUND' || err.code === 'MODULE_NOT_FOUND')
+        ) {
+          throw new Error(
+            '@prefresh/web-dev-server requires @babel/core and @prefresh/babel-plugin. ' +
+              'Install them as dev dependencies of your project.'
+          );
+        }
+        throw err;
+      });
+  }
+  return babelLoaderPromise;
+}
 
 export default function preactRefreshPlugin(config, pluginOptions) {
   return {
@@ -13,7 +36,16 @@ export default function preactRefreshPlugin(config, pluginOptions) {
       )
         return;
 
-      const { code } = transform(context.body);
+      const { transformSync, plugin } = await loadBabel();
+      const { code } = transformSync(context.body, {
+        plugins: [[plugin, { skipEnvCheck: true }]],
+        cwd: process.cwd(),
+        ast: false,
+        compact: false,
+        sourceMaps: false,
+        configFile: false,
+        babelrc: false,
+      });
 
       const hasRefeshReg = /\$RefreshReg\$\(/.test(code);
       const hasRefeshSig = /\$RefreshSig\$\(/.test(code);
@@ -72,14 +104,3 @@ export default function preactRefreshPlugin(config, pluginOptions) {
     },
   };
 }
-
-const transform = code =>
-  transformSync(code, {
-    plugins: [[plugin, { skipEnvCheck: true }]],
-    cwd: process.cwd(),
-    ast: false,
-    compact: false,
-    sourceMaps: false,
-    configFile: false,
-    babelrc: false,
-  });

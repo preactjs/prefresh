@@ -2,16 +2,33 @@ const { createFilter } = require('@rollup/pluginutils');
 
 const SCRIPT_LANG_RE = /\.(c|m)?(t|j)sx?$/;
 let babel;
+let babelLoadAttempted = false;
 let prefreshRolldownPromise;
 let viteSupportsHookFilters;
 let viteVersionParts;
 
-function loadBabel() {
-  babel ||= {
-    transformSync: require('@babel/core').transformSync,
-    prefreshBabelPlugin: require('@prefresh/babel-plugin'),
-  };
+function tryLoadBabel() {
+  if (babelLoadAttempted) return babel;
+  babelLoadAttempted = true;
+  try {
+    babel = {
+      transformSync: require('@babel/core').transformSync,
+      prefreshBabelPlugin: require('@prefresh/babel-plugin'),
+    };
+  } catch (err) {
+    if (err && err.code !== 'MODULE_NOT_FOUND') throw err;
+  }
   return babel;
+}
+
+function loadBabel() {
+  const loaded = tryLoadBabel();
+  if (loaded) return loaded;
+  throw new Error(
+    '@prefresh/vite needs @babel/core and @prefresh/babel-plugin to use the Babel transform path ' +
+      '(triggered by `parserPlugins` or by Vite < 8 without rolldown support). ' +
+      'Install them as dev dependencies, or upgrade to a Vite version with rolldown so the Oxc path is used instead.'
+  );
 }
 
 function loadPrefreshRolldown() {
@@ -213,6 +230,10 @@ function prefreshBabelTransformPlugin(options = {}, forceBabel) {
         const hasSig = /\$RefreshSig\$\(/.test(code);
 
         if (hasReg || hasSig) return;
+
+        // Babel is an optional fallback on the Oxc path; if it's not
+        // installed we silently skip rather than failing the request.
+        if (!tryLoadBabel()) return;
       }
 
       const result = transform(code, id, parserPlugins);
