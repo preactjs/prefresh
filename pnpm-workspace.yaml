@@ -1,2 +1,11 @@
 packages:
   - 'packages/*'
+
+minimumReleaseAge: 10080
+
+blockExoticSubdeps: true
+
+allowBuilds:
+  core-js: true
+  fsevents: true
+  puppeteer: true
