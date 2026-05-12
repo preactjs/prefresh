@@ -38,7 +38,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
-          version: 10
+          version: 11.0.0
           run_install: false
 
       - name: Install Dependencies
@@ -83,7 +83,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
-          version: 10
+          version: 11.0.0
           run_install: false
 
       - name: Install Dependencies
