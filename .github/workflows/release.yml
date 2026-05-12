@@ -9,13 +9,11 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    outputs:
+      has_changesets: ${{ steps.changesets.outputs.hasChangesets }}
     permissions:
       contents: write
-      id-token: write
-      issues: write
-      repository-projects: write
-      deployments: write
-      packages: write
+      issues: read
       pull-requests: write
     steps:
       - name: Checkout Repo
@@ -27,7 +25,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          registry-url: "https://registry.npmjs.org"
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Update npm
         run: npm install -g npm@11.11
@@ -54,7 +52,65 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile false --prefer-offline
 
-      - name: Release or Create Pull Request
+      - name: Create Release Pull Request
+        id: changesets
+        uses: changesets/action@v1.5.3
+        with:
+          version: pnpm run version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    name: Publish
+    needs: release
+    if: needs.release.outputs.has_changesets == 'false'
+    runs-on: ubuntu-latest
+    environment:
+      name: npm
+      url: https://www.npmjs.com/search?q=%40prefresh
+    permissions:
+      contents: write
+      id-token: write
+      issues: read
+      pull-requests: write
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Update npm
+        run: npm install -g npm@11.11
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-store
+        run: echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Use pnpm store
+        uses: actions/cache@v4
+        id: pnpm-cache
+        with:
+          path: ${{ steps.pnpm-store.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile false --prefer-offline
+
+      - name: Publish packages
         uses: changesets/action@v1.5.3
         with:
           publish: pnpm changeset publish
