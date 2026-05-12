@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       has_changesets: ${{ steps.changesets.outputs.hasChangesets }}
+      has_unpublished_packages: ${{ steps.unpublished.outputs.has_unpublished }}
     permissions:
       contents: write
       issues: read
@@ -29,6 +30,10 @@ jobs:
 
       - name: Update npm
         run: npm install -g npm@11.11
+
+      - name: Check for unpublished package versions
+        id: unpublished
+        run: node .github/scripts/has-unpublished-packages.mjs
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
@@ -63,7 +68,7 @@ jobs:
   publish:
     name: Publish
     needs: release
-    if: needs.release.outputs.has_changesets == 'false'
+    if: needs.release.outputs.has_changesets == 'false' && needs.release.outputs.has_unpublished_packages == 'true'
     runs-on: ubuntu-latest
     environment:
       name: npm
