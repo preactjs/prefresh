@@ -30,6 +30,7 @@
     "cjyes": "0.3.1"
   },
   "publishConfig": {
+    "access": "public",
     "provenance": true
   }
 }
