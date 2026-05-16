@@ -46,7 +46,7 @@
     "@babel/core": "^7.22.1",
     "@prefresh/babel-plugin": "^0.5.2",
     "preact": "^10.26.10",
-    "vite": "^8.0.0"
+    "vite": "^8.0.5"
   },
   "peerDependencies": {
     "@babel/core": "^7.22.1",
