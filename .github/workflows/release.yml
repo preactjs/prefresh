@@ -25,6 +25,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
+          package-manager-cache: false
           node-version: 22
           registry-url: 'https://registry.npmjs.org'
 
@@ -74,6 +75,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
+          package-manager-cache: false
           node-version: 22
           registry-url: 'https://registry.npmjs.org'
 
