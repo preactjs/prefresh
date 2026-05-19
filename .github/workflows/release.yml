@@ -18,12 +18,12 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           package-manager-cache: false
           node-version: 22
@@ -37,7 +37,7 @@ jobs:
         run: node .github/scripts/has-unpublished-packages.mjs
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@a3252b78c470c02df07e9d59298aecedc3ccdd6d # v3
         with:
           version: 11.0.0
           run_install: false
@@ -47,7 +47,7 @@ jobs:
 
       - name: Create Release Pull Request
         id: changesets
-        uses: changesets/action@v1.5.3
+        uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba # v1.5.3
         with:
           version: pnpm run version
         env:
@@ -68,12 +68,12 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           package-manager-cache: false
           node-version: 22
@@ -83,7 +83,7 @@ jobs:
         run: npm install -g npm@11.11
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@a3252b78c470c02df07e9d59298aecedc3ccdd6d # v3
         with:
           version: 11.0.0
           run_install: false
@@ -92,7 +92,7 @@ jobs:
         run: pnpm install --frozen-lockfile false
 
       - name: Publish packages
-        uses: changesets/action@v1.5.3
+        uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba # v1.5.3
         with:
           publish: pnpm changeset publish
         env:
