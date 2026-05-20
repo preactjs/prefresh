@@ -1,5 +1,13 @@
 # @prefresh/vite
 
+## 4.0.0
+
+### Major Changes
+
+- [`f1a23d05ed8910a0c927ec09ffd9ec463c6027b0`](https://github.com/preactjs/prefresh/commit/f1a23d05ed8910a0c927ec09ffd9ec463c6027b0) [#614](https://github.com/preactjs/prefresh/pull/614) Thanks [@LoganDark](https://github.com/LoganDark)! - Make Babel an optional peer dependency
+
+  `@babel/core` and `@prefresh/babel-plugin` are no longer hard dependencies of `@prefresh/vite`. Projects using modern versions of Vite no longer require Babel in their dependency tree.
+
 ## 3.0.1
 
 ### Patch Changes
