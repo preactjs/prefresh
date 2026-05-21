@@ -30,7 +30,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Update npm
-        run: npm install -g npm@11.11
+        run: npm install -g npm@11.15.0
 
       - name: Check for unpublished package versions
         id: unpublished
@@ -80,7 +80,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Update npm
-        run: npm install -g npm@11.11
+        run: npm install -g npm@11.15.0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@a3252b78c470c02df07e9d59298aecedc3ccdd6d # v3
@@ -94,6 +94,6 @@ jobs:
       - name: Publish packages
         uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba # v1.5.3
         with:
-          publish: pnpm changeset publish
+          publish: node .github/scripts/stage-packages.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
