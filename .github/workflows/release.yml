@@ -39,11 +39,11 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@a3252b78c470c02df07e9d59298aecedc3ccdd6d # v3
         with:
-          version: 11.0.0
+          version: 11.3.0
           run_install: false
 
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile false
+        run: pnpm install --frozen-lockfile
 
       - name: Create Release Pull Request
         id: changesets
@@ -85,15 +85,16 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@a3252b78c470c02df07e9d59298aecedc3ccdd6d # v3
         with:
-          version: 11.0.0
+          version: 11.3.0
           run_install: false
 
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile false
+        run: pnpm install --frozen-lockfile
 
       - name: Publish packages
         uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba # v1.5.3
         with:
           publish: node .github/scripts/stage-packages.mjs
+          createGithubReleases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
