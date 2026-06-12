@@ -36,15 +36,15 @@
   },
   "homepage": "https://github.com/preactjs/prefresh#readme",
   "dependencies": {
-    "@prefresh/core": "^1.5.0",
+    "@prefresh/core": "workspace:*",
     "@prefresh/rolldown": "workspace:*",
-    "@prefresh/utils": "^1.2.0",
+    "@prefresh/utils": "workspace:*",
     "@rollup/pluginutils": "^4.2.1",
     "rolldown": "^1.0.0-rc.12"
   },
   "devDependencies": {
     "@babel/core": "^7.22.1",
-    "@prefresh/babel-plugin": "^0.5.2",
+    "@prefresh/babel-plugin": "workspace:*",
     "preact": "^10.26.10",
     "vite": "^8.0.0"
   },
