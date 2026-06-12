@@ -6,9 +6,14 @@
   "types": "index.d.ts",
   "exports": {
     ".": {
-      "types": "./index.d.ts",
-      "require": "./src/index.js",
-      "import": "./src/index.js"
+      "import": {
+        "types": "./index.d.mts",
+        "default": "./src/index.mjs"
+      },
+      "require": {
+        "types": "./index.d.ts",
+        "default": "./src/index.js"
+      }
     },
     "./package.json": "./package.json"
   },
@@ -16,10 +21,9 @@
     "default": "src/index.js"
   },
   "files": [
-    "dist",
-    "runtime",
-    "utils",
-    "index.d.ts"
+    "src",
+    "index.d.ts",
+    "index.d.mts"
   ],
   "scripts": {
     "lint": "eslint src",

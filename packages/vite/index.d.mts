@@ -10,4 +10,4 @@ interface Options {
 
 declare const prefreshPlugin: (options?: Options) => Promise<PluginOption>;
 
-export = prefreshPlugin;
+export default prefreshPlugin;
