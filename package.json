@@ -22,8 +22,8 @@
   "homepage": "https://github.com/preactjs/prefresh#readme",
   "private": true,
   "devDependencies": {
-    "@changesets/changelog-github": "^0.2.8",
-    "@changesets/cli": "^2.26.1",
+    "@changesets/changelog-github": "^1.0.0",
+    "@changesets/cli": "^3.0.0",
     "eslint": "8.42.0",
     "eslint-config-developit": "^1.2.0",
     "eslint-config-prettier": "^8.8.0",
