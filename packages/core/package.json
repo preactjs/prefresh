@@ -1,6 +1,6 @@
 {
   "name": "@prefresh/core",
-  "version": "1.5.10",
+  "version": "1.5.11",
   "description": "The core logic for prefresh.",
   "main": "src/index.js",
   "exports": {

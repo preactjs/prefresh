@@ -1,5 +1,11 @@
 # @prefresh/core
 
+## 1.5.11
+
+### Patch Changes
+
+- [#630](https://github.com/preactjs/prefresh/pull/630) [`b390f28`](https://github.com/preactjs/prefresh/commit/b390f28b3c0a6fc264e03a5e964034728e8c7420) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Prevent stale component vnodes from being retained across rerenders and unmounts
+
 ## 1.5.10
 
 ### Patch Changes

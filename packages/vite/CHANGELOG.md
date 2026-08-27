@@ -1,5 +1,24 @@
 # @prefresh/vite
 
+## 4.0.0
+
+### Major Changes
+
+- [#614](https://github.com/preactjs/prefresh/pull/614) [`f1a23d0`](https://github.com/preactjs/prefresh/commit/f1a23d05ed8910a0c927ec09ffd9ec463c6027b0) Thanks [@LoganDark](https://github.com/LoganDark)! - Make Babel an optional peer dependency
+
+  `@babel/core` and `@prefresh/babel-plugin` are no longer hard dependencies of `@prefresh/vite`. Projects using modern versions of Vite no longer require Babel in their dependency tree.
+
+### Patch Changes
+
+- [#626](https://github.com/preactjs/prefresh/pull/626) [`4bbe51f`](https://github.com/preactjs/prefresh/commit/4bbe51f6d99469f08f6c6726a57f87929d009860) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - Fix type resolution under `moduleResolution: NodeNext` and Deno
+
+  The `import` condition now resolves to a real ESM entry (`src/index.mjs`) with matching ESM type declarations (`index.d.mts` using `export default`), while `require` keeps the CommonJS declarations (`index.d.ts` using `export =`). Previously the ESM entry was typed with a CJS-style `export =` declaration, which TypeScript 6 / Deno 2.8.3+ reject as a hard error.
+
+  Also inline the `FilterPattern` type instead of importing it from `@rollup/pluginutils`, whose types do not resolve under NodeNext.
+
+- Updated dependencies [[`b390f28`](https://github.com/preactjs/prefresh/commit/b390f28b3c0a6fc264e03a5e964034728e8c7420)]:
+  - @prefresh/core@1.5.11
+
 ## 3.0.1
 
 ### Patch Changes
