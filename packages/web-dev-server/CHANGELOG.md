@@ -1,5 +1,12 @@
 # @prefresh/web-dev-server
 
+## 1.1.7
+
+### Patch Changes
+
+- Updated dependencies [[`b390f28`](https://github.com/preactjs/prefresh/commit/b390f28b3c0a6fc264e03a5e964034728e8c7420)]:
+  - @prefresh/core@1.5.11
+
 ## 1.1.6
 
 ### Patch Changes
