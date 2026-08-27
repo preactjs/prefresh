@@ -2,7 +2,7 @@ import { options } from 'preact';
 import {
   vnodesForComponent,
   mappedVNodes,
-  lastSeen,
+  setLastSeen,
 } from './vnodesForComponent';
 import { VNODE_COMPONENT } from '../constants';
 
@@ -57,7 +57,7 @@ const oldDiffed = options.diffed;
 options.diffed = vnode => {
   if (vnode && typeof vnode.type === 'function') {
     const vnodes = vnodesForComponent.get(vnode.type);
-    lastSeen.set(vnode.__v, vnode);
+    setLastSeen(vnode);
     if (vnodes) {
       const matchingDom = vnodes.filter(p => p.__c === vnode.__c);
       if (matchingDom.length > 1) {

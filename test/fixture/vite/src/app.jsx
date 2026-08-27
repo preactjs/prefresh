@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import { useState } from 'preact/hooks';
 import { useCounter } from './useCounter';
 import { StoreProvider } from './context';
 import { Products } from './products';
@@ -10,6 +11,9 @@ import { Style } from './styles';
 
 setup(h);
 
+const lastSeenPayloads = [];
+self.__lastSeenPayloads = lastSeenPayloads;
+
 function Test() {
   const [count, increment] = useCounter();
   return (
@@ -20,10 +24,30 @@ function Test() {
   )
 }
 
+function LastSeenChild({ payload }) {
+  return <span className="last-seen-child">{payload.count}</span>;
+}
+
+function LastSeenTest() {
+  const [count, setCount] = useState(0);
+  const payload = { count };
+  lastSeenPayloads.push(new WeakRef(payload));
+
+  return (
+    <div>
+      <button className="last-seen-increment" onClick={() => setCount(count + 1)}>
+        Increment tracked component
+      </button>
+      <LastSeenChild payload={payload} />
+    </div>
+  );
+}
+
 export function App(props) {
   return (
     <Style id="color">
       <Test />
+      <LastSeenTest />
       <Greeting />
       <StoreProvider>
         <Products />
