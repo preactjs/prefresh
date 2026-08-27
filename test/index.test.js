@@ -127,6 +127,29 @@ describe('Prefresh integrations', () => {
         await expectByPolling(() => getText(button), 'Increment (+)');
       });
 
+      test('does not retain stale vnodes after rerenders', async () => {
+        const increment = await page.$('.last-seen-increment');
+
+        await page.evaluate(() => {
+          self.__lastSeenPayloads.length = 0;
+        });
+
+        for (let i = 0; i < 20; i++) {
+          await increment.click();
+        }
+
+        await expectByPolling(() => getText('.last-seen-child'), '20');
+
+        const client = await page.target().createCDPSession();
+        await client.send('HeapProfiler.collectGarbage');
+        expect(
+          await page.evaluate(
+            () => self.__lastSeenPayloads.filter(ref => ref.deref()).length
+          )
+        ).toBe(1);
+        await client.detach();
+      });
+
       test('add export', async () => {
         const button = await page.$('.button');
         await expectByPolling(() => getText(button), 'Increment (+)');
