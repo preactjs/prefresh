@@ -492,6 +492,7 @@ export default function (babel, opts = {}) {
 
         const getFirstParent = parentPath => {
           if (
+            !parentPath ||
             t.isProgram(parentPath) ||
             t.isFunctionDeclaration(parentPath) ||
             t.isArrowFunctionExpression(parentPath)
@@ -507,8 +508,7 @@ export default function (babel, opts = {}) {
         contexts.set(id, counter);
         if (counter) id += counter;
         id = '_' + state.get('filehash') + id;
-        path.skip();
-        if (!t.isProgram(closestClosurePath)) {
+        if (closestClosurePath && !t.isProgram(closestClosurePath)) {
           const params = closestClosurePath.node.params;
           params.forEach(param => {
             if (t.isIdentifier(param)) {
@@ -556,6 +556,12 @@ export default function (babel, opts = {}) {
             })
           );
         }
+
+        // `replaceWith` requeues this path, and Babel 8's `requeue` resets
+        // `shouldSkip`, so we have to skip *after* replacing. Otherwise we'd
+        // visit the `createContext` call we just created and wrap it again,
+        // recursing until the stack blows up.
+        path.skip();
       },
       ExportDefaultDeclaration(path) {
         const node = path.node;
