@@ -49,6 +49,10 @@ importers:
         version: 3.1.0
 
   packages/babel:
+    dependencies:
+      '@babel/core':
+        specifier: ^7.0.0 || ^8.0.0
+        version: 7.27.7(supports-color@8.1.1)
     devDependencies:
       cjyes:
         specifier: 0.3.1

@@ -14,7 +14,8 @@
   "scripts": {
     "build": "cjyes src/index.mjs",
     "prepublishOnly": "cjyes src/index.mjs",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test": "node --test test/*.test.mjs"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,9 @@
     "url": "https://github.com/preactjs/prefresh/issues"
   },
   "homepage": "https://github.com/preactjs/prefresh#readme",
+  "peerDependencies": {
+    "@babel/core": "^7.0.0 || ^8.0.0"
+  },
   "devDependencies": {
     "cjyes": "0.3.1"
   },
