@@ -43,8 +43,7 @@
     "@prefresh/core": "workspace:*",
     "@prefresh/rolldown": "workspace:*",
     "@prefresh/utils": "workspace:*",
-    "@rollup/pluginutils": "^4.2.1",
-    "rolldown": "^1.0.0-rc.12"
+    "@rollup/pluginutils": "^4.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.22.1",
