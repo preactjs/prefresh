@@ -1,5 +1,11 @@
 # @prefresh/vite
 
+## 4.0.2
+
+### Patch Changes
+
+- [#635](https://github.com/preactjs/prefresh/pull/635) [`3df4964`](https://github.com/preactjs/prefresh/commit/3df4964f9db37a7f4cdff7c01c1c9771b95dbec0) Thanks [@JoviDeCroock](https://github.com/JoviDeCroock)! - `@prefresh/vite` no longer installs its own copy of Rolldown, so pnpm projects on Vite 8 resolve `@prefresh/rolldown`'s `rolldown` peer to the one Vite already ships instead of a second copy.
+
 ## 4.0.1
 
 ### Patch Changes
