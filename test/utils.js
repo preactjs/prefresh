@@ -1,3 +1,4 @@
+const fs = require('fs-extra');
 const path = require('path');
 
 const timeout = n => new Promise(r => setTimeout(r, n));
@@ -20,7 +21,7 @@ const HMR_TIMEOUT = 10000;
  *
  * Call this *before* writing the file so the message can't be missed.
  */
-exports.waitForHmr = page => {
+const waitForHmr = page => {
 	let listener;
 	let timer;
 	return new Promise((resolve, reject) => {
@@ -47,7 +48,29 @@ exports.waitForHmr = page => {
 		});
 };
 
-exports.expectByPolling =async (poll, expected) => {
+// chokidar (Vite's watcher) drops a `change` event for a path if another one
+// was emitted for that same path less than 50ms earlier. Once the previous
+// HMR update for a file has been applied its change event has already fired,
+// so waiting this long after that point guarantees the next write is seen.
+const SAME_FILE_GAP = 100;
+const lastUpdated = new Map();
+
+/**
+ * Rewrites `filePath` with `replacer` and resolves once the resulting HMR
+ * update has been applied in `page`.
+ */
+exports.updateFileAndWaitForHmr = async (page, filePath, replacer) => {
+	const wait = (lastUpdated.get(filePath) || 0) + SAME_FILE_GAP - Date.now();
+	if (wait > 0) await timeout(wait);
+
+	const hmr = waitForHmr(page);
+	const content = await fs.readFile(filePath, 'utf-8');
+	await fs.writeFile(filePath, replacer(content));
+	await hmr;
+	lastUpdated.set(filePath, Date.now());
+};
+
+exports.expectByPolling = async (poll, expected) => {
 	const maxTries = 20;
 	for (let tries = 0; tries < maxTries; tries++) {
 		const actual = (await poll()) || '';

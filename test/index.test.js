@@ -7,7 +7,7 @@ const {
   getFixtureDir,
   getTempDir,
   timeout,
-  waitForHmr,
+  updateFileAndWaitForHmr,
 } = require('./utils');
 const {
   bin,
@@ -27,13 +27,12 @@ describe('Prefresh integrations', () => {
 
     let serverConsoleListener;
 
-    async function updateFile(file, replacer) {
-      const hmr = waitForHmr(page);
-      const compPath = path.join(getTempDir(integration), file);
-      const content = await fs.readFile(compPath, 'utf-8');
-      await fs.writeFile(compPath, replacer(content));
-      await hmr;
-    }
+    const updateFile = (file, replacer) =>
+      updateFileAndWaitForHmr(
+        page,
+        path.join(getTempDir(integration), file),
+        replacer
+      );
 
     describe(integration, () => {
       const getEl = async selectorOrEl => {
