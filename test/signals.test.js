@@ -7,10 +7,9 @@ const {
   getFixtureDir,
   getTempDir,
   timeout,
+  waitForHmr,
 } = require('./utils');
 const { bin, binArgs, goMessage, defaultPort } = require('./constants');
-
-const TIMEOUT = 1000;
 
 describe('Signals', () => {
   ['vite-signals', 'vite-signals-babel'].forEach(integration => {
@@ -108,9 +107,11 @@ describe('Signals', () => {
       };
 
       async function updateFile(file, replacer) {
+        const hmr = waitForHmr(page);
         const compPath = path.join(getTempDir(integration), file);
         const content = await fs.readFile(compPath, 'utf-8');
         await fs.writeFile(compPath, replacer(content));
+        await hmr;
       }
 
       test('Can increment after HMR', async () => {
@@ -123,8 +124,6 @@ describe('Signals', () => {
         await updateFile('src/app.jsx', content =>
           content.replace('Count:', 'count:')
         );
-
-        await timeout(TIMEOUT);
         await expectByPolling(() => getText(countValue), 'count: 0');
 
         await increment.click();
@@ -136,7 +135,6 @@ describe('Signals', () => {
         await updateFile('src/app.jsx', content =>
           content.replace('count:', 'Count:')
         );
-        await timeout(TIMEOUT);
         await expectByPolling(() => getText(countValue), 'Count: 0');
 
         await increment.click();
@@ -149,8 +147,6 @@ describe('Signals', () => {
         await updateFile('src/app.jsx', content =>
           content.replace('signal(0)', 'signal(10)')
         );
-
-        await timeout(TIMEOUT);
         await expectByPolling(() => getText(countValue), 'Count: 10');
       });
 
@@ -165,8 +161,6 @@ describe('Signals', () => {
         await updateFile('src/Input.jsx', content =>
           content.replace("signal('foo')", "signal('bar')")
         );
-
-        await timeout(TIMEOUT);
         //await expectByPolling(() => getInputValue(input), 'bar');
 
         await page.focus('.input');

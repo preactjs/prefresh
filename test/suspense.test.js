@@ -7,6 +7,7 @@ const {
   getFixtureDir,
   getTempDir,
   timeout,
+  waitForHmr,
 } = require('./utils');
 const { bin, binArgs, goMessage, defaultPort } = require('./constants');
 
@@ -103,9 +104,11 @@ describe('Suspense', () => {
       };
 
       async function updateFile(file, replacer) {
+        const hmr = waitForHmr(page);
         const compPath = path.join(getTempDir(integration), file);
         const content = await fs.readFile(compPath, 'utf-8');
         await fs.writeFile(compPath, replacer(content));
+        await hmr;
       }
 
       test('Can make change to lazy loaded components', async () => {
@@ -116,8 +119,6 @@ describe('Suspense', () => {
         await updateFile('src/test1.jsx', content =>
           content.replace('Test 1', 'Test 1!!!')
         );
-
-        await timeout(TIMEOUT);
         await expectByPolling(() => getText(text1), 'Test 1!!!');
 
         await button.click();
@@ -135,7 +136,6 @@ describe('Suspense', () => {
         await updateFile('src/test1.jsx', content =>
           content.replace('Test 1!!!', 'Test 1!')
         );
-        await timeout(TIMEOUT);
         await expectByPolling(() => getText(text1), 'Test 1!');
       });
     });

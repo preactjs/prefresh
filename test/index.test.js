@@ -7,6 +7,7 @@ const {
   getFixtureDir,
   getTempDir,
   timeout,
+  waitForHmr,
 } = require('./utils');
 const {
   bin,
@@ -15,8 +16,6 @@ const {
   defaultPort,
   integrations,
 } = require('./constants');
-
-const TIMEOUT = 1000;
 
 describe('Prefresh integrations', () => {
   integrations.forEach(integration => {
@@ -29,9 +28,11 @@ describe('Prefresh integrations', () => {
     let serverConsoleListener;
 
     async function updateFile(file, replacer) {
+      const hmr = waitForHmr(page);
       const compPath = path.join(getTempDir(integration), file);
       const content = await fs.readFile(compPath, 'utf-8');
       await fs.writeFile(compPath, replacer(content));
+      await hmr;
     }
 
     describe(integration, () => {
@@ -122,7 +123,6 @@ describe('Prefresh integrations', () => {
         await updateFile('src/app.jsx', content =>
           content.replace('Increment', 'Increment (+)')
         );
-        await timeout(TIMEOUT);
 
         await expectByPolling(() => getText(button), 'Increment (+)');
       });
@@ -160,7 +160,6 @@ describe('Prefresh integrations', () => {
           newContent.replace('Increment (+)', 'Increment');
           return newContent;
         });
-        await timeout(TIMEOUT);
 
         await expectByPolling(() => getText(button), 'Increment (+)');
       });
@@ -177,7 +176,6 @@ describe('Prefresh integrations', () => {
         await updateFile('src/useCounter.js', content =>
           content.replace('state + 1', 'state + 2')
         );
-        await timeout(TIMEOUT);
 
         await button.click();
         await expectByPolling(() => getText(value), 'Count: 3');
@@ -185,7 +183,6 @@ describe('Prefresh integrations', () => {
         await updateFile('src/useCounter.js', content =>
           content.replace('useState(0)', 'useState(10)')
         );
-        await timeout(TIMEOUT);
 
         await expectByPolling(() => getText(value), 'Count: 10');
       });
@@ -196,7 +193,6 @@ describe('Prefresh integrations', () => {
         await updateFile('src/useCounter.js', content =>
           content.replace('useState(0);', 'useState(10);')
         );
-        await timeout(TIMEOUT);
 
         await expectByPolling(() => getText(value), 'Count: 10');
       });
@@ -211,7 +207,6 @@ describe('Prefresh integrations', () => {
             "useEffect(() => { setState('changed world'); }, []);"
           )
         );
-        await timeout(TIMEOUT);
 
         await expectByPolling(() => getText(value), 'changed world');
       });
@@ -226,7 +221,6 @@ describe('Prefresh integrations', () => {
             "I'm a reloaded class component"
           )
         );
-        await timeout(TIMEOUT);
 
         await expectByPolling(
           () => getText(text),
@@ -248,7 +242,6 @@ describe('Prefresh integrations', () => {
             "this.setState({ greeting: 'hello' });"
           )
         );
-        await timeout(TIMEOUT);
 
         await button.click();
         await expectByPolling(() => getText(text), 'hello');
@@ -269,7 +262,6 @@ describe('Prefresh integrations', () => {
             'setItems([...items, id])'
           )
         );
-        await timeout(TIMEOUT);
 
         const peachDiv = await page.$('.peach-div');
         await peachDiv.click();
@@ -286,7 +278,6 @@ describe('Prefresh integrations', () => {
         await updateFile('src/styles.js', content =>
           content.replace('background-color: #000;', 'background-color: #fff;')
         );
-        await timeout(TIMEOUT);
 
         expect(
           await page.$eval('#color', e => getComputedStyle(e).backgroundColor)
@@ -305,7 +296,6 @@ describe('Prefresh integrations', () => {
           c = c.replace('ContextA.Provider', 'ContextB.Provider');
           return c;
         });
-        await timeout(TIMEOUT);
 
         const ctxBGood = await page.$('#ctx-b-success');
         await expectByPolling(() => getText(ctxBGood), 'Context A');
